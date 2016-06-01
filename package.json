@@ -13,7 +13,9 @@
     "pg-promise": "^3.0.0",
     "pixl-xml": "^1.0.0",
     "postgrator": "^2.8.1",
-    "rsvp": "^3.0.0"
+    "pouchdb": "^5.3.2",
+    "rsvp": "^3.0.0",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "chai": "^3.0.0",

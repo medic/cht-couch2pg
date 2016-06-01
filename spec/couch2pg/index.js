@@ -12,8 +12,8 @@ var handleReject = common.handleReject;
 var couch2pg = require('../../libs/couch2pg/index');
 
 // prebuild the query string with table and column references
-var pgcol = process.env.POSTGRESQL_COLUMN;
-var pgtab = process.env.POSTGRESQL_TABLE;
+var pgcol = 'doc';
+var pgtab = 'couchdb';
 var queryStr = format('SELECT %I FROM %I WHERE %I->>\'_id\' = %%L AND %I->>\'_rev\' = %%L;', pgcol, pgtab, pgcol, pgcol);
 var appQueryStr = format('SELECT %I->\'app_settings\'->\'schedules\'->0->\'messages\' FROM %I WHERE %I->\'app_settings\'->\'schedules\'->0 ? \'messages\';', pgcol, pgtab, pgcol);
 var countQueryStr = format('SELECT COUNT(%I) FROM %I;', pgcol, pgtab);
