@@ -4,7 +4,7 @@ var common = require('../common');
 var expect = common.expect;
 
 var pgsql = require('../../libs/xmlforms/pgsql');
-var scrub = require('pg-format');
+var format = require('pg-format');
 
 // test helpers
 
@@ -140,8 +140,8 @@ describe('xmlforms SQL', function() {
 
     formNames.forEach(function (formName) {
 
-      it('contains/scrubs the form ' + formName + ' as expected', function () {
-        return expect(retSQL).to.contain(scrub('%L', formName));
+      it('contains/formats the form ' + formName + ' as expected', function () {
+        return expect(retSQL).to.contain(format('%L', formName));
       });
 
     });
@@ -173,14 +173,14 @@ describe('xmlforms SQL', function() {
     // iterate tests over each form in the fixture
     Object.keys(formHash).forEach(function (tableName) {
 
-      it('contains/scrubs the table ' + tableName, function () {
-        return expect(retSQL).to.contain(scrub('%I', tableName));
+      it('contains/formats the table ' + tableName, function () {
+        return expect(retSQL).to.contain(format('%I', tableName));
       });
 
       formHash[tableName].forEach(function (fieldName) {
 
-        it('contains/scrubs the field ' + fieldName, function () {
-          return expect(retSQL).to.contain(scrub('%I', fieldName));
+        it('contains/formats the field ' + fieldName, function () {
+          return expect(retSQL).to.contain(format('%I', fieldName));
         });
 
       });
@@ -252,11 +252,11 @@ describe('xmlforms SQL', function() {
         // iterate through all the relevant fields to make sure they're escaped
         ['id', 'formname', 'formversion', 'chw'].forEach(function (field) {
           it('escapes field ' + field, function() {
-            return expect(retSQL).to.contain(scrub('%I', field));
+            return expect(retSQL).to.contain(format('%I', field));
           });
 
           it('escapes value ' + obj[field], function() {
-            return expect(retSQL).to.contain(scrub('%L', obj[field]));
+            return expect(retSQL).to.contain(format('%L', obj[field]));
           });
         });
 
@@ -340,7 +340,7 @@ describe('xmlforms SQL', function() {
         // iterate over fields to ensure they're escaped
         formObject[table].fields.forEach(function (field) {
           it('escapes field ' + field, function() {
-            return expect(retSQL).to.contain(scrub('%I', field));
+            return expect(retSQL).to.contain(format('%I', field));
           });
         });
 
@@ -350,7 +350,7 @@ describe('xmlforms SQL', function() {
           Object.keys(doc.xml).forEach(function (field) {
             var value = doc.xml[field];
             it('escapes value ' + value, function() {
-              return expect(retSQL).to.contain(scrub('%L', value));
+              return expect(retSQL).to.contain(format('%L', value));
             });
           });
         });

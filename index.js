@@ -3,21 +3,11 @@ var couch2pg = require('./libs/couch2pg/index'),
     postgrator = require('postgrator'),
     Promise = require('rsvp').Promise;
 
-// convert minutes into ms
-var sleepMins = process.env.COUCH2PG_SLEEP_MINS * 60000;
-if (isNaN(sleepMins)) {
-  // no interval specified. Default to once per hour.
+var sleepMs = process.env.COUCH2PG_SLEEP_MINS * 60 * 1000;
+if (isNaN(sleepMs)) {
   console.log('Missing time interval. Defaulting to once per hour.');
-  sleepMins = 3600000;
+  sleepMs = 1 * 60 * 60 * 1000;
 }
-
-var startTime = function() {
-  return new Promise(function (resolve) {
-    var starttime = new Date();
-    console.log('\nStarting import at ' + starttime);
-    resolve(starttime);
-  });
-};
 
 var potentiallyMigrateDatabase = function() {
   return new Promise(function (resolve, reject) {
@@ -27,7 +17,7 @@ var potentiallyMigrateDatabase = function() {
       connectionString: process.env.POSTGRESQL_URL
     });
 
-    postgrator.migrate('201505271423', function(err, migrations) {
+    postgrator.migrate('001', function(err, migrations) {
       if (err) {
         reject(err);
       } else {
@@ -40,14 +30,10 @@ var potentiallyMigrateDatabase = function() {
 };
 
 var loop = function () {
-  var starttime;
-  startTime()
-    .then(function (time) {
-      starttime = time;
-    })
-    .then(potentiallyMigrateDatabase)
-    .then(function(migrations) {
-      console.log('Sucessfully migrated', migrations);
+  console.log('Starting loop at ' + new Date());
+  return potentiallyMigrateDatabase()
+    .then(function() {
+      console.log('Migration checks complete');
     })
     .then(couch2pg)
     .then(function () {
@@ -59,11 +45,10 @@ var loop = function () {
     })
     .catch(function(err) {
       console.error(err);
-    })
-    .finally(function () {
-      console.log('Next run at ' + new Date(starttime.valueOf() + sleepMins));
     });
 };
 
-loop();
-setInterval(loop, sleepMins);
+loop().then(function() {
+  console.log('Next run at ' + new Date(new Date().getTime() + sleepMs));
+  setInterval(loop, sleepMs);
+});

@@ -1,6 +1,6 @@
 var httplib = require('request');
 var pgplib = require('pg-promise');
-var scrub = require('pg-format');
+var format = require('pg-format');
 var url = require('url');
 
 var common = require('../../tests/common');
@@ -14,10 +14,10 @@ var couch2pg = require('../../libs/couch2pg/index');
 // prebuild the query string with table and column references
 var pgcol = process.env.POSTGRESQL_COLUMN;
 var pgtab = process.env.POSTGRESQL_TABLE;
-var queryStr = scrub('SELECT %I FROM %I WHERE %I->>\'_id\' = %%L AND %I->>\'_rev\' = %%L;', pgcol, pgtab, pgcol, pgcol);
-var appQueryStr = scrub('SELECT %I->\'app_settings\'->\'schedules\'->0->\'messages\' FROM %I WHERE %I->\'app_settings\'->\'schedules\'->0 ? \'messages\';', pgcol, pgtab, pgcol);
-var countQueryStr = scrub('SELECT COUNT(%I) FROM %I;', pgcol, pgtab);
-var whoOwns = scrub('SELECT tableowner FROM pg_catalog.pg_tables WHERE tablename=%L', pgtab);
+var queryStr = format('SELECT %I FROM %I WHERE %I->>\'_id\' = %%L AND %I->>\'_rev\' = %%L;', pgcol, pgtab, pgcol, pgcol);
+var appQueryStr = format('SELECT %I->\'app_settings\'->\'schedules\'->0->\'messages\' FROM %I WHERE %I->\'app_settings\'->\'schedules\'->0 ? \'messages\';', pgcol, pgtab, pgcol);
+var countQueryStr = format('SELECT COUNT(%I) FROM %I;', pgcol, pgtab);
+var whoOwns = format('SELECT tableowner FROM pg_catalog.pg_tables WHERE tablename=%L', pgtab);
 
 // postgres connection
 var pgp = pgplib({ 'promiseLib': Promise });
@@ -87,7 +87,7 @@ function couch_in_postgres(done) {
       // confirm each doc is in postgres
       var uuid = row.id;
       var rev = row.value.rev;
-      var thisQuery = scrub(queryStr, uuid, rev);
+      var thisQuery = format(queryStr, uuid, rev);
       // skip design docs
       if (uuid.slice(0,7) === '_design') { return; }
       // iterative step: order queries with then

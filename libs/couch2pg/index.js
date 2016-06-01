@@ -1,15 +1,10 @@
 // move data from couch to postgres.
-var pglib = require('pg-promise');
-
-// import the correct lib for web content:
-// travis couchdb does not support HTTPS, but prod systems require HTTPS
-var httplib = require('request');
-
-var Promise = require('../common').Promise;
-
-var cdbfuncs = require('./cdbfuncs');
-var couchiter = require('./couchiter');
-var pgsql = require('./pgsql');
+var pglib = require('pg-promise'),
+    Promise = require('rsvp').Promise,
+    httplib = require('request'),
+    cdbfuncs = require('./cdbfuncs'),
+    couchiter = require('./couchiter'),
+    pgsql = require('./pgsql');
 
 module.exports = function () {
   var sco;

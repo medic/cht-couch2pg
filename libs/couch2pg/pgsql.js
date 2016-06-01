@@ -1,4 +1,4 @@
-var scrub = require('../common').scrub;
+var format = require('pg-format');
 
 function getFromEnv() {
   var config = {};
@@ -9,10 +9,10 @@ function getFromEnv() {
 
 exports.insertIntoColumn = function(data) {
   var c = getFromEnv();
-  return scrub('INSERT INTO %I (%I) VALUES %L;', c.jsonTable, c.jsonCol, data);
+  return format('INSERT INTO %I (%I) VALUES %L;', c.jsonTable, c.jsonCol, data);
 };
 
 exports.fetchEntries = function () {
   var c = getFromEnv();
-  return scrub('SELECT %I->\'_id\' AS _id, %I->\'_rev\' AS _rev FROM %I', c.jsonCol, c.jsonCol, c.jsonTable);
+  return format('SELECT %I->\'_id\' AS _id, %I->\'_rev\' AS _rev FROM %I', c.jsonCol, c.jsonCol, c.jsonTable);
 };

@@ -1,19 +1,7 @@
-var scrub_inner = require('pg-format');
+// TODO: get rid of this and have promise users require their own promises
+exports.Promise = require('rsvp').Promise;
 
-exports.scrub = function() {
-  // Intercept calls to scrub SQL and insert SET ROLE.
-
-  // This requires a full_access role to be present for the adapter to use,
-  // and the membership required to switch into the full_access role.
-
-  // convert unknown list of arguments into array for alteration
-  var args = Array.prototype.slice.call(arguments);
-  // modify first argument (query string)
-  args[0] = 'SET ROLE full_access;' + args[0];
-  // push arguments with modification
-  return scrub_inner.apply(null, args);
-};
-
+// TODO check usage
 function wrapError(err) {
   // sometimes the err is a string, other times not. :(
   if (err.length !== undefined) {
@@ -25,10 +13,12 @@ function wrapError(err) {
   return err;
 }
 
+// TODO check usage
 exports.handleError = function (err) {
   throw wrapError(err);
 };
 
+// TODO check usage
 exports.handleReject = function (reject) {
   return function (err) {
     return reject(wrapError(err));
