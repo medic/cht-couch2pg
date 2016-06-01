@@ -30,15 +30,6 @@ Optional variables:
 
 It is assumed PostgreSQL is in use.
 
-### `full_access` role
-
-A role called `full_access` must exist, and the role accessing PostgreSQL must
-either be `full_access` or must have access to `SET ROLE full_access;`. Such
-access can be granted using `GRANT full_access TO <role>;`.
-
-It might be useful to add real users to the `full_access` role as well using
-the same command above.
-
 ### `read_only` role
 
 While not required for this software, it is assumed for some use cases that
