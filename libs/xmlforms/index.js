@@ -1,3 +1,7 @@
+// TODO: remove env var usage and pass them into module instantiation
+var POSTGRESQL_URL = process.env.POSTGRESQL_URL,
+    COUCH2PG_DEBUG = process.env.COUCH2PG_DEBUG;
+
 var pglib = require('pg-promise');
 
 var Promise = require('../common').Promise;
@@ -6,8 +10,10 @@ var handleError = require('../common').handleError;
 var contacts = require('./contacts');
 var formreport = require('./formreport');
 var pgsql = require('./pgsql');
+var postgrator = require('postgrator');
 
-module.exports = function () {
+var exports = module.exports = {};
+exports.extract = function () {
   var db;
   return pglib({ 'promiseLib': Promise })(process.env.POSTGRESQL_URL)
     .connect()
@@ -15,68 +21,89 @@ module.exports = function () {
       db = this_db;
     })
     .then(function () {
-      if (process.env.COUCH2PG_DEBUG) {
+      if (COUCH2PG_DEBUG) {
         console.log('checking if contacts are needed and missing');
       }
       return contacts.contactsNeeded(db, pgsql);
     })
     .then(function (needed) {
-      if (process.env.COUCH2PG_DEBUG) {
+      if (COUCH2PG_DEBUG) {
         console.log('contacts needed? ' + needed);
         console.log('adding if necessary.');
       }
       return contacts.addContacts(db, pgsql, needed);
     })
     .then(function () {
-      if (process.env.COUCH2PG_DEBUG) {
+      if (COUCH2PG_DEBUG) {
         console.log('checking if form metadata is missing');
       }
       return formreport.formMetadataNeeded(db, pgsql);
     })
     .then(function (needed) {
-      if (process.env.COUCH2PG_DEBUG) {
+      if (COUCH2PG_DEBUG) {
         console.log('metadata table needed? ' + needed);
         console.log('adding if necessary.');
       }
       return formreport.addFormMetadata(db, pgsql, needed);
     })
     .then(function () {
-      if (process.env.COUCH2PG_DEBUG) {
+      if (COUCH2PG_DEBUG) {
         console.log('find unparsed reports and parse them');
       }
       return formreport.fetchAndParseReports(db, pgsql);
     }, handleError)
     .then(function (reports) {
-      if (process.env.COUCH2PG_DEBUG) {
+      if (COUCH2PG_DEBUG) {
         console.log('create form tables to store reports');
       }
       return formreport.createTables(db, pgsql, reports);
     }, handleError)
     .then(function (reports) {
-      if (process.env.COUCH2PG_DEBUG) {
+      if (COUCH2PG_DEBUG) {
         console.log('writing report metadata to database');
       }
       return formreport.storeMetaData(db, pgsql, reports);
     }, handleError)
     .then(function (reports) {
-      if (process.env.COUCH2PG_DEBUG) {
+      if (COUCH2PG_DEBUG) {
         console.log('writing report data to database');
       }
       return formreport.storeReports(db, pgsql, reports);
     }, handleError)
     .then(function () {
-      if (process.env.COUCH2PG_DEBUG) {
+      if (COUCH2PG_DEBUG) {
         console.log('refreshing materialized views');
       }
       return db.query(pgsql.refreshMatViews());
     }, handleError)
     .catch(handleError)
     .finally(function () {
-      if (process.env.COUCH2PG_DEBUG) {
+      if (COUCH2PG_DEBUG) {
         console.log('done. releasing database connection');
       }
       if (db) {
         db.done();
       }
     });
+};
+
+exports.migrate = function() {
+  return new Promise(function (resolve, reject) {
+    postgrator.setConfig({
+      migrationDirectory: __dirname + '/migrations',
+      schemaTable: 'xmlforms_migrations',
+      driver: 'pg',
+      connectionString: POSTGRESQL_URL
+    });
+
+    postgrator.migrate('001', function(err, migrations) {
+      if (err) {
+        reject(err);
+      } else {
+        postgrator.endConnection(function() {
+          resolve(migrations);
+        });
+      }
+    });
+  });
 };

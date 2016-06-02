@@ -23,7 +23,8 @@ var loop = function () {
     .then(function (time) {
       starttime = time;
     })
-    .then(couch2pg)
+    .then(couch2pg.migrate)
+    .then(couch2pg.import)
     .then(function () {
       console.log('Imported successfully at ' + Date());
     }, function (err) {
