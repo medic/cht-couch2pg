@@ -3,8 +3,8 @@ var format = require('pg-format'),
 
 function getFromEnv() {
   var config = {};
-  config.jsonTable = process.env.POSTGRESQL_TABLE;
-  config.jsonCol = process.env.POSTGRESQL_COLUMN;
+  config.jsonTable = 'couchdb';
+  config.jsonCol = 'doc';
   return config;
 }
 

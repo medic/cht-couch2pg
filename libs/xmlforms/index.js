@@ -2,6 +2,7 @@
 var POSTGRESQL_URL = process.env.POSTGRESQL_URL,
     COUCH2PG_DEBUG = process.env.COUCH2PG_DEBUG;
 
+var _ = require('underscore');
 var pglib = require('pg-promise');
 
 var Promise = require('../common').Promise;
@@ -51,31 +52,36 @@ exports.extract = function () {
         console.log('find unparsed reports and parse them');
       }
       return formreport.fetchAndParseReports(db, pgsql);
-    }, handleError)
+    })
     .then(function (reports) {
       if (COUCH2PG_DEBUG) {
         console.log('create form tables to store reports');
       }
-      return formreport.createTables(db, pgsql, reports);
-    }, handleError)
-    .then(function (reports) {
-      if (COUCH2PG_DEBUG) {
-        console.log('writing report metadata to database');
+
+      if (_.isEmpty(reports)) {
+        return new Promise(function(succ) { succ(); });
+      } else {
+        return formreport.createTables(db, pgsql, reports)
+          .then(function (reports) {
+            if (COUCH2PG_DEBUG) {
+              console.log('writing report metadata to database');
+            }
+            return formreport.storeMetaData(db, pgsql, reports);
+          })
+          .then(function (reports) {
+            if (COUCH2PG_DEBUG) {
+              console.log('writing report data to database');
+            }
+            return formreport.storeReports(db, pgsql, reports);
+          })
+          .then(function () {
+            if (COUCH2PG_DEBUG) {
+              console.log('refreshing materialized views');
+            }
+            return db.query(pgsql.refreshMatViews());
+          });
       }
-      return formreport.storeMetaData(db, pgsql, reports);
-    }, handleError)
-    .then(function (reports) {
-      if (COUCH2PG_DEBUG) {
-        console.log('writing report data to database');
-      }
-      return formreport.storeReports(db, pgsql, reports);
-    }, handleError)
-    .then(function () {
-      if (COUCH2PG_DEBUG) {
-        console.log('refreshing materialized views');
-      }
-      return db.query(pgsql.refreshMatViews());
-    }, handleError)
+    })
     .catch(handleError)
     .finally(function () {
       if (COUCH2PG_DEBUG) {

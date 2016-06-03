@@ -1,4 +1,5 @@
 language: node_js
+# TODO: work out which node we run on, only support one?
 node_js:
    - "0.12"
    - "0.10"
@@ -6,10 +7,12 @@ node_js:
 
 env:
   global:
+    - INT_PG_USER="postgres"
+    - INT_COUCHDB_URL="http://localhost:5984/medic-analytics-test"
+    # TODO we shouldn't need this
     - POSTGRESQL_URL="postgres://postgres@localhost:5432/medicdata"
-    - POSTGRESQL_TABLE="couchdb"
-    - POSTGRESQL_COLUMN="doc"
-    - COUCHDB_URL="http://localhost:5984/medic/_all_docs"
+    # TODO we shouldn't need this
+    - COUCHDB_URL="http://localhost:5984/medic"
 
 sudo: required
 
@@ -20,10 +23,13 @@ addons:
    postgresql: "9.4"
 
 before_script:
+   # TODO experiment with removing this, we shouldn't need it
    - psql -c "CREATE ROLE full_access;" -U postgres
+   # TODO we shouldn't need this
    - psql -c "CREATE DATABASE medicdata WITH OWNER postgres;" -U postgres
 
 script:
+   # Used by (so far non-existent) spec tests for xmlforms
    - ./bin/replace_couch.sh
    - grunt ci
 
