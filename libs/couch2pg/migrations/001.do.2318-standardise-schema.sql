@@ -1,7 +1,7 @@
 -- get everyone to baseline what existed before we added migrations
 CREATE TABLE IF NOT EXISTS couchdb (doc jsonb);
 -- if couchdb already existed it may not be owned by this user
-ALTER TABLE couchdb OWNER TO session_user;
+-- ALTER TABLE couchdb OWNER TO session_user;
 
 -- IF NOT EXISTS doesn't exist (!) in Postgres 9.4, so do this silliness instead
 DO $$
