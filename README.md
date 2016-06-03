@@ -13,19 +13,18 @@ are required.
   * tcp: `postgres://user:password@site:port/dbname`
   * unix domain socket: e.g. `postgres:///dbname?host=/var/run/postgresql`
   * parameters: e.g. `postgres://localhost/dbname?client_encoding=UTF8`
-* `COUCHDB_URL`: a full path URL to `_all_docs`, including `user:pass@`, the
-  database name, and `_all_docs`.
-  * e.g. `https://user:pass@localhost/medic/_all_docs`
+* `COUCHDB_URL`: a full path URL to the couchdb database, with any required credentials.
+  * e.g. `https://user:pass@localhost/medic`
 * `COUCH2PG_SLEEP_MINS`: number of minutes between checking for updates.
 
 Optional variables:
 
-* `COUCH2PG_DOC_LIMIT`: maximum number of full documents to request and download from couch during any particular iterative run. this is useful to avoid out of memory errors. Must be balanced properly with `COUCH2PG_SLEEP_MINS` to keep up with new data but not overload.
-* `COUCH2PG_DEBUG`: set this to anything to get more output.
+* `COUCH2PG_DOC_LIMIT`: number of documents to grab concurrently. Defaults to 100. Increasing this number will cut down on HTTP GETs and may improve performance, decreasing this number will cut down on node memory usage, and may increase stability.
+* `COUCH2PG_DEBUG`: returns more debug output from the xmlforms module.
 
 ## Required database setup
 
-We support PostgreSQL 9.4 and greater. The user passed in the postgres url needs to have table creation rights on the databse passed in the postgres url. 
+We support PostgreSQL 9.4 and greater. The user passed in the postgres url needs to have full creation rights on the given database.
 
 ### `read_only` role
 
@@ -67,19 +66,21 @@ Here, anything created by `no_delete` is readable by `read_only` (and thus
 `full_access`), meanwhile `full_access` has no write ability in the `static`
 schema.
 
-### Local PostgreSQL testing
+## Running tests
 
-```TODO
-   write grunt test instructions, what needs to be setup locally etc
-```
+Some environment variables that may be required for the integration tests to run correctly:
+ * `INT_PG_HOST`: postgres host, defaults to `localhost`
+ * `INT_PG_PORT`: postgres port, defaults to `5432` 
+ * `INT_PG_USER`: postgres user, defaults to none (system default). This user must be able to create databases on the given host.
+ * `INT_PG_PASS`: user's password, defaults to none (system default)
+ * `INT_PG_DB`: test databse to use, defaults to `medic-analytics-test`
+ * `INT_COUCHDB_URL`: url to test couchdb, defaults to `http://admin:pass@localhost:5894/medic-analytics-test`. The user must have the ability to destory and create databases on that host.
 
-If using a local PostgreSQL database, the integration tests can choke if
-the data table already exists.
+You may be able to get away with not setting any of these, or only needing to set some of these depending on your development environment.
 
-Between iterations of the integration test, the table must be dropped or
-cleared.
+NB: the integration tests destroy and re-create the given databases each time they are run. Use test databases.
 
-https://github.com/medic/medic-analytics/issues/15
+TODO: see if this is still relevant: https://github.com/medic/medic-analytics/issues/15
 
 ## Example usage
 

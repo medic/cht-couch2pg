@@ -12,18 +12,13 @@ var _ = require('underscore'),
 
 var limit = COUCH2PG_DOC_LIMIT || 100;
 
-// TODO: is there a better idiom for an empty promise?
-var emptyPromise = function() {
-    return new Promise(function(res) { res(); });
-};
-
 var deleteDocuments = function(docIdsToDelete) {
   if (docIdsToDelete && docIdsToDelete.length > 0) {
     return db.query(
       format('DELETE FROM couchdb WHERE doc->>\'_id\' in (%L)',
         docIdsToDelete));
   } else {
-    return emptyPromise();
+    return Promise.resolve();
   }
 };
 
@@ -86,7 +81,7 @@ exports.import = function() {
       console.log('There are ' + changes.results.length + ' changes to process');
 
       if (changes.results.length === 0) {
-        return emptyPromise();
+        return Promise.resolve();
       }
 
       // TODO when node supports destructuring use it:
