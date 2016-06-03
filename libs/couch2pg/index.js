@@ -7,7 +7,7 @@ var _ = require('underscore'),
     postgrator = require('postgrator'),
     Promise = require('rsvp').Promise,
     couchdb = require('pouchdb')(COUCHDB_URL),
-    db = require('pg-promise')()(POSTGRESQL_URL),
+    db = require('pg-promise')({ 'promiseLib': Promise })(POSTGRESQL_URL),
     format = require('pg-format');
 
 var limit = COUCH2PG_DOC_LIMIT || 100;
