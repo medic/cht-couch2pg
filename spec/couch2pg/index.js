@@ -14,12 +14,11 @@ process.env.POSTGRESQL_URL = 'postgres://' +
 process.env.COUCHDB_URL = INT_COUCHDB_URL;
 
 var _ = require('underscore'),
-    pgp = require('pg-promise')({ 'promiseLib': Promise }),
-    format = require('pg-format'),
-    common = require('../../tests/common'),
-    expect = common.expect,
     RSVP = require('rsvp'),
     Promise = RSVP.Promise,
+    pgp = require('pg-promise')({ 'promiseLib': Promise }),
+    format = require('pg-format'),
+    expect = require('../../tests/common').common.expect,
     couch2pg = require('../../libs/couch2pg/index'),
     pouchdb = require('pouchdb');
 
