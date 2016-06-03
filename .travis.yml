@@ -7,7 +7,7 @@ node_js:
 
 env:
   global:
-    - INT_PG_USER="postgres"
+    # - INT_PG_USER="postgres"
     - INT_COUCHDB_URL="http://localhost:5984/medic-analytics-test"
     # TODO we shouldn't need this
     - POSTGRESQL_URL="postgres://postgres@localhost:5432/medicdata"
