@@ -8,7 +8,8 @@ var INT_PG_HOST = process.env.INT_PG_HOST || 'localhost',
 // TODO: change modules so that you pass in variables instead of needing enviroment variables
 process.env.POSTGRESQL_URL = 'postgres://' +
   (INT_PG_USER ? INT_PG_USER : '') +
-  (INT_PG_PASS ? INT_PG_PASS += ':' + INT_PG_PASS + '@' : '') +
+  (INT_PG_PASS ? INT_PG_PASS += ':' + INT_PG_PASS : '') +
+  (INT_PG_USER ? '@' : '') +
   INT_PG_HOST + ':' + INT_PG_PORT + '/' + INT_PG_DB;
 process.env.COUCHDB_URL = INT_COUCHDB_URL;
 
