@@ -29,6 +29,7 @@ before_script:
    - sudo apt-get purge postgresql-9.1 postgresql-9.2 postgresql-9.3
    - sudo apt-get install postgresql-client-common postgresql-9.4
    - sudo service postgresql start
+   - psql -c 'SELECT version()' -U postgres
    - psql -c 'create database travis' -U postgres
    # TODO experiment with removing this, we shouldn't need it
    - psql -c "CREATE ROLE full_access;" -U postgres
