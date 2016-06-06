@@ -19,10 +19,17 @@ sudo: required
 services:
    - couchdb
 
-addons:
-   postgresql: "9.4"
+# TODO uncomment this once Travis updates 9.4.0 to latest patch level
+# addons:
+#    postgresql: "9.4"
 
 before_script:
+   # TODO remove this once Travis updates 9.4.0 to latest patch level
+   - sudo apt-get update
+   - sudo apt-get purge postgresql-9.1 postgresql-9.2 postgresql-9.3
+   - sudo apt-get install postgresql-client-common postgresql-9.4
+   - sudo service postgresql start
+   - psql -c 'create database travis' -U postgres
    # TODO experiment with removing this, we shouldn't need it
    - psql -c "CREATE ROLE full_access;" -U postgres
    # TODO we shouldn't need this
