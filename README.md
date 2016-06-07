@@ -40,28 +40,9 @@ You may be able to get away with not setting any of these, or only needing to se
 
 NB: the integration tests destroy and re-create the given databases each time they are run. Use test databases.
 
-TODO: see if this is still relevant: https://github.com/medic/medic-analytics/issues/15
-
 ## Example usage
 
 Run `node index`
-
-## Common problems
-
-### Cannot read property 'version'
-
-```
-[TypeError: Cannot read property 'version' of undefined]
-```
-
-This error is normal when first running the import process. It means that the
-design document, which contains the version in Kanso, has not yet been imported
-and so the XML Forms and Contacts code cannot determine whether or not it
-should run.
-
-If this software is in use with a system that isn't using Kanso, the error will
-never go away. It might be annoying but it will not adversely affect
-performance.
 
 ## couch2pg
 

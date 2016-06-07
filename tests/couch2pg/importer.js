@@ -37,7 +37,7 @@ var shouldFail = function(promise, reason) {
   });
 };
 
-describe.only('IO failure propagation:', function() {
+describe('IO failure propagation:', function() {
   var db, couchdb;
   beforeEach(function() {
     db = {

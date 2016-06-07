@@ -5,7 +5,7 @@ var POSTGRESQL_URL = process.env.POSTGRESQL_URL,
 var _ = require('underscore');
 var pglib = require('pg-promise');
 
-var Promise = require('../common').Promise;
+var Promise = require('rsvp').Promise;
 var handleError = require('../common').handleError;
 
 var contacts = require('./contacts');
