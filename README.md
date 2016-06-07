@@ -26,46 +26,6 @@ Optional variables:
 
 We support PostgreSQL 9.4 and greater. The user passed in the postgres url needs to have full creation rights on the given database.
 
-### `read_only` role
-
-While not required for this software, it is assumed for some use cases that
-there is also a `read_only` role. In such a case, `full_access` should be set
-so that `read_only` is granted read access. While logged in as `full_access`,
-or using `SET ROLE full_access;`, this can be done with the following:
-
-```
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO full_access;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO read_only;
-```
-
-`full_access` should also be able to read anything `read_only` can read. While
-logged in as `read_only` or using `SET ROLE read_only;`, access can be granted
-with `GRANT read_only TO full_access;`.
-
-### `no_delete` role and `static` schema
-
-Again, while not required for this software, it is assumed for some use cases
-that `no_delete` will be used to maintain datasets that should be immutable
-by this adapter and the `full_access` user. This utilizes a schema called
-`static`.
-
-Create the `no_delete` role, create the `static` schema, expose the `static`
-schema to other roles, and then set `no_delete` default permissions:
-```
-CREATE ROLE no_delete;
-CREATE SCHEMA static;
-GRANT USAGE, CREATE ON SCHEMA static TO no_delete;
-GRANT USAGE ON SCHEMA static TO read_only;
-SET ROLE no_delete;
-ALTER DEFAULT PRIVILEGES IN SCHEMA static GRANT ALL ON TABLES TO no_delete;
-ALTER DEFAULT PRIVILEGES IN SCHEMA static GRANT SELECT ON TABLES TO read_only;
-RESET ROLE;
-```
-
-Here, anything created by `no_delete` is readable by `read_only` (and thus
-`full_access`), meanwhile `full_access` has no write ability in the `static`
-schema.
-
 ## Running tests
 
 Some environment variables that may be required for the integration tests to run correctly:
