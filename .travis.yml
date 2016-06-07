@@ -23,8 +23,6 @@ addons:
    postgresql: "9.4"
 
 before_script:
-   # TODO experiment with removing this, we shouldn't need it
-   - psql -c "CREATE ROLE full_access;" -U postgres
    # TODO we shouldn't need this
    - psql -c "CREATE DATABASE medicdata WITH OWNER postgres;" -U postgres
 
