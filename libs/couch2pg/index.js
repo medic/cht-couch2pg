@@ -2,7 +2,6 @@ var Promise = require('rsvp').Promise,
     postgrator = require('postgrator'),
     importer = require('./importer');
 
-// TODO: remove env var usage and pass them into module instantiation
 var COUCHDB_URL  = process.env.COUCHDB_URL,
     POSTGRESQL_URL = process.env.POSTGRESQL_URL,
     COUCH2PG_DOC_LIMIT = process.env.COUCH2PG_DOC_LIMIT;

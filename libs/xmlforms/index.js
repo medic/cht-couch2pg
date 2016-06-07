@@ -1,4 +1,3 @@
-// TODO: remove env var usage and pass them into module instantiation
 var POSTGRESQL_URL = process.env.POSTGRESQL_URL,
     COUCH2PG_DEBUG = process.env.COUCH2PG_DEBUG;
 

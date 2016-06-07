@@ -5,7 +5,6 @@ var INT_PG_HOST = process.env.INT_PG_HOST || 'localhost',
     INT_PG_DB   = process.env.INT_PG_DB || 'medic-analytics-test',
     INT_COUCHDB_URL = process.env.INT_COUCHDB_URL || 'http://admin:pass@localhost:5984/medic-analytics-test';
 
-// TODO: change modules so that you pass in variables instead of needing enviroment variables
 process.env.POSTGRESQL_URL = 'postgres://' +
   (INT_PG_USER ? INT_PG_USER : '') +
   (INT_PG_PASS ? INT_PG_PASS += ':' + INT_PG_PASS : '') +
