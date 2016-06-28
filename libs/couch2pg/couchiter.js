@@ -60,6 +60,13 @@ exports.insertListToPG = function(db, pgsql, dataList) {
   return db.query(pgsql.insertIntoColumn(dataList.map(function (datum) {
     // stringify each item of the dataList to JSON
     // each value is a list of one field
+
+    // PostgreSQL doesn't support \u0000 in JSON strings, see:
+    //   https://www.postgresql.org/message-id/E1YHHV8-00032A-Em@gemulon.postgresql.org
+    // pg-format replaces any \uxxxx with \\\\uxxxx, which looks weird but
+    // results ultimately in the data getting into pg correctly.
+    datum = datum.replace(/\\\\u0000/g, '');
+
     return [JSON.stringify(datum)];
   })));
 };
