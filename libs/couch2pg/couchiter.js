@@ -65,9 +65,11 @@ exports.insertListToPG = function(db, pgsql, dataList) {
     //   https://www.postgresql.org/message-id/E1YHHV8-00032A-Em@gemulon.postgresql.org
     // pg-format replaces any \uxxxx with \\\\uxxxx, which looks weird but
     // results ultimately in the data getting into pg correctly.
-    datum = datum.replace(/\\\\u0000/g, '');
+    if (datum) {
+      datum = JSON.stringify(datum).replace(/\\\\u0000/g, '');
+    }
 
-    return [JSON.stringify(datum)];
+    return [datum];
   })));
 };
 
