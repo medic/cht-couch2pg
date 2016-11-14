@@ -1,6 +1,6 @@
 {
   "name": "medic-couch2pg",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "index.js",
   "license": "Apache-2.0",
   "repository": {
@@ -8,8 +8,7 @@
     "url": "git://github.com/medic/medic-couch2pg.git"
   },
   "dependencies": {
-    "couch2pg": "TODO tag this and use that tag instead, then push to npm",
-    "couch2pg": "git://github.com/medic/couch2pg.git#master",
+    "couch2pg": "^0.1.1",
     "loglevel": "^1.4.1",
     "loglevel-message-prefix": "^2.0.1",
     "pg": "^4.0.0",
