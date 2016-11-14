@@ -4,13 +4,14 @@ var log = require('loglevel-message-prefix')(require('loglevel'), {
 
 var Promise = require('rsvp').Promise,
     env = require('./env')(log),
-    couch2pgMigrator = require('./libs/couch2pg/migrator'),
     xmlformsMigrator = require('./libs/xmlforms/migrator');
 
 var couchdb = require('pouchdb')(env.couchdbUrl),
     db = require('pg-promise')({ 'promiseLib': Promise })(env.postgresqlUrl);
 
-var couch2pg = require('./libs/couch2pg/importer')(
+var couch2pg = require('couch2pg'),
+    migrator = couch2pg.migrator,
+    importer = couch2pg.importer(
       db, couchdb,
       env.couch2pgDocLimit,
       env.couch2pgChangesLimit),
@@ -33,7 +34,7 @@ var sleepMs = function(errored) {
 };
 
 var migrateCouch2pg = function() {
-  return couch2pgMigrator(env.postgresqlUrl)();
+  return migrator(env.postgresqlUrl)();
 };
 var migrateXmlforms = function() {
   return xmlformsMigrator(env.postgresqlUrl)();
@@ -56,7 +57,7 @@ var run = function() {
 
   var runErrored = false;
 
-  return couch2pg.importAll()
+  return importer.importAll()
   .catch(function(err) {
     log.error('Couch2PG import failed');
     log.error(err.stack);
@@ -84,7 +85,7 @@ var run = function() {
 var legacyRun = function() {
   log.info('Beginning couch2pg run at ' + new Date());
 
-  return couch2pg.importAll()
+  return importer.importAll()
   .then(
     function() {
       return delayLoop();
