@@ -3,7 +3,7 @@ var log = require('loglevel-message-prefix')(require('loglevel'), {
 });
 
 var Promise = require('rsvp').Promise,
-    env = require('./env')(log),
+    env = require('./env')(),
     xmlformsMigrator = require('./libs/xmlforms/migrator');
 
 var couchdb = require('pouchdb')(env.couchdbUrl),
