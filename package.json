@@ -8,7 +8,7 @@
     "url": "git://github.com/medic/medic-couch2pg.git"
   },
   "dependencies": {
-    "couch2pg": "^0.1.1",
+    "couch2pg": "^0.2.0",
     "loglevel": "^1.4.1",
     "loglevel-message-prefix": "^2.0.1",
     "pg": "^4.0.0",
