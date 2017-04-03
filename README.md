@@ -47,7 +47,7 @@ author "Your name"
 script
     export POSTGRESQL_URL="..."
     export COUCHDB_URL="..."
-    exec nodejs /path/to/the/repo/index >> /var/log/couch2pg-example-client.log
+    exec nodejs /path/to/the/repo/index
 end script
 ```
  - The service is then a standard service, e.g. `service couch2pg-example-client start`
