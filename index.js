@@ -93,6 +93,7 @@ var legacyRun = function() {
     function(err) {
       log.error('Couch2PG import failed');
       log.error(err.stack);
+      return delayLoop(true);
     })
   .then(legacyRun);
 };
