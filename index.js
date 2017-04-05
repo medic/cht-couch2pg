@@ -60,7 +60,7 @@ var run = function() {
   return importer.importAll()
   .catch(function(err) {
     log.error('Couch2PG import failed');
-    log.error(err.stack);
+    log.error(err);
 
     runErrored = true;
   })
@@ -72,7 +72,7 @@ var run = function() {
   })
   .catch(function(err) {
     log.error('XMLForms support failed');
-    log.error(err.stack);
+    log.error(err);
 
     runErrored = true;
   })
@@ -92,7 +92,7 @@ var legacyRun = function() {
     },
     function(err) {
       log.error('Couch2PG import failed');
-      log.error(err.stack);
+      log.error(err);
       return delayLoop(true);
     })
   .then(legacyRun);
@@ -115,7 +115,7 @@ var doRun = function() {
 
 doRun().catch(function(err) {
   log.error('An unrecoverable error occurred');
-  log.error(err.stack);
+  log.error(err);
   log.error('exiting');
   process.exit(1);
 });
