@@ -17,18 +17,19 @@ var couch2pg = require('couch2pg'),
       env.couch2pgChangesLimit),
     xmlforms = require('./libs/xmlforms/updater')(db);
 
-var backoff = 0;
+var errorCount = 0;
 var sleepMs = function(errored) {
   if (errored) {
-    var backoffMs = backoff * 1000 * 60;
-    if (backoffMs < env.sleepMs) {
-      backoff++;
-      return backoffMs;
-    } else {
-      return env.sleepMs;
+    errorCount++;
+
+    if (errorCount === env.couch2pgRetryCount) {
+      throw new Error('Too many consecutive errors');
     }
+
+    var backoffMs = errorCount * 1000 * 60;
+    return Math.min(backoffMs, env.sleepMs);
   } else {
-    backoff = 0;
+    errorCount = 0;
     return env.sleepMs;
   }
 };
