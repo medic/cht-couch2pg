@@ -23,7 +23,7 @@ Optional variables:
 * `COUCH2PG_DOC_LIMIT`: number of documents to grab concurrently. Defaults to **100**. Increasing this number will cut down on HTTP GETs and may improve performance, decreasing this number will cut down on node memory usage, and may increase stability.
 * `COUCH2PG_CHANGES_LIMIT`: number of document ids to grab per change limit request. Defaults to **10,000**. Increasing this number will cut down on HTTP GETs and may improve performance, decreasing this number will cut down on node memory usage slightly, and may increase stability.
 * `COUCH2PG_DEBUG`: Whether or not to have verbose logging. Defaults to **true**.
-* `COUCH2PG_RETRY_COUNT`: how many times to internally retry continued unsuccessful runs before exiting. If unset medic-couch2pg will retry indefinitely. If set it will retry N times, and then exit and display all prior errors in that set of unsuccessful runs.
+* `COUCH2PG_RETRY_COUNT`: how many times to internally retry continued unsuccessful runs before exiting. If unset medic-couch2pg will retry indefinitely. If set it will retry N times, and then exit with status code 1
 * `V0_4_MODE`: skips anything 2.6+ related. Defaults to **false**.
 
 ## Required database setup

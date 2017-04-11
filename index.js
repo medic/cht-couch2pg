@@ -17,6 +17,8 @@ var couch2pg = require('couch2pg'),
       env.couch2pgChangesLimit),
     xmlforms = require('./libs/xmlforms/updater')(db);
 
+var firstRun = false;
+
 var errorCount = 0;
 var sleepMs = function(errored) {
   if (errored) {
@@ -66,8 +68,11 @@ var run = function() {
     runErrored = true;
   })
   .then(function(results) {
-    // Either couch2pg errored and maybe there is new data, or there is definitely new data
-    if (runErrored || results.deleted.length || results.edited.length) {
+    // Run secondary tasks if we reasonably think there might be new data
+    // runErrored || errorCount <- something went wrong, but maybe there is still new data
+    // firstRun <- this is first run, we don't know what the DB state is in
+    // results.deleted.length || results.edited.length <- data has changed
+    if (runErrored || errorCount || firstRun || results.deleted.length || results.edited.length) {
       return xmlforms.update();
     }
   })
@@ -78,6 +83,11 @@ var run = function() {
     runErrored = true;
   })
   .then(function() {
+    if (!runErrored) {
+      // We have completed a successful run
+      firstRun = false;
+    }
+
     return delayLoop(runErrored);
   })
   .then(run);
