@@ -18,6 +18,7 @@ var couch2pg = require('couch2pg'),
     xmlforms = require('./libs/xmlforms/updater')(db);
 
 var firstRun = false;
+var authError = false;
 
 var errorCount = 0;
 var sleepMs = function(errored) {
@@ -26,6 +27,8 @@ var sleepMs = function(errored) {
 
     if (errorCount === env.couch2pgRetryCount) {
       throw new Error('Too many consecutive errors');
+    } else if (authError){
+      throw new Error('Invalid CouchDB credentials');
     }
 
     var backoffMs = errorCount * 1000 * 60;
@@ -59,12 +62,16 @@ var run = function() {
   log.info('Beginning couch2pg and xmlforms run at ' + new Date());
 
   var runErrored = false;
-
   return importer.importAll()
   .catch(function(err) {
     log.error('Couch2PG import failed');
     log.error(err);
 
+    // CouchDB will return a json response with a 401 status code in case of
+    // authentication failure
+    if ((typeof err == "object" && err.status == 401)){
+	  authError = true;
+    }
     runErrored = true;
   })
   .then(function(results) {
@@ -72,7 +79,7 @@ var run = function() {
     // runErrored || errorCount <- something went wrong, but maybe there is still new data
     // firstRun <- this is first run, we don't know what the DB state is in
     // results.deleted.length || results.edited.length <- data has changed
-    if (runErrored || errorCount || firstRun || results.deleted.length || results.edited.length) {
+    if ((runErrored || errorCount || firstRun || results.deleted.length || results.edited.length) && !authError) {
       return xmlforms.update();
     }
   })
