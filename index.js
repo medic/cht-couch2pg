@@ -18,7 +18,6 @@ var couch2pg = require('couch2pg'),
     xmlforms = require('./libs/xmlforms/updater')(db);
 
 var firstRun = false;
-
 var errorCount = 0;
 var sleepMs = function(errored) {
   if (errored) {
@@ -59,12 +58,14 @@ var run = function() {
   log.info('Beginning couch2pg and xmlforms run at ' + new Date());
 
   var runErrored = false;
-
   return importer.importAll()
   .catch(function(err) {
     log.error('Couch2PG import failed');
     log.error(err);
 
+    if (err  && err.status === 401){
+      process.exit(1);
+    }
     runErrored = true;
   })
   .then(function(results) {
