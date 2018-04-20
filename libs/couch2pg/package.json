@@ -1,0 +1,39 @@
+{
+  "name": "couch2pg",
+  "version": "0.2.0",
+  "bin": {
+    "couch2pg": "./cli.js"
+  },
+  "main": "index.js",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/medic/couch2pg.git"
+  },
+  "dependencies": {
+    "commander": "^2.9.0",
+    "loglevel": "^1.4.1",
+    "loglevel-message-prefix": "^2.0.1",
+    "pg": "^4.0.0",
+    "pg-format": "^1.0.0",
+    "pg-promise": "^3.0.0",
+    "postgrator": "^2.8.2",
+    "pouchdb": "^5.3.2",
+    "rsvp": "^3.0.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "chai-as-promised": "^5.0.0",
+    "es6-promise": "4.2.4",
+    "grunt": "^0.4.0",
+    "grunt-cli": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-mocha-test": "^0.12.0",
+    "mocha": "^2.0.0",
+    "nock": "^7.0.0",
+    "request": "^2.0.0",
+    "rewire": "^2.5.1",
+    "sinon": "2.1.0"
+  }
+}

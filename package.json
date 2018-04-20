@@ -7,29 +7,54 @@
     "type": "git",
     "url": "git://github.com/medic/medic-couch2pg.git"
   },
-  "dependencies": {
-    "couch2pg": "^0.2.0",
-    "loglevel": "^1.4.1",
-    "loglevel-message-prefix": "^2.0.1",
-    "pg": "^4.0.0",
-    "pg-format": "^1.0.0",
-    "pg-promise": "^3.0.0",
-    "postgrator": "^2.8.2",
-    "pouchdb": "^5.3.2",
-    "rsvp": "^3.0.0",
-    "underscore": "^1.8.3"
+  "scripts": {
+    "test": "jest --coverage",
+    "watch": "jest --watchAll",
+    "ci": "jest"
   },
+  "dependencies": {},
   "devDependencies": {
-    "chai": "^3.0.0",
-    "chai-as-promised": "^5.0.0",
+    "chai": "4.1.2",
+    "chai-as-promised": "7.1.1",
+    "curl-request": "1.1.1",
     "grunt": "^0.4.0",
     "grunt-cli": "^1.0.0",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-mocha-test": "^0.12.0",
-    "mocha": "^2.0.0",
-    "nock": "^7.0.0",
-    "request": "^2.0.0",
-    "rewire": "^2.5.1",
-    "sinon": "^1.17.4"
+    "jest": "22.4.3",
+    "jest-runner-mocha": "0.6.0",
+    "knex": "0.14.6",
+    "loglevel": "1.6.1",
+    "loglevel-message-prefix": "3.0.0",
+    "mocha": "5.1.1",
+    "pg": "7.4.1",
+    "pg-format": "1.0.4",
+    "pg-promise": "8.4.0",
+    "postgrator": "3.5.0",
+    "pouchdb": "6.4.3",
+    "rsvp": "4.8.2",
+    "sinon": "4.5.0",
+    "underscore": "1.9.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "<rootDir>/tests/**/*.js"
+    ],
+    "testPathIgnorePatterns": [
+      "pgutils"
+    ],
+    "collectCoverageFrom": [
+      "<rootDir>/libs/*.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "globalSetup": "<rootDir>/setup.js"
   }
 }

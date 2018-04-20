@@ -6,14 +6,14 @@ module.exports = function(postgresUrl) {
   return function() {
     return new rsvp.Promise(function (resolve, reject) {
       postgrator.setConfig({
-        migrationDirectory: __dirname + '/migrations',
-        schemaTable: 'xmlforms_migrations',
+      migrationDirectory: __dirname + '/../migrations',
+        schemaTable: 'couch2pg_migrations',
         driver: 'pg',
         logProgress: log.getLevel() <= log.levels.DEBUG,
         connectionString: postgresUrl
       });
 
-      postgrator.migrate('201711101200', function(err, migrations) {
+      postgrator.migrate('201803202020', function(err, migrations) {
         if (err) {
           reject(err);
         } else {
