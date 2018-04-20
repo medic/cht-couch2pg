@@ -18,7 +18,7 @@ const sentinel = () => new PouchDB(SENTINEL_DB_URL);
 const cleanUp = async () => {
   await pouch().destroy();
   await sentinel().destroy();
-  await pgutils.ensureDbIsClean(PG_DB_URL)
+  await pgutils.ensureDbIsClean(PG_DB_URL);
 }
 
 describe('replication', () => {
@@ -37,7 +37,7 @@ describe('replication', () => {
     expect(rows.rowCount).to.equal(4);//Avoids view
     rows = await pgconn.raw('select * from couchdb_progress');
 
-    const url = urlParser.parse(process.env.TEST_COUCH_URL)
+    const url = urlParser.parse(process.env.TEST_COUCH_URL);
     expect(rows.rows[0].source).to.equal(`${url.host}/mycouchtest`);
     expect(rows.rows[0].seq).to.not.equal(null);
     expect(rows.rows[1].source).to.equal(`${url.host}/mycouchtest-sentinel`);

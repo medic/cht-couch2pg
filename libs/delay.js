@@ -17,10 +17,9 @@ const sleepTime = (errored, sleepMs) => {
     var backoffMs = errorCount * 1000 * 60;
     return Math.min(backoffMs, sleepMs);
   }
-  errorCount = 0;
   return sleepMs;
 };
 
 module.exports = {
   delayLoop: delayLoop
-}
+};

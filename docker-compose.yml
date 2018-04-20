@@ -17,11 +17,11 @@ services:
     build: .
     volumes:
       - ./libs:/usr/app/libs
-      - ./tests:/usr/app/tests
+      - ./spec:/usr/app/spec
       - ./setup.js:/usr/app/setup.js
     depends_on:
       - couch
       - postgres
     environment:
       TEST_COUCH_URL: http://${COUCH_ADMIN}:${COUCH_PASS}@couch:5984
-      TEST_PG_URL: postgres://postgres:postgres@postgres:5432
+      TEST_PG_URL: postgres://postgres:${PG_PASS}@postgres:5432

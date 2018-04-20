@@ -1,9 +1,9 @@
 const urlParser = require('url'),
       PouchDB = require('pouchdb'),
-      Promise = require('rsvp').Promise,
+      // Promise = require('rsvp').Promise,
       env = require('../env')(),
       xmlforms = require('./xmlforms'),
-      couch2pg = require('./couch2pg'),
+      couch2pg = require('couch2pg'),
       {delayLoop} = require('./delay'),
       pgp = require('pg-promise'),
       log = require('./log');
@@ -32,6 +32,28 @@ const pg = (pgconn) => {
 let firstRun = false;
 let errorCount = 0;
 let runTimes = 0;
+let legacyRunTimes = 0;
+
+const legacyRun = async (couchUrl, pgconn, timesToRun=undefined) => {
+  log.info('Beginning couch2pg run at ' + new Date());
+  try {
+    await couch2pg.importer(
+      pgconn,
+      new PouchDB(couchUrl),
+      env.couch2pgDocLimit,
+      env.couch2pgChangesLimit,
+      parseSource(couchUrl));
+
+    if(!timesToRun || ++legacyRunTimes < timesToRun) {
+      await delayLoop();
+      await legacyRun();
+    }
+  } catch(err) {
+    log.error('Couch2PG import failed');
+    log.error(err);
+    await delayLoop(true);
+  }
+};
 
 const run = async (couchUrl, pgconn, timesToRun=undefined) => {
   log.info('Beginning couch2pg and xmlforms run at ' + new Date());
@@ -71,8 +93,12 @@ const run = async (couchUrl, pgconn, timesToRun=undefined) => {
     }
   }
 
-  if (errorCount++ === env.couch2pgRetryCount) {
-    throw new Error('Too many consecutive errors');
+  if(runErrored) {
+    if (errorCount++ === env.couch2pgRetryCount) {
+      throw new Error('Too many consecutive errors');
+    }
+  } else {
+    errorCount = 0;
   }
 
   if(!timesToRun || ++runTimes < timesToRun) {
@@ -86,7 +112,7 @@ const replicate = async (couchUrl, pgUrl, timesToRun=undefined) => {
     await couch2pg.migrator(pgUrl)();
     if (env.v04Mode) {
       log.info('Adapter is running in 0.4 mode');
-      await legacyRun()
+      await legacyRun(couchUrl, pgconn, timesToRun)
     } else {
       log.info('Adapter is running in NORMAL mode');
       await xmlforms.migrate(pgUrl);

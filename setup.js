@@ -1,21 +1,29 @@
-const CurlRequest = require('curl-request')
-const knex = require('knex')
+const CurlRequest = require('curl-request'),
+      knex = require('knex'),
+      log = require('./libs/log');
 
-const wait = ms => new Promise(resolve => setTimeout(resolve, ms))
-const WAIT_TIME = 5000
-const MAX_RETRIES = 10
+const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+const WAIT_TIME = 5000;
+const MAX_RETRIES = 10;
 
-const curl = new CurlRequest()
+const PUBLIC_ANNOUNCEMENT1 = 'Please define env vars \
+    TEST_COUCH_URL(ie: http://admin:pass@localhost:5984) & \
+    TEST_PG_URL(ie: postgres://locahost:5432) to test locally.';
+
+const PUBLIC_ANNOUNCEMENT2 = 'Everything can also be tested with: \
+    docker-compose run test yarn ci';
+
+const curl = new CurlRequest();
 
 const waitForDb = async ({url, fn, retries=0}) => {
   if(retries ++ >= MAX_RETRIES) {
-    console.log(`****** ERROR: Unable to connect: ${url}`)
-    process.exit(1)
+    log.error(`****** ERROR: Unable to connect: ${url}`);
+    process.exit(1);
   }
   if(!await fn()) {
     if(!url) {
-      console.log('Please define env vars TEST_COUCH_URL & TEST_PG_URL to test locally.');
-      console.log('Everything can also be tested with: docker-compose run test yarn ci');
+      log.info(PUBLIC_ANNOUNCEMENT1);
+      log.info(PUBLIC_ANNOUNCEMENT2);
       process.exit(1);
     }
     console.log(`====> Waiting on ${url} to become available.`)
@@ -29,7 +37,7 @@ const waitForCouch = async (url) => {
     try {
       const {statusCode} = await curl.get(url)
       if(statusCode === 200) {
-        console.log(`- Couch [${url}] is now avaliable.`)
+        log.info(`- Couch [${url}] is now avaliable.`)
         return true
       }
     } catch(err) {}
@@ -41,7 +49,7 @@ const waitForPg = async (url) => {
   await waitForDb({url: url, fn: async () => {
     try {
       await conn.raw('SELECT * FROM pg_catalog.pg_tables')
-      console.log(`- Postgres [${url}] is now avaliable.`)
+      log.info(`- Postgres [${url}] is now avaliable.`)
       await conn.destroy()
       return true
     } catch(err) {
