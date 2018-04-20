@@ -9,7 +9,7 @@ services:
   - docker
 
 script:
-  - docker-compose run test yarn test
+  - docker-compose run test yarn ci
 
 # notifications:
 #   webhooks:
