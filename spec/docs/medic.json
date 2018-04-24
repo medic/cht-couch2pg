@@ -1,0 +1,72 @@
+[
+  {
+    "doc": {
+      "_id": "015ebd5d-5452-4f12-ba30-d41fe4ded03c",
+      "_rev": "2-cae134713cab00d1c0368597ca4dd728",
+      "alternate_phone": "",
+      "date_of_birth": "1994-11-20",
+      "date_of_birth_method": "approx",
+      "debug_note": "",
+      "name": "Amanda Allen",
+      "notes": "",
+      "parent": {
+        "_id": "c3ced356-f845-4222-b107-e2568feff2c7",
+        "parent": {
+            "_id": "a0689548-8ade-4b55-b691-074ee548a0d4",
+            "parent": {
+                "_id": "18bf0bfe-d38a-4961-9134-add156b1c3a5"
+            }
+        }
+      },
+      "patient_id": "56650",
+      "phone": "+14155556655",
+      "pregnant_at_registration": "false",
+      "reported_date": 1511153396479,
+      "role": "patient",
+      "sex": "female",
+      "transitions": {
+        "generate_patient_id_on_people": {
+            "last_rev": 2,
+            "ok": true,
+            "seq": 1327
+        }
+      },
+      "type": "person"
+    }
+  },
+  {
+    "doc": {
+      "_id": "0186101b-be93-4be3-97bd-4ace7f4b94dd",
+      "_rev": "2-c50fafe8c58f7afa01666a573b5a18d8",
+      "imported_date": "2018-01-21T17:03:55.864Z",
+      "name": "Dyah Wahyuningsih",
+      "parent": {
+        "_id": "f02aba23-3219-42de-9add-497baca490f1",
+        "parent": {
+            "_id": "35bf7334-7d45-4763-b67f-f7d98abf8dbb",
+            "parent": {
+                "_id": "2e724ea8-cedb-4d31-95dc-632710c4f571"
+            }
+        }
+      },
+      "patient_id": "02732",
+      "phone": "+628568408080",
+      "reported_date": 1516554238437,
+      "transitions": {
+        "generate_patient_id_on_people": {
+            "last_rev": 2,
+            "ok": true,
+            "seq": 2285
+        }
+      },
+      "type": "person"
+    }
+  },
+  {
+    "views": {
+      "conflicts": {
+        "map": "function(doc) {\n  if (doc._conflicts) {\n    emit(doc._conflicts);\n  }\n}"
+      }
+    }
+  }  
+]
