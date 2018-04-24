@@ -1,11 +1,11 @@
-const expect = require('chai').expect,
-      PouchDB = require('pouchdb'),
-      medicDocs = require('./docs/medic.json'),
-      sentinelDocs = require('./docs/sentinel.json'),
-      medic = require('../libs/medic'),
-      knex = require('knex'),
-      pgutils = require('./utils/pgutils'),
-      urlParser = require('url');
+const expect = require('chai').expect
+    , PouchDB = require('pouchdb')
+    , medicDocs = require('./docs/medic.json')
+    , sentinelDocs = require('./docs/sentinel.json')
+    , medic = require('../libs/medic')
+    , knex = require('knex')
+    , pgutils = require('./utils/pgutils')
+    , urlParser = require('url');
 
 const COUCH_DB_URL = `${process.env.TEST_COUCH_URL}/mycouchtest`;
 const SENTINEL_DB_URL = `${COUCH_DB_URL}-sentinel`;
@@ -19,7 +19,7 @@ const cleanUp = async () => {
   await pouch().destroy();
   await sentinel().destroy();
   await pgutils.ensureDbIsClean(PG_DB_URL);
-}
+};
 
 describe('replication', () => {
   beforeEach(async () => {
@@ -43,5 +43,5 @@ describe('replication', () => {
     expect(rows.rows[1].source).to.equal(`${url.host}/mycouchtest-sentinel`);
     expect(rows.rows[1].seq).to.not.equal(null);
     await pgconn.destroy();
-  })
-})
+  });
+});

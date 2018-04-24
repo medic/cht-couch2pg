@@ -1,5 +1,5 @@
-const urlParser = require('url'),
-      knex  = require('knex');
+const urlParser = require('url')
+    , knex  = require('knex');
 
 const ensureDbExists = async (url) => {
   const opts = urlParser.parse(url);
@@ -14,7 +14,7 @@ const ensureDbExists = async (url) => {
     }
   }
   await conn.destroy();
-}
+};
 
 const ensureDbIsClean = async (url) => {
   try {
@@ -30,10 +30,10 @@ const ensureDbIsClean = async (url) => {
     }
   }
   await ensureDbExists(url);
-}
+};
 
 
 module.exports = {
-  ensureDbExists: ensureDbExists,
-  ensureDbIsClean: ensureDbIsClean
+    ensureDbExists: ensureDbExists
+  , ensureDbIsClean: ensureDbIsClean
 };

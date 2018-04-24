@@ -1,8 +1,8 @@
-const assert = require('chai').assert,
-  xmlforms = require('../libs/xmlforms'),
-  pgutils = require('./utils/pgutils'),
-  couch2pg = require('couch2pg'),
-  knex = require('knex');
+const assert = require('chai').assert
+    , xmlforms = require('../libs/xmlforms')
+    , pgutils = require('./utils/pgutils')
+    , couch2pg = require('couch2pg')
+    , knex = require('knex');
 
 const PG_DB_URL = `${process.env.TEST_PG_URL}/xmlformstest`;
 const SELECT_VIEWS =
@@ -10,7 +10,7 @@ const SELECT_VIEWS =
   WHERE table_schema = ANY (current_schemas(false)) \
   order by table_name';
 
-const cleanUp = async () => { await pgutils.ensureDbIsClean(PG_DB_URL); }
+const cleanUp = async () => { await pgutils.ensureDbIsClean(PG_DB_URL); };
 
 describe('xmlforms', () => {
   beforeEach(async () => {
@@ -36,5 +36,5 @@ describe('xmlforms', () => {
     assert.equal(views[4].table_name, 'contactview_person_fields');
     assert.equal(views[5].table_name, 'raw_contacts');
     await db.destroy();
-  })
-})
+  });
+});

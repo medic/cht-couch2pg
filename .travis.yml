@@ -4,19 +4,14 @@ services:
   - docker
 
 script:
-  - docker-compose run test yarn ci
+  - docker-compose run test grunt test
 
-# notifications:
-#   webhooks:
-#     urls:
-#       - https://medic.slack.com/services/hooks/travis?token=xcYT8yusfEdSwLskhBxK4Vwj
-#     on_success: change
-#     on_failure: always
-#   email:
-#     recipients:
-#       - dev@medicmobile.org
-
-# node_js:
-#    - "0.12"
-#    - "0.10"
-#    - "5"
+notifications:
+  webhooks:
+    urls:
+      - https://medic.slack.com/services/hooks/travis?token=xcYT8yusfEdSwLskhBxK4Vwj
+    on_success: change
+    on_failure: always
+  email:
+    recipients:
+      - dev@medicmobile.org

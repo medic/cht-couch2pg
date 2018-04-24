@@ -1,4 +1,7 @@
-const log = require('./log');
+const log = require('./log')
+    , Promise = require('rsvp').Promise;
+
+let errorCount = 0;
 
 const delayLoop = (errored, sleepMs) => {
   return new Promise(resolve => {
@@ -14,8 +17,10 @@ const delayLoop = (errored, sleepMs) => {
 
 const sleepTime = (errored, sleepMs) => {
   if (errored) {
-    var backoffMs = errorCount * 1000 * 60;
+    var backoffMs = ++errorCount * 1000 * 60;
     return Math.min(backoffMs, sleepMs);
+  } else {
+    errorCount = 0;
   }
   return sleepMs;
 };

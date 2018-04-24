@@ -1,22 +1,22 @@
-const urlParser = require('url'),
-      PouchDB = require('pouchdb'),
-      // Promise = require('rsvp').Promise,
-      env = require('../env')(),
-      xmlforms = require('./xmlforms'),
-      couch2pg = require('couch2pg'),
-      {delayLoop} = require('./delay'),
-      pgp = require('pg-promise'),
-      log = require('./log');
+const urlParser = require('url')
+      , PouchDB = require('pouchdb')
+      , env = require('../env')()
+      , xmlforms = require('./xmlforms')
+      , couch2pg = require('couch2pg')
+      , {delayLoop} = require('./delay')
+      , pgp = require('pg-promise')
+      , Promise = require('rsvp').Promise
+      , log = require('./log');
+
+// Removes credentials from couchdb url
+// Converts http://admin:pass@localhost:5984/couch1
+// to localhost:5984/couch1 -- seq source
+const parseSource = url => {
+  const source = urlParser.parse(url);
+  return `${source.host}${source.path}`;
+};
 
 const pg = (pgconn) => {
-  // Removes credentials from couchdb url
-  // Converts http://admin:pass@localhost:5984/couch1
-  // to localhost:5984/couch1 -- seq source
-  const parseSource = url => {
-    const source = urlParser.parse(url);
-    return `${source.host}${source.path}`;
-  }
-
   return {
     importAll: (couchUrl) => {
       return couch2pg.importer(
@@ -26,8 +26,8 @@ const pg = (pgconn) => {
         env.couch2pgChangesLimit,
         parseSource(couchUrl));
     }
-  }
-}
+  };
+};
 
 let firstRun = false;
 let errorCount = 0;
@@ -58,19 +58,19 @@ const legacyRun = async (couchUrl, pgconn, timesToRun=undefined) => {
 const run = async (couchUrl, pgconn, timesToRun=undefined) => {
   log.info('Beginning couch2pg and xmlforms run at ' + new Date());
   let runErrored = false;
-  let allResults = []
+  let allResults = [];
   try {
     allResults = [
-      await pg(pgconn).importAll(couchUrl).importAll(),
-      await pg(pgconn).importAll(`${couchUrl}-sentinel`).importAll(),
-    ]
+        await pg(pgconn).importAll(couchUrl).importAll()
+      , await pg(pgconn).importAll(`${couchUrl}-sentinel`).importAll()
+    ];
   } catch(err) {
     log.error('Couch2PG import failed');
     log.error(err);
     if (err  && err.status === 401){
       process.exit(1);
     }
-    runErrored = true
+    runErrored = true;
   }
   if(allResults) {
     const [results, sentinelResults] = allResults;
@@ -88,7 +88,7 @@ const run = async (couchUrl, pgconn, timesToRun=undefined) => {
       } catch(err) {
         log.error('XMLForms support failed');
         log.error(err);
-        runErrored = true
+        runErrored = true;
       }
     }
   }
@@ -110,13 +110,13 @@ const run = async (couchUrl, pgconn, timesToRun=undefined) => {
 const replicate = async (couchUrl, pgUrl, timesToRun=undefined) => {
   try {
     await couch2pg.migrator(pgUrl)();
+    const pgconn = pgp({ 'promiseLib': Promise })(pgUrl);
     if (env.v04Mode) {
       log.info('Adapter is running in 0.4 mode');
-      await legacyRun(couchUrl, pgconn, timesToRun)
+      await legacyRun(couchUrl, pgconn, timesToRun);
     } else {
       log.info('Adapter is running in NORMAL mode');
       await xmlforms.migrate(pgUrl);
-      const pgconn = pgp({ 'promiseLib': Promise })(pgUrl);
       await run(couchUrl, pgconn, timesToRun);
     }
   } catch(err) {
@@ -130,5 +130,5 @@ const replicate = async (couchUrl, pgUrl, timesToRun=undefined) => {
 module.exports = couchUrl => {
   return {
     replicateTo: (pgUrl, times) => replicate(couchUrl, pgUrl, times)
-  }
+  };
 };
