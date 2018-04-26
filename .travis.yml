@@ -1,29 +1,10 @@
-language: node_js
-
-node_js:
-   - "6"
-
-env:
-  global:
-    - INT_COUCHDB_URL="http://localhost:5984/medic-analytics-test"
-
-# Used by the replace_couch script
-sudo: required
+language: generic
 
 services:
-   - couchdb
-
-addons:
-   postgresql: "9.4"
-
-before_script:
-   # Used by (so far non-existent) spec tests for xmlforms
-   - psql -c "CREATE DATABASE medicdata WITH OWNER postgres;" -U postgres
+  - docker
 
 script:
-   # Used by (so far non-existent) spec tests for xmlforms
-   - ./bin/replace_couch.sh
-   - grunt ci
+  - docker-compose run test grunt ci
 
 notifications:
   webhooks:
