@@ -1,7 +1,7 @@
 const replicator = require('./replicator'),
       log = require('./log'),
-      env = require('../env')(),
-      xmlforms = require('./xmlforms'),
+      env = require('../../env')(),
+      analytics = require('../analytics'),
       {delayLoop} = require('./delay');
 
 let firstRun = false;
@@ -40,7 +40,7 @@ const run = async (couchUrl, pgconn, timesToRun=undefined) => {
         medicResults.deleted.length || medicResults.edited.length ||
         sentinelResults.deleted.length || sentinelResults.edited.length) {
       try {
-        await xmlforms.update(pgconn);
+        await analytics.update(pgconn);
         // We have completed a successful run
         firstRun = false;
       } catch(err) {

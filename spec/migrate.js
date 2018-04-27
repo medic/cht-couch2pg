@@ -1,5 +1,5 @@
 const assert = require('chai').assert,
-    xmlforms = require('../libs/xmlforms'),
+    analytics = require('../libs/analytics'),
     pgutils = require('./utils/pgutils'),
     couch2pg = require('couch2pg'),
     knex = require('knex');
@@ -25,7 +25,7 @@ describe('xmlforms', () => {
     assert(await db.schema.hasTable('couchdb_progress'));
     assert(await db.schema.hasTable('couch2pg_migrations'));
 
-    await xmlforms.migrate(PG_DB_URL);
+    await analytics.migrate(PG_DB_URL);
     assert(await db.schema.hasTable('xmlforms_migrations'));
 
     const views = (await db.raw(SELECT_VIEWS)).rows;

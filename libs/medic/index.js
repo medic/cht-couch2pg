@@ -1,5 +1,5 @@
-const xmlforms = require('./xmlforms'),
-      env = require('../env'),
+const analytics = require('../analytics'),
+      env = require('../../env'),
       pgp = require('pg-promise'),
       couch2pg = require('couch2pg'),
       log = require('./log'),
@@ -15,7 +15,7 @@ const replicate = async (couchUrl, pgUrl, timesToRun) => {
       await legacyRunner.run(couchUrl, pgconn, timesToRun);
     } else {
       log.info('Adapter is running in NORMAL mode');
-      await xmlforms.migrate(pgUrl);
+      await analytics.migrate(pgUrl);
       await runner.run(couchUrl, pgconn, timesToRun);
     }
   } catch(err) {

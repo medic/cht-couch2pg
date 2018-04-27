@@ -1,7 +1,7 @@
 const urlParser = require('url'),
       PouchDB = require('pouchdb'),
       couch2pg = require('couch2pg'),
-      env = require('../env')();
+      env = require('../../env')();
 
 // Removes credentials from couchdb url
 // Converts http://admin:pass@localhost:5984/couch1
