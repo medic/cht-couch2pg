@@ -1,5 +1,5 @@
 const Postgrator = require('postgrator'),
-    log = require('loglevel');
+      log = require('loglevel');
 
 const migrate = postgresUrl => {
   const postgrator = new Postgrator({
@@ -13,6 +13,15 @@ const migrate = postgresUrl => {
   return postgrator.migrate('201711101200');
 };
 
+const update = async (db) => {
+  log.info('Refreshing materialised views');
+
+  const result = await db.one('SELECT refresh_matviews()');
+  log.debug(result);
+  return result;
+};
+
 module.exports = {
-  migrate: migrate
+  migrate: migrate,
+  update: update
 };

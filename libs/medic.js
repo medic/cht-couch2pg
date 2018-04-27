@@ -1,8 +1,7 @@
 const urlParser = require('url'),
       PouchDB = require('pouchdb'),
       env = require('../env')(),
-      migrator = require('./xmlforms/migrator'),
-      updater = require('./xmlforms/updater'),
+      xmlforms = require('./xmlforms'),
       couch2pg = require('couch2pg'),
       {delayLoop} = require('./delay'),
       pgp = require('pg-promise'),
@@ -83,7 +82,7 @@ const run = async (couchUrl, pgconn, timesToRun=undefined) => {
         results.deleted.length || results.edited.length ||
         sentinelResults.deleted.length || sentinelResults.edited.length) {
       try {
-        await updater(pgconn).update();
+        await xmlforms.update(pgconn);
         // We have completed a successful run
         firstRun = false;
       } catch(err) {
@@ -117,7 +116,7 @@ const replicate = async (couchUrl, pgUrl, timesToRun=undefined) => {
       await legacyRun(couchUrl, pgconn, timesToRun);
     } else {
       log.info('Adapter is running in NORMAL mode');
-      await migrator.migrate(pgUrl);
+      await xmlforms.migrate(pgUrl);
       await run(couchUrl, pgconn, timesToRun);
     }
   } catch(err) {
