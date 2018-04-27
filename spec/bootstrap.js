@@ -1,6 +1,5 @@
 const CurlRequest = require('curl-request'),
-      knex = require('knex'),
-      Promise = require('es6-promise').Promise;
+      knex = require('knex');
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 const WAIT_TIME = 5000;

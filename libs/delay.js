@@ -1,5 +1,4 @@
-const log = require('./log'),
-      Promise = require('es6-promise').Promise;
+const log = require('./log');
 
 let errorCount = 0;
 

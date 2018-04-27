@@ -2,6 +2,20 @@
 # yarn lockfile v1
 
 
+"@natlibfi/es6-polyfills@^2.0.0":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@natlibfi/es6-polyfills/-/es6-polyfills-2.0.1.tgz#37209345d9a0796de8474a6aafc9ef5e547a937e"
+  dependencies:
+    es6-object-assign "^1.0.3"
+    es6-promise-polyfill "^1.2.0"
+
+"@natlibfi/loglevel-message-prefix@3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@natlibfi/loglevel-message-prefix/-/loglevel-message-prefix-3.0.1.tgz#f5d794cd7c3305cdd55c2e1b846a3c6535a81138"
+  dependencies:
+    "@natlibfi/es6-polyfills" "^2.0.0"
+    loglevel "^1.4.0"
+
 "@sinonjs/formatio@^2.0.0":
   version "2.0.0"
   resolved "http://registry.npmjs.org/@sinonjs/formatio/-/formatio-2.0.0.tgz#84db7e9eb5531df18a8c5e0bfb6e449e55e654b2"
@@ -611,9 +625,9 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
-couch2pg@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/couch2pg/-/couch2pg-0.3.0.tgz#1c9cb9ba28c4ff16487e589c5e0312dc7f26ea68"
+couch2pg@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/couch2pg/-/couch2pg-0.2.1.tgz#4a3ea6710ae89cd3053d567919899264add9d33e"
   dependencies:
     commander "^2.9.0"
     loglevel "^1.4.1"
@@ -885,10 +899,6 @@ es6-promise-polyfill@^1.2.0:
 es6-promise-pool@2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/es6-promise-pool/-/es6-promise-pool-2.4.2.tgz#b8d8e680dce67ba4c885f8a60feb2c0386fb2e07"
-
-es6-promise@4.2.4:
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.2.4.tgz#dc4221c2b16518760bd8c39a52d8f356fc00ed29"
 
 es6-symbol@^3.0.2, es6-symbol@^3.1.1, es6-symbol@~3.1.1:
   version "3.1.1"
@@ -2279,6 +2289,10 @@ make-iterator@^1.0.0:
   dependencies:
     kind-of "^6.0.2"
 
+manakin@0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/manakin/-/manakin-0.5.1.tgz#c4a7116f6b00df3d5f1a37ad3ca515d22065a658"
+
 map-cache@^0.2.0, map-cache@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/map-cache/-/map-cache-0.2.2.tgz#c32abd0bd6525d9b051645bb4f26ac5dc98a0dbf"
@@ -2788,13 +2802,17 @@ pg-connection-string@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/pg-connection-string/-/pg-connection-string-2.0.0.tgz#3eefe5997e06d94821e4d502e42b6a1c73f8df82"
 
-pg-format@^1.0.0:
+pg-format@1.0.4, pg-format@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/pg-format/-/pg-format-1.0.4.tgz#27734236c2ad3f4e5064915a59334e20040a828e"
 
 pg-int8@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/pg-int8/-/pg-int8-1.0.1.tgz#943bd463bf5b71b4170115f80f8efc9a0c0eb78c"
+
+pg-minify@0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/pg-minify/-/pg-minify-0.5.4.tgz#89d5261cacfd44dd7927fa052222a404e9b2a3c9"
 
 pg-minify@^0.2.4:
   version "0.2.5"
@@ -2803,6 +2821,15 @@ pg-minify@^0.2.4:
 pg-pool@~2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/pg-pool/-/pg-pool-2.0.3.tgz#c022032c8949f312a4f91fb6409ce04076be3257"
+
+pg-promise@8.4.0:
+  version "8.4.0"
+  resolved "https://registry.yarnpkg.com/pg-promise/-/pg-promise-8.4.0.tgz#8efde596c39c53c958e27f9aafd85d7f87249f65"
+  dependencies:
+    manakin "0.5.1"
+    pg "7.4.1"
+    pg-minify "0.5.4"
+    spex "2.0.2"
 
 pg-promise@^3.0.0:
   version "3.9.1"
@@ -3351,10 +3378,6 @@ rimraf@~2.2.8:
   version "2.2.8"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
 
-rsvp@4.8.2:
-  version "4.8.2"
-  resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-4.8.2.tgz#9d5647108735784eb13418cdddb56f75b919d722"
-
 rsvp@^3.0.0:
   version "3.6.2"
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-3.6.2.tgz#2e96491599a96cde1b515d5674a8f7a91452926a"
@@ -3575,6 +3598,10 @@ spdx-expression-parse@^3.0.0:
 spdx-license-ids@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.0.tgz#7a7cd28470cc6d3a1cfe6d66886f6bc430d3ac87"
+
+spex@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/spex/-/spex-2.0.2.tgz#e8c8d633a4c67af642dded701ec2350c9de964a0"
 
 spex@^0.4.2:
   version "0.4.6"

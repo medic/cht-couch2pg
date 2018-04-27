@@ -10,18 +10,14 @@
   "dependencies": {
     "couch2pg": "^0.2.1",
     "loglevel": "^1.4.1",
-    "loglevel-message-prefix": "^2.0.1",
     "pg": "7.4.1",
     "pg-format": "1.0.4",
     "pg-promise": "8.4.0",
     "postgrator": "3.5.0",
-    "pouchdb": "^5.3.2",
-    "underscore": "^1.8.3",
-    "es6-promise": "4.2.4"
+    "pouchdb": "^5.3.2"
   },
   "devDependencies": {
     "chai": "^3.0.0",
-    "chai-as-promised": "^5.0.0",
     "curl-request": "1.1.1",
     "grunt": "1.0.2",
     "grunt-cli": "1.2.0",

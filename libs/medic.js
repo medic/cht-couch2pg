@@ -3,9 +3,8 @@ const urlParser = require('url'),
       env = require('../env')(),
       xmlforms = require('./xmlforms'),
       couch2pg = require('couch2pg'),
-      {delayLoop} = require('./delay'),
       pgp = require('pg-promise'),
-      Promise = require('es6-promise').Promise,
+      {delayLoop} = require('./delay'),
       log = require('./log');
 
 // Removes credentials from couchdb url
