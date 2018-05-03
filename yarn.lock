@@ -2,20 +2,6 @@
 # yarn lockfile v1
 
 
-"@natlibfi/es6-polyfills@^2.0.0":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@natlibfi/es6-polyfills/-/es6-polyfills-2.0.1.tgz#37209345d9a0796de8474a6aafc9ef5e547a937e"
-  dependencies:
-    es6-object-assign "^1.0.3"
-    es6-promise-polyfill "^1.2.0"
-
-"@natlibfi/loglevel-message-prefix@3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@natlibfi/loglevel-message-prefix/-/loglevel-message-prefix-3.0.1.tgz#f5d794cd7c3305cdd55c2e1b846a3c6535a81138"
-  dependencies:
-    "@natlibfi/es6-polyfills" "^2.0.0"
-    loglevel "^1.4.0"
-
 "@sinonjs/formatio@^2.0.0":
   version "2.0.0"
   resolved "http://registry.npmjs.org/@sinonjs/formatio/-/formatio-2.0.0.tgz#84db7e9eb5531df18a8c5e0bfb6e449e55e654b2"
@@ -457,10 +443,6 @@ caseless@~0.11.0:
 caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
-
-chai-as-promised@^5.0.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/chai-as-promised/-/chai-as-promised-5.3.0.tgz#09d7a402908aa70dfdbead53e5853fc79d3ef21c"
 
 chai@^3.0.0:
   version "3.5.0"

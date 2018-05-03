@@ -5,12 +5,15 @@ const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 const WAIT_TIME = 5000;
 const MAX_RETRIES = 10;
 
-const PUBLIC_ANNOUNCEMENT1 = 'Please define env vars \
-    TEST_COUCH_URL(ie: http://admin:pass@localhost:5984) & \
-    TEST_PG_URL(ie: postgres://locahost:5432) to test locally.';
-
-const PUBLIC_ANNOUNCEMENT2 = 'Everything can also be tested with: \
-    docker-compose run test grunt test';
+const PUBLIC_ANNOUNCEMENT =
+'-------------------------------------------------------------------\n \
+  * To test against your local databases (couch/postgres),\n\
+   please define these env vars:\n\n \
+    TEST_COUCH_URL (ie: http://admin:pass@localhost:5984) &\n \
+    TEST_PG_URL    (ie: postgres://locahost:5432)\n\n\n\
+  * Everything can also be tested with:\n\n\
+    docker-compose run test grunt test\n\n\
+-----------------------------------------------------------------';
 
 const curl = new CurlRequest();
 
@@ -21,8 +24,7 @@ const waitForDb = async ({url, fn, retries=0}) => {
   }
   if(!await fn()) {
     if(!url) {
-      console.log(PUBLIC_ANNOUNCEMENT1);
-      console.log(PUBLIC_ANNOUNCEMENT2);
+      console.log(PUBLIC_ANNOUNCEMENT);
       process.exit(1);
     }
     console.log(`====> Waiting on ${url} to appear.`);

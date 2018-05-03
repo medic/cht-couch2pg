@@ -32,8 +32,34 @@ const ensureDbIsClean = async (url) => {
   await ensureDbExists(url);
 };
 
+const SELECT_VIEWS =
+  'select table_name from INFORMATION_SCHEMA.views \
+  WHERE table_schema = ANY (current_schemas(false)) \
+  order by table_name';
+
+class Pg {
+
+  constructor(url) {
+    this.conn = knex({client: 'pg', connection: url});
+    this.schema = this.conn.schema;
+  }
+
+  async rows() {
+    return (await this.conn.raw('select * from couchdb')).rows;
+  }
+
+  async views() {
+    return (await this.conn.raw(SELECT_VIEWS)).rows;
+  }
+
+  async destroy() {
+    await this.conn.destroy();
+  }
+}
+
 
 module.exports = {
+  Pg: Pg,
   ensureDbExists: ensureDbExists,
   ensureDbIsClean: ensureDbIsClean
 };
