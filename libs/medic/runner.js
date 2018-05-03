@@ -1,6 +1,5 @@
-const replicator = require('./replicator'),
+const couch2pg = require('../couch2pg'),
       log = require('./log'),
-      env = require('../../env')(),
       analytics = require('../analytics'),
       {delayLoop} = require('./delay');
 
@@ -8,13 +7,14 @@ let firstRun = false;
 let errorCount = 0;
 let runTimes = 0;
 
-const replicateAll = async (couchUrl, pgconn) => {
+const replicateAll = async (couchUrl, pgconn, opts) => {
   let allResults = [],
       runErrored = false;
   try {
+    const sentinelUrl = `${couchUrl}-sentinel`;
     allResults = [
-      await replicator.replicator(couchUrl, pgconn).importAll(),
-      await replicator.replicator(`${couchUrl}-sentinel`, pgconn).importAll()
+      await couch2pg.replicate(couchUrl, pgconn, opts),
+      await couch2pg.replicate(sentinelUrl, pgconn, opts)
     ];
   } catch(err) {
     log.error('Couch2PG import failed');
@@ -27,9 +27,9 @@ const replicateAll = async (couchUrl, pgconn) => {
   return [allResults, runErrored];
 };
 
-const run = async (couchUrl, pgconn, timesToRun=undefined) => {
+const run = async (couchUrl, pgconn, opts) => {
   log.info('Beginning couch2pg and xmlforms run at ' + new Date());
-  const [allResults, runErrored] = await replicateAll(couchUrl, pgconn);
+  const [allResults, runErrored] = await replicateAll(couchUrl, pgconn, opts);
   if(allResults) {
     const [medicResults, sentinelResults] = allResults;
     // Run secondary tasks if we reasonably think there might be new data
@@ -51,15 +51,17 @@ const run = async (couchUrl, pgconn, timesToRun=undefined) => {
     }
   }
 
-  if(runErrored && errorCount++ >= env.couch2pgRetryCount) {
-    throw new Error('Too many consecutive errors');
-  } else {
+  const retries = opts.retryCount;
+  if(!runErrored) {
     errorCount = 0;
+  } else if(retries > 0 && errorCount++ >= retries) {
+    throw new Error('Too many consecutive errors');
   }
 
-  if(!timesToRun || ++runTimes < timesToRun) {
-    await delayLoop(runErrored, env.sleepMs);
-    await run(couchUrl, pgconn, timesToRun);
+  log.debug(opts);
+  if(!opts.timesToRun || ++runTimes < opts.timesToRun) {
+    await delayLoop(runErrored, opts.sleepMins);
+    await run(couchUrl, pgconn, opts);
   }
 };
 

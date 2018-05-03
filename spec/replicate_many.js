@@ -4,20 +4,20 @@ const expect = require('chai').expect,
       medicDocs = require('./docs/medic.json'),
       sentinelDocs = require('./docs/sentinel.json'),
       pgutils = require('./utils/pgutils'),
-      medic = require('../libs/medic');
+      replicate = require('../libs/replicate');
 
-const COUCH_DB_URL = `${process.env.TEST_COUCH_URL}/mycouchtest`;
-const SENTINEL_DB_URL = `${COUCH_DB_URL}-sentinel`;
-const PG_DB_NAME = 'xmypgtest';
-const PG_DB_URL = `${process.env.TEST_PG_URL}/${PG_DB_NAME}`;
+const couchUrl = `${process.env.TEST_COUCH_URL}/mycouchtest`;
+const sentinelUrl = `${couchUrl}-sentinel`;
+const pgDbName = 'mypgtest';
+const pgUrl = `${process.env.TEST_PG_URL}/${pgDbName}`;
 
-const pouch = () => new PouchDB(COUCH_DB_URL);
-const sentinel = () => new PouchDB(SENTINEL_DB_URL);
+const pouch = () => new PouchDB(couchUrl);
+const sentinel = () => new PouchDB(sentinelUrl);
 
 const cleanUp = async () => {
   await pouch().destroy();
   await sentinel().destroy();
-  await pgutils.ensureDbIsClean(PG_DB_URL);
+  await pgutils.ensureDbIsClean(pgUrl);
 };
 
 describe('replication', () => {
@@ -27,7 +27,7 @@ describe('replication', () => {
     await cleanUp();
     await pouch().bulkDocs(medicDocs);
     await sentinel().bulkDocs(sentinelDocs);
-    pg = new pgutils.Pg(PG_DB_URL);
+    pg = new pgutils.Pg(pgUrl);
   });
 
   afterEach(async () => {
@@ -35,16 +35,16 @@ describe('replication', () => {
   });
 
   it('replicates different type of couch records to pg', async () => {
-    await medic(COUCH_DB_URL).replicateTo(PG_DB_URL, 1);
+    await replicate(couchUrl, pgUrl, {timesToRun:1});
     const totalMedicDocs = medicDocs.length + sentinelDocs.length;
     expect((await pg.rows()).length).to.equal(totalMedicDocs);
 
     //Insert new couch doc
-    const couch = new PouchDB(COUCH_DB_URL);
+    const couch = new PouchDB(couchUrl);
     await couch.put(singleMedicDoc);
 
     // Replicate again and expect one more doc
-    await medic(COUCH_DB_URL).replicateTo(PG_DB_URL, 1);
+    await replicate(couchUrl, pgUrl, {timesToRun:1});
     expect((await pg.rows()).length).to.equal(totalMedicDocs + 1);
   });
 

@@ -2,17 +2,17 @@ const expect = require('chai').expect,
       PouchDB = require('pouchdb'),
       singleMedicDoc = require('./docs/single-medic.json'),
       pgutils = require('./utils/pgutils'),
-      medic = require('../libs/medic');
+      replicate = require('../libs/replicate');
 
-const COUCH_DB_URL = `${process.env.TEST_COUCH_URL}/mycouchonetest`;
-const PG_DB_NAME = 'pgonetest';
-const PG_DB_URL = `${process.env.TEST_PG_URL}/${PG_DB_NAME}`;
+const couchUrl = `${process.env.TEST_COUCH_URL}/mycouchsinglerecordtest`;
+const pgDbName = 'pgsinglerecordtest';
+const pgUrl = `${process.env.TEST_PG_URL}/${pgDbName}`;
 
-const pouch = () => new PouchDB(COUCH_DB_URL);
+const pouch = () => new PouchDB(couchUrl);
 
 const cleanUp = async () => {
   await pouch().destroy();
-  await pgutils.ensureDbIsClean(PG_DB_URL);
+  await pgutils.ensureDbIsClean(pgUrl);
 };
 
 describe('medic without sentinel db replication', () => {
@@ -21,7 +21,7 @@ describe('medic without sentinel db replication', () => {
   beforeEach(async () => {
     await cleanUp();
     await pouch().bulkDocs([singleMedicDoc]);
-    pg = new pgutils.Pg(PG_DB_URL);
+    pg = new pgutils.Pg(pgUrl);
   });
 
   afterEach(async() => {
@@ -29,7 +29,7 @@ describe('medic without sentinel db replication', () => {
   });
 
   it('replicates single couch record to postgres', async() => {
-    await medic(COUCH_DB_URL).replicateTo(PG_DB_URL, 1);
+    await replicate(couchUrl, pgUrl, {timesToRun: 1});
     let rows = await pg.rows();
     expect(rows.length).to.equal(1);
     const [couchRecord, pgRecord] = [singleMedicDoc, rows[0].doc];
@@ -38,13 +38,13 @@ describe('medic without sentinel db replication', () => {
     expect(pgRecord.type).to.equal(couchRecord.type);
 
     // Update couch record
-    const couch = new PouchDB(COUCH_DB_URL);
+    const couch = new PouchDB(couchUrl);
     const doc = await couch.get(couchRecord._id);
     doc.name = 'Simon Says';
     await couch.put(doc);
 
     // Replicate again
-    await medic(COUCH_DB_URL).replicateTo(PG_DB_URL, 1);
+    await replicate(couchUrl, pgUrl, {timesToRun: 1});
     rows = await pg.rows();
     expect(rows.length).to.equal(1); // Still one pg record
     expect(rows[0].doc.name).to.equal(doc.name); // pg record has been updated

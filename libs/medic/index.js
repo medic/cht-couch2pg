@@ -1,22 +1,26 @@
 const analytics = require('../analytics'),
-      env = require('../../env'),
       pgp = require('pg-promise'),
-      couch2pg = require('couch2pg'),
+      couch2pg = require('../couch2pg'),
       log = require('./log'),
       runner = require('./runner'),
       legacyRunner = require('./legacy-runner');
 
-const replicate = async (couchUrl, pgUrl, timesToRun) => {
+const replicate = async (couchUrl, pgUrl, opts={}) => {
   try {
-    await couch2pg.migrator(pgUrl)();
+    log.setDefaultLevel(opts.verbose ? 'debug' : 'info');
+
+    log.debug(`${couchUrl} => ${pgUrl}`);
+    log.debug(opts);
+
+    await couch2pg.migrate(pgUrl);
     const pgconn = pgp({ 'promiseLib': Promise })(pgUrl);
-    if (env.v04Mode) {
+    if (opts.v4Mode) {
       log.info('Adapter is running in 0.4 mode');
-      await legacyRunner.run(couchUrl, pgconn, timesToRun);
+      await legacyRunner.run(couchUrl, pgconn, opts);
     } else {
       log.info('Adapter is running in NORMAL mode');
       await analytics.migrate(pgUrl);
-      await runner.run(couchUrl, pgconn, timesToRun);
+      await runner.run(couchUrl, pgconn, opts);
     }
   } catch(err) {
     log.error('An unrecoverable error occurred');
@@ -28,6 +32,6 @@ const replicate = async (couchUrl, pgUrl, timesToRun) => {
 
 module.exports = couchUrl => {
   return {
-    replicateTo: (pgUrl, times) => replicate(couchUrl, pgUrl, times)
+    replicateTo: (pgUrl, opts) => replicate(couchUrl, pgUrl, opts)
   };
 };

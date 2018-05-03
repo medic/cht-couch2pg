@@ -1,7 +1,7 @@
 const assert = require('chai').assert,
     analytics = require('../libs/analytics'),
     pgutils = require('./utils/pgutils'),
-    couch2pg = require('couch2pg');
+    couch2pg = require('../libs/couch2pg');
 
 const PG_DB_URL = `${process.env.TEST_PG_URL}/xmlformstest`;
 
@@ -15,7 +15,7 @@ describe('xmlforms', () => {
   it('checks migrations', async () => {
     await pgutils.ensureDbExists(PG_DB_URL);
     const db = new pgutils.Pg(PG_DB_URL);
-    await couch2pg.migrator(PG_DB_URL)();
+    await couch2pg.migrate(PG_DB_URL);
     assert(await db.schema.hasTable('couchdb'));
     assert(await db.schema.hasTable('couchdb_progress'));
     assert(await db.schema.hasTable('couch2pg_migrations'));
