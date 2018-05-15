@@ -16,7 +16,7 @@ console.log(
 );
 
 const runInBackground = (couchUrl, pgUrl, opts) => {
-  const replica = new (forever.Monitor)('./libs/replicate_cli.js', {
+  const replica = new forever.Monitor('./libs/replicate_cli.js', {
     max: 5,
     silent: true,
     args: [couchUrl, pgUrl, JSON.stringify(opts)]
@@ -36,7 +36,7 @@ const runInBackground = (couchUrl, pgUrl, opts) => {
   function savePid() { console.log(replica.childData.pid); }
 
   replica.start();
-}
+};
 
 const run = async (args) => {
   const {couchUrl, pgUrl, ...opts} = await inquirer.askAboutConfiguration(args);
