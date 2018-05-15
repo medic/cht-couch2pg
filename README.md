@@ -14,7 +14,7 @@ might extend beyond that.
 
 ### Running locally
 
-If you want to run it locally: `node index`
+If you want to run it locally: `yarn && node .`
 
 
 ## Running tests through docker-compose

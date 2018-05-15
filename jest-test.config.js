@@ -4,7 +4,7 @@ module.exports = {
   'testPathIgnorePatterns': [
     'bootstrap', 'mocks', 'docs', 'utils'
   ],
-  'testMatch': ['<rootDir>/spec/**/*.js'],
+  'testMatch': ['<rootDir>/tests/**/*.js'],
   'collectCoverageFrom': ['<rootDir>/replicate/**/*.{js}'],
   'coverageThreshold': {
     'global': {

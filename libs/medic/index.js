@@ -7,7 +7,7 @@ const analytics = require('../analytics'),
 
 const replicate = async (couchUrl, pgUrl, opts={}) => {
   try {
-    log.setDefaultLevel(opts.verbose ? 'debug' : 'info');
+    log.setDefaultLevel(opts.debug ? 'debug' : 'info');
 
     log.debug(`${couchUrl} => ${pgUrl}`);
     log.debug(opts);

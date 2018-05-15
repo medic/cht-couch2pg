@@ -43,6 +43,7 @@ const waitForCouch = async (url) => {
       }
     } catch(err) {
       //Ignore
+      console.log(err);
     }
   }});
 };

@@ -4,7 +4,7 @@ const INDEFINITELY = 'indefinitely';
 
 module.exports = {
 
-  askDetailsAndOptions: async (args) => {
+  askAboutConfiguration: async (args) => {
     const questions = [
       {
         name: 'couchUrl',
@@ -35,15 +35,15 @@ module.exports = {
         name: 'docLimit',
         type: 'list',
         message: 'Select the number of documents to grab concurrently. Increasing this number will cut down on HTTP GETs and may improve performance, decreasing this number will cut down on node memory usage, and may increase stability.',
-        choices: ['10', '100', '200', '500', '1000'],
+        choices: ['10', '100', '200', '500', '1,000'],
         default: '100'
       },
       {
         name: 'changesLimit',
         type: 'list',
         message: 'Select the number of document ids to grab per change limit request. Increasing this number will cut down on HTTP GETs and may improve performance, decreasing this number will cut down on node memory usage slightly, and may increase stability.',
-        choices: ['100', '1000', '10000', '20000', '100000'],
-        default: '10000'
+        choices: ['100', '1,000', '10,000', '20,000', '100,000'],
+        default: '10,000'
       },
       {
         name: 'debug',
@@ -65,13 +65,20 @@ module.exports = {
         message: 'Run in v4 mode. Skips anything 2.6+ related.',
         choices: ['false', 'true'],
         default: 'false'
+      },
+      {
+        name: 'backgroundMode',
+        type: 'list',
+        message: 'Run the replication process in the background?',
+        choices: ['false', 'true'],
+        default: 'false'
       }
     ];
     const values = await inquirer.prompt(questions);
     ['sleepMins', 'docLimit', 'changesLimit'].forEach(key => {
-      values[key] = parseInt(values[key]);
+      values[key] = parseInt(values[key].replace(/,/g, ''));
     });
-    ['debug', 'v4Mode'].forEach(key => {
+    ['debug', 'v4Mode', 'backgroundMode'].forEach(key => {
       values[key] = values[key] === 'true';
     });
     const retries = values['retryCount'];

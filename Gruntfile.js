@@ -10,26 +10,22 @@ module.exports = function(grunt) {
       },
       src: [
         "libs/**/*.js",
-        "spec/**/*.js",
+        "tests/**/*.js",
         "index.js"
       ]
     },
     mochaTest: {
-      unit: {
-        src: ['tests/**/*.js']
-      },
       integration: {
         options: {
           timeout: 300000
         },
-        src: ['spec/**/*.js']
+        src: ['tests/**/*.js']
       }
     }
   });
 
   grunt.registerTask('test', 'Run tests.', [
     'eslint',
-    'mochaTest:unit',
     'mochaTest:integration'
   ]);
 

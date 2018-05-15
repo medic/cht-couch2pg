@@ -5,7 +5,9 @@ const chalk = require('chalk'),
       CLI = require('clui'),
       Spinner = CLI.Spinner,
       inquirer = require('./inquirer'),
-      replicate = require('./libs/replicate');
+      replicate = require('./libs/replicate'),
+      forever = require('forever-monitor'),
+      fs = require('fs');
 
 console.log(
   chalk.yellow(
@@ -13,15 +15,43 @@ console.log(
   )
 );
 
+const runInBackground = (couchUrl, pgUrl, opts) => {
+  const replica = new (forever.Monitor)('./libs/replicate_cli.js', {
+    max: 5,
+    silent: true,
+    args: [couchUrl, pgUrl, JSON.stringify(opts)]
+  });
+
+  replica.on('exit', function () {
+    console.log('replication has exited after 5 restarts');
+  });
+
+  const logs = fs.createWriteStream('./replication.log');
+  process.stdout.write = process.stderr.write = logs.write.bind(logs);
+
+  console.log = d => { logs.write(d + '\n'); };
+
+  replica.on('restart', savePid);
+  replica.on('start', savePid);
+  function savePid() { console.log(replica.childData.pid); }
+
+  replica.start();
+}
+
 const run = async (args) => {
-  const {couchUrl, pgUrl, ...opts} = await inquirer.askDetailsAndOptions(args);
-  const status = new Spinner('medic-couch2pg:');
-  status.start();
-  try {
-    await replicate(couchUrl, pgUrl, opts);
-  } finally {
-    status.stop();
+  const {couchUrl, pgUrl, ...opts} = await inquirer.askAboutConfiguration(args);
+  if(opts.backgroundMode) {
+    runInBackground(couchUrl, pgUrl, opts);
+  } else {
+    const spinner = new Spinner('medic-couch2pg:');
+    spinner.start();
+    try {
+      await replicate(couchUrl, pgUrl, opts);
+    } finally {
+      spinner.stop();
+    }
   }
+  process.exit();
 };
 
 var args = process.argv.slice(2);

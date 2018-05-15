@@ -17,7 +17,7 @@ services:
     build: .
     volumes:
       - ./libs:/usr/app/libs
-      - ./spec:/usr/app/spec
+      - ./tests:/usr/app/tests
     depends_on:
       - couch
       - postgres
