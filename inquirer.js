@@ -58,27 +58,13 @@ module.exports = {
         message: 'Select how many times to internally retry continued unsuccessful runs before exiting. If unset medic-couch2pg will retry indefinitely. If set it will retry N times, and then exit with status code 1',
         choices: ['1', '3', '5', '10', INDEFINITELY],
         default: INDEFINITELY
-      },
-      {
-        name: 'v4Mode',
-        type: 'list',
-        message: 'Run in v4 mode. Skips anything 2.6+ related.',
-        choices: ['false', 'true'],
-        default: 'false'
-      },
-      {
-        name: 'backgroundMode',
-        type: 'list',
-        message: 'Run the replication process in the background?',
-        choices: ['false', 'true'],
-        default: 'false'
       }
     ];
     const values = await inquirer.prompt(questions);
     ['sleepMins', 'docLimit', 'changesLimit'].forEach(key => {
       values[key] = parseInt(values[key].replace(/,/g, ''));
     });
-    ['debug', 'v4Mode', 'backgroundMode'].forEach(key => {
+    ['debug'].forEach(key => {
       values[key] = values[key] === 'true';
     });
     const retries = values['retryCount'];

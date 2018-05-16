@@ -6,43 +6,23 @@ const chalk = require('chalk'),
       Spinner = CLI.Spinner,
       inquirer = require('./inquirer'),
       replicate = require('./libs/replicate'),
-      forever = require('forever-monitor'),
-      fs = require('fs');
+      fs = require('fs'),
+      env = require('./env')();
 
-console.log(
-  chalk.yellow(
-    figlet.textSync('Medic-Couch2Pg', { horizontalLayout: 'full' })
-  )
-);
-
-const runInBackground = (couchUrl, pgUrl, opts) => {
-  const replica = new forever.Monitor('./libs/replicate_cli.js', {
-    max: 5,
-    silent: true,
-    args: [couchUrl, pgUrl, JSON.stringify(opts)]
-  });
-
-  replica.on('exit', function () {
-    console.log('replication has exited after 5 restarts');
-  });
-
-  const logs = fs.createWriteStream('./replication.log');
-  process.stdout.write = process.stderr.write = logs.write.bind(logs);
-
-  console.log = d => { logs.write(d + '\n'); };
-
-  replica.on('restart', savePid);
-  replica.on('start', savePid);
-  function savePid() { console.log(replica.childData.pid); }
-
-  replica.start();
-};
+const interactiveMode = args => {
+  return args && args.length > 0 && args[0] === '-i';
+}
 
 const run = async (args) => {
-  const {couchUrl, pgUrl, ...opts} = await inquirer.askAboutConfiguration(args);
-  if(opts.backgroundMode) {
-    runInBackground(couchUrl, pgUrl, opts);
+  if(!interactiveMode(args)) {
+    await replicate(env.couchdbUrl, env.postgresqlUrl, env);
   } else {
+    console.log(
+      chalk.yellow(
+        figlet.textSync('Medic-Couch2Pg', { horizontalLayout: 'full' })
+      )
+    );
+    const {couchUrl, pgUrl, ...opts} = await inquirer.askAboutConfiguration(args.slice(1));
     const spinner = new Spinner('medic-couch2pg:');
     spinner.start();
     try {
@@ -50,8 +30,8 @@ const run = async (args) => {
     } finally {
       spinner.stop();
     }
+    process.exit();
   }
-  process.exit();
 };
 
 var args = process.argv.slice(2);

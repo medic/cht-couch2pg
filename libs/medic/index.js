@@ -2,8 +2,7 @@ const analytics = require('../analytics'),
       pgp = require('pg-promise'),
       couch2pg = require('../couch2pg'),
       log = require('./log'),
-      runner = require('./runner'),
-      legacyRunner = require('./legacy-runner');
+      runner = require('./runner');
 
 const replicate = async (couchUrl, pgUrl, opts={}) => {
   try {
@@ -14,14 +13,9 @@ const replicate = async (couchUrl, pgUrl, opts={}) => {
 
     await couch2pg.migrate(pgUrl);
     const pgconn = pgp({ 'promiseLib': Promise })(pgUrl);
-    if (opts.v4Mode) {
-      log.info('Adapter is running in 0.4 mode');
-      await legacyRunner.run(couchUrl, pgconn, opts);
-    } else {
-      log.info('Adapter is running in NORMAL mode');
-      await analytics.migrate(pgUrl);
-      await runner.run(couchUrl, pgconn, opts);
-    }
+    log.info('Adapter is running in NORMAL mode');
+    await analytics.migrate(pgUrl);
+    await runner.run(couchUrl, pgconn, opts);
   } catch(err) {
     log.error('An unrecoverable error occurred');
     log.error(err);

@@ -9,12 +9,22 @@ might extend beyond that.
 
 1. Clone repo
 2. Run `yarn`
-3. Install the module globally with `yarn global add`
-4. Run `replicate-medic <medic-couch-db-url> <analytics-postgres-db-url>`
 
-### Running locally
+### Running locally with env variables
 
-If you want to run it locally: `yarn && node .`
+```
+export POSTGRESQL_URL=postgres://localhost:5432/standarddev3
+export COUCHDB_URL=https://admin:pass@localhost:5984/medic
+export COUCH2PG_SLEEP_MINS=120
+export COUCH2PG_DOC_LIMIT=1000
+export COUCH2PG_RETRY_COUNT=5
+```
+
+Run it locally with env vars: `yarn && node .`
+
+### Running locally in interactive mode (no env vars needed)
+
+Run it locally in interactive mode: `yarn && node . -i`
 
 
 ## Running tests through docker-compose
