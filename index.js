@@ -6,12 +6,11 @@ const chalk = require('chalk'),
       Spinner = CLI.Spinner,
       inquirer = require('./inquirer'),
       replicate = require('./libs/replicate'),
-      fs = require('fs'),
       env = require('./env')();
 
 const interactiveMode = args => {
   return args && args.length > 0 && args[0] === '-i';
-}
+};
 
 const run = async (args) => {
   if(!interactiveMode(args)) {
