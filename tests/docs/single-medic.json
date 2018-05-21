@@ -1,0 +1,23 @@
+{
+  "_id": "015ebd5d-5152-4212-ba30-d41fe4ded03c",
+  "alternate_phone": "",
+  "date_of_birth": "1988-12-22",
+  "date_of_birth_method": "approx",
+  "debug_note": "",
+  "name": "Simona Bolivar",
+  "notes": "",
+  "patient_id": "56350",
+  "phone": "+141444444444",
+  "pregnant_at_registration": "false",
+  "reported_date": 1511153396479,
+  "role": "patient",
+  "sex": "female",
+  "transitions": {
+      "generate_patient_id_on_people": {
+          "last_rev": 2,
+          "ok": true,
+          "seq": 1328
+      }
+  },
+  "type": "person"
+}

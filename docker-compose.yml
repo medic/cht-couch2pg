@@ -1,0 +1,26 @@
+version: '2'
+services:
+  couch:
+    image: couchdb:2.1.1
+    ports:
+      - ${COUCH_PORT}:5984
+    environment:
+      COUCHDB_USER: ${COUCH_ADMIN}
+      COUCHDB_PASSWORD: ${COUCH_PASS}
+  postgres:
+    image: postgres:9.4
+    ports:
+      - ${PG_PORT}:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+  test:
+    build: .
+    volumes:
+      - ./libs:/usr/app/libs
+      - ./tests:/usr/app/tests
+    depends_on:
+      - couch
+      - postgres
+    environment:
+      TEST_COUCH_URL: http://${COUCH_ADMIN}:${COUCH_PASS}@couch:5984
+      TEST_PG_URL: postgres://postgres:${PG_PASS}@postgres:5432

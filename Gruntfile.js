@@ -1,42 +1,38 @@
 module.exports = function(grunt) {
   //'use strict';
-  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('gruntify-eslint');
   grunt.loadNpmTasks('grunt-mocha-test');
 
   grunt.initConfig({
-    jshint: {
+    eslint: {
       options: {
-        jshintrc: true
+        configFile: ".eslintrc"
       },
-      all: [
-        'libs/**/*.js',
-        'tests/**/*.js',
-        'spec/**/*.js'
+      src: [
+        "libs/**/*.js",
+        "tests/**/*.js",
+        "index.js"
       ]
     },
     mochaTest: {
-      unit: {
-        src: ['tests/**/*.js']
-      },
       integration: {
         options: {
           timeout: 300000
         },
-        src: ['spec/**/*.js']
+        src: ['tests/**/*.js']
       }
     }
   });
 
   grunt.registerTask('test', 'Run tests.', [
-    'jshint',
-    'mochaTest:unit',
+    'eslint',
     'mochaTest:integration'
   ]);
 
   grunt.registerTask('default', 'test');
 
   grunt.registerTask('noint', 'skip integration tests', [
-    'jshint',
+    'eslint',
     'mochaTest:unit'
   ]);
 
