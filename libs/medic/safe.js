@@ -5,13 +5,13 @@ const cleanUrl = (url) => {
     return url.split('@').pop();
   }
   return url;
-}
+};
 
 const safe = (opts) => {
   const o = Object.assign({}, opts);
   EXPECTED_URLS.forEach(url => {
     o[url] = cleanUrl(o[url]);
-  })
+  });
   return o;
 };
 
