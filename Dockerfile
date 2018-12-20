@@ -3,8 +3,9 @@ FROM node:8
 WORKDIR /usr/app
 
 COPY package.json .
+COPY package-lock.json .
 
-RUN yarn --silent
-RUN yarn global add grunt-cli
+RUN npm ci
+RUN npm i -g grunt-cli
 
 COPY . .
