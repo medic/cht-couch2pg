@@ -8,7 +8,7 @@ might extend beyond that.
 ## Installation Steps (if applicable)
 
 1. Clone repo
-2. Run `yarn`
+2. Run `npm ci`
 
 ### Running locally with env variables
 
@@ -20,23 +20,23 @@ export COUCH2PG_DOC_LIMIT=1000
 export COUCH2PG_RETRY_COUNT=5
 ```
 
-Run it locally with env vars: `yarn && node .`
+Run it locally with env vars: `npm ci && node .`
 
 ### Running locally in interactive mode (no env vars needed)
 
-Run it locally in interactive mode: `yarn && node . -i`
+Run it locally in interactive mode: `npm ci && node . -i`
 
 
 ## Running tests through docker-compose
 
 Run tests with: `docker-compose run test grunt test`.
-Run tests in interactive watch mode with: `docker-compose run test yarn watch`.
+Run tests in interactive watch mode with: `docker-compose run test npm run watch`.
 
 
 ## Running tests against local couch and postgres databases
 
 Run tests with: `grunt test`.
-Run tests in interactive watch mode with: `yarn watch`.
+Run tests in interactive watch mode with: `npm run watch`.
 
 Environment variables required for the integration tests to run correctly:
  * `TEST_PG_URL`: postgres url. ie: `http://admin:pass@localhost:5984`
