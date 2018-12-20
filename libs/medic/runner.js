@@ -1,5 +1,6 @@
 const couch2pg = require('../couch2pg'),
       log = require('./log'),
+      safe = require('./safe'),
       analytics = require('../analytics'),
       {delayLoop} = require('./delay');
 
@@ -58,7 +59,7 @@ const run = async (couchUrl, pgconn, opts) => {
     throw new Error('Too many consecutive errors');
   }
 
-  log.debug(opts);
+  log.debug(safe(opts));
   if(!opts.timesToRun || ++runTimes < opts.timesToRun) {
     await delayLoop(runErrored, opts.sleepMins);
     await run(couchUrl, pgconn, opts);

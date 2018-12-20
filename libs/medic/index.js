@@ -2,14 +2,14 @@ const analytics = require('../analytics'),
       pgp = require('pg-promise'),
       couch2pg = require('../couch2pg'),
       log = require('./log'),
+      safe = require('./safe'),
       runner = require('./runner');
 
 const replicate = async (couchUrl, pgUrl, opts={}) => {
   try {
     log.setDefaultLevel(opts.debug ? 'debug' : 'info');
 
-    log.debug(`${couchUrl} => ${pgUrl}`);
-    log.debug(opts);
+    log.debug(safe(opts));
 
     await couch2pg.migrate(pgUrl);
     const pgconn = pgp({ 'promiseLib': Promise })(pgUrl);
