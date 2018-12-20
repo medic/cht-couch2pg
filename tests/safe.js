@@ -1,4 +1,5 @@
-const safe = require('../libs/medic/safe');
+const expect = require('chai').expect,
+      safe = require('../libs/medic/safe');
 
 describe('safe', () => {
   const opts = {
@@ -18,15 +19,28 @@ describe('safe', () => {
     }
   };
 
+  const expected = {
+    withPasswords: {
+      debug: true,
+      v4Mode: false,
+      couchdbUrl: 'rhc-ghana.app.medicmobile.org/medic',
+      postgresqlUrl: 'localhost:5432/rhc_ghana_upgrade',
+      docLimit: 100,
+      changesLimit: undefined,
+      retryCount: 5,
+      sleepMins: 120
+    }
+  };
+
   it('keeps initial opts and removes passwords from returned obj', () => {
-    const optsWithPasswords = opts.withPasswords;
+    const optsWithPasswords = Object.assign({}, opts.withPasswords);
     const safeOpts = safe(optsWithPasswords);
-    expect(optsWithPasswords).toEqual(opts.withPasswords);
-    expect(safeOpts).toMatchSnapshot();
+    expect(optsWithPasswords).to.deep.equal(opts.withPasswords);
+    expect(safeOpts).to.deep.equal(expected.withPasswords);
   });
 
   it('returns valid couch/pg urls for urls without passwords', () => {
-    expect(safe(opts.withoutPasswords)).toMatchSnapshot();
+    expect(safe(opts.withoutPasswords)).to.deep.equal(opts.withoutPasswords);
   });
 
 });
