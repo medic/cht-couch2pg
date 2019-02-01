@@ -1,9 +1,15 @@
-# medic-couch2pg ![travis](https://travis-ci.org/medic/medic-couch2pg.svg?branch=master)
+# medic-couch2pg 2.x.x ![travis](https://travis-ci.org/medic/medic-couch2pg.svg?branch=master)
 
 Software for creating read-only replicas of CouchDB data inside PostgreSQL v9.4
 
 The focus is on Medic Mobile data currently stored in CouchDB, but applications
 might extend beyond that.
+
+# LEGACY VERSION
+
+The 2.x.x branch of `medic-couch2pg` is meant to support existing deployments of partners already using the software, who have not yet migrated to 3.x.x of `medic/medic`. Only bug fixes will appear on the 2.x.x line.
+
+The 3.x.x branch is the branch designed to work with 3.x.x of `medic/medic`, as it support pulling from multiple CouchDB databases. All future development will happen there, and everyone is encourgaged to use that release instead.
 
 ## Required Environment Variables
 
