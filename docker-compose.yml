@@ -1,4 +1,4 @@
-version: '2'
+version: '2.2'
 services:
   couch:
     image: couchdb:2.1.1
