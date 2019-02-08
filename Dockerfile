@@ -1,4 +1,5 @@
-FROM node:8
+ARG node_version
+FROM node:$node_version
 
 WORKDIR /usr/app
 

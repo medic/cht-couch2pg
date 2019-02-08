@@ -30,7 +30,11 @@ Run it locally in interactive mode: `npm ci && node . -i`
 
 ## Running tests through docker-compose
 
-Run tests with: `docker-compose run test grunt test`.
+Run tests with:
+```
+docker-compose build --build-arg node_version=8
+docker-compose run test grunt test
+```
 Run tests in interactive watch mode with: `docker-compose run test npm run watch`.
 
 
