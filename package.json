@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git://github.com/medic/medic-couch2pg.git"
   },
+  "bin": {
+    "replicate-medic": "./index.js"
+  },
   "dependencies": {
     "couch2pg": "^0.2.3",
     "loglevel": "^1.4.1",

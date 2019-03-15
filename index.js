@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var log = require('loglevel-message-prefix')(require('loglevel'), {
     prefixes: ['timestamp', 'level']
 });
