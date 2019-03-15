@@ -6,7 +6,10 @@ var Promise = require('rsvp').Promise,
     env = require('./env')(),
     xmlformsMigrator = require('./libs/xmlforms/migrator');
 
-var couchdb = require('pouchdb')(env.couchdbUrl),
+var PouchDB = require('pouchdb-core');
+PouchDB.plugin(require('pouchdb-adapter-http'));
+
+var couchdb = PouchDB(env.couchdbUrl),
     db = require('pg-promise')({ 'promiseLib': Promise })(env.postgresqlUrl);
 
 var couch2pg = require('couch2pg'),
