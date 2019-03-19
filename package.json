@@ -7,15 +7,19 @@
     "type": "git",
     "url": "git://github.com/medic/medic-couch2pg.git"
   },
+  "bin": {
+    "replicate-medic": "./index.js"
+  },
   "dependencies": {
-    "couch2pg": "^0.2.2",
+    "couch2pg": "^0.2.3",
     "loglevel": "^1.4.1",
     "loglevel-message-prefix": "^2.0.1",
     "pg": "^4.0.0",
     "pg-format": "^1.0.0",
     "pg-promise": "^3.0.0",
     "postgrator": "^2.8.2",
-    "pouchdb": "^5.3.2",
+    "pouchdb-core": "^5.3.2",
+    "pouchdb-adapter-http": "^5.3.2",
     "rsvp": "^3.0.0",
     "underscore": "^1.8.3"
   },
