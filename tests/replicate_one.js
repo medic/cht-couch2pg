@@ -1,5 +1,5 @@
 const expect = require('chai').expect,
-      PouchDB = require('pouchdb'),
+      PouchDB = require('../libs/db'),
       singleMedicDoc = require('./docs/single-medic.json'),
       pgutils = require('./utils/pgutils'),
       replicate = require('../libs/replicate');

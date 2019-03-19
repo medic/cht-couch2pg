@@ -6,12 +6,12 @@ module.exports = function(grunt) {
   grunt.initConfig({
     eslint: {
       options: {
-        configFile: ".eslintrc"
+        configFile: '.eslintrc'
       },
       src: [
-        "libs/**/*.js",
-        "tests/**/*.js",
-        "index.js"
+        'libs/**/*.js',
+        'tests/**/*.js',
+        'index.js'
       ]
     },
     mochaTest: {

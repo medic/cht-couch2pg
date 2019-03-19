@@ -1,5 +1,5 @@
 const urlParser = require('url'),
-      PouchDB = require('pouchdb'),
+      PouchDB = require('./db'),
       couch2pg = require('couch2pg');
 
 // Removes credentials from couchdb url
