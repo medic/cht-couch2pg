@@ -10,7 +10,7 @@ const migrate = postgresUrl => {
     connectionString: postgresUrl
   });
 
-  return postgrator.migrate('201711101200');
+  return postgrator.migrate();
 };
 
 const update = async (db) => {
