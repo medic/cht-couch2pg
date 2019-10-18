@@ -78,7 +78,7 @@ end script
  - The service is then a standard service, e.g. `service couch2pg-example-client start`
  
  ### Installing as a service using Systemd (18.04.3 LTS [Bionic Beaver])
-To setup couch2pg using systemd  is also pretty simple. You will need to have sudo rights to the server and then follow the steps listed below:
+To setup couch2pg using systemd is also pretty simple. You will need to have sudo rights to the server and then follow the steps listed below:
  
  - Install git and clone this repo onto your server, check out the relevant tag `git checkout tag_id`, and run `npm ci`. 
  - Create a systemd unit file for your project `sudo` create `/etc/systemd/system/couch2pg-sample-client.service`
