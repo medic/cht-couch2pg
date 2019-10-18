@@ -82,7 +82,7 @@ To setup couch2pg using systemd  is also pretty simple. You will need to have su
  
  - Install git and clone this repo onto your server, check out the relevant tag `git checkout tag_id`, and run `npm install`. 
  - Create a systemd unit file for your project `sudo` create `/etc/systemd/system/couch2pg-sample-client.service`
- - As we are going to put passwords in this file, you want to `chown o-r /etc/systemd/system/couch2pg-sample-client.service` so that only root can read it.
+ - As we are going to put passwords in this file, you want to `sudo chmod o-r /etc/systemd/system/couch2pg-sample-client.service` so that only root can read it.
  - Edit this file and configure the couch2pg system unit. It could be something simillar to this;
  ```[Unit]
 Description=Service for running ACME couch2pg integration
