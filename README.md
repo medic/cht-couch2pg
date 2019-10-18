@@ -76,3 +76,47 @@ script
 end script
 ```
  - The service is then a standard service, e.g. `service couch2pg-example-client start`
+ 
+ ### Installing as a service using Systemd (18.04.3 LTS [Bionic Beaver])
+To setup couch2pg using systemd is also pretty simple. You will need to have sudo rights to the server and then follow the steps listed below:
+ 
+ - Install git and clone this repo onto your server, check out the relevant tag `git checkout tag_id`, and run `npm ci`. 
+ - Create a systemd unit file for your project `sudo` create `/etc/systemd/system/couch2pg-sample-client.service`
+ - As we are going to put passwords in this file, you want to `sudo chmod o-r /etc/systemd/system/couch2pg-sample-client.service` so that only root can read it.
+ - Edit this file and configure the couch2pg system unit. It could be something simillar to this;
+ ```[Unit]
+Description=Service for running ACME couch2pg integration
+
+[Service]
+Environment='POSTGRESQL_URL=postgres://couch2pg:secret=@localhost:5432/db'
+Environment='COUCHDB_URL=https://username:pass@couchdburl/medic'
+Environment='COUCH2PG_SLEEP_MINS=720'
+Environment='COUCH2PG_DOC_LIMIT=1000'
+Environment='COUCH2PG_RETRY_COUNT=5'
+Environment='COUCH2PG_CHANGES_LIMIT=1000'
+
+ExecStart=/usr/bin/npm run medic-couch2pg --prefix /path/to/medic-couch2pg/index.js
+
+ExecStartPost= add monitoring script command to run after service starts.
+ExecStopPost= add monitoring script to run if service stops 
+# Required on some systems
+WorkingDirectory=/path/to/medic-couch2pg/source
+Restart=always
+# Restart service after 10 seconds if couch2pg service crashes
+RestartSec=10
+# Output to syslog
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=couch2pg-acme
+
+[Install]
+WantedBy=multi-user.target
+```
+
+ - Reload systemd settings `systemctl daemon-reload`
+ - Start the service `sudo service couch2pg-sample-client start`
+ - If all goes well the service should start smoothly.
+ - You can check the service logs using `journalctl` like this `journalctl -u couch2pg-sample-client --since today`
+ 
+ 
+
