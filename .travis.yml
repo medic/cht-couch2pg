@@ -14,9 +14,9 @@ script:
 notifications:
   webhooks:
     urls:
-      - https://medic.slack.com/services/hooks/travis?token=xcYT8yusfEdSwLskhBxK4Vwj
-    on_success: change
+      - https://hooks.zapier.com/hooks/catch/3653132/j182m9/
+    on_success: never
     on_failure: always
-  email:
-    recipients:
-      - dev@medicmobile.org
+    on_start:   never
+    on_cancel:  never
+    on_error:   always
