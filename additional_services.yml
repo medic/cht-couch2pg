@@ -6,8 +6,12 @@ services:
     container_name: medic-couch2pg
     image: medicmobile/couch2pg:3.7.0-test1
     environment:
-      - COUCH_URL=
-      - COUCH_NODE_NAME=
+      - COUCHDB_URL=https://medic-couch2pg:$(cat /srv/storage/medic-core/passwd/medic-couch2pg)@gamma.dev.medicmobile.org/medic
+      - COUCH2PG_SLEEP_MINS=720
+      - COUCH2PG_DOC_LIMIT=1000
+      - COUCH2PG_RETRY_COUNT=5
+      - COUCH2PG_CHANGES_LIMIT=1000
+      - POSTGRESQL_URL=postgres://medic-couch2pg:${POSTGRES_PASSWORD}@postgres:5432/gamma_dev
     volumes:
       - medic-couchconfig:/opt/couchdb/etc/local.d
     networks:
@@ -23,7 +27,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_USER=medic-couch2pg
-      - POSTGRES_DB=cht-core
+      - POSTGRES_DB=gamma_dev
     volumes:
       - medic-rdbms:/var/lib/postgresql/data
       - medic-couchconfig:/opt/couchdb/etc/local.d
@@ -40,3 +44,23 @@ volumes:
 # - Share passwords b/w postgres user and couch2pg container without input
 # - Launch compose with medic-os compose and see if it works
 # - build, test, node_modules, docker-ignore, travis-ci
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
