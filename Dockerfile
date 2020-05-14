@@ -1,5 +1,7 @@
 # Base Build
 FROM node:10.20.1-alpine AS build-couch2pg
+RUN apk --no-cache -q add build-base libgit2-dev
+RUN ln -s /usr/lib/libcurl.so.4 /usr/lib/libcurl-gnutls.so.4
 WORKDIR /app
 COPY . .
 RUN npm ci
