@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+  couchdb:
+    image: couchdb:2.3.1
+    environment:
+      COUCHDB_USER: ${COUCHDB_ADMIN}
+      COUCHDB_PASSWORD: ${COUCHDB_PASS}
+
+  postgres:
+    image: postgres:12.2
+    environment:
+      POSTGRES_PASSWORD: ${PG_PASS}
+
+  couch2pg:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: test-couch2pg
+    depends_on:
+      - couchdb
+      - postgres
+    environment:
+      TEST_COUCH_URL: http://${COUCHDB_ADMIN}:${COUCHDB_PASS}@couchdb:5984
+      TEST_PG_URL: postgres://postgres:${PG_PASS}@postgres:5432
