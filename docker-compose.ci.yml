@@ -5,11 +5,16 @@ services:
     environment:
       COUCHDB_USER: ${COUCHDB_ADMIN}
       COUCHDB_PASSWORD: ${COUCHDB_PASS}
+    networks:
+      - travis-test
+
 
   postgres:
     image: postgres:12.2
     environment:
       POSTGRES_PASSWORD: ${PG_PASS}
+    networks:
+      - travis-test
 
   couch2pg:
     build:
@@ -22,9 +27,14 @@ services:
           COUCHDB_SVC: couchdb
           PG_SVC: postgres
           PG_PASS: ${PG_PASS}
+      network: travis-test
     depends_on:
       - couchdb
       - postgres
     environment:
       TEST_COUCH_URL: http://${COUCHDB_ADMIN}:${COUCHDB_PASS}@couchdb:5984
       TEST_PG_URL: postgres://postgres:${PG_PASS}@postgres:5432
+
+networks:
+  travis-test:
+    name: travis-test
