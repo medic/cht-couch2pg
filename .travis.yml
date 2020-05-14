@@ -22,6 +22,7 @@ jobs:
     - stage: pre-test
       script: curl http://localhost:5984/_active_tasks
     - stage: build
+      before_script: docker network ls
       script: docker build -t couch2pg-test-${TRAVIS_BUILD_NUMBER} --network host --target test-couch2pg --build-arg COUCH_ADMIN=${CI_COUCHDB_ADMIN} --build-arg COUCH_PASS=${CI_COUCHDB_PASS} --build-arg PG_PASS="" --build-arg PG_SVC=localhost --build-arg COUCHDB_SVC=localhost .
     - stage: deploy
       before_script: echo "$CI_DOCKER_PASSWORD" | docker login -u "$CI_DOCKER_USERNAME" --password-stdin
