@@ -5,6 +5,8 @@ node_js:
   - "10"
   #- "12"
 
+install: echo "hi travis"
+
 env:
   global:
     #CI_DOCKER_PASSWORD
@@ -17,6 +19,8 @@ services:
 
 jobs:
   include:
+    - stage: pre-test
+      script: curl http://localhost:5984/_active_tasks
     - stage: build
       script: docker build -t couch2pg-test-${TRAVIS_BUILD_NUMBER} --network host --target test-couch2pg --build-arg COUCH_ADMIN=${CI_COUCHDB_ADMIN} --build-arg COUCH_PASS=${CI_COUCHDB_PASS} --build-arg PG_PASS="" --build-arg PG_SVC=localhost --build-arg COUCHDB_SVC=localhost .
     - stage: deploy
