@@ -18,7 +18,8 @@ services:
 jobs:
   include:
     - stage: build
-      script: docker-compose -f docker-compose.ci.yml up
+      before_script: docker-compose -f docker-compose.ci.yml up -d couchdb && docker-compose -f docker-compose.ci.yml up -d postgres
+      script: docker-compose -f docker-compose.ci.yml up couchdb
     - stage: deploy
       before_script: echo "$CI_DOCKER_PASSWORD" | docker login -u "$CI_DOCKER_USERNAME" --password-stdin
       script: docker build -t medicmobile/medic-couch2pg-${TRAVIS_BRANCH} .

@@ -15,9 +15,6 @@ ENV TEST_PG_URL="postgres://postgres:${PG_PASS}@${PG_SVC}:5432"
 ENV TEST_COUCH_URL="http://${COUCH_ADMIN}:${COUCH_PASS}@${COUCHDB_SVC}:5984"
 WORKDIR /app
 RUN npm install -g grunt
-RUN apt-get update
-RUN apt-get install -y net-tools
-RUN netstat -lt
 RUN grunt test
 
 # Final
