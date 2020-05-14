@@ -1,5 +1,5 @@
 # Base Build
-FROM node:10.20.1 AS build-couch2pg
+FROM node:10.20.1-alpine AS build-couch2pg
 WORKDIR /app
 COPY . .
 RUN npm ci

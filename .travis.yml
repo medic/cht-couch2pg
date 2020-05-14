@@ -1,10 +1,3 @@
-language: node_js
-
-node_js:
-  #- "8"
-  - "10"
-  #- "12"
-
 before_install:
   - docker --version
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -14,7 +7,7 @@ before_install:
   - sudo rm /etc/docker/daemon.json 
   - sudo systemctl restart docker
 
-install: echo "We won't use the default travis install method as `npm ci` will be run inside the docker-compose build."
+install: echo "We won't use the default travis install method as `npm ci` will be run inside the docker build."
 
 env:
   global:
@@ -26,17 +19,8 @@ jobs:
     - stage: build
       before_script: docker-compose -f docker-compose.ci.yml up -d couchdb && docker-compose -f docker-compose.ci.yml up -d postgres
       script: docker-compose -f docker-compose.ci.yml up couch2pg
+
     - stage: deploy
       before_script: echo "$CI_DOCKER_PASSWORD" | docker login -u "$CI_DOCKER_USERNAME" --password-stdin
-      script: DOCKER_BUILDKIT=1 docker build -t medicmobile/medic-couch2pg-${TRAVIS_BRANCH} .
-      after_script: docker push medicmobile/medic-couch2pg-${TRAVIS_BRANCH}
-
-notifications:
-  webhooks:
-    urls:
-      - https://medic.slack.com/services/hooks/travis?token=xcYT8yusfEdSwLskhBxK4Vwj
-    on_success: change
-    on_failure: always
-  email:
-    recipients:
-      - dev@medicmobile.org
+      script: DOCKER_BUILDKIT=1 docker build -t medicmobile/medic-couch2pg:${TRAVIS_BRANCH} .
+      after_script: docker push medicmobile/medic-couch2pg:${TRAVIS_BRANCH}
