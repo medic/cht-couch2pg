@@ -5,6 +5,8 @@ services:
     environment:
       COUCHDB_USER: ${COUCHDB_ADMIN}
       COUCHDB_PASSWORD: ${COUCHDB_PASS}
+    expose:
+     - "5984"
     networks:
       - travis-test
 
@@ -15,6 +17,8 @@ services:
       POSTGRES_PASSWORD: ${PG_PASS}
     networks:
       - travis-test
+    expose:
+      - "5432"
 
   couch2pg:
     build:
