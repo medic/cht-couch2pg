@@ -34,6 +34,8 @@ services:
     environment:
       TEST_COUCH_URL: http://${COUCHDB_ADMIN}:${COUCHDB_PASS}@couchdb:5984
       TEST_PG_URL: postgres://postgres:${PG_PASS}@postgres:5432
+    networks:
+      - travis-test
 
 networks:
   travis-test:
