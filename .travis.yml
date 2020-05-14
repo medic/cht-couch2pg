@@ -5,7 +5,7 @@ node_js:
   - "10"
   #- "12"
 
-install: echo "hi travis"
+install: echo "We won't use the default travis install method as `npm ci` will be run inside the docker-compose build."
 
 env:
   global:
@@ -14,16 +14,10 @@ env:
 
 services:
   - docker
-  - postgres
-  - couchdb
 
 jobs:
   include:
-    - stage: pre-test
-      script: curl http://localhost:5984/_active_tasks
-    - stage: build
-      before_script: docker network ls
-      script: docker build -t couch2pg-test-${TRAVIS_BUILD_NUMBER} --network host --target test-couch2pg --build-arg COUCH_ADMIN=${CI_COUCHDB_ADMIN} --build-arg COUCH_PASS=${CI_COUCHDB_PASS} --build-arg PG_PASS="" --build-arg PG_SVC=localhost --build-arg COUCHDB_SVC=localhost .
+      script: docker-compose -f docker-compose.ci.yml up
     - stage: deploy
       before_script: echo "$CI_DOCKER_PASSWORD" | docker login -u "$CI_DOCKER_USERNAME" --password-stdin
       script: docker build -t medicmobile/medic-couch2pg-${TRAVIS_BRANCH} .
