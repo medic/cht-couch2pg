@@ -1,15 +1,22 @@
 language: node_js
 
 node_js:
-  - "8"
+  #- "8"
   - "10"
+  #- "12"
 
 services:
   - docker
+  - postgres
+  - couchdb
 
-script:
-  - docker-compose build --build-arg node_version=${TRAVIS_NODE_VERSION} test
-  - docker-compose run test grunt ci
+stage: build
+script: docker build -t couch2pg-test-${TRAVIS_BUILD_NUMBER} --network host --target test-couch2pg --build-arg COUCH_ADMIN=${CI_COUCHDB_ADMIN} --build-arg COUCH_PASS=${CI_COUCHDB_PASS} --build-arg PG_PASS="" --build-arg POSTGRES_SVC=localhost --build-arg COUCHDB_SVC=localhost .
+
+stage: deploy
+script: docker build -t medicmobile/medic-couch2pg-${TRAVIS_BRANCH} .
+script: echo "$CI_DOCKER_PASSWORD" | docker login -u "$CI_DOCKER_USERNAME" --password-stdin
+script: docker push medicmobile/medic-couch2pg-${TRAVIS_BRANCH}
 
 notifications:
   webhooks:

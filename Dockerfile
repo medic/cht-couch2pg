@@ -8,9 +8,11 @@ RUN npm ci
 FROM build-couch2pg AS test-couch2pg
 ARG PG_PASS
 ARG COUCH_PASS
-ARG COUCH_USER
-ENV TEST_PG_URL="postgres://postgres:${PG_PASS}@postgres:5432"
-ENV TEST_COUCH_URL="http://${COUCH_USER}:${COUCH_PASS}@couchdb:5984"
+ARG COUCH_ADMIN
+ARG PG_SVC
+ARG COUCH_SVC
+ENV TEST_PG_URL="postgres://postgres:${PG_PASS}@${PG_SVC}:5432"
+ENV TEST_COUCH_URL="http://${COUCH_ADMIN}:${COUCH_PASS}@${COUCH_SVC}:5984"
 WORKDIR /app
 RUN npm install -g grunt
 RUN grunt test
