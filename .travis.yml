@@ -29,7 +29,7 @@ jobs:
       script: docker-compose -f docker-compose.ci.yml up couch2pg
     - stage: deploy
       before_script: echo "$CI_DOCKER_PASSWORD" | docker login -u "$CI_DOCKER_USERNAME" --password-stdin
-      script: docker build -t medicmobile/medic-couch2pg-${TRAVIS_BRANCH} .
+      script: DOCKER_BUILDKIT=1 docker build -t medicmobile/medic-couch2pg-${TRAVIS_BRANCH} .
       after_script: docker push medicmobile/medic-couch2pg-${TRAVIS_BRANCH}
 
 notifications:
