@@ -5,6 +5,13 @@ node_js:
   - "10"
   #- "12"
 
+before_install:
+  - docker --version
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+
 install: echo "We won't use the default travis install method as `npm ci` will be run inside the docker-compose build."
 
 env:
@@ -22,7 +29,7 @@ jobs:
       script: docker-compose -f docker-compose.ci.yml up couch2pg
     - stage: deploy
       before_script: echo "$CI_DOCKER_PASSWORD" | docker login -u "$CI_DOCKER_USERNAME" --password-stdin
-      script: docker build -t medicmobile/medic-couch2pg-${TRAVIS_BRANCH} .
+      script: docker build --target medic-couch2pg -t medicmobile/medic-couch2pg-${TRAVIS_BRANCH} .
       after_script: docker push medicmobile/medic-couch2pg-${TRAVIS_BRANCH}
 
 notifications:
