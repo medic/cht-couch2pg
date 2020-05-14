@@ -17,6 +17,7 @@ services:
 
 jobs:
   include:
+    - stage: build
       script: docker-compose -f docker-compose.ci.yml up
     - stage: deploy
       before_script: echo "$CI_DOCKER_PASSWORD" | docker login -u "$CI_DOCKER_USERNAME" --password-stdin
