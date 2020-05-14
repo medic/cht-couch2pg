@@ -16,6 +16,12 @@ services:
       context: .
       dockerfile: Dockerfile
       target: test-couch2pg
+      args:
+          COUCH_ADMIN: ${COUCHDB_ADMIN}
+          COUCH_PASS: ${COUCHDB_PASS}
+          COUCHDB_SVC: couchdb
+          PG_SVC: postgres
+          PG_PASS: ${PG_PASS}
     depends_on:
       - couchdb
       - postgres
