@@ -6,10 +6,72 @@ The focus is specifically on Medic Mobile data currently stored in CouchDB. If y
 
 This version is built for medic/medic#3.0.0 and above. For replicating data from earlier versions of Medic, see the 2.0.x branch and associated tags.
 
-## Installation Steps (if applicable)
+## Docker Deployment
+### Self-Hosting + Local
+
+Prerequistes:
+- CHT-Core setup and installed via Docker
+- Postgres 9.4+. Your can use our configuration below to automatically launch a container, or use an existing outside Postgres installation. We recommend the former.
+- Identify docker networking used in CHT-Core setup. In your docker-compose.yml for CHT-Core, you should see:
+
+```
+networks:
+  medic-net:
+    name: medic-net
+
+# or underneath each service definition
+
+network: host
+```
+
+Export necessary variables:
+```
+export PG_PASS=password123
+export PG_DB=dbname
+export COUCH2PG_PW=password321
+export PROJECT_URL=gamma.dev.medicmobile.org
+
+# IF your docker network for CHT-Core that was identified above is "medic-net", then:
+export PG_SVC=postgres
+
+# IF your docker network for CHT-Core was identified as "host", then:
+export PG_SVC=localhost
+```
+
+You can either clone this repo, or copy `additional_services.yml` to a local directory.
+In order to bring up postgres, run:
+```
+docker-compose -f additional_services.yml up -d postgres
+```
+*Note* : If you have an outside Postgres installation, skip the above step.
+
+Then we can bring up medic-couch2pg:
+```
+docker-compose -f additional_services.yml up -d couch2pg
+```
+
+### Medic-Hosted
+- Provide link to medic-infrastructure doc
+
+## Local installation steps for development (if applicable)
 
 1. Clone repo
 2. Run `npm ci`
+
+## Running tests through docker-compose
+
+Run tests with:
+```
+export COUCHDB_ADMIN=admin123
+export COUCHDB_PASS=password123
+export PG_PASS=password321
+
+docker-compose -f docker-compose.ci.yml up -d postgres couchdb
+docker-compose -f docker-compose.ci.yml up couch2pg
+```
+
+Run tests in interactive watch mode with: `docker-compose -f docker-compose.ci.yml run couch2pg npm run watch`.
+
 
 ### Running locally with env variables
 
@@ -26,16 +88,6 @@ Run it locally with env vars: `npm ci && node .`
 ### Running locally in interactive mode (no env vars needed)
 
 Run it locally in interactive mode: `npm ci && node . -i`
-
-
-## Running tests through docker-compose
-
-Run tests with:
-```
-docker-compose build --build-arg node_version=8 test
-docker-compose run test grunt test
-```
-Run tests in interactive watch mode with: `docker-compose run test npm run watch`.
 
 
 ## Running tests against local couch and postgres databases
