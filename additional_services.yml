@@ -4,63 +4,38 @@ services:
 
   couch2pg:
     container_name: medic-couch2pg
-    image: medicmobile/couch2pg:3.7.0-test1
+    image: medicmobile/medic-couch2pg
     environment:
-      - COUCHDB_URL=https://medic-couch2pg:$(cat /srv/storage/medic-core/passwd/medic-couch2pg)@gamma.dev.medicmobile.org/medic
+      - COUCHDB_URL=https://medic-couch2pg:${COUCH2PG_PW}@${PROJECT_URL}/medic
       - COUCH2PG_SLEEP_MINS=720
       - COUCH2PG_DOC_LIMIT=1000
       - COUCH2PG_RETRY_COUNT=5
       - COUCH2PG_CHANGES_LIMIT=1000
-      - POSTGRESQL_URL=postgres://medic-couch2pg:${POSTGRES_PASSWORD}@postgres:5432/gamma_dev
-    volumes:
-      - medic-couchconfig:/opt/couchdb/etc/local.d
+      - POSTGRESQL_URL=postgres://medic-couch2pg:${PG_PASS}@${PG_SVC}:5432/${PG_DB}
+    working_dir: /app
+    entrypoint: ["./wait-for-it.sh", "${PG_SVC}:5432", "--", "node", "."]
     networks:
       - medic-net
-    depends_on:
-      - postgres
 
-# Create postgres with rdbms config
-# postgres admin user
   postgres:
     container_name: postgres
-    image: postgres:12.1-alpine
+    image: postgres:12.2
     environment:
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_PASSWORD=${PG_PASS}
       - POSTGRES_USER=medic-couch2pg
-      - POSTGRES_DB=gamma_dev
+      - POSTGRES_DB=${PG_DB}
+      - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
-      - medic-rdbms:/var/lib/postgresql/data
-      - medic-couchconfig:/opt/couchdb/etc/local.d
-      - ./postgresql.conf:/var/lib/postgresql/data/postgresql.conf
-    command: postgres -c config_file=/var/lib/postgresql/data/postgresql.conf
+      - medic-rdbms:/var/lib/postgresql
+    networks:
+      - medic-net
+    expose:
+      - "5432"
+
+networks:
+  medic-net:
+    name: medic-net
 
 volumes:
   medic-rdbms:
     name: medic-rdbms
-
-
-# TO DO:
-# - create postgresql.conf and map it into Postgres container_name
-# - Share passwords b/w postgres user and couch2pg container without input
-# - Launch compose with medic-os compose and see if it works
-# - build, test, node_modules, docker-ignore, travis-ci
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
