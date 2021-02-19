@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS couchdb_users_meta (doc jsonb);
