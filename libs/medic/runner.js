@@ -17,6 +17,12 @@ const replicateAll = async (couchUrl, pgconn, opts) => {
       await couch2pg.replicate(couchUrl, pgconn, opts),
       await couch2pg.replicate(sentinelUrl, pgconn, opts)
     ];
+    if (opts.couchdbUsersMeta) {
+      const usersMetaUrl = `${couchUrl}-users-meta`;
+      allResults.push(
+        await couch2pg.replicate(usersMetaUrl, pgconn, opts)
+      )
+    }
   } catch(err) {
     log.error('Couch2PG import failed');
     log.error(err);

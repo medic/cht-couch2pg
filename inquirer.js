@@ -58,6 +58,12 @@ module.exports = {
         message: 'Select how many times to internally retry continued unsuccessful runs before exiting. If unset medic-couch2pg will retry indefinitely. If set it will retry N times, and then exit with status code 1',
         choices: ['1', '3', '5', '10', INDEFINITELY],
         default: INDEFINITELY
+      },
+      {
+        name: 'couchdbUsersMeta',
+        type: 'confirm',
+        message: 'Do you want to replicate the medic-users-meta database?',
+        default: false
       }
     ];
     const values = await inquirer.prompt(questions);
