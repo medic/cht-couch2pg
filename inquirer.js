@@ -62,8 +62,15 @@ module.exports = {
       {
         name: 'couchdbUsersMeta',
         type: 'confirm',
-        message: 'Do you want to replicate the medic-users-meta database?',
+        message: 'Do you want to replicate the users-meta database?',
         default: false
+      },
+      {
+        name: 'couchdbUsersMetaDocLimit',
+        type: 'list',
+        message: 'Select the number of documents to grab concurrently from the users-meta database. Increasing this number will cut down on HTTP GETs and may improve performance, decreasing this number will cut down on node memory usage, and may increase stability. These documents are larger so set a limit lower than the docLimit',
+        choices: ['10', '50', '100', '200', '500'],
+        default: '50'
       }
     ];
     const values = await inquirer.prompt(questions);

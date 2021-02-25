@@ -10,13 +10,14 @@ const parseSource = url => {
   return `${source.host}${source.path}`;
 };
 
-const replicate = (couchUrl, pgconn, opts) => {
+const replicate = (couchUrl, pgconn, opts, table) => {
   return couch2pg.importer(
           pgconn,
           new PouchDB(couchUrl),
           opts.docLimit,
           opts.changesLimit,
-          parseSource(couchUrl)).importAll();
+          parseSource(couchUrl),
+          table).importAll();
 };
 
 const migrate = (pgUrl) => {
@@ -24,6 +25,6 @@ const migrate = (pgUrl) => {
 };
 
 module.exports = {
-  replicate: (couchUrl, pgconn, opts) => replicate(couchUrl, pgconn, opts),
+  replicate: (couchUrl, pgconn, opts, table = 'couchdb') => replicate(couchUrl, pgconn, opts, table),
   migrate: (pgUrl) => migrate(pgUrl)
 };

@@ -19,9 +19,11 @@ const replicateAll = async (couchUrl, pgconn, opts) => {
     ];
     if (opts.couchdbUsersMeta) {
       const usersMetaUrl = `${couchUrl}-users-meta`;
+      
+      opts.docLimit = opts.couchdbUsersMetaDocLimit;
       allResults.push(
-        await couch2pg.replicate(usersMetaUrl, pgconn, opts)
-      )
+        await couch2pg.replicate(usersMetaUrl, pgconn, opts, 'couchdb_users_meta')
+      );
     }
   } catch(err) {
     log.error('Couch2PG import failed');
@@ -38,14 +40,15 @@ const run = async (couchUrl, pgconn, opts) => {
   log.info('Beginning couch2pg and xmlforms run at ' + new Date());
   const [allResults, runErrored] = await replicateAll(couchUrl, pgconn, opts);
   if(allResults) {
-    const [medicResults, sentinelResults] = allResults;
+    const [medicResults, sentinelResults, usersMetaResults] = allResults;
     // Run secondary tasks if we reasonably think there might be new data
     // runErrored || errorCount <- something went wrong, but maybe there is still new data
     // firstRun <- this is first run, we don't know what the DB state is in
     // results.deleted.length || results.edited.length <- data has changed
     if (runErrored || errorCount || firstRun ||
         medicResults.deleted.length || medicResults.edited.length ||
-        sentinelResults.deleted.length || sentinelResults.edited.length) {
+        sentinelResults.deleted.length || sentinelResults.edited.length ||
+        usersMetaResults && usersMetaResults.deleted.length || usersMetaResults && usersMetaResults.edited.length) {
       try {
         await analytics.update(pgconn);
         // We have completed a successful run

@@ -4,7 +4,7 @@ const log = require('loglevel');
 const migrate = postgresUrl => {
   const postgrator = new Postgrator({
     migrationDirectory: `${__dirname}/migrations`,
-    schemaTable: 'medic_users_meta_migrations',
+    schemaTable: 'users_meta_migrations',
     driver: 'pg',
     logProgress: log.getLevel() <= log.levels.DEBUG,
     connectionString: postgresUrl,
