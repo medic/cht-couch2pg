@@ -1,10 +1,10 @@
 -- filter contact docs into one place
-CREATE OR REPLACE VIEW raw_contacts AS SELECT * FROM couchdb WHERE doc->>'type' IN ('clinic', 'district_hospital', 'health_center', 'person');
+CREATE OR REPLACE VIEW raw_contacts AS SELECT * FROM couchdb WHERE doc->>'type' IN ('clinic', 'district_hospital', 'health_center', 'person', 'contact');
 
 -- extract JSON data from contact docs and cache it
 DROP MATERIALIZED VIEW IF EXISTS contactview_metadata CASCADE;
 CREATE MATERIALIZED VIEW contactview_metadata AS
-SELECT doc->>'_id' AS uuid, doc->>'name' AS name, doc->>'type' AS type, doc#>>'{contact,_id}' AS contact_uuid, doc#>>'{parent,_id}' AS parent_uuid, doc->>'notes' AS notes,
+SELECT doc->>'_id' AS uuid, doc->>'name' AS name, doc->>'type' AS type, doc->>'contact_type' AS contact_type, doc#>>'{contact,_id}' AS contact_uuid, doc#>>'{parent,_id}' AS parent_uuid, doc->>'notes' AS notes,
 TIMESTAMP WITH TIME ZONE 'epoch' + (doc->>'reported_date')::numeric / 1000 * interval '1 second' AS reported
 FROM raw_contacts;
 
