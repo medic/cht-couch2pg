@@ -22,5 +22,5 @@ jobs:
       run: docker-compose build --build-arg node_version=10 test
 
     - name: unit-test
-        id: unit-test-project
-        run: docker-compose run test grunt ci
+      id: unit-test-project
+      run: docker-compose run test grunt ci
