@@ -6,29 +6,21 @@ name: Build medic-couch2pg and run unit test cases
 
 on: [push, pull_request]
 
+env:
+  export COUCH2PG_SLEEP_MINS=120
+  export COUCH2PG_DOC_LIMIT=1000
+  export COUCH2PG_RETRY_COUNT=5
+
 jobs:
   build-and-test:
     name: Build medic-couch2pg
     runs-on: ubuntu-18.04
 
     steps:
-    - name: Checkout branch
-      uses: actions/checkout@v2
+    - name: build
+      id: build-project
+      run: docker-compose build --build-arg node_version=10 test
 
-    - name: Use nodeJS 10.x
-      uses: actions/setup-node@v1
-      with:
-        node-version: 10.x
-
-    - name: Set environment variables
-      run: |
-        echo "COUCH2PG_SLEEP_MINS=120" >> $GITHUB_ENV
-        echo "COUCH2PG_DOC_LIMIT=1000" >> $GITHUB_ENV
-        echo "COUCH2PG_RETRY_COUNT=5" >> $GITHUB_ENV
-
-    - name: Build
-      run: docker-compose build test
-
-    - name: Run unit-test
-      id: unit-test-project
-      run: docker-compose run test grunt test
+    - name: unit-test
+        id: unit-test-project
+        run: docker-compose run test grunt ci
