@@ -7,9 +7,9 @@ name: Build medic-couch2pg and run unit test cases
 on: [push, pull_request]
 
 env:
-  COUCH2PG_SLEEP_MINS=120
-  COUCH2PG_DOC_LIMIT=1000
-  COUCH2PG_RETRY_COUNT=5
+  COUCH2PG_SLEEP_MINS: 120
+  COUCH2PG_DOC_LIMIT: 1000
+  COUCH2PG_RETRY_COUNT: 5
 
 jobs:
   build-and-test:
