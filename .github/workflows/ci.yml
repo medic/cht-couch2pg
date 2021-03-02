@@ -22,7 +22,6 @@ jobs:
 
     - name: Set environment variables
       run: |
-        echo "COUCHDB_URL=http://admin:pass@localhost:5984/medic" >> $GITHUB_ENV
         echo "COUCH2PG_SLEEP_MINS=120" >> $GITHUB_ENV
         echo "COUCH2PG_DOC_LIMIT=1000" >> $GITHUB_ENV
         echo "COUCH2PG_RETRY_COUNT=5" >> $GITHUB_ENV
