@@ -6,11 +6,6 @@ name: Build medic-couch2pg and run unit test cases
 
 on: [push, pull_request]
 
-env:
-  COUCH2PG_SLEEP_MINS: 120
-  COUCH2PG_DOC_LIMIT: 1000
-  COUCH2PG_RETRY_COUNT: 5
-
 jobs:
   build-and-test:
     name: Build medic-couch2pg
@@ -27,6 +22,12 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
       if: steps.get-docker-hub-username.outputs.dockerhub_username
+
+    - name: Set environment variables
+      run: |
+        echo "COUCH2PG_SLEEP_MINS=120" >> $GITHUB_ENV
+        echo "COUCH2PG_DOC_LIMIT=1000" >> $GITHUB_ENV
+        echo "COUCH2PG_RETRY_COUNT=5" >> $GITHUB_ENV
 
     - name: Check branch
       uses: actions/checkout@v2
