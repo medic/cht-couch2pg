@@ -9,4 +9,4 @@ RUN npm ci
 RUN npm i -g grunt-cli
 
 COPY . .
-ENTRYPOINT ["node", "."]
+CMD ["node", "index.js"]
