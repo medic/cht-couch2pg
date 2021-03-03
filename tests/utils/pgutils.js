@@ -49,8 +49,8 @@ class Pg {
     this.schema = this.conn.schema;
   }
 
-  async rows() {
-    return (await this.conn.raw('select * from couchdb')).rows;
+  async rows(table='couchdb') {
+    return (await this.conn.raw(`select * from ${table}`)).rows;
   }
 
   async views() {
