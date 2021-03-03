@@ -2,9 +2,9 @@
 
 Software for creating read-only replicas of CouchDB data inside PostgreSQL v9.4
 
-The focus is specifically on Medic Mobile data currently stored in CouchDB. If you are looking to have a read-only replica of CouchDB data for your application, consider [couch2pg](https://www.npmjs.com/package/couch2pg).
+The focus is specifically on CHT application data currently stored in CouchDB. If you are looking to have a read-only replica of CouchDB data for your application, consider [couch2pg](https://www.npmjs.com/package/couch2pg).
 
-This version is built for medic/medic#3.0.0 and above. For replicating data from earlier versions of Medic, see the 2.0.x branch and associated tags.
+This version is built for medic/cht-core#3.0.0 and above. For replicating data from earlier versions, see the 2.0.x branch and associated tags.
 
 ## Installation Steps (if applicable)
 
