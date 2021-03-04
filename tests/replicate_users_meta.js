@@ -28,9 +28,9 @@ describe('medic users meta db replication', () => {
     await pg.destroy();
   });
 
-  it('replicates single couch record to postgres', async() => {
+  it('replicates single couch record to the right table on postgres', async() => {
     await replicate(couchUrl, pgUrl, {timesToRun: 1, couchdbUsersMeta: true});
-    let rows = await pg.rows();
+    let rows = await pg.rows('couchdb_users_meta');
     expect(rows.length).to.equal(1);
     const [couchRecord, pgRecord] = [singleMedicDoc, rows[0].doc];
     expect(pgRecord.sex).to.equal(couchRecord.sex);
