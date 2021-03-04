@@ -17,8 +17,6 @@ WHERE
 
 CREATE UNIQUE INDEX idx_useview_feedback_period_start_user ON useview_feedback(period_start,user_name);
 
-ALTER MATERIALIZED VIEW useview_feedback OWNER TO full_access;
-
 CREATE MATERIALIZED VIEW useview_telemetry AS
 SELECT 
     doc->>'_id' AS uuid,
@@ -43,5 +41,3 @@ WHERE
     doc->>'type'='telemetry';
 
 CREATE UNIQUE INDEX idx_useview_telemetry_period_start_user ON useview_telemetry(period_start,user_name);
-
-ALTER MATERIALIZED VIEW useview_telemetry OWNER TO full_access;
