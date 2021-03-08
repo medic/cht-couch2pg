@@ -25,6 +25,6 @@ const migrate = (pgUrl) => {
 };
 
 module.exports = {
-  replicate: (couchUrl, pgconn, opts, table = 'couchdb') => replicate(couchUrl, pgconn, opts, table),
+  replicate: (couchUrl, pgconn, opts, table) => replicate(couchUrl, pgconn, opts, table),
   migrate: (pgUrl) => migrate(pgUrl)
 };
