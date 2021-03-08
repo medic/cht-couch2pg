@@ -37,7 +37,7 @@ describe('replication', () => {
   it('replicates different type of couch records to pg', async () => {
     await replicate(couchUrl, pgUrl, {timesToRun:1});
     const totalMedicDocs = medicDocs.length + sentinelDocs.length;
-    expect((await pg.rows()).length).to.equal(totalMedicDocs);
+    expect((await pg.rows('couchdb')).length).to.equal(totalMedicDocs);
 
     //Insert new couch doc
     const couch = new PouchDB(couchUrl);
@@ -45,7 +45,7 @@ describe('replication', () => {
 
     // Replicate again and expect one more doc
     await replicate(couchUrl, pgUrl, {timesToRun:1});
-    expect((await pg.rows()).length).to.equal(totalMedicDocs + 1);
+    expect((await pg.rows('couchdb')).length).to.equal(totalMedicDocs + 1);
   });
 
 });

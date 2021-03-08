@@ -49,7 +49,7 @@ class Pg {
     this.schema = this.conn.schema;
   }
 
-  async rows(table='couchdb') {
+  async rows(table) {
     return (await this.conn.raw(`select * from ${table}`)).rows;
   }
 
