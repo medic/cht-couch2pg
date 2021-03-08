@@ -30,7 +30,7 @@ describe('medic without sentinel db replication', () => {
 
   it('replicates single couch record to postgres', async() => {
     await replicate(couchUrl, pgUrl, {timesToRun: 1});
-    let rows = await pg.rows();
+    let rows = await pg.rows('couchdb');
     expect(rows.length).to.equal(1);
     const [couchRecord, pgRecord] = [singleMedicDoc, rows[0].doc];
     expect(pgRecord.sex).to.equal(couchRecord.sex);
@@ -45,7 +45,7 @@ describe('medic without sentinel db replication', () => {
 
     // Replicate again
     await replicate(couchUrl, pgUrl, {timesToRun: 1});
-    rows = await pg.rows();
+    rows = await pg.rows('couchdb');
     expect(rows.length).to.equal(1); // Still one pg record
     expect(rows[0].doc.name).to.equal(doc.name); // pg record has been updated
   });

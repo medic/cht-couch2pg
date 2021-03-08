@@ -37,6 +37,8 @@ const SELECT_VIEWS =
   WHERE table_schema = ANY (current_schemas(false)) \
   order by table_name';
 
+const SELECT_MATERIALIXED_VIEWS = 'SELECT matviewname as name FROM pg_matviews ORDER BY matviewname';
+
 class Pg {
 
   constructor(url) {
@@ -44,12 +46,16 @@ class Pg {
     this.schema = this.conn.schema;
   }
 
-  async rows(table='couchdb') {
+  async rows(table) {
     return (await this.conn.raw(`select * from ${table}`)).rows;
   }
 
   async views() {
     return (await this.conn.raw(SELECT_VIEWS)).rows;
+  }
+
+  async matViews() {
+    return (await this.conn.raw(SELECT_MATERIALIXED_VIEWS)).rows;
   }
 
   async destroy() {
