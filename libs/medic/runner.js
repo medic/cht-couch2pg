@@ -14,8 +14,8 @@ const replicateAll = async (couchUrl, pgconn, opts) => {
   try {
     const sentinelUrl = `${couchUrl}-sentinel`;
     allResults = [
-      await couch2pg.replicate(couchUrl, pgconn, opts),
-      await couch2pg.replicate(sentinelUrl, pgconn, opts)
+      await couch2pg.replicate(couchUrl, pgconn, opts, 'couchdb'),
+      await couch2pg.replicate(sentinelUrl, pgconn, opts, 'couchdb')
     ];
     if (opts.couchdbUsersMeta) {
       const usersMetaUrl = `${couchUrl}-users-meta`;
