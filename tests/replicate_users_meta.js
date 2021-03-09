@@ -30,7 +30,7 @@ describe('medic users meta db replication', () => {
   });
 
   it('replicates single couch record to the right table on postgres', async() => {
-    await replicate(couchUrl, pgUrl, {timesToRun: 1, couchdbUsersMeta: true});
+    await replicate(couchUrl, pgUrl, {timesToRun: 1});
     let rows = await pg.rows('couchdb_users_meta');
     expect(rows.length).to.equal(1);
     const [couchRecord, pgRecord] = [singleMedicDoc, rows[0].doc];
@@ -40,7 +40,7 @@ describe('medic users meta db replication', () => {
   });
 
   it('checks migrations', async() => {
-    await replicate(couchUrl, pgUrl, {timesToRun: 1, couchdbUsersMeta: true});
+    await replicate(couchUrl, pgUrl, {timesToRun: 1});
     const db = new pgutils.Pg(pgUrl);
 
     assert(await db.schema.hasTable('couchdb_users_meta'));
