@@ -16,9 +16,7 @@ const replicate = async (couchUrl, pgUrl, opts={}) => {
     const pgconn = pgp({ 'promiseLib': Promise })(pgUrl);
     log.info('Adapter is running in NORMAL mode');
     await analytics.migrate(pgUrl);
-    if(opts.couchdbUsersMeta) {
-      await medicUsersMeta.migrate(pgUrl);
-    }
+    await medicUsersMeta.migrate(pgUrl);
     await runner.run(couchUrl, pgconn, opts);
   } catch(err) {
     log.error('An unrecoverable error occurred');

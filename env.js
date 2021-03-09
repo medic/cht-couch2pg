@@ -17,7 +17,6 @@ module.exports = function() {
     changesLimit: safeNum(process.env.COUCH2PG_CHANGES_LIMIT),
     retryCount: safeNum(process.env.COUCH2PG_RETRY_COUNT),
     sleepMins: (safeNum(process.env.COUCH2PG_SLEEP_MINS) || 60),
-    couchdbUsersMeta: process.env.COUCH2PG_USERS_META || false,
     couchdbUsersMetaDocLimit: process.env.COUCH2PG_USERS_META_DOC_LIMIT || 50,
   };
 };

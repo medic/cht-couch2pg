@@ -13,18 +13,14 @@ const replicateAll = async (couchUrl, pgconn, opts) => {
       runErrored = false;
   try {
     const sentinelUrl = `${couchUrl}-sentinel`;
+    const usersMetaUrl = `${couchUrl}-users-meta`;
+    opts.docLimit = opts.couchdbUsersMetaDocLimit;
+
     allResults = [
       await couch2pg.replicate(couchUrl, pgconn, opts, 'couchdb'),
-      await couch2pg.replicate(sentinelUrl, pgconn, opts, 'couchdb')
+      await couch2pg.replicate(sentinelUrl, pgconn, opts, 'couchdb'),
+      await couch2pg.replicate(usersMetaUrl, pgconn, opts, 'couchdb_users_meta')
     ];
-    if (opts.couchdbUsersMeta) {
-      const usersMetaUrl = `${couchUrl}-users-meta`;
-      
-      opts.docLimit = opts.couchdbUsersMetaDocLimit;
-      allResults.push(
-        await couch2pg.replicate(usersMetaUrl, pgconn, opts, 'couchdb_users_meta')
-      );
-    }
   } catch(err) {
     log.error('Couch2PG import failed');
     log.error(err);
