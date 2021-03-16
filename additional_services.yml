@@ -1,0 +1,41 @@
+version: '3.7'
+
+services:
+
+  couch2pg:
+    container_name: medic-couch2pg
+    image: medicmobile/medic-couch2pg
+    environment:
+      - COUCHDB_URL=https://medic-couch2pg:${COUCH2PG_PW}@${PROJECT_URL}/medic
+      - COUCH2PG_SLEEP_MINS=720
+      - COUCH2PG_DOC_LIMIT=1000
+      - COUCH2PG_RETRY_COUNT=5
+      - COUCH2PG_CHANGES_LIMIT=1000
+      - POSTGRESQL_URL=postgres://medic-couch2pg:${PG_PASS}@${PG_SVC}:5432/${PG_DB}
+    working_dir: /app
+    entrypoint: ["./wait-for-it.sh", "${PG_SVC}:5432", "--", "node", "."]
+    networks:
+      - medic-net
+
+  postgres:
+    container_name: postgres
+    image: postgres:12.2
+    environment:
+      - POSTGRES_PASSWORD=${PG_PASS}
+      - POSTGRES_USER=medic-couch2pg
+      - POSTGRES_DB=${PG_DB}
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - medic-rdbms:/var/lib/postgresql
+    networks:
+      - medic-net
+    expose:
+      - "5432"
+
+networks:
+  medic-net:
+    name: medic-net
+
+volumes:
+  medic-rdbms:
+    name: medic-rdbms

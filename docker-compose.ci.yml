@@ -1,0 +1,46 @@
+version: '3.7'
+services:
+  couchdb:
+    image: couchdb:2.3.1
+    environment:
+      COUCHDB_USER: ${COUCHDB_ADMIN}
+      COUCHDB_PASSWORD: ${COUCHDB_PASS}
+    expose:
+     - "5984"
+    networks:
+      - travis-test
+
+
+  postgres:
+    image: postgres:12.2
+    environment:
+      POSTGRES_PASSWORD: ${PG_PASS}
+    networks:
+      - travis-test
+    expose:
+      - "5432"
+
+  couch2pg:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: test-couch2pg
+      args:
+          COUCH_ADMIN: ${COUCHDB_ADMIN}
+          COUCH_PASS: ${COUCHDB_PASS}
+          COUCHDB_SVC: couchdb
+          PG_SVC: postgres
+          PG_PASS: ${PG_PASS}
+      network: travis-test
+    depends_on:
+      - couchdb
+      - postgres
+    environment:
+      TEST_COUCH_URL: http://${COUCHDB_ADMIN}:${COUCHDB_PASS}@couchdb:5984
+      TEST_PG_URL: postgres://postgres:${PG_PASS}@postgres:5432
+    networks:
+      - travis-test
+
+networks:
+  travis-test:
+    name: travis-test
