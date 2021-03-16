@@ -37,6 +37,11 @@ const SELECT_VIEWS =
   WHERE table_schema = ANY (current_schemas(false)) \
   order by table_name';
 
+const SELECT_MATERIALIZED_VIEWS =
+  'SELECT matviewname AS view_name, attributes.attname AS column_name \
+   FROM pg_matviews LEFT JOIN pg_attribute AS attributes ON (matviewname::regclass = attributes.attrelid) \
+   ORDER BY view_name;';
+
 class Pg {
 
   constructor(url) {
@@ -50,6 +55,20 @@ class Pg {
 
   async views() {
     return (await this.conn.raw(SELECT_VIEWS)).rows;
+  }
+
+  async materializedViews() {
+    const rows = (await this.conn.raw(SELECT_MATERIALIZED_VIEWS)).rows;
+    const viewsMap = {};
+
+    rows.forEach(row => {
+      if (!viewsMap[row.view_name]) {
+        viewsMap[row.view_name] = { columns: [] };
+      }
+      viewsMap[row.view_name].columns.push(row.column_name);
+    });
+
+    return viewsMap;
   }
 
   async destroy() {
