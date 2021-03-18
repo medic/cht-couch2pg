@@ -43,13 +43,13 @@ const waitForCouch = async (url) => {
 
       if (result.error) {
         //Ignore
-        console.log('waitForDb ', result.error);
+        console.log(result.error);
       }
 
       return result.ready;
     } catch (err) {
       //Ignore
-      console.log('waitForDb ', err);
+      console.log(err);
     }
   }});
 };
