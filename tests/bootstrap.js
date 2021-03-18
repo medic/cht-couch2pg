@@ -20,7 +20,7 @@ const waitForDb = async ({url, fn, retries=0}) => {
     console.log(`****** ERROR: Unable to connect: ${url}`);
     process.exit(1);
   }
-  console.log('Trying to connect to ', url, retries);
+
   if(!await fn()) {
     if(!url) {
       console.log(PUBLIC_ANNOUNCEMENT);
@@ -34,10 +34,8 @@ const waitForDb = async ({url, fn, retries=0}) => {
 
 const waitForCouch = async (url) => {
   await waitForDb({url: url, fn: async () => {
-    console.log('calling isDBReady fn');
     try {
       const result = await isDBReady(url);
-      console.log('isDBReady is resolved ', result);
 
       if (result.ready) {
         console.log(`- Couch [${url}] is now avaliable.`);
@@ -74,12 +72,9 @@ const waitForPg = async (url) => {
 };
 
 const isDBReady = (url = '') => {
-  console.log('In isDBReady fn');
   return new Promise((resolve, reject) => {
-    console.log('calling http.get fn');
     http
         .get(url, res => {
-          console.log('http.get resolved: ', res);
           if (res.statusCode === 200) {
             resolve({ ready: true });
             return;
