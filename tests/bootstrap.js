@@ -20,6 +20,7 @@ const waitForDb = async ({url, fn, retries=0}) => {
     console.log(`****** ERROR: Unable to connect: ${url}`);
     process.exit(1);
   }
+  console.log('Trying to connect to ', url, retries);
   if(!await fn()) {
     if(!url) {
       console.log(PUBLIC_ANNOUNCEMENT);
@@ -82,6 +83,8 @@ const isDBReady = (url = '') => {
 };
 
 before(async () => {
+  console.warn('TEST_COUCH_URL: ', TEST_COUCH_URL);
+  console.warn('TEST_PG_URL: ', TEST_PG_URL);
   await waitForCouch(process.env.TEST_COUCH_URL);
   await waitForPg(process.env.TEST_PG_URL);
 });
