@@ -8,14 +8,6 @@ node_js:
 services:
   - docker
 
-env:
-  global:
-    # Docker Env Var
-    - secure: EsA4CuIoXwu+Ha9uT9W3UNrrOAymtsC5Cr77+bPA1bw+qvnnGfHRQiizfQHHf0Ps8NoJhxMZPXukzSNMgbWeR32JxpBRpXT5f1PNIjVubUk5XzrYRvo7anwcMlSSbLi0N1YQ5nStbDSrZqR5/aShDQhYeqdTSK5yWTj4gZrJymw=
-
-before_install:
-  - echo "$DOCKER_PASSWORD" | docker login -u "communityhealthtoolkit" --password-stdin
-
 script:
   - docker-compose build --build-arg node_version=${TRAVIS_NODE_VERSION} test
   - docker-compose run test grunt ci
