@@ -83,8 +83,8 @@ const isDBReady = (url = '') => {
 };
 
 before(async () => {
-  console.warn('TEST_COUCH_URL: ', TEST_COUCH_URL);
-  console.warn('TEST_PG_URL: ', TEST_PG_URL);
+  console.warn('TEST_COUCH_URL: ', process.env.TEST_COUCH_URL);
+  console.warn('TEST_PG_URL: ', process.env.TEST_PG_URL);
   await waitForCouch(process.env.TEST_COUCH_URL);
   await waitForPg(process.env.TEST_PG_URL);
 });
