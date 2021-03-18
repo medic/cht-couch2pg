@@ -30,7 +30,6 @@
   },
   "devDependencies": {
     "chai": "^3.0.0",
-    "curl-request": "1.1.1",
     "grunt": "^1.0.3",
     "grunt-cli": "1.2.0",
     "grunt-mocha-test": "0.13.3",
