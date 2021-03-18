@@ -75,7 +75,9 @@ const isDBReady = (url = '') => {
           }
           reject(false);
         })
-        .on('error', (error) => { throw error });
+        .on('error', (error) => {
+          throw error;
+        });
   });
 };
 
