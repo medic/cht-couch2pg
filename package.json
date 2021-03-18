@@ -34,7 +34,7 @@
     "grunt-cli": "1.2.0",
     "grunt-mocha-test": "0.13.3",
     "gruntify-eslint": "4.0.0",
-    "jest": "22.4.3",
+    "jest": "23.0.0",
     "jest-runner-eslint": "0.5.0",
     "jest-runner-mocha": "0.6.0",
     "knex": "0.14.6",
