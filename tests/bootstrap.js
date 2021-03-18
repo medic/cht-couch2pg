@@ -1,5 +1,5 @@
-const CurlRequest = require('curl-request'),
-      knex = require('knex');
+const knex = require('knex');
+const http = require('http');
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 const WAIT_TIME = 5000;
@@ -14,8 +14,6 @@ const PUBLIC_ANNOUNCEMENT =
   * Everything can also be tested with:\n\n\
     docker-compose run test grunt test\n\n\
 -----------------------------------------------------------------';
-
-const curl = new CurlRequest();
 
 const waitForDb = async ({url, fn, retries=0}) => {
   if(retries ++ >= MAX_RETRIES) {
@@ -36,12 +34,14 @@ const waitForDb = async ({url, fn, retries=0}) => {
 const waitForCouch = async (url) => {
   await waitForDb({url: url, fn: async () => {
     try {
-      const {statusCode} = await curl.get(url);
-      if(statusCode === 200) {
+      const isReady = await isDBReady(url);
+
+      if (isReady) {
         console.log(`- Couch [${url}] is now avaliable.`);
-        return true;
       }
-    } catch(err) {
+
+      return isReady;
+    } catch (err) {
       //Ignore
       console.log(err);
     }
@@ -63,6 +63,20 @@ const waitForPg = async (url) => {
       }
     }
   }});
+};
+
+const isDBReady = (url = '') => {
+  return new Promise((resolve, reject) => {
+    http
+        .get(url, res => {
+          if (res.statusCode === 200) {
+            resolve(true);
+            return;
+          }
+          reject(false);
+        })
+        .on('error', (error) => { throw error });
+  });
 };
 
 before(async () => {

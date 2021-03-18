@@ -1,0 +1,23 @@
+language: node_js
+
+node_js:
+  - "8"
+  - "10"
+  - "12"
+
+services:
+  - docker
+
+script:
+  - docker-compose build --build-arg node_version=${TRAVIS_NODE_VERSION} test
+  - docker-compose run test grunt ci
+
+notifications:
+  webhooks:
+    urls:
+      - https://hooks.zapier.com/hooks/catch/3653132/j182m9/
+    on_success: never
+    on_failure: always
+    on_start:   never
+    on_cancel:  never
+    on_error:   always
