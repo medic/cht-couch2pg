@@ -37,7 +37,7 @@ const waitForCouch = async (url) => {
     console.log('calling isDBReady fn');
     try {
       const result = await isDBReady(url);
-      console.log('isDBReady is resolved ', isReady);
+      console.log('isDBReady is resolved ', result);
 
       if (result.ready) {
         console.log(`- Couch [${url}] is now avaliable.`);
