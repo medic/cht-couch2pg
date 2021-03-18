@@ -82,7 +82,7 @@ const isDBReady = (url = '') => {
           reject(false);
         })
         .on('error', (error) => {
-          console,error('Fn isDBReady? error:', error);
+          console.error('Fn isDBReady? error:', error);
           throw error;
         });
   });
