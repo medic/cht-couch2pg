@@ -34,8 +34,10 @@ const waitForDb = async ({url, fn, retries=0}) => {
 
 const waitForCouch = async (url) => {
   await waitForDb({url: url, fn: async () => {
+    console.log('calling isDBReady fn');
     try {
       const isReady = await isDBReady(url);
+      console.log('isDBReady is resolved ', isReady);
 
       if (isReady) {
         console.log(`- Couch [${url}] is now avaliable.`);
@@ -44,7 +46,7 @@ const waitForCouch = async (url) => {
       return isReady;
     } catch (err) {
       //Ignore
-      console.log(err);
+      console.log('waitForDb ', err);
     }
   }});
 };
@@ -67,9 +69,12 @@ const waitForPg = async (url) => {
 };
 
 const isDBReady = (url = '') => {
+  console.log('In isDBReady fn');
   return new Promise((resolve, reject) => {
+    console.log('calling http.get fn');
     http
         .get(url, res => {
+          console.log('http.get resolved: ', res);
           if (res.statusCode === 200) {
             resolve(true);
             return;
@@ -77,6 +82,7 @@ const isDBReady = (url = '') => {
           reject(false);
         })
         .on('error', (error) => {
+          console,error('Fn isDBReady? error:', error);
           throw error;
         });
   });
