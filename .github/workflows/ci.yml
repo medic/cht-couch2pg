@@ -21,7 +21,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Build
-      run: docker-compose build test
+      run: docker-compose build --build-arg node_version=${{matrix.node-version}} test
       env:
         COUCH2PG_SLEEP_MINS: 120
         COUCH2PG_DOC_LIMIT: 1000
