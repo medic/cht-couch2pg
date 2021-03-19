@@ -1,0 +1,26 @@
+name: Build medic-couch2pg and run unit test cases
+
+on: [ push, pull_request ]
+
+jobs:
+  build-and-test:
+    name: Build medic-couch2pg
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        node-version: [ 8, 10, 12 ]
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: docker-compose build --build-arg node_version=${{ matrix.node-version }} test
+        env:
+          COUCH2PG_SLEEP_MINS: 120
+          COUCH2PG_DOC_LIMIT: 1000
+          COUCH2PG_RETRY_COUNT: 5
+
+      - name: Run tests
+        run: docker-compose run test grunt test
