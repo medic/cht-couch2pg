@@ -19,7 +19,7 @@ jobs:
 
         with:
           username: ${{ secrets.CI_DOCKER_USERNAME }}
-          password: ${{ secrets.CI_DOCKER_PASSWORD }}
+          password: ${{ env.CI_DOCKER_PASSWORD }}
 
       - name: Checkout branch
         uses: actions/checkout@v2
