@@ -1,6 +1,6 @@
 name: Build medic-couch2pg and run unit test cases
 
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
   build-and-test:
