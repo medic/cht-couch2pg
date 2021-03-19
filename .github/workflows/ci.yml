@@ -9,24 +9,18 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 8.x, 10.x, 12.x ]
+        node-version: [ 8, 10, 12 ]
 
     steps:
     - name: Checkout branch
       uses: actions/checkout@v2
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-
     - name: Build
-      run: docker-compose build --build-arg node_version=${{matrix.node-version}} test
+      run: docker-compose build --build-arg node_version=${{ matrix.node-version }} test
       env:
         COUCH2PG_SLEEP_MINS: 120
         COUCH2PG_DOC_LIMIT: 1000
         COUCH2PG_RETRY_COUNT: 5
 
     - name: Run tests
-      id: unit-test-project
       run: docker-compose run test grunt test
