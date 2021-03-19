@@ -1,5 +1,4 @@
 const knex = require('knex');
-const http = require('http');
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 const WAIT_TIME = 5000;
@@ -72,6 +71,8 @@ const waitForPg = async (url) => {
 };
 
 const isDBReady = (url = '') => {
+  const http = url.indexOf('https') > -1 ? require('https') : require('http');
+
   return new Promise((resolve, reject) => {
     http
         .get(url, res => {
