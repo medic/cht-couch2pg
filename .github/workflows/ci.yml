@@ -20,15 +20,12 @@ jobs:
       with:
         node-version: 10.x
 
-    - name: Set environment variables
-      run: |
-        echo "COUCH2PG_SLEEP_MINS=120" >> $GITHUB_ENV
-        echo "COUCH2PG_DOC_LIMIT=1000" >> $GITHUB_ENV
-        echo "COUCH2PG_RETRY_COUNT=5" >> $GITHUB_ENV
-        echo "COUCH2PG_RETRY_COUNT=5" >> $GITHUB_ENV
-
     - name: Build
       run: docker-compose build test
+      env:
+        COUCH2PG_SLEEP_MINS: 120
+        COUCH2PG_DOC_LIMIT: 1000
+        COUCH2PG_RETRY_COUNT: 5
 
     - name: Run tests
       id: unit-test-project
