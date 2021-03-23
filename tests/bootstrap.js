@@ -1,4 +1,5 @@
 const knex = require('knex');
+const url = require('url');
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 const WAIT_TIME = 5000;
@@ -14,51 +15,44 @@ const PUBLIC_ANNOUNCEMENT =
     docker-compose run test grunt test\n\n\
 -----------------------------------------------------------------';
 
-const waitForDb = async ({url, fn, retries=0}) => {
+const waitForDb = async ({ dbUrl, fn, retries=0 }) => {
   if(retries ++ >= MAX_RETRIES) {
-    console.log(`****** ERROR: Unable to connect: ${url}`);
+    console.log(`****** ERROR: Unable to connect: ${dbUrl}`);
     process.exit(1);
   }
 
   if(!await fn()) {
-    if(!url) {
+    if(!dbUrl) {
       console.log(PUBLIC_ANNOUNCEMENT);
       process.exit(1);
     }
-    console.log(`====> Waiting on ${url} to appear.`);
+    console.log(`====> Waiting on ${dbUrl} to appear.`);
     await wait(WAIT_TIME);
-    await waitForDb({url: url, fn: fn, retries: retries});
+    await waitForDb({ dbUrl, fn, retries });
   }
 };
 
-const waitForCouch = async (url) => {
-  await waitForDb({url: url, fn: async () => {
+const waitForCouch = async (dbUrl) => {
+  await waitForDb({ dbUrl, fn: async () => {
     try {
-      const result = await isDBReady(url);
-
-      if (result.ready) {
-        console.log(`- Couch [${url}] is now avaliable.`);
-      }
-
-      if (result.error) {
-        //Ignore
-        console.log(result.error);
-      }
-
+      const result = await isDBReady(dbUrl);
+      const log = result.ready ? `- Couch [${dbUrl}] is now available.` : result.error;
+      console.log(log);
       return result.ready;
+
     } catch (err) {
       //Ignore
       console.log(err);
     }
-  }});
+  } });
 };
 
-const waitForPg = async (url) => {
-  const conn = knex({client: 'pg', connection: url});
-  await waitForDb({url: url, fn: async () => {
+const waitForPg = async (dbUrl) => {
+  const conn = knex({client: 'pg', connection: dbUrl});
+  await waitForDb({ dbUrl, fn: async () => {
     try {
       await conn.raw('SELECT * FROM pg_catalog.pg_tables');
-      console.log(`- Postgres [${url}] is now avaliable.`);
+      console.log(`- Postgres [${dbUrl}] is now available.`);
       await conn.destroy();
       return true;
     } catch(err) {
@@ -67,28 +61,33 @@ const waitForPg = async (url) => {
         process.exit(1);
       }
     }
-  }});
+  } });
 };
 
-const isDBReady = (url = '') => {
-  const http = url.indexOf('https') > -1 ? require('https') : require('http');
+const isDBReady = (dbUrl) => {
+  const parsed = new url.URL(dbUrl);
+  const http = parsed.protocol === 'https:' ? require('https') : require('http');
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     http
-        .get(url, res => {
-          if (res.statusCode === 200) {
-            resolve({ ready: true });
-            return;
-          }
-          reject({ ready: false });
+        .get(dbUrl, res => {
+          resolve({ ready: res.statusCode === 200 });
         })
         .on('error', (error) => {
-          reject({ ready: false, error });
+          resolve({ ready: false, error });
         });
   });
 };
 
 before(async () => {
+  if (!process.env.TEST_COUCH_URL) {
+    throw new Error('TEST_COUCH_URL is undefined.');
+  }
+
+  if (!process.env.TEST_PG_URL) {
+    throw new Error('TEST_PG_URL is undefined.');
+  }
+
   await waitForCouch(process.env.TEST_COUCH_URL);
   await waitForPg(process.env.TEST_PG_URL);
 });
