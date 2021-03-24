@@ -15,13 +15,13 @@ This version is built for medic/cht-core#3.0.0 and above. For replicating data f
 
 The supported environment variables are:
 
-| Variable             | Description |
-| -------------------- | --------------------- |
-| POSTGRESQL_URL       | PostgreSQL instance URL, format: `postgres://[postgres user]:[postgres password]@localhost:[port]/[database name]` |
-| COUCHDB_URL          | CouchDB instance URL, format: `https://[user]:[password]@localhost:[port]/medic`                                   |
-| COUCH2PG_SLEEP_MINS  | Number of minutes between synchronization                                                                          |
-| COUCH2PG_DOC_LIMIT   | Number of documents medic-couch2pg fetches from CouchDB everytime                                                  |
-| COUCH2PG_RETRY_COUNT | Number of times medic-couch2pg will retry synchronizing documents from CouchDB after experiencing an error         |
+| Variable             | Description                                                                                                |
+| -------------------- | ---------------------------------------------------------------------------------------------------------- |
+| POSTGRESQL_URL       | PostgreSQL instance URL, format: `postgres://[user]:[password]@localhost:[port]/[database name]`           |
+| COUCHDB_URL          | CouchDB instance URL, format: `https://[user]:[password]@localhost:[port]/medic`                           |
+| COUCH2PG_SLEEP_MINS  | Number of minutes between synchronization                                                                  |
+| COUCH2PG_DOC_LIMIT   | Number of documents medic-couch2pg fetches from CouchDB everytime                                          |
+| COUCH2PG_RETRY_COUNT | Number of times medic-couch2pg will retry synchronizing documents from CouchDB after experiencing an error |
 
 Example:
 ```
