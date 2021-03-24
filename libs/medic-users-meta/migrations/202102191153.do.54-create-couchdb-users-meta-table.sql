@@ -24,7 +24,7 @@ SELECT
     doc#>>'{metadata,year}',
     '-',
     CASE WHEN 
-            string_to_array(doc#>>'{metadata,versions,app}','.')::int[] < string_to_array('3.8.0','.')::int[] THEN 
+            string_to_array(substring(doc#>>'{metadata,versions,app}' FROM '(\d.\d.\d)'),'.')::int[] < '{3,8,0}'::int[] THEN 
             (doc#>>'{metadata,month}')::int 
         ELSE 
             (doc#>>'{metadata,month}')::int+1 END,
@@ -36,7 +36,7 @@ SELECT
     doc#>>'{metrics,boot_time,count}' AS boot_time_count,
     doc#>>'{dbInfo,doc_count}' AS doc_count_on_local_db
 FROM
-    couchdb_users_meta
+    couchdb
 WHERE
     doc->>'type'='telemetry';
 
