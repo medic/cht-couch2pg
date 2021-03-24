@@ -8,35 +8,45 @@ This version is built for medic/cht-core#3.0.0 and above. For replicating data f
 
 ## Installation Steps (if applicable)
 
-1. Clone repo
+1. Clone repository
 2. Run `npm ci`
 
-### Running locally with env variables
+### Running locally with environment variables
 
+The supported environment variables are:
+
+| Variable             | Description |
+| -------------------- | --------------------- |
+| POSTGRESQL_URL       | PostgreSQL instance URL, format: `postgres://[postgres user]:[postgres password]@localhost:[port]/[database name]` |
+| COUCHDB_URL          | CouchDB instance URL, format: `https://[user]:[password]@localhost:[port]/medic`                                   |
+| COUCH2PG_SLEEP_MINS  | Number of minutes between synchronization                                                                          |
+| COUCH2PG_DOC_LIMIT   | Number of documents medic-couch2pg fetches from CouchDB everytime                                                  |
+| COUCH2PG_RETRY_COUNT | Number of times medic-couch2pg will retry synchronizing documents from CouchDB after experiencing an error         |
+
+Example:
 ```
-export POSTGRESQL_URL=postgres://localhost:5432/standarddev3
+export POSTGRESQL_URL=postgres://postgres:postgres@localhost:15432/postgres
 export COUCHDB_URL=https://admin:pass@localhost:5984/medic
 export COUCH2PG_SLEEP_MINS=120
 export COUCH2PG_DOC_LIMIT=1000
 export COUCH2PG_RETRY_COUNT=5
 ```
 
-Run it locally with env vars: `npm ci && node .`
+Run it locally with environment variables: `npm ci && node .`
 
-### Running locally in interactive mode (no env vars needed)
+### Running locally in interactive mode (no environment variables needed)
 
 Run it locally in interactive mode: `npm ci && node . -i`
-
 
 ## Running tests through docker-compose
 
 Run tests with:
 ```
-docker-compose build --build-arg node_version=8 test
+docker-compose build --build-arg node_version=[node version] test
 docker-compose run test grunt test
 ```
-Run tests in interactive watch mode with: `docker-compose run test npm run watch`.
 
+Run tests in interactive watch mode with: `docker-compose run test npm run watch`.
 
 ## Running tests against local couch and postgres databases
 
@@ -47,8 +57,7 @@ Environment variables required for the integration tests to run correctly:
  * `TEST_PG_URL`: postgres url. ie: `http://admin:pass@localhost:5984`
  * `TEST_COUCH_URL`: couch url. ie: `postgres://localhost:5432`
 
-NB: the integration tests destroy and re-create the given databases each time they are run.
-
+NB: The integration tests destroy and re-create the given databases each time they are run.
 
 ## Required database setup
 
