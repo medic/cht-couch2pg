@@ -36,7 +36,7 @@ SELECT
     doc#>>'{metrics,boot_time,count}' AS boot_time_count,
     doc#>>'{dbInfo,doc_count}' AS doc_count_on_local_db
 FROM
-    couchdb
+    couchdb_users_meta
 WHERE
     doc->>'type'='telemetry';
 
