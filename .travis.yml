@@ -3,9 +3,18 @@ language: node_js
 node_js:
   - "8"
   - "10"
+  - "12"
 
 services:
   - docker
+
+env:
+  global:
+    #CI_DOCKER_PASSWORD
+    secure: XimlsIRTuP0u/sKpLav046CLS65RrKV0oKFKWCudfNQE7VUw7GWnKdMM4LJwprB4p5YSL/M4mEdMku/hdJhCx9YTlzQ5+O9qJ8Yiz9inqJKsz1lzoFxs8nhRlFTzpxi/c0EVmDH5J0nkRJvVZfpNML2GRPOsoYtiCnZF9dP5b9bxthJVgZq+gX9SNF61pmI0qtNiS7fsQ++4UYu5EZK/7Dmzi7mbEQGrfEcn8sgb3ywPnzSQQPwPQh4tUfLH/8JzTfBM9HFt0pd5vIdhjvxl7I88pdRCa61Yw7CZWOWhseVwcdMtANz3B8flOigd80WW/UHydRyKjfWDFD/XH6aR6sUqfa/fskHPYrpc6HXDIFS9D3TPU48ujGEtRbMbRNkAAVrAK4H9VqhL4WXjMOOUT4F5RrpcHE2jxj62F1u2jNljXpn75huHDKBh1nEGJ141HeRdJB+6chq9Ys7syvG0b98TMG7GQlG4pF1c2Zi2cewDrgc7N1wL4bwICBPXFphwxWz8MNzvVu9MmeF4O5T4RRv3274MdH9sq1YgEvt+tyPBU3YVQOE0VOUxj7QcQx/2f3Ye46sA/62YKp9itHjj1Arq9eHZZmwub5yPWRCedTQWSgzlSfvXHSP0o6ALVw7EBIYZdjuK8XZZIMyfVZ9IcOQM+b6vrvlj+yQhMmHH0TU=
+
+before_install:
+  - echo "$CI_DOCKER_PASSWORD" | docker login -u "$CI_DOCKER_USERNAME" --password-stdin
 
 script:
   - docker-compose build --build-arg node_version=${TRAVIS_NODE_VERSION} test
