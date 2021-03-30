@@ -8,7 +8,7 @@ SELECT
     doc#>>'{meta,url}' AS url,
     doc#>>'{meta,user,name}' AS user_name,
     doc#>>'{meta,time}' AS period_start,
-    doc#>>'{info,cause}' AS cause,
+    COALESCE(doc#>>'{info,cause}',doc->>'info') AS cause,
     doc#>>'{info,message}' AS message
 FROM
     couchdb_users_meta
