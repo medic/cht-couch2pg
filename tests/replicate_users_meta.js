@@ -1,5 +1,4 @@
 const expect = require('chai').expect,
-      assert = require('chai').assert,
       PouchDB = require('../libs/db'),
       singleMedicDoc = require('./docs/single-medic.json'),
       pgutils = require('./utils/pgutils'),
@@ -43,13 +42,12 @@ describe('medic users meta db replication', () => {
     await replicate(couchUrl, pgUrl, {timesToRun: 1});
     const db = new pgutils.Pg(pgUrl);
 
-    assert(await db.schema.hasTable('couchdb_users_meta'));
+    const hasTable = await db.schema.hasTable('couchdb_users_meta');
+    expect(hasTable).to.equal(true);
 
     const views = await db.matViews();
 
-    assert.equal(views[0].name, 'contactview_metadata');
-    assert.equal(views[1].name, 'form_metadata');
-    assert.equal(views[2].name, 'useview_feedback');
-    assert.equal(views[3].name, 'useview_telemetry');
+    const viewsNames = views.map(view => view.view_name);
+    expect(viewsNames).to.have.members(['form_metadata', 'contactview_metadata', 'useview_feedback', 'useview_telemetry']);
   });
 });

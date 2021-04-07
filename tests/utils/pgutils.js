@@ -57,6 +57,10 @@ class Pg {
     return (await this.conn.raw(SELECT_VIEWS)).rows;
   }
 
+  async matViews() {
+    return (await this.conn.raw(SELECT_MATERIALIZED_VIEWS)).rows;
+  }
+
   async materializedViews() {
     const rows = (await this.conn.raw(SELECT_MATERIALIZED_VIEWS)).rows;
     const viewsMap = {};
