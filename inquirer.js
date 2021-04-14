@@ -58,6 +58,13 @@ module.exports = {
         message: 'Select how many times to internally retry continued unsuccessful runs before exiting. If unset medic-couch2pg will retry indefinitely. If set it will retry N times, and then exit with status code 1',
         choices: ['1', '3', '5', '10', INDEFINITELY],
         default: INDEFINITELY
+      },
+      {
+        name: 'couchdbUsersMetaDocLimit',
+        type: 'list',
+        message: 'Select the number of documents to grab concurrently from the users-meta database. Increasing this number will cut down on HTTP GETs and may improve performance, decreasing this number will cut down on node memory usage, and may increase stability. These documents are larger so set a limit lower than the docLimit',
+        choices: ['10', '50', '100', '200', '500'],
+        default: '50'
       }
     ];
     const values = await inquirer.prompt(questions);

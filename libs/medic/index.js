@@ -1,9 +1,10 @@
-const analytics = require('../analytics'),
-      pgp = require('pg-promise'),
-      couch2pg = require('../couch2pg'),
-      log = require('./log'),
-      safe = require('./safe'),
-      runner = require('./runner');
+const analytics = require('../analytics');
+const pgp = require('pg-promise');
+const couch2pg = require('../couch2pg');
+const log = require('./log');
+const safe = require('./safe');
+const runner = require('./runner');
+const medicUsersMeta = require('../medic-users-meta');
 
 const replicate = async (couchUrl, pgUrl, opts={}) => {
   try {
@@ -15,6 +16,7 @@ const replicate = async (couchUrl, pgUrl, opts={}) => {
     const pgconn = pgp({ 'promiseLib': Promise })(pgUrl);
     log.info('Adapter is running in NORMAL mode');
     await analytics.migrate(pgUrl);
+    await medicUsersMeta.migrate(pgUrl);
     await runner.run(couchUrl, pgconn, opts);
   } catch(err) {
     log.error('An unrecoverable error occurred');

@@ -49,12 +49,16 @@ class Pg {
     this.schema = this.conn.schema;
   }
 
-  async rows() {
-    return (await this.conn.raw('select * from couchdb')).rows;
+  async rows(table) {
+    return (await this.conn.raw(`select * from ${table}`)).rows;
   }
 
   async views() {
     return (await this.conn.raw(SELECT_VIEWS)).rows;
+  }
+
+  async matViews() {
+    return (await this.conn.raw(SELECT_MATERIALIZED_VIEWS)).rows;
   }
 
   async materializedViews() {

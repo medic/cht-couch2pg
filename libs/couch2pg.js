@@ -1,6 +1,6 @@
-const urlParser = require('url'),
-      PouchDB = require('./db'),
-      couch2pg = require('couch2pg');
+const urlParser = require('url');
+const PouchDB = require('./db');
+const couch2pg = require('couch2pg');
 
 // Removes credentials from couchdb url
 // Converts http://admin:pass@localhost:5984/couch1
@@ -10,13 +10,14 @@ const parseSource = url => {
   return `${source.host}${source.path}`;
 };
 
-const replicate = (couchUrl, pgconn, opts) => {
+const replicate = (couchUrl, pgconn, opts, table) => {
   return couch2pg.importer(
           pgconn,
           new PouchDB(couchUrl),
           opts.docLimit,
           opts.changesLimit,
-          parseSource(couchUrl)).importAll();
+          parseSource(couchUrl),
+          table).importAll();
 };
 
 const migrate = (pgUrl) => {
@@ -24,6 +25,6 @@ const migrate = (pgUrl) => {
 };
 
 module.exports = {
-  replicate: (couchUrl, pgconn, opts) => replicate(couchUrl, pgconn, opts),
+  replicate: (couchUrl, pgconn, opts, table) => replicate(couchUrl, pgconn, opts, table),
   migrate: (pgUrl) => migrate(pgUrl)
 };
