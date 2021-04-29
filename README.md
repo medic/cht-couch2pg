@@ -6,6 +6,7 @@ The focus is specifically on CHT application data currently stored in CouchDB. I
 
 This version is built for medic/cht-core#3.0.0 and above. For replicating data from earlier versions, see the 2.0.x branch and associated tags.
 
+
 ## Installation Steps (if applicable)
 
 1. Clone repository
@@ -38,15 +39,24 @@ Run it locally with environment variables: `npm ci && node .`
 
 Run it locally in interactive mode: `npm ci && node . -i`
 
+
 ## Running tests through docker-compose
 
 Run tests with:
+
 ```
 docker-compose build --build-arg node_version=[node version] test
+docker-compose up
+```
+
+Then in another terminal:
+
+```
 docker-compose run test grunt test
 ```
 
 Run tests in interactive watch mode with: `docker-compose run test npm run watch`.
+
 
 ## Running tests against local couch and postgres databases
 
@@ -59,9 +69,11 @@ Environment variables required for the integration tests to run correctly:
 
 NB: The integration tests destroy and re-create the given databases each time they are run.
 
+
 ## Required database setup
 
 We support PostgreSQL 9.4 and greater. The user passed in the postgres url needs to have full creation rights on the given database.
+
 
 ## Example usage
 
@@ -86,7 +98,8 @@ end script
 ```
  - The service is then a standard service, e.g. `service couch2pg-example-client start`
  
- ### Installing as a service using Systemd (18.04.3 LTS [Bionic Beaver])
+### Installing as a service using Systemd (18.04.3 LTS [Bionic Beaver])
+
 To setup couch2pg using systemd is also pretty simple. You will need to have sudo rights to the server and then follow the steps listed below:
  
  - Install git and clone this repo onto your server, check out the relevant tag `git checkout tag_id`, and run `npm ci`. 
@@ -126,6 +139,32 @@ WantedBy=multi-user.target
  - Start the service `sudo service couch2pg-sample-client start`
  - If all goes well the service should start smoothly.
  - You can check the service logs using `journalctl` like this `journalctl -u couch2pg-sample-client --since today`
- 
- 
 
+
+## Known issues
+
+### Error "Checksum failed for migration ..." when upgrading from 3.2.0 to latest
+
+In the version 3.2.0 of medic-couch2pg one of the SQL migration files was changed causing the process to fail if the PostgreSQL database already have data. The change was reverted later, but if you started to use this tool since that version you won't be able to upgrade to newer versions until the following SQL script is executed in the Postgre database:
+
+```sql
+UPDATE xmlforms_migrations
+  SET md5 = 'e0535c9fe3faef6e66a31691deebf1a8'
+  WHERE version = '201606200952' AND
+        md5 = '40187aa5ee95eda0e154ecefd7512cda';
+```
+
+See more details about the error in [#78](https://github.com/medic/medic-couch2pg/issues/78).
+
+### Error installing deps `ERR! ... node-pre-gyp install --fallback-to-build`
+
+If installing de Node.js dependencies locally or building the docker image you got an error like:
+
+```
+...
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! node-libcurl@1.3.3 install: `node-pre-gyp install --fallback-to-build`
+```
+
+It is probably related to a gcc library that is failing with some versions of Node and npm, try with Node 10 without updating the `npm` version that comes with it.
