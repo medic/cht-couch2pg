@@ -158,7 +158,7 @@ See more details about the error in [#78](https://github.com/medic/medic-couch2p
 
 ### Error installing deps `ERR! ... node-pre-gyp install --fallback-to-build`
 
-If installing de Node.js dependencies locally or building the docker image you got an error like:
+When installing Node.js dependencies locally or building the docker image, you might get an error like:
 
 ```
 ...
