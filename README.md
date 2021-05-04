@@ -145,7 +145,10 @@ WantedBy=multi-user.target
 
 ### Error "Checksum failed for migration ..." when upgrading from 3.2.0 to latest
 
-In the version 3.2.0 of medic-couch2pg one of the SQL migration files was changed causing the process to fail if the PostgreSQL database already have data. The change was reverted later, but if you started to use this tool since that version you won't be able to upgrade to newer versions until the following SQL script is executed in the Postgre database:
+An SQL migration file was changed in version 3.2.0. This made upgrades from 3.1.x impossible, with the process crashing upon startup after the upgrade. See more [details about the error](https://github.com/medic/medic-couch2pg/issues/78).
+
+This was fixed in version 3.2.1, by reverting the changes made to the migration file. 
+Fresh installations of 3.2.0 should execute this SQL before upgrading: 
 
 ```sql
 UPDATE xmlforms_migrations
