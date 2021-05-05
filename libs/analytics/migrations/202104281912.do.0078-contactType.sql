@@ -1,4 +1,5 @@
 -- Recreates the view only to add the new column contact_type
+-- Replaces -> https://github.com/medic/medic-couch2pg/blob/53c8b27aa6e33c8e2a62dc7d8f697cad20b891c7/libs/analytics/migrations/201606200952.do.2318-prepareContacts.sql#L5-L25
 DROP MATERIALIZED VIEW IF EXISTS contactview_metadata CASCADE;
 CREATE MATERIALIZED VIEW contactview_metadata AS
   SELECT doc->>'_id' AS uuid,
@@ -19,11 +20,13 @@ CREATE INDEX contactview_metadata_type ON contactview_metadata (type);
 -- NOTE: The recreation of the view above caused 4 other views to be dropped in cascade,
 --       here are the scripts to recreate them:
 
+-- Replace -> https://github.com/medic/medic-couch2pg/blob/53c8b27aa6e33c8e2a62dc7d8f697cad20b891c7/libs/analytics/migrations/201606200952.do.2318-prepareContacts.sql#L31
 CREATE VIEW contactview_hospital AS
   SELECT cmd.uuid, cmd.name
     FROM contactview_metadata AS cmd
     WHERE cmd.type = 'district_hospital';
 
+-- Replace -> https://github.com/medic/medic-couch2pg/blob/53c8b27aa6e33c8e2a62dc7d8f697cad20b891c7/libs/analytics/migrations/201606200952.do.2318-prepareContacts.sql#L48
 CREATE VIEW contactview_chw AS
   SELECT chw.name, pplfields.*, chwarea.uuid AS area_uuid,
          chwarea.parent_uuid AS branch_uuid
@@ -32,12 +35,14 @@ CREATE VIEW contactview_chw AS
          INNER JOIN contactview_metadata AS chwarea ON (chw.parent_uuid = chwarea.uuid)
     WHERE pplfields.parent_type = 'health_center';
 
+-- Replace -> https://github.com/medic/medic-couch2pg/blob/53c8b27aa6e33c8e2a62dc7d8f697cad20b891c7/libs/analytics/migrations/201606200952.do.2318-prepareContacts.sql#L57
 CREATE VIEW contactview_clinic AS
   SELECT cmd.uuid, cmd.name, chw.uuid AS chw_uuid, cmd.reported AS created
     FROM contactview_metadata AS cmd
          INNER JOIN contactview_chw AS chw ON (cmd.parent_uuid = chw.area_uuid)
     WHERE type = 'clinic';
 
+-- Replace -> https://github.com/medic/medic-couch2pg/blob/53c8b27aa6e33c8e2a62dc7d8f697cad20b891c7/libs/analytics/migrations/201711071603.do.2635-removeNestedContactReferences.sql#L4
 CREATE VIEW contactview_clinic_person AS
   SELECT
       raw_contacts.doc ->> '_id' AS uuid,
