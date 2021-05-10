@@ -1,6 +1,6 @@
 {
   "name": "medic-couch2pg",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "replicate medic data to postgres database",
   "main": "index.js",
   "license": "Apache-2.0",
