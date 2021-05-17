@@ -1,6 +1,6 @@
-# medic-couch2pg ![travis](https://travis-ci.org/medic/medic-couch2pg.svg?branch=master)
+# medic-couch2pg
 
-Software for creating read-only replicas of CouchDB data inside PostgreSQL v9.4
+Software for creating read-only replicas of CouchDB data inside PostgreSQL v9.4.
 
 The focus is specifically on CHT application data currently stored in CouchDB. If you are looking to have a read-only replica of CouchDB data for your application, consider [couch2pg](https://www.npmjs.com/package/couch2pg).
 
@@ -77,7 +77,7 @@ We support PostgreSQL 9.4 and greater. The user passed in the postgres url needs
 
 ## Example usage
 
-You should probably install medic-analytics as a service and leave it to do its thing, as it should be able to run independently without any user input.
+You should probably install medic-couch2pg as a service and leave it to do its thing, as it should be able to run independently without any user input.
 
 ### Installing as a service using Upstart (Ubuntu 14.4)
 
