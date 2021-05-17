@@ -17,6 +17,8 @@ WHERE
 
 CREATE UNIQUE INDEX idx_useview_feedback_period_start_user ON useview_feedback(period_start,user_name);
 
+DROP INDEX IF EXISTS idx_useview_telemetry_period_start_user;
+DROP MATERIALIZED VIEW IF EXISTS useview_telemetry;
 CREATE MATERIALIZED VIEW useview_telemetry AS
 SELECT 
     doc->>'_id' AS uuid,
@@ -40,4 +42,5 @@ FROM
 WHERE
     doc->>'type'='telemetry';
 
-CREATE UNIQUE INDEX idx_useview_telemetry_period_start_user ON useview_telemetry(period_start,user_name);
+CREATE UNIQUE INDEX idx_useview_telemetry_uuid ON useview_telemetry(uuid);
+CREATE INDEX idx_useview_telemetry_period_start_user ON useview_telemetry(period_start, user_name);
