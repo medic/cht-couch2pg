@@ -25,12 +25,10 @@ SELECT
     CONCAT(
     doc#>>'{metadata,year}',
     '-',
-    CASE WHEN 
-            string_to_array(substring(doc#>>'{metadata,versions,app}' FROM '(\d+.\d+.\d+)'),'.')::int[] < '{3,8,0}'::int[] THEN 
-            (doc#>>'{metadata,month}')::int 
-        ELSE 
-            (doc#>>'{metadata,month}')::int+1 END,
-    '-1')::date AS period_start,
+    CASE
+    	WHEN string_to_array("substring"(couchdb_users_meta.doc #>> '{metadata,versions,app}'::text[], '(\d+.\d+.\d+)'::text), '.'::text)::integer[] < '{3,8,0}'::integer[] THEN (couchdb_users_meta.doc #>> '{metadata,month}'::text[])::integer + 1
+            ELSE ((couchdb_users_meta.doc #>> '{metadata,month}'::text[])::integer)
+        END, '-1')::date AS period_start,
     doc#>>'{metadata,user}' AS user_name,
     doc#>>'{metadata,versions,app}' AS app_version,
     doc#>>'{metrics,boot_time,min}' AS boot_time_min,
