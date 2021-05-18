@@ -19,6 +19,7 @@ WHERE
     doc->>'type'='feedback';
 
 CREATE UNIQUE INDEX idx_useview_feedback_uuid ON useview_feedback(uuid);  --> Only to allow the refresh of the view CONCURRENTLY
+CREATE INDEX idx_useview_feedback_period_start_user ON useview_feedback(period_start,user_name);
 
 CREATE MATERIALIZED VIEW useview_telemetry AS
 SELECT
@@ -55,3 +56,4 @@ WHERE
   doc->>'type'='telemetry';
 
 CREATE UNIQUE INDEX idx_useview_telemetry_uuid ON useview_telemetry(uuid);  --> Only to allow the refresh of the view CONCURRENTLY
+CREATE INDEX idx_useview_telemetry_period_start_user ON useview_telemetry(period_start,user_name);
