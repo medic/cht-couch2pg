@@ -64,8 +64,8 @@ Run tests with: `grunt test`.
 Run tests in interactive watch mode with: `npm run watch`.
 
 Environment variables required for the integration tests to run correctly:
- * `TEST_PG_URL`: postgres url. ie: `http://admin:pass@localhost:5984`
- * `TEST_COUCH_URL`: couch url. ie: `postgres://localhost:5432`
+ * `TEST_PG_URL`: postgres url. ie: `postgres://localhost:5432`
+ * `TEST_COUCH_URL`: couch url. ie: `http://admin:pass@localhost:5984`
 
 NB: The integration tests destroy and re-create the given databases each time they are run.
 
