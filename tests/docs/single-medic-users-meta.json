@@ -1,0 +1,158 @@
+{
+  "_id": "telemetry-2021-5-4-adama-5517a586-d839-47cf-ae2c-8ca81ac9014b",
+  "type": "telemetry",
+  "metrics": {
+    "boot_time": {
+      "sum": 2667,
+      "min": 616,
+      "max": 2051,
+      "count": 2,
+      "sumsqr": 4586057
+    },
+    "boot_time:1:to_first_code_execution": {
+      "sum": 974,
+      "min": 478,
+      "max": 496,
+      "count": 2,
+      "sumsqr": 474500
+    },
+    "boot_time:2:to_bootstrap": {
+      "sum": 1576,
+      "min": 68,
+      "max": 1508,
+      "count": 2,
+      "sumsqr": 2278688
+    },
+    "boot_time:3:to_angular_bootstrap": {
+      "sum": 117,
+      "min": 52,
+      "max": 65,
+      "count": 2,
+      "sumsqr": 6929
+    },
+    "rules-engine:initialize": {
+      "sum": 59,
+      "min": 28,
+      "max": 31,
+      "count": 2,
+      "sumsqr": 1745
+    },
+    "rules-engine:targets": {
+      "sum": 34,
+      "min": 34,
+      "max": 34,
+      "count": 1,
+      "sumsqr": 1156
+    },
+    "rules-engine:targets:dirty-contacts": {
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "count": 1,
+      "sumsqr": 0
+    },
+    "rules-engine:targets:queued": {
+      "sum": 1,
+      "min": 1,
+      "max": 1,
+      "count": 1,
+      "sumsqr": 1
+    },
+    "rules-engine:tasks:all-contacts": {
+      "sum": 112,
+      "min": 112,
+      "max": 112,
+      "count": 1,
+      "sumsqr": 12544
+    },
+    "rules-engine:tasks:all-contacts:queued": {
+      "sum": 3,
+      "min": 3,
+      "max": 3,
+      "count": 1,
+      "sumsqr": 9
+    },
+    "rules-engine:tasks:dirty-contacts": {
+      "sum": 1,
+      "min": 1,
+      "max": 1,
+      "count": 1,
+      "sumsqr": 1
+    },
+    "rules-engine:update-emissions": {
+      "sum": 64,
+      "min": 64,
+      "max": 64,
+      "count": 1,
+      "sumsqr": 4096
+    },
+    "search:contacts:types": {
+      "sum": 258,
+      "min": 103,
+      "max": 155,
+      "count": 2,
+      "sumsqr": 34634
+    },
+    "search:reports": {
+      "sum": 108,
+      "min": 13,
+      "max": 95,
+      "count": 2,
+      "sumsqr": 9194
+    },
+    "search:reports:subjectIds": {
+      "sum": 310,
+      "min": 126,
+      "max": 184,
+      "count": 2,
+      "sumsqr": 49732
+    }
+  },
+  "metadata": {
+    "year": 2021,
+    "month": 5,
+    "day": 4,
+    "user": "adama",
+    "deviceId": "5517a586-d839-47cf-ae2c-8ca81ac9014b",
+    "versions": {
+      "app": "unknown",
+      "forms": {
+        "contact:clinic:create": "2-757396242984ec5ea69e4b2a10571db8",
+        "contact:clinic:edit": "2-c1c955042db963a95470bdf891bcef6f",
+        "contact:district_hospital:create": "2-42b8b579b38ca6c2978c238e7d9c78fe",
+        "contact:district_hospital:edit": "2-4360bb0eb6f6ff863849a07adac7e851",
+        "contact:health_center:create": "2-c9b86820479f211c8e505eba150c5203",
+        "contact:health_center:edit": "2-19b3da5f9f146be07ec1854a372e374b",
+        "contact:person:create": "2-230d39c41682da720b83e4909b138c9b",
+        "contact:person:edit": "2-a5b769f3a462172bed6ef4f2227beb41",
+        "death_report": "2-97cfa3cc24ee743dfea03c019d644bec",
+        "delivery": "2-adf37c0da7d5e58c8e4d27fc940f70e6",
+        "pnc_danger_sign_follow_up_baby": "2-12e8989f6774828bb10aa4b675bc43ff",
+        "pnc_danger_sign_follow_up_mother": "2-62f58b6e0ade10d70f15df73ddb6a025",
+        "pregnancy": "2-e9487af97a3d705f14fdf377fc909610",
+        "pregnancy_danger_sign": "2-49758bfd894fb5db6e719bff864f9da9",
+        "pregnancy_danger_sign_follow_up": "2-a9a2b6800d6f93e151a3a63359620976",
+        "pregnancy_facility_visit_reminder": "2-0e3deaf22966166d05bcf803615499c8",
+        "pregnancy_home_visit": "2-283eb323e61a7fc756bda61f9d9be382",
+        "undo_death_report": "2-3a4ca8d678f0338d7044cb1bc35d103d"
+      }
+    }
+  },
+  "device": {
+    "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:88.0) Gecko/20100101 Firefox/88.0",
+    "hardwareConcurrency": 16,
+    "screen": {
+      "width": 1536,
+      "height": 837
+    },
+    "deviceInfo": {}
+  },
+  "dbInfo": {
+    "doc_count": 39,
+    "update_seq": 40,
+    "idb_attachment_format": "binary",
+    "db_name": "medic-user-adama",
+    "auto_compaction": true,
+    "adapter": "idb"
+  }
+}

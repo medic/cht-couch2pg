@@ -1,0 +1,1343 @@
+[
+{
+  "_id": "telemetry-2021-5-10-adama-5517a586-d839-47cf-ae2c-8ca81ac9014b",
+  "type": "telemetry",
+  "metrics": {
+    "boot_time": {
+      "sum": 2667,
+      "min": 616,
+      "max": 2051,
+      "count": 2,
+      "sumsqr": 4586057
+    },
+    "boot_time:1:to_first_code_execution": {
+      "sum": 974,
+      "min": 478,
+      "max": 496,
+      "count": 2,
+      "sumsqr": 474500
+    },
+    "boot_time:2:to_bootstrap": {
+      "sum": 1576,
+      "min": 68,
+      "max": 1508,
+      "count": 2,
+      "sumsqr": 2278688
+    },
+    "boot_time:3:to_angular_bootstrap": {
+      "sum": 117,
+      "min": 52,
+      "max": 65,
+      "count": 2,
+      "sumsqr": 6929
+    },
+    "rules-engine:initialize": {
+      "sum": 59,
+      "min": 28,
+      "max": 31,
+      "count": 2,
+      "sumsqr": 1745
+    },
+    "rules-engine:targets": {
+      "sum": 34,
+      "min": 34,
+      "max": 34,
+      "count": 1,
+      "sumsqr": 1156
+    },
+    "rules-engine:targets:dirty-contacts": {
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "count": 1,
+      "sumsqr": 0
+    },
+    "rules-engine:targets:queued": {
+      "sum": 1,
+      "min": 1,
+      "max": 1,
+      "count": 1,
+      "sumsqr": 1
+    },
+    "rules-engine:tasks:all-contacts": {
+      "sum": 112,
+      "min": 112,
+      "max": 112,
+      "count": 1,
+      "sumsqr": 12544
+    },
+    "rules-engine:tasks:all-contacts:queued": {
+      "sum": 3,
+      "min": 3,
+      "max": 3,
+      "count": 1,
+      "sumsqr": 9
+    },
+    "rules-engine:tasks:dirty-contacts": {
+      "sum": 1,
+      "min": 1,
+      "max": 1,
+      "count": 1,
+      "sumsqr": 1
+    },
+    "rules-engine:update-emissions": {
+      "sum": 64,
+      "min": 64,
+      "max": 64,
+      "count": 1,
+      "sumsqr": 4096
+    },
+    "search:contacts:types": {
+      "sum": 258,
+      "min": 103,
+      "max": 155,
+      "count": 2,
+      "sumsqr": 34634
+    },
+    "search:reports": {
+      "sum": 108,
+      "min": 13,
+      "max": 95,
+      "count": 2,
+      "sumsqr": 9194
+    },
+    "search:reports:subjectIds": {
+      "sum": 310,
+      "min": 126,
+      "max": 184,
+      "count": 2,
+      "sumsqr": 49732
+    }
+  },
+  "metadata": {
+    "year": 2021,
+    "month": 5,
+    "day": 10,
+    "user": "adama",
+    "deviceId": "5517a586-d839-47cf-ae2c-8ca81ac9014b",
+    "versions": {
+      "app": "unknown",
+      "forms": {
+        "contact:clinic:create": "2-757396242984ec5ea69e4b2a10571db8",
+        "contact:clinic:edit": "2-c1c955042db963a95470bdf891bcef6f",
+        "contact:district_hospital:create": "2-42b8b579b38ca6c2978c238e7d9c78fe",
+        "contact:district_hospital:edit": "2-4360bb0eb6f6ff863849a07adac7e851",
+        "contact:health_center:create": "2-c9b86820479f211c8e505eba150c5203",
+        "contact:health_center:edit": "2-19b3da5f9f146be07ec1854a372e374b",
+        "contact:person:create": "2-230d39c41682da720b83e4909b138c9b",
+        "contact:person:edit": "2-a5b769f3a462172bed6ef4f2227beb41",
+        "death_report": "2-97cfa3cc24ee743dfea03c019d644bec",
+        "delivery": "2-adf37c0da7d5e58c8e4d27fc940f70e6",
+        "pnc_danger_sign_follow_up_baby": "2-12e8989f6774828bb10aa4b675bc43ff",
+        "pnc_danger_sign_follow_up_mother": "2-62f58b6e0ade10d70f15df73ddb6a025",
+        "pregnancy": "2-e9487af97a3d705f14fdf377fc909610",
+        "pregnancy_danger_sign": "2-49758bfd894fb5db6e719bff864f9da9",
+        "pregnancy_danger_sign_follow_up": "2-a9a2b6800d6f93e151a3a63359620976",
+        "pregnancy_facility_visit_reminder": "2-0e3deaf22966166d05bcf803615499c8",
+        "pregnancy_home_visit": "2-283eb323e61a7fc756bda61f9d9be382",
+        "undo_death_report": "2-3a4ca8d678f0338d7044cb1bc35d103d"
+      }
+    }
+  },
+  "device": {
+    "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:88.0) Gecko/20100101 Firefox/88.0",
+    "hardwareConcurrency": 16,
+    "screen": {
+      "width": 1536,
+      "height": 837
+    },
+    "deviceInfo": {}
+  },
+  "dbInfo": {
+    "doc_count": 39,
+    "update_seq": 40,
+    "idb_attachment_format": "binary",
+    "db_name": "medic-user-adama",
+    "auto_compaction": true,
+    "adapter": "idb"
+  }
+},
+{
+  "_id": "telemetry-2021-5-10-bobb-5517a586-d839-47cf-ae2c-8ca81ac9014b",
+  "type": "telemetry",
+  "metrics": {
+    "analytics:targets:load": {
+      "sum": 24,
+      "min": 24,
+      "max": 24,
+      "count": 1,
+      "sumsqr": 576
+    },
+    "boot_time": {
+      "sum": 2052,
+      "min": 2052,
+      "max": 2052,
+      "count": 1,
+      "sumsqr": 4210704
+    },
+    "boot_time:1:to_first_code_execution": {
+      "sum": 478,
+      "min": 478,
+      "max": 478,
+      "count": 1,
+      "sumsqr": 228484
+    },
+    "boot_time:2:to_bootstrap": {
+      "sum": 1506,
+      "min": 1506,
+      "max": 1506,
+      "count": 1,
+      "sumsqr": 2268036
+    },
+    "boot_time:3:to_angular_bootstrap": {
+      "sum": 68,
+      "min": 68,
+      "max": 68,
+      "count": 1,
+      "sumsqr": 4624
+    },
+    "enketo:reports:pnc_danger_sign_follow_up_baby:add:render": {
+      "sum": 139,
+      "min": 139,
+      "max": 139,
+      "count": 1,
+      "sumsqr": 19321
+    },
+    "enketo:reports:pnc_danger_sign_follow_up_baby:add:save": {
+      "sum": 101,
+      "min": 101,
+      "max": 101,
+      "count": 1,
+      "sumsqr": 10201
+    },
+    "enketo:reports:pnc_danger_sign_follow_up_baby:add:user_edit_time": {
+      "sum": 64582,
+      "min": 29943,
+      "max": 34639,
+      "count": 2,
+      "sumsqr": 2096443570
+    },
+    "geolocation:failure:-1": {
+      "sum": 2,
+      "min": 1,
+      "max": 1,
+      "count": 2,
+      "sumsqr": 2
+    },
+    "rules-engine:ensureTargetFreshness:cancel": {
+      "sum": 45132,
+      "min": 45132,
+      "max": 45132,
+      "count": 1,
+      "sumsqr": 2036897424
+    },
+    "rules-engine:ensureTaskFreshness:cancel": {
+      "sum": 42412,
+      "min": 42412,
+      "max": 42412,
+      "count": 1,
+      "sumsqr": 1798777744
+    },
+    "rules-engine:initialize": {
+      "sum": 27,
+      "min": 27,
+      "max": 27,
+      "count": 1,
+      "sumsqr": 729
+    },
+    "rules-engine:targets": {
+      "sum": 17,
+      "min": 17,
+      "max": 17,
+      "count": 1,
+      "sumsqr": 289
+    },
+    "rules-engine:targets:dirty-contacts": {
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "count": 1,
+      "sumsqr": 0
+    },
+    "rules-engine:targets:queued": {
+      "sum": 1,
+      "min": 1,
+      "max": 1,
+      "count": 1,
+      "sumsqr": 1
+    },
+    "rules-engine:tasks:all-contacts": {
+      "sum": 208,
+      "min": 21,
+      "max": 187,
+      "count": 2,
+      "sumsqr": 35410
+    },
+    "rules-engine:tasks:all-contacts:queued": {
+      "sum": 1,
+      "min": 0,
+      "max": 1,
+      "count": 2,
+      "sumsqr": 1
+    },
+    "rules-engine:tasks:dirty-contacts": {
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "count": 2,
+      "sumsqr": 0
+    },
+    "rules-engine:update-emissions": {
+      "sum": 78,
+      "min": 78,
+      "max": 78,
+      "count": 1,
+      "sumsqr": 6084
+    },
+    "search:contacts:types": {
+      "sum": 319,
+      "min": 8,
+      "max": 206,
+      "count": 5,
+      "sumsqr": 46625
+    },
+    "search:reports": {
+      "sum": 189,
+      "min": 26,
+      "max": 93,
+      "count": 4,
+      "sumsqr": 11793
+    },
+    "search:reports:subjectIds": {
+      "sum": 280,
+      "min": 31,
+      "max": 190,
+      "count": 3,
+      "sumsqr": 40542
+    },
+    "tasks:refresh": {
+      "sum": 232,
+      "min": 34,
+      "max": 198,
+      "count": 2,
+      "sumsqr": 40360
+    }
+  },
+  "metadata": {
+    "year": 2021,
+    "month": 5,
+    "day": 10,
+    "user": "bobb",
+    "deviceId": "5517a586-d839-47cf-ae2c-8ca81ac9014b",
+    "versions": {
+      "app": "unknown",
+      "forms": {
+        "contact:clinic:create": "2-757396242984ec5ea69e4b2a10571db8",
+        "contact:clinic:edit": "2-c1c955042db963a95470bdf891bcef6f",
+        "contact:district_hospital:create": "2-42b8b579b38ca6c2978c238e7d9c78fe",
+        "contact:district_hospital:edit": "2-4360bb0eb6f6ff863849a07adac7e851",
+        "contact:health_center:create": "2-c9b86820479f211c8e505eba150c5203",
+        "contact:health_center:edit": "2-19b3da5f9f146be07ec1854a372e374b",
+        "contact:person:create": "2-230d39c41682da720b83e4909b138c9b",
+        "contact:person:edit": "2-a5b769f3a462172bed6ef4f2227beb41",
+        "death_report": "2-97cfa3cc24ee743dfea03c019d644bec",
+        "delivery": "2-adf37c0da7d5e58c8e4d27fc940f70e6",
+        "pnc_danger_sign_follow_up_baby": "2-12e8989f6774828bb10aa4b675bc43ff",
+        "pnc_danger_sign_follow_up_mother": "2-62f58b6e0ade10d70f15df73ddb6a025",
+        "pregnancy": "2-e9487af97a3d705f14fdf377fc909610",
+        "pregnancy_danger_sign": "2-49758bfd894fb5db6e719bff864f9da9",
+        "pregnancy_danger_sign_follow_up": "2-a9a2b6800d6f93e151a3a63359620976",
+        "pregnancy_facility_visit_reminder": "2-0e3deaf22966166d05bcf803615499c8",
+        "pregnancy_home_visit": "2-283eb323e61a7fc756bda61f9d9be382",
+        "undo_death_report": "2-3a4ca8d678f0338d7044cb1bc35d103d"
+      }
+    }
+  },
+  "device": {
+    "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:88.0) Gecko/20100101 Firefox/88.0",
+    "hardwareConcurrency": 16,
+    "screen": {
+      "width": 1536,
+      "height": 837
+    },
+    "deviceInfo": {}
+  },
+  "dbInfo": {
+    "doc_count": 38,
+    "update_seq": 39,
+    "idb_attachment_format": "binary",
+    "db_name": "medic-user-bobb",
+    "auto_compaction": true,
+    "adapter": "idb"
+  }
+},
+{
+  "_id": "telemetry-2021-5-11-adama-15faf456-91ff-4c22-9dfc-4f9c6f5eb2c1",
+  "type": "telemetry",
+  "metrics": {
+    "boot_time": {
+      "sum": 2876,
+      "min": 581,
+      "max": 2295,
+      "count": 2,
+      "sumsqr": 5604586
+    },
+    "boot_time:1:to_first_code_execution": {
+      "sum": 900,
+      "min": 438,
+      "max": 462,
+      "count": 2,
+      "sumsqr": 405288
+    },
+    "boot_time:2:to_bootstrap": {
+      "sum": 1864,
+      "min": 88,
+      "max": 1776,
+      "count": 2,
+      "sumsqr": 3161920
+    },
+    "boot_time:3:to_angular_bootstrap": {
+      "sum": 112,
+      "min": 55,
+      "max": 57,
+      "count": 2,
+      "sumsqr": 6274
+    },
+    "rules-engine:ensureTaskFreshness:cancel": {
+      "sum": 1160,
+      "min": 1160,
+      "max": 1160,
+      "count": 1,
+      "sumsqr": 1345600
+    },
+    "rules-engine:initialize": {
+      "sum": 59,
+      "min": 27,
+      "max": 32,
+      "count": 2,
+      "sumsqr": 1753
+    },
+    "rules-engine:targets": {
+      "sum": 16,
+      "min": 16,
+      "max": 16,
+      "count": 1,
+      "sumsqr": 256
+    },
+    "rules-engine:targets:dirty-contacts": {
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "count": 1,
+      "sumsqr": 0
+    },
+    "rules-engine:targets:queued": {
+      "sum": 258,
+      "min": 258,
+      "max": 258,
+      "count": 1,
+      "sumsqr": 66564
+    },
+    "rules-engine:tasks:all-contacts": {
+      "sum": 318,
+      "min": 19,
+      "max": 266,
+      "count": 3,
+      "sumsqr": 72206
+    },
+    "rules-engine:tasks:all-contacts:queued": {
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "count": 3,
+      "sumsqr": 0
+    },
+    "rules-engine:tasks:dirty-contacts": {
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "count": 3,
+      "sumsqr": 0
+    },
+    "search:reports": {
+      "sum": 101,
+      "min": 101,
+      "max": 101,
+      "count": 1,
+      "sumsqr": 10201
+    },
+    "tasks:refresh": {
+      "sum": 93,
+      "min": 43,
+      "max": 50,
+      "count": 2,
+      "sumsqr": 4349
+    }
+  },
+  "metadata": {
+    "year": 2021,
+    "month": 5,
+    "day": 11,
+    "user": "adama",
+    "deviceId": "15faf456-91ff-4c22-9dfc-4f9c6f5eb2c1",
+    "versions": {
+      "app": "3.7.3",
+      "forms": {
+        "contact:clinic:create": "2-757396242984ec5ea69e4b2a10571db8",
+        "contact:clinic:edit": "2-c1c955042db963a95470bdf891bcef6f",
+        "contact:district_hospital:create": "2-42b8b579b38ca6c2978c238e7d9c78fe",
+        "contact:district_hospital:edit": "2-4360bb0eb6f6ff863849a07adac7e851",
+        "contact:health_center:create": "2-c9b86820479f211c8e505eba150c5203",
+        "contact:health_center:edit": "2-19b3da5f9f146be07ec1854a372e374b",
+        "contact:person:create": "2-230d39c41682da720b83e4909b138c9b",
+        "contact:person:edit": "2-a5b769f3a462172bed6ef4f2227beb41",
+        "death_report": "2-97cfa3cc24ee743dfea03c019d644bec",
+        "delivery": "2-adf37c0da7d5e58c8e4d27fc940f70e6",
+        "pnc_danger_sign_follow_up_baby": "2-12e8989f6774828bb10aa4b675bc43ff",
+        "pnc_danger_sign_follow_up_mother": "2-62f58b6e0ade10d70f15df73ddb6a025",
+        "pregnancy": "2-e9487af97a3d705f14fdf377fc909610",
+        "pregnancy_danger_sign": "2-49758bfd894fb5db6e719bff864f9da9",
+        "pregnancy_danger_sign_follow_up": "2-a9a2b6800d6f93e151a3a63359620976",
+        "pregnancy_facility_visit_reminder": "2-0e3deaf22966166d05bcf803615499c8",
+        "pregnancy_home_visit": "2-283eb323e61a7fc756bda61f9d9be382",
+        "undo_death_report": "2-3a4ca8d678f0338d7044cb1bc35d103d"
+      }
+    }
+  },
+  "device": {
+    "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:88.0) Gecko/20100101 Firefox/88.0",
+    "hardwareConcurrency": 16,
+    "screen": {
+      "width": 1536,
+      "height": 837
+    },
+    "deviceInfo": {}
+  },
+  "dbInfo": {
+    "doc_count": 39,
+    "update_seq": 40,
+    "idb_attachment_format": "binary",
+    "db_name": "medic-user-adama",
+    "auto_compaction": true,
+    "adapter": "idb"
+  }
+},
+{
+  "_id": "telemetry-2021-5-11-bobb-5517a586-d839-47cf-ae2c-8ca81ac9014b",
+  "type": "telemetry",
+  "metrics": {
+    "analytics:targets:load": {
+      "sum": 232,
+      "min": 232,
+      "max": 232,
+      "count": 1,
+      "sumsqr": 53824
+    },
+    "boot_time": {
+      "sum": 668,
+      "min": 668,
+      "max": 668,
+      "count": 1,
+      "sumsqr": 446224
+    },
+    "boot_time:1:to_first_code_execution": {
+      "sum": 510,
+      "min": 510,
+      "max": 510,
+      "count": 1,
+      "sumsqr": 260100
+    },
+    "boot_time:2:to_bootstrap": {
+      "sum": 105,
+      "min": 105,
+      "max": 105,
+      "count": 1,
+      "sumsqr": 11025
+    },
+    "boot_time:3:to_angular_bootstrap": {
+      "sum": 53,
+      "min": 53,
+      "max": 53,
+      "count": 1,
+      "sumsqr": 2809
+    },
+    "rules-engine:ensureTargetFreshness:cancel": {
+      "sum": 18764,
+      "min": 18764,
+      "max": 18764,
+      "count": 1,
+      "sumsqr": 352087696
+    },
+    "rules-engine:initialize": {
+      "sum": 29,
+      "min": 29,
+      "max": 29,
+      "count": 1,
+      "sumsqr": 841
+    },
+    "rules-engine:targets": {
+      "sum": 222,
+      "min": 222,
+      "max": 222,
+      "count": 1,
+      "sumsqr": 49284
+    },
+    "rules-engine:targets:dirty-contacts": {
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "count": 1,
+      "sumsqr": 0
+    },
+    "rules-engine:targets:queued": {
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "count": 1,
+      "sumsqr": 0
+    },
+    "rules-engine:tasks:all-contacts": {
+      "sum": 49,
+      "min": 49,
+      "max": 49,
+      "count": 1,
+      "sumsqr": 2401
+    },
+    "rules-engine:tasks:all-contacts:queued": {
+      "sum": 1,
+      "min": 1,
+      "max": 1,
+      "count": 1,
+      "sumsqr": 1
+    },
+    "rules-engine:tasks:dirty-contacts": {
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "count": 1,
+      "sumsqr": 0
+    },
+    "search:reports": {
+      "sum": 125,
+      "min": 59,
+      "max": 66,
+      "count": 2,
+      "sumsqr": 7837
+    }
+  },
+  "metadata": {
+    "year": 2021,
+    "month": 5,
+    "day": 11,
+    "user": "bobb",
+    "deviceId": "5517a586-d839-47cf-ae2c-8ca81ac9014b",
+    "versions": {
+      "app": "3.13.3",
+      "forms": {
+        "contact:clinic:create": "2-757396242984ec5ea69e4b2a10571db8",
+        "contact:clinic:edit": "2-c1c955042db963a95470bdf891bcef6f",
+        "contact:district_hospital:create": "2-42b8b579b38ca6c2978c238e7d9c78fe",
+        "contact:district_hospital:edit": "2-4360bb0eb6f6ff863849a07adac7e851",
+        "contact:health_center:create": "2-c9b86820479f211c8e505eba150c5203",
+        "contact:health_center:edit": "2-19b3da5f9f146be07ec1854a372e374b",
+        "contact:person:create": "2-230d39c41682da720b83e4909b138c9b",
+        "contact:person:edit": "2-a5b769f3a462172bed6ef4f2227beb41",
+        "death_report": "2-97cfa3cc24ee743dfea03c019d644bec",
+        "delivery": "2-adf37c0da7d5e58c8e4d27fc940f70e6",
+        "pnc_danger_sign_follow_up_baby": "2-12e8989f6774828bb10aa4b675bc43ff",
+        "pnc_danger_sign_follow_up_mother": "2-62f58b6e0ade10d70f15df73ddb6a025",
+        "pregnancy": "2-e9487af97a3d705f14fdf377fc909610",
+        "pregnancy_danger_sign": "2-49758bfd894fb5db6e719bff864f9da9",
+        "pregnancy_danger_sign_follow_up": "2-a9a2b6800d6f93e151a3a63359620976",
+        "pregnancy_facility_visit_reminder": "2-0e3deaf22966166d05bcf803615499c8",
+        "pregnancy_home_visit": "2-283eb323e61a7fc756bda61f9d9be382",
+        "undo_death_report": "2-3a4ca8d678f0338d7044cb1bc35d103d"
+      }
+    }
+  },
+  "device": {
+    "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:88.0) Gecko/20100101 Firefox/88.0",
+    "hardwareConcurrency": 16,
+    "screen": {
+      "width": 1536,
+      "height": 837
+    },
+    "deviceInfo": {}
+  },
+  "dbInfo": {
+    "doc_count": 39,
+    "update_seq": 41,
+    "idb_attachment_format": "binary",
+    "db_name": "medic-user-bobb",
+    "auto_compaction": true,
+    "adapter": "idb"
+  }
+},
+{
+  "_id": "telemetry-2021-5-12-adama-808a91c2-a026-4c5f-b52e-8e2bc57cb5c4",
+  "type": "telemetry",
+  "metrics": {
+    "boot_time": {
+      "sum": 1906,
+      "min": 1906,
+      "max": 1906,
+      "count": 1,
+      "sumsqr": 3632836
+    },
+    "boot_time:1:to_first_code_execution": {
+      "sum": 482,
+      "min": 482,
+      "max": 482,
+      "count": 1,
+      "sumsqr": 232324
+    },
+    "boot_time:2:to_bootstrap": {
+      "sum": 1372,
+      "min": 1372,
+      "max": 1372,
+      "count": 1,
+      "sumsqr": 1882384
+    },
+    "boot_time:3:to_angular_bootstrap": {
+      "sum": 52,
+      "min": 52,
+      "max": 52,
+      "count": 1,
+      "sumsqr": 2704
+    },
+    "rules-engine:initialize": {
+      "sum": 30,
+      "min": 30,
+      "max": 30,
+      "count": 1,
+      "sumsqr": 900
+    },
+    "rules-engine:targets": {
+      "sum": 35,
+      "min": 35,
+      "max": 35,
+      "count": 1,
+      "sumsqr": 1225
+    },
+    "rules-engine:targets:dirty-contacts": {
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "count": 1,
+      "sumsqr": 0
+    },
+    "rules-engine:targets:queued": {
+      "sum": 1,
+      "min": 1,
+      "max": 1,
+      "count": 1,
+      "sumsqr": 1
+    },
+    "rules-engine:tasks:all-contacts": {
+      "sum": 243,
+      "min": 243,
+      "max": 243,
+      "count": 1,
+      "sumsqr": 59049
+    },
+    "rules-engine:tasks:all-contacts:queued": {
+      "sum": 4,
+      "min": 4,
+      "max": 4,
+      "count": 1,
+      "sumsqr": 16
+    },
+    "rules-engine:tasks:dirty-contacts": {
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "count": 1,
+      "sumsqr": 0
+    },
+    "search:contacts:types": {
+      "sum": 96,
+      "min": 96,
+      "max": 96,
+      "count": 1,
+      "sumsqr": 9216
+    },
+    "search:reports": {
+      "sum": 150,
+      "min": 40,
+      "max": 110,
+      "count": 2,
+      "sumsqr": 13700
+    },
+    "search:reports:subjectIds": {
+      "sum": 93,
+      "min": 93,
+      "max": 93,
+      "count": 1,
+      "sumsqr": 8649
+    }
+  },
+  "metadata": {
+    "year": 2021,
+    "month": 5,
+    "day": 12,
+    "user": "adama",
+    "deviceId": "808a91c2-a026-4c5f-b52e-8e2bc57cb5c4",
+    "versions": {
+      "app": "unknown",
+      "forms": {
+        "contact:clinic:create": "2-757396242984ec5ea69e4b2a10571db8",
+        "contact:clinic:edit": "2-c1c955042db963a95470bdf891bcef6f",
+        "contact:district_hospital:create": "2-42b8b579b38ca6c2978c238e7d9c78fe",
+        "contact:district_hospital:edit": "2-4360bb0eb6f6ff863849a07adac7e851",
+        "contact:health_center:create": "2-c9b86820479f211c8e505eba150c5203",
+        "contact:health_center:edit": "2-19b3da5f9f146be07ec1854a372e374b",
+        "contact:person:create": "2-230d39c41682da720b83e4909b138c9b",
+        "contact:person:edit": "2-a5b769f3a462172bed6ef4f2227beb41",
+        "death_report": "2-97cfa3cc24ee743dfea03c019d644bec",
+        "delivery": "2-adf37c0da7d5e58c8e4d27fc940f70e6",
+        "pnc_danger_sign_follow_up_baby": "2-12e8989f6774828bb10aa4b675bc43ff",
+        "pnc_danger_sign_follow_up_mother": "2-62f58b6e0ade10d70f15df73ddb6a025",
+        "pregnancy": "2-e9487af97a3d705f14fdf377fc909610",
+        "pregnancy_danger_sign": "2-49758bfd894fb5db6e719bff864f9da9",
+        "pregnancy_danger_sign_follow_up": "2-a9a2b6800d6f93e151a3a63359620976",
+        "pregnancy_facility_visit_reminder": "2-0e3deaf22966166d05bcf803615499c8",
+        "pregnancy_home_visit": "2-283eb323e61a7fc756bda61f9d9be382",
+        "undo_death_report": "2-3a4ca8d678f0338d7044cb1bc35d103d"
+      }
+    }
+  },
+  "device": {
+    "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:88.0) Gecko/20100101 Firefox/88.0",
+    "hardwareConcurrency": 16,
+    "screen": {
+      "width": 1536,
+      "height": 837
+    },
+    "deviceInfo": {}
+  },
+  "dbInfo": {
+    "doc_count": 39,
+    "update_seq": 40,
+    "idb_attachment_format": "binary",
+    "db_name": "medic-user-adama",
+    "auto_compaction": true,
+    "adapter": "idb"
+  }
+},
+{
+  "_id": "telemetry-2021-5-12-bobb-808a91c2-a026-4c5f-b52e-8e2bc57cb5c4",
+  "type": "telemetry",
+  "metrics": {
+    "boot_time": {
+      "sum": 2295,
+      "min": 2295,
+      "max": 2295,
+      "count": 1,
+      "sumsqr": 5267025
+    },
+    "boot_time:1:to_first_code_execution": {
+      "sum": 466,
+      "min": 466,
+      "max": 466,
+      "count": 1,
+      "sumsqr": 217156
+    },
+    "boot_time:2:to_bootstrap": {
+      "sum": 1769,
+      "min": 1769,
+      "max": 1769,
+      "count": 1,
+      "sumsqr": 3129361
+    },
+    "boot_time:3:to_angular_bootstrap": {
+      "sum": 60,
+      "min": 60,
+      "max": 60,
+      "count": 1,
+      "sumsqr": 3600
+    },
+    "enketo:reports:pnc_danger_sign_follow_up_baby:add:render": {
+      "sum": 162,
+      "min": 162,
+      "max": 162,
+      "count": 1,
+      "sumsqr": 26244
+    },
+    "rules-engine:ensureTaskFreshness:cancel": {
+      "sum": 9501,
+      "min": 9501,
+      "max": 9501,
+      "count": 1,
+      "sumsqr": 90269001
+    },
+    "rules-engine:initialize": {
+      "sum": 26,
+      "min": 26,
+      "max": 26,
+      "count": 1,
+      "sumsqr": 676
+    },
+    "rules-engine:targets": {
+      "sum": 41,
+      "min": 41,
+      "max": 41,
+      "count": 1,
+      "sumsqr": 1681
+    },
+    "rules-engine:targets:dirty-contacts": {
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "count": 1,
+      "sumsqr": 0
+    },
+    "rules-engine:targets:queued": {
+      "sum": 1,
+      "min": 1,
+      "max": 1,
+      "count": 1,
+      "sumsqr": 1
+    },
+    "rules-engine:tasks:all-contacts": {
+      "sum": 423,
+      "min": 23,
+      "max": 361,
+      "count": 3,
+      "sumsqr": 132371
+    },
+    "rules-engine:tasks:all-contacts:queued": {
+      "sum": 1,
+      "min": 0,
+      "max": 1,
+      "count": 3,
+      "sumsqr": 1
+    },
+    "rules-engine:tasks:dirty-contacts": {
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "count": 3,
+      "sumsqr": 0
+    },
+    "search:reports": {
+      "sum": 420,
+      "min": 25,
+      "max": 257,
+      "count": 5,
+      "sumsqr": 73180
+    },
+    "tasks:refresh": {
+      "sum": 472,
+      "min": 46,
+      "max": 375,
+      "count": 3,
+      "sumsqr": 145342
+    }
+  },
+  "metadata": {
+    "year": 2021,
+    "month": 5,
+    "day": 12,
+    "user": "bobb",
+    "deviceId": "808a91c2-a026-4c5f-b52e-8e2bc57cb5c4",
+    "versions": {
+      "app": "unknown",
+      "forms": {
+        "contact:clinic:create": "2-757396242984ec5ea69e4b2a10571db8",
+        "contact:clinic:edit": "2-c1c955042db963a95470bdf891bcef6f",
+        "contact:district_hospital:create": "2-42b8b579b38ca6c2978c238e7d9c78fe",
+        "contact:district_hospital:edit": "2-4360bb0eb6f6ff863849a07adac7e851",
+        "contact:health_center:create": "2-c9b86820479f211c8e505eba150c5203",
+        "contact:health_center:edit": "2-19b3da5f9f146be07ec1854a372e374b",
+        "contact:person:create": "2-230d39c41682da720b83e4909b138c9b",
+        "contact:person:edit": "2-a5b769f3a462172bed6ef4f2227beb41",
+        "death_report": "2-97cfa3cc24ee743dfea03c019d644bec",
+        "delivery": "2-adf37c0da7d5e58c8e4d27fc940f70e6",
+        "pnc_danger_sign_follow_up_baby": "2-12e8989f6774828bb10aa4b675bc43ff",
+        "pnc_danger_sign_follow_up_mother": "2-62f58b6e0ade10d70f15df73ddb6a025",
+        "pregnancy": "2-e9487af97a3d705f14fdf377fc909610",
+        "pregnancy_danger_sign": "2-49758bfd894fb5db6e719bff864f9da9",
+        "pregnancy_danger_sign_follow_up": "2-a9a2b6800d6f93e151a3a63359620976",
+        "pregnancy_facility_visit_reminder": "2-0e3deaf22966166d05bcf803615499c8",
+        "pregnancy_home_visit": "2-283eb323e61a7fc756bda61f9d9be382",
+        "undo_death_report": "2-3a4ca8d678f0338d7044cb1bc35d103d"
+      }
+    }
+  },
+  "device": {
+    "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:88.0) Gecko/20100101 Firefox/88.0",
+    "hardwareConcurrency": 16,
+    "screen": {
+      "width": 1536,
+      "height": 837
+    },
+    "deviceInfo": {}
+  },
+  "dbInfo": {
+    "doc_count": 39,
+    "update_seq": 40,
+    "idb_attachment_format": "binary",
+    "db_name": "medic-user-bobb",
+    "auto_compaction": true,
+    "adapter": "idb"
+  }
+},
+{
+  "_id": "telemetry-2021-5-bobb-5517a586-d839-47cf-ae2c-8ca81ac9014b",
+  "type": "telemetry",
+  "metrics": {
+    "analytics:targets:load": {
+      "sum": 232,
+      "min": 232,
+      "max": 232,
+      "count": 1,
+      "sumsqr": 53824
+    },
+    "boot_time": {
+      "sum": 668,
+      "min": 668,
+      "max": 668,
+      "count": 1,
+      "sumsqr": 446224
+    },
+    "boot_time:1:to_first_code_execution": {
+      "sum": 510,
+      "min": 510,
+      "max": 510,
+      "count": 1,
+      "sumsqr": 260100
+    },
+    "boot_time:2:to_bootstrap": {
+      "sum": 105,
+      "min": 105,
+      "max": 105,
+      "count": 1,
+      "sumsqr": 11025
+    },
+    "boot_time:3:to_angular_bootstrap": {
+      "sum": 53,
+      "min": 53,
+      "max": 53,
+      "count": 1,
+      "sumsqr": 2809
+    },
+    "rules-engine:ensureTargetFreshness:cancel": {
+      "sum": 18764,
+      "min": 18764,
+      "max": 18764,
+      "count": 1,
+      "sumsqr": 352087696
+    },
+    "rules-engine:initialize": {
+      "sum": 29,
+      "min": 29,
+      "max": 29,
+      "count": 1,
+      "sumsqr": 841
+    },
+    "rules-engine:targets": {
+      "sum": 222,
+      "min": 222,
+      "max": 222,
+      "count": 1,
+      "sumsqr": 49284
+    },
+    "rules-engine:targets:dirty-contacts": {
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "count": 1,
+      "sumsqr": 0
+    },
+    "rules-engine:targets:queued": {
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "count": 1,
+      "sumsqr": 0
+    },
+    "rules-engine:tasks:all-contacts": {
+      "sum": 49,
+      "min": 49,
+      "max": 49,
+      "count": 1,
+      "sumsqr": 2401
+    },
+    "rules-engine:tasks:all-contacts:queued": {
+      "sum": 1,
+      "min": 1,
+      "max": 1,
+      "count": 1,
+      "sumsqr": 1
+    },
+    "rules-engine:tasks:dirty-contacts": {
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "count": 1,
+      "sumsqr": 0
+    },
+    "search:reports": {
+      "sum": 125,
+      "min": 59,
+      "max": 66,
+      "count": 2,
+      "sumsqr": 7837
+    }
+  },
+  "metadata": {
+    "year": 2021,
+    "month": 5,
+    "user": "bobb",
+    "deviceId": "5517a586-d839-47cf-ae2c-8ca81ac9014b",
+    "versions": {
+      "app": "unknown",
+      "forms": {
+        "contact:clinic:create": "2-757396242984ec5ea69e4b2a10571db8",
+        "contact:clinic:edit": "2-c1c955042db963a95470bdf891bcef6f",
+        "contact:district_hospital:create": "2-42b8b579b38ca6c2978c238e7d9c78fe",
+        "contact:district_hospital:edit": "2-4360bb0eb6f6ff863849a07adac7e851",
+        "contact:health_center:create": "2-c9b86820479f211c8e505eba150c5203",
+        "contact:health_center:edit": "2-19b3da5f9f146be07ec1854a372e374b",
+        "contact:person:create": "2-230d39c41682da720b83e4909b138c9b",
+        "contact:person:edit": "2-a5b769f3a462172bed6ef4f2227beb41",
+        "death_report": "2-97cfa3cc24ee743dfea03c019d644bec",
+        "delivery": "2-adf37c0da7d5e58c8e4d27fc940f70e6",
+        "pnc_danger_sign_follow_up_baby": "2-12e8989f6774828bb10aa4b675bc43ff",
+        "pnc_danger_sign_follow_up_mother": "2-62f58b6e0ade10d70f15df73ddb6a025",
+        "pregnancy": "2-e9487af97a3d705f14fdf377fc909610",
+        "pregnancy_danger_sign": "2-49758bfd894fb5db6e719bff864f9da9",
+        "pregnancy_danger_sign_follow_up": "2-a9a2b6800d6f93e151a3a63359620976",
+        "pregnancy_facility_visit_reminder": "2-0e3deaf22966166d05bcf803615499c8",
+        "pregnancy_home_visit": "2-283eb323e61a7fc756bda61f9d9be382",
+        "undo_death_report": "2-3a4ca8d678f0338d7044cb1bc35d103d"
+      }
+    }
+  },
+  "device": {
+    "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:88.0) Gecko/20100101 Firefox/88.0",
+    "hardwareConcurrency": 16,
+    "screen": {
+      "width": 1536,
+      "height": 837
+    },
+    "deviceInfo": {}
+  },
+  "dbInfo": {
+    "doc_count": 39,
+    "update_seq": 41,
+    "idb_attachment_format": "binary",
+    "db_name": "medic-user-bobb",
+    "auto_compaction": true,
+    "adapter": "idb"
+  }
+},
+
+
+
+
+
+
+{
+  "_id": "feedback-2021-05-10T23:15:49.718Z-4872eaf3-0e52-42bb-a905-13a11d3aea95",
+  "meta": {
+    "time": "2021-05-10T23:15:49.718Z",
+    "user": {
+      "name": "adama",
+      "roles": [
+        "chw_supervisor"
+      ]
+    },
+    "url": "http://cht.localhost:5988/#/messages",
+    "source": "automatic"
+  },
+  "info": {
+    "message": "Uncaught (in promise): {\"name\":\"Error\",\"message\":\"NetworkError when attempting to fetch resource.\"}",
+    "stack": "resolvePromise@http://cht.localhost:5988/polyfills.js:1863:21\nresolvePromise@http://cht.localhost:5988/polyfills.js:1810:25\nscheduleResolveOrReject/<@http://cht.localhost:5988/polyfills.js:1937:25\n./node_modules/zone.js/dist/zone.js/</Zone$1</ZoneDelegate</ZoneDelegate.prototype.invokeTask@http://cht.localhost:5988/polyfills.js:823:173\nonInvokeTask@http://cht.localhost:5988/main.js:130872:25\n./node_modules/zone.js/dist/zone.js/</Zone$1</ZoneDelegate</ZoneDelegate.prototype.invokeTask@http://cht.localhost:5988/polyfills.js:823:56\n./node_modules/zone.js/dist/zone.js/</Zone$1</Zone</Zone.prototype.runTask@http://cht.localhost:5988/polyfills.js:573:39\ndrainMicroTaskQueue@http://cht.localhost:5988/polyfills.js:1039:25\n"
+  },
+  "log": [
+    {
+      "level": "error",
+      "arguments": "[{\"rejection\":{\"fileName\":\"\",\"lineNumber\":0,\"columnNumber\":0,\"message\":\"NetworkError when attempting to fetch resource.\",\"docId\":\"_local/3batqWyVIjpz58AMLvy7GA%3D%3D\",\"result\":{\"ok\":false,\"start_time\":\"2021-05-10T23:15:49.697Z\",\"docs_read\":0,\"docs_written\":0,\"doc_write_failures\":0,\"errors\":[],\"status\":\"aborting\",\"end_time\":\"2021-05-10T23:15:49.711Z\",\"last_seq\":0}},\"promise\":{\"__zone_symbol__state\":0},\"zone\":{\"_parent\":{\"_parent\":null,\"_name\":\"<root>\",\"_properties\":{},\"_zoneDelegate\":{\"_taskCounts\":{\"microTask\":0,\"macroTask\":0,\"eventTask\":0},\"_parentDelegate\":null,\"_forkZS\":null,\"_forkDlgt\":null,\"_forkCurrZone\":null,\"_interceptZS\":null,\"_interceptDlgt\":null,\"_interceptCurrZone\":null,\"_invokeZS\":null,\"_invokeDlgt\":null,\"_invokeCurrZone\":null,\"_handleErrorZS\":null,\"_handleErrorDlgt\":null,\"_handleErrorCurrZone\":null,\"_scheduleTaskZS\":null,\"_scheduleTaskDlgt\":null,\"_scheduleTaskCurrZone\":null,\"_invokeTaskZS\":null,\"_invokeTaskDlgt\":null,\"_invokeTaskCurrZone\":null,\"_cancelTaskZS\":null,\"_cancelTaskDlgt\":null,\"_cancelTaskCurrZone\":null,\"_hasTaskZS\":null,\"_hasTaskDlgt\":null,\"_hasTaskDlgtOwner\":null,\"_hasTaskCurrZone\":null}},\"_name\":\"angular\",\"_properties\":{\"isAngularZone\":true,\"maybeDelayChangeDetection\":false},\"_zoneDelegate\":{\"_taskCounts\":{\"microTask\":0,\"macroTask\":3,\"eventTask\":113},\"_forkZS\":null,\"_forkDlgt\":null,\"_forkCurrZone\":null,\"_interceptZS\":null,\"_interceptDlgt\":null,\"_interceptCurrZone\":null,\"_invokeZS\":{\"name\":\"angular\"},\"_scheduleTaskZS\":{\"name\":\"\"}}},\"task\":{\"type\":\"microTask\",\"state\":\"notScheduled\",\"source\":\"Promise.then\",\"zone\":\"angular\",\"runCount\":0}}]"
+    },
+    {
+      "level": "log",
+      "arguments": "[\"%c next state\",\"color: #4CAF50; font-weight: bold\",{\"global\":{\"actionBar\":{\"left\":{\"hasResults\":false},\"right\":{\"type\":\"xml\",\"verifyingReport\":false,\"sendTo\":{\"parent\":{\"_id\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"type\":\"person\",\"name\":\"Bob Bouchard\",\"short_name\":\"Bob B\",\"date_of_birth\":\"2000-05-10\",\"date_of_birth_method\":\"approx\",\"ephemeral_dob\":{\"age_label\":\"\",\"age_years\":\"21\",\"age_months\":\"\",\"dob_method\":\"approx\",\"ephemeral_months\":\"5\",\"ephemeral_years\":\"2000\",\"dob_approx\":\"2000-05-10\",\"dob_raw\":\"2000-05-10\",\"dob_iso\":\"2000-05-10\"},\"sex\":\"male\",\"phone\":\"\",\"phone_alternate\":\"\",\"role\":\"chw\",\"external_id\":\"\",\"notes\":\"\",\"meta\":{\"created_by\":\"admin\",\"created_by_person_uuid\":\"\",\"created_by_place_uuid\":\"\"},\"reported_date\":1620687052700,\"patient_id\":\"57691\",\"_id\":\"fe8b9f60-0261-4b7e-ad2e-d718ed133597\",\"_rev\":\"2-160935b16fcb930fbbc200e07da0a8fb\"}}},\"cancelCallback\":null,\"currentTab\":\"messages\",\"snapshotData\":{\"permissions\":[\"can_view_messages\"],\"tab\":\"messages\"},\"enketoStatus\":{\"edited\":false,\"saving\":false,\"error\":null},\"facilities\":[],\"filters\":{\"search\":\"\"},\"forms\":[{\"id\":\"form:death_report\",\"code\":\"death_report\",\"title\":\"Death report\",\"icon\":\"icon-death-general\"},{\"id\":\"form:delivery\",\"code\":\"delivery\",\"title\":\"Delivery\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pnc_danger_sign_follow_up_baby\",\"code\":\"pnc_danger_sign_follow_up_baby\",\"title\":\"Postnatal danger sign follow-up - baby\",\"icon\":\"icon-infant\"},{\"id\":\"form:pnc_danger_sign_follow_up_mother\",\"code\":\"pnc_danger_sign_follow_up_mother\",\"title\":\"Postnatal danger sign follow-up - mother\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pregnancy\",\"code\":\"pregnancy\",\"title\":\"Pregnancy registration\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_danger_sign\",\"code\":\"pregnancy_danger_sign\",\"title\":\"Pregnancy danger sign\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_danger_sign_follow_up\",\"code\":\"pregnancy_danger_sign_follow_up\",\"title\":\"Pregnancy danger sign follow-up\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_facility_visit_reminder\",\"code\":\"pregnancy_facility_visit_reminder\",\"title\":\"Health facility ANC reminder\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_home_visit\",\"code\":\"pregnancy_home_visit\",\"title\":\"Pregnancy home visit\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:undo_death_report\",\"code\":\"undo_death_report\",\"title\":\"Undo death report\",\"icon\":\"icon-person\"}],\"isAdmin\":false,\"lastChangedDoc\":false,\"loadingContent\":false,\"loadingSubActionBar\":false,\"minimalTabs\":true,\"replicationStatus\":{\"disabled\":false,\"lastTrigger\":1620688544099,\"lastSuccessTo\":1620688268729,\"current\":{\"icon\":\"fa-exclamation-triangle\",\"key\":\"sync.status.required\",\"className\":\"required\"},\"lastSuccessFrom\":1620688268729},\"selectMode\":false,\"privacyPolicyAccepted\":true,\"showActionBar\":false,\"showContent\":false,\"showPrivacyPolicy\":false,\"title\":\"\",\"unreadCount\":{\"report\":0,\"message\":0},\"version\":null,\"translationsLoaded\":true,\"userFacilityId\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"services\":{\"lastChangedDoc\":false},\"analytics\":{\"selected\":null,\"analyticsModules\":[]},\"reports\":{\"reports\":[],\"reportsById\":{},\"selected\":[],\"verifyingReport\":false,\"filters\":{}},\"messages\":{\"error\":false,\"conversations\":[],\"selected\":null},\"targetAggregates\":{\"selected\":null,\"targetAggregates\":[],\"targetAggregatesLoaded\":false,\"error\":false},\"contacts\":{\"contacts\":[],\"contactsById\":{},\"selected\":null,\"filters\":{},\"loadingSelectedChildren\":false,\"loadingSelectedReports\":false,\"loadingSummary\":false},\"tasks\":{\"tasksList\":[],\"selected\":null,\"loaded\":false}}]"
+    },
+    {
+      "level": "log",
+      "arguments": "[\"%c action\",\"color: #03A9F4; font-weight: bold\",{\"payload\":{\"replicationStatus\":{\"current\":{\"icon\":\"fa-exclamation-triangle\",\"key\":\"sync.status.required\",\"className\":\"required\"}}},\"type\":\"UPDATE_REPLICATION_STATUS\"}]"
+    },
+    {
+      "level": "log",
+      "arguments": "[\"%c prev state\",\"color: #9E9E9E; font-weight: bold\",{\"global\":{\"actionBar\":{\"left\":{\"hasResults\":false},\"right\":{\"type\":\"xml\",\"verifyingReport\":false,\"sendTo\":{\"parent\":{\"_id\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"type\":\"person\",\"name\":\"Bob Bouchard\",\"short_name\":\"Bob B\",\"date_of_birth\":\"2000-05-10\",\"date_of_birth_method\":\"approx\",\"ephemeral_dob\":{\"age_label\":\"\",\"age_years\":\"21\",\"age_months\":\"\",\"dob_method\":\"approx\",\"ephemeral_months\":\"5\",\"ephemeral_years\":\"2000\",\"dob_approx\":\"2000-05-10\",\"dob_raw\":\"2000-05-10\",\"dob_iso\":\"2000-05-10\"},\"sex\":\"male\",\"phone\":\"\",\"phone_alternate\":\"\",\"role\":\"chw\",\"external_id\":\"\",\"notes\":\"\",\"meta\":{\"created_by\":\"admin\",\"created_by_person_uuid\":\"\",\"created_by_place_uuid\":\"\"},\"reported_date\":1620687052700,\"patient_id\":\"57691\",\"_id\":\"fe8b9f60-0261-4b7e-ad2e-d718ed133597\",\"_rev\":\"2-160935b16fcb930fbbc200e07da0a8fb\"}}},\"cancelCallback\":null,\"currentTab\":\"messages\",\"snapshotData\":{\"permissions\":[\"can_view_messages\"],\"tab\":\"messages\"},\"enketoStatus\":{\"edited\":false,\"saving\":false,\"error\":null},\"facilities\":[],\"filters\":{\"search\":\"\"},\"forms\":[{\"id\":\"form:death_report\",\"code\":\"death_report\",\"title\":\"Death report\",\"icon\":\"icon-death-general\"},{\"id\":\"form:delivery\",\"code\":\"delivery\",\"title\":\"Delivery\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pnc_danger_sign_follow_up_baby\",\"code\":\"pnc_danger_sign_follow_up_baby\",\"title\":\"Postnatal danger sign follow-up - baby\",\"icon\":\"icon-infant\"},{\"id\":\"form:pnc_danger_sign_follow_up_mother\",\"code\":\"pnc_danger_sign_follow_up_mother\",\"title\":\"Postnatal danger sign follow-up - mother\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pregnancy\",\"code\":\"pregnancy\",\"title\":\"Pregnancy registration\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_danger_sign\",\"code\":\"pregnancy_danger_sign\",\"title\":\"Pregnancy danger sign\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_danger_sign_follow_up\",\"code\":\"pregnancy_danger_sign_follow_up\",\"title\":\"Pregnancy danger sign follow-up\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_facility_visit_reminder\",\"code\":\"pregnancy_facility_visit_reminder\",\"title\":\"Health facility ANC reminder\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_home_visit\",\"code\":\"pregnancy_home_visit\",\"title\":\"Pregnancy home visit\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:undo_death_report\",\"code\":\"undo_death_report\",\"title\":\"Undo death report\",\"icon\":\"icon-person\"}],\"isAdmin\":false,\"lastChangedDoc\":false,\"loadingContent\":false,\"loadingSubActionBar\":false,\"minimalTabs\":true,\"replicationStatus\":{\"disabled\":false,\"lastTrigger\":1620688544099,\"lastSuccessTo\":1620688268729,\"current\":{\"icon\":\"fa-refresh\",\"key\":\"sync.status.in_progress\",\"disableSyncButton\":true},\"lastSuccessFrom\":1620688268729},\"selectMode\":false,\"privacyPolicyAccepted\":true,\"showActionBar\":false,\"showContent\":false,\"showPrivacyPolicy\":false,\"title\":\"\",\"unreadCount\":{\"report\":0,\"message\":0},\"version\":null,\"translationsLoaded\":true,\"userFacilityId\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"services\":{\"lastChangedDoc\":false},\"analytics\":{\"selected\":null,\"analyticsModules\":[]},\"reports\":{\"reports\":[],\"reportsById\":{},\"selected\":[],\"verifyingReport\":false,\"filters\":{}},\"messages\":{\"error\":false,\"conversations\":[],\"selected\":null},\"targetAggregates\":{\"selected\":null,\"targetAggregates\":[],\"targetAggregatesLoaded\":false,\"error\":false},\"contacts\":{\"contacts\":[],\"contactsById\":{},\"selected\":null,\"filters\":{},\"loadingSelectedChildren\":false,\"loadingSelectedReports\":false,\"loadingSummary\":false},\"tasks\":{\"tasksList\":[],\"selected\":null,\"loaded\":false}}]"
+    },
+    {
+      "level": "info",
+      "arguments": "[\"Replication failed after 0 seconds\"]"
+    },
+    {
+      "level": "error",
+      "arguments": "[\"Error replicating to remote server\",{\"fileName\":\"\",\"lineNumber\":0,\"columnNumber\":0,\"message\":\"NetworkError when attempting to fetch resource.\",\"result\":{\"ok\":false,\"start_time\":\"2021-05-10T23:15:44.105Z\",\"docs_read\":0,\"docs_written\":0,\"doc_write_failures\":0,\"errors\":[],\"status\":\"aborting\",\"end_time\":\"2021-05-10T23:15:44.152Z\",\"last_seq\":0}}]"
+    },
+    {
+      "level": "error",
+      "arguments": "[\"Error replicating to remote server\",{\"fileName\":\"\",\"lineNumber\":0,\"columnNumber\":0,\"message\":\"NetworkError when attempting to fetch resource.\",\"result\":{\"ok\":false,\"start_time\":\"2021-05-10T23:15:44.105Z\",\"docs_read\":0,\"docs_written\":0,\"doc_write_failures\":0,\"errors\":[],\"status\":\"aborting\",\"end_time\":\"2021-05-10T23:15:44.152Z\",\"last_seq\":0}}]"
+    },
+    {
+      "level": "error",
+      "arguments": "[\"Unhandled Promise rejection:\",\"NetworkError when attempting to fetch resource.\",\"; Zone:\",\"<root>\",\"; Task:\",\"Promise.then\",\"; Value:\",{},\"\"]"
+    },
+    {
+      "level": "error",
+      "arguments": "[\"Error replicating from remote server\",{\"fileName\":\"\",\"lineNumber\":0,\"columnNumber\":0,\"message\":\"NetworkError when attempting to fetch resource.\",\"result\":{\"ok\":false,\"start_time\":\"2021-05-10T23:15:44.104Z\",\"docs_read\":0,\"docs_written\":0,\"doc_write_failures\":0,\"errors\":[],\"status\":\"aborting\",\"end_time\":\"2021-05-10T23:15:44.137Z\",\"last_seq\":0}}]"
+    },
+    {
+      "level": "error",
+      "arguments": "[\"Error replicating from remote server\",{\"fileName\":\"\",\"lineNumber\":0,\"columnNumber\":0,\"message\":\"NetworkError when attempting to fetch resource.\",\"result\":{\"ok\":false,\"start_time\":\"2021-05-10T23:15:44.104Z\",\"docs_read\":0,\"docs_written\":0,\"doc_write_failures\":0,\"errors\":[],\"status\":\"aborting\",\"end_time\":\"2021-05-10T23:15:44.137Z\",\"last_seq\":0}}]"
+    },
+    {
+      "level": "info",
+      "arguments": "[\"Replication started after 61 seconds since previous attempt\"]"
+    },
+    {
+      "level": "log",
+      "arguments": "[\"%c next state\",\"color: #4CAF50; font-weight: bold\",{\"global\":{\"actionBar\":{\"left\":{\"hasResults\":false},\"right\":{\"type\":\"xml\",\"verifyingReport\":false,\"sendTo\":{\"parent\":{\"_id\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"type\":\"person\",\"name\":\"Bob Bouchard\",\"short_name\":\"Bob B\",\"date_of_birth\":\"2000-05-10\",\"date_of_birth_method\":\"approx\",\"ephemeral_dob\":{\"age_label\":\"\",\"age_years\":\"21\",\"age_months\":\"\",\"dob_method\":\"approx\",\"ephemeral_months\":\"5\",\"ephemeral_years\":\"2000\",\"dob_approx\":\"2000-05-10\",\"dob_raw\":\"2000-05-10\",\"dob_iso\":\"2000-05-10\"},\"sex\":\"male\",\"phone\":\"\",\"phone_alternate\":\"\",\"role\":\"chw\",\"external_id\":\"\",\"notes\":\"\",\"meta\":{\"created_by\":\"admin\",\"created_by_person_uuid\":\"\",\"created_by_place_uuid\":\"\"},\"reported_date\":1620687052700,\"patient_id\":\"57691\",\"_id\":\"fe8b9f60-0261-4b7e-ad2e-d718ed133597\",\"_rev\":\"2-160935b16fcb930fbbc200e07da0a8fb\"}}},\"cancelCallback\":null,\"currentTab\":\"messages\",\"snapshotData\":{\"permissions\":[\"can_view_messages\"],\"tab\":\"messages\"},\"enketoStatus\":{\"edited\":false,\"saving\":false,\"error\":null},\"facilities\":[],\"filters\":{\"search\":\"\"},\"forms\":[{\"id\":\"form:death_report\",\"code\":\"death_report\",\"title\":\"Death report\",\"icon\":\"icon-death-general\"},{\"id\":\"form:delivery\",\"code\":\"delivery\",\"title\":\"Delivery\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pnc_danger_sign_follow_up_baby\",\"code\":\"pnc_danger_sign_follow_up_baby\",\"title\":\"Postnatal danger sign follow-up - baby\",\"icon\":\"icon-infant\"},{\"id\":\"form:pnc_danger_sign_follow_up_mother\",\"code\":\"pnc_danger_sign_follow_up_mother\",\"title\":\"Postnatal danger sign follow-up - mother\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pregnancy\",\"code\":\"pregnancy\",\"title\":\"Pregnancy registration\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_danger_sign\",\"code\":\"pregnancy_danger_sign\",\"title\":\"Pregnancy danger sign\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_danger_sign_follow_up\",\"code\":\"pregnancy_danger_sign_follow_up\",\"title\":\"Pregnancy danger sign follow-up\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_facility_visit_reminder\",\"code\":\"pregnancy_facility_visit_reminder\",\"title\":\"Health facility ANC reminder\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_home_visit\",\"code\":\"pregnancy_home_visit\",\"title\":\"Pregnancy home visit\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:undo_death_report\",\"code\":\"undo_death_report\",\"title\":\"Undo death report\",\"icon\":\"icon-person\"}],\"isAdmin\":false,\"lastChangedDoc\":false,\"loadingContent\":false,\"loadingSubActionBar\":false,\"minimalTabs\":true,\"replicationStatus\":{\"disabled\":false,\"lastTrigger\":1620688544099,\"lastSuccessTo\":1620688268729,\"current\":{\"icon\":\"fa-refresh\",\"key\":\"sync.status.in_progress\",\"disableSyncButton\":true},\"lastSuccessFrom\":1620688268729},\"selectMode\":false,\"privacyPolicyAccepted\":true,\"showActionBar\":false,\"showContent\":false,\"showPrivacyPolicy\":false,\"title\":\"\",\"unreadCount\":{\"report\":0,\"message\":0},\"version\":null,\"translationsLoaded\":true,\"userFacilityId\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"services\":{\"lastChangedDoc\":false},\"analytics\":{\"selected\":null,\"analyticsModules\":[]},\"reports\":{\"reports\":[],\"reportsById\":{},\"selected\":[],\"verifyingReport\":false,\"filters\":{}},\"messages\":{\"error\":false,\"conversations\":[],\"selected\":null},\"targetAggregates\":{\"selected\":null,\"targetAggregates\":[],\"targetAggregatesLoaded\":false,\"error\":false},\"contacts\":{\"contacts\":[],\"contactsById\":{},\"selected\":null,\"filters\":{},\"loadingSelectedChildren\":false,\"loadingSelectedReports\":false,\"loadingSummary\":false},\"tasks\":{\"tasksList\":[],\"selected\":null,\"loaded\":false}}]"
+    },
+    {
+      "level": "log",
+      "arguments": "[\"%c action\",\"color: #03A9F4; font-weight: bold\",{\"payload\":{\"replicationStatus\":{\"current\":{\"icon\":\"fa-refresh\",\"key\":\"sync.status.in_progress\",\"disableSyncButton\":true},\"lastTrigger\":1620688544099}},\"type\":\"UPDATE_REPLICATION_STATUS\"}]"
+    },
+    {
+      "level": "log",
+      "arguments": "[\"%c prev state\",\"color: #9E9E9E; font-weight: bold\",{\"global\":{\"actionBar\":{\"left\":{\"hasResults\":false},\"right\":{\"type\":\"xml\",\"verifyingReport\":false,\"sendTo\":{\"parent\":{\"_id\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"type\":\"person\",\"name\":\"Bob Bouchard\",\"short_name\":\"Bob B\",\"date_of_birth\":\"2000-05-10\",\"date_of_birth_method\":\"approx\",\"ephemeral_dob\":{\"age_label\":\"\",\"age_years\":\"21\",\"age_months\":\"\",\"dob_method\":\"approx\",\"ephemeral_months\":\"5\",\"ephemeral_years\":\"2000\",\"dob_approx\":\"2000-05-10\",\"dob_raw\":\"2000-05-10\",\"dob_iso\":\"2000-05-10\"},\"sex\":\"male\",\"phone\":\"\",\"phone_alternate\":\"\",\"role\":\"chw\",\"external_id\":\"\",\"notes\":\"\",\"meta\":{\"created_by\":\"admin\",\"created_by_person_uuid\":\"\",\"created_by_place_uuid\":\"\"},\"reported_date\":1620687052700,\"patient_id\":\"57691\",\"_id\":\"fe8b9f60-0261-4b7e-ad2e-d718ed133597\",\"_rev\":\"2-160935b16fcb930fbbc200e07da0a8fb\"}}},\"cancelCallback\":null,\"currentTab\":\"messages\",\"snapshotData\":{\"permissions\":[\"can_view_messages\"],\"tab\":\"messages\"},\"enketoStatus\":{\"edited\":false,\"saving\":false,\"error\":null},\"facilities\":[],\"filters\":{\"search\":\"\"},\"forms\":[{\"id\":\"form:death_report\",\"code\":\"death_report\",\"title\":\"Death report\",\"icon\":\"icon-death-general\"},{\"id\":\"form:delivery\",\"code\":\"delivery\",\"title\":\"Delivery\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pnc_danger_sign_follow_up_baby\",\"code\":\"pnc_danger_sign_follow_up_baby\",\"title\":\"Postnatal danger sign follow-up - baby\",\"icon\":\"icon-infant\"},{\"id\":\"form:pnc_danger_sign_follow_up_mother\",\"code\":\"pnc_danger_sign_follow_up_mother\",\"title\":\"Postnatal danger sign follow-up - mother\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pregnancy\",\"code\":\"pregnancy\",\"title\":\"Pregnancy registration\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_danger_sign\",\"code\":\"pregnancy_danger_sign\",\"title\":\"Pregnancy danger sign\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_danger_sign_follow_up\",\"code\":\"pregnancy_danger_sign_follow_up\",\"title\":\"Pregnancy danger sign follow-up\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_facility_visit_reminder\",\"code\":\"pregnancy_facility_visit_reminder\",\"title\":\"Health facility ANC reminder\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_home_visit\",\"code\":\"pregnancy_home_visit\",\"title\":\"Pregnancy home visit\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:undo_death_report\",\"code\":\"undo_death_report\",\"title\":\"Undo death report\",\"icon\":\"icon-person\"}],\"isAdmin\":false,\"lastChangedDoc\":false,\"loadingContent\":false,\"loadingSubActionBar\":false,\"minimalTabs\":true,\"replicationStatus\":{\"disabled\":false,\"lastTrigger\":1620688483198,\"lastSuccessTo\":1620688268729,\"current\":{\"icon\":\"fa-exclamation-triangle\",\"key\":\"sync.status.required\",\"className\":\"required\"},\"lastSuccessFrom\":1620688268729},\"selectMode\":false,\"privacyPolicyAccepted\":true,\"showActionBar\":false,\"showContent\":false,\"showPrivacyPolicy\":false,\"title\":\"\",\"unreadCount\":{\"report\":0,\"message\":0},\"version\":null,\"translationsLoaded\":true,\"userFacilityId\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"services\":{\"lastChangedDoc\":false},\"analytics\":{\"selected\":null,\"analyticsModules\":[]},\"reports\":{\"reports\":[],\"reportsById\":{},\"selected\":[],\"verifyingReport\":false,\"filters\":{}},\"messages\":{\"error\":false,\"conversations\":[],\"selected\":null},\"targetAggregates\":{\"selected\":null,\"targetAggregates\":[],\"targetAggregatesLoaded\":false,\"error\":false},\"contacts\":{\"contacts\":[],\"contactsById\":{},\"selected\":null,\"filters\":{},\"loadingSelectedChildren\":false,\"loadingSelectedReports\":false,\"loadingSummary\":false},\"tasks\":{\"tasksList\":[],\"selected\":null,\"loaded\":false}}]"
+    },
+    {
+      "level": "log",
+      "arguments": "[\"%c next state\",\"color: #4CAF50; font-weight: bold\",{\"global\":{\"actionBar\":{\"left\":{\"hasResults\":false},\"right\":{\"type\":\"xml\",\"verifyingReport\":false,\"sendTo\":{\"parent\":{\"_id\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"type\":\"person\",\"name\":\"Bob Bouchard\",\"short_name\":\"Bob B\",\"date_of_birth\":\"2000-05-10\",\"date_of_birth_method\":\"approx\",\"ephemeral_dob\":{\"age_label\":\"\",\"age_years\":\"21\",\"age_months\":\"\",\"dob_method\":\"approx\",\"ephemeral_months\":\"5\",\"ephemeral_years\":\"2000\",\"dob_approx\":\"2000-05-10\",\"dob_raw\":\"2000-05-10\",\"dob_iso\":\"2000-05-10\"},\"sex\":\"male\",\"phone\":\"\",\"phone_alternate\":\"\",\"role\":\"chw\",\"external_id\":\"\",\"notes\":\"\",\"meta\":{\"created_by\":\"admin\",\"created_by_person_uuid\":\"\",\"created_by_place_uuid\":\"\"},\"reported_date\":1620687052700,\"patient_id\":\"57691\",\"_id\":\"fe8b9f60-0261-4b7e-ad2e-d718ed133597\",\"_rev\":\"2-160935b16fcb930fbbc200e07da0a8fb\"}}},\"cancelCallback\":null,\"currentTab\":\"messages\",\"snapshotData\":{\"permissions\":[\"can_view_messages\"],\"tab\":\"messages\"},\"enketoStatus\":{\"edited\":false,\"saving\":false,\"error\":null},\"facilities\":[],\"filters\":{\"search\":\"\"},\"forms\":[{\"id\":\"form:death_report\",\"code\":\"death_report\",\"title\":\"Death report\",\"icon\":\"icon-death-general\"},{\"id\":\"form:delivery\",\"code\":\"delivery\",\"title\":\"Delivery\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pnc_danger_sign_follow_up_baby\",\"code\":\"pnc_danger_sign_follow_up_baby\",\"title\":\"Postnatal danger sign follow-up - baby\",\"icon\":\"icon-infant\"},{\"id\":\"form:pnc_danger_sign_follow_up_mother\",\"code\":\"pnc_danger_sign_follow_up_mother\",\"title\":\"Postnatal danger sign follow-up - mother\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pregnancy\",\"code\":\"pregnancy\",\"title\":\"Pregnancy registration\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_danger_sign\",\"code\":\"pregnancy_danger_sign\",\"title\":\"Pregnancy danger sign\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_danger_sign_follow_up\",\"code\":\"pregnancy_danger_sign_follow_up\",\"title\":\"Pregnancy danger sign follow-up\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_facility_visit_reminder\",\"code\":\"pregnancy_facility_visit_reminder\",\"title\":\"Health facility ANC reminder\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_home_visit\",\"code\":\"pregnancy_home_visit\",\"title\":\"Pregnancy home visit\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:undo_death_report\",\"code\":\"undo_death_report\",\"title\":\"Undo death report\",\"icon\":\"icon-person\"}],\"isAdmin\":false,\"lastChangedDoc\":false,\"loadingContent\":false,\"loadingSubActionBar\":false,\"minimalTabs\":true,\"replicationStatus\":{\"disabled\":false,\"lastTrigger\":1620688483198,\"lastSuccessTo\":1620688268729,\"current\":{\"icon\":\"fa-exclamation-triangle\",\"key\":\"sync.status.required\",\"className\":\"required\"},\"lastSuccessFrom\":1620688268729},\"selectMode\":false,\"privacyPolicyAccepted\":true,\"showActionBar\":false,\"showContent\":false,\"showPrivacyPolicy\":false,\"title\":\"\",\"unreadCount\":{\"report\":0,\"message\":0},\"version\":null,\"translationsLoaded\":true,\"userFacilityId\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"services\":{\"lastChangedDoc\":false},\"analytics\":{\"selected\":null,\"analyticsModules\":[]},\"reports\":{\"reports\":[],\"reportsById\":{},\"selected\":[],\"verifyingReport\":false,\"filters\":{}},\"messages\":{\"error\":false,\"conversations\":[],\"selected\":null},\"targetAggregates\":{\"selected\":null,\"targetAggregates\":[],\"targetAggregatesLoaded\":false,\"error\":false},\"contacts\":{\"contacts\":[],\"contactsById\":{},\"selected\":null,\"filters\":{},\"loadingSelectedChildren\":false,\"loadingSelectedReports\":false,\"loadingSummary\":false},\"tasks\":{\"tasksList\":[],\"selected\":null,\"loaded\":false}}]"
+    },
+    {
+      "level": "log",
+      "arguments": "[\"%c action\",\"color: #03A9F4; font-weight: bold\",{\"payload\":{\"replicationStatus\":{\"current\":{\"icon\":\"fa-exclamation-triangle\",\"key\":\"sync.status.required\",\"className\":\"required\"}}},\"type\":\"UPDATE_REPLICATION_STATUS\"}]"
+    },
+    {
+      "level": "log",
+      "arguments": "[\"%c prev state\",\"color: #9E9E9E; font-weight: bold\",{\"global\":{\"actionBar\":{\"left\":{\"hasResults\":false},\"right\":{\"type\":\"xml\",\"verifyingReport\":false,\"sendTo\":{\"parent\":{\"_id\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"type\":\"person\",\"name\":\"Bob Bouchard\",\"short_name\":\"Bob B\",\"date_of_birth\":\"2000-05-10\",\"date_of_birth_method\":\"approx\",\"ephemeral_dob\":{\"age_label\":\"\",\"age_years\":\"21\",\"age_months\":\"\",\"dob_method\":\"approx\",\"ephemeral_months\":\"5\",\"ephemeral_years\":\"2000\",\"dob_approx\":\"2000-05-10\",\"dob_raw\":\"2000-05-10\",\"dob_iso\":\"2000-05-10\"},\"sex\":\"male\",\"phone\":\"\",\"phone_alternate\":\"\",\"role\":\"chw\",\"external_id\":\"\",\"notes\":\"\",\"meta\":{\"created_by\":\"admin\",\"created_by_person_uuid\":\"\",\"created_by_place_uuid\":\"\"},\"reported_date\":1620687052700,\"patient_id\":\"57691\",\"_id\":\"fe8b9f60-0261-4b7e-ad2e-d718ed133597\",\"_rev\":\"2-160935b16fcb930fbbc200e07da0a8fb\"}}},\"cancelCallback\":null,\"currentTab\":\"messages\",\"snapshotData\":{\"permissions\":[\"can_view_messages\"],\"tab\":\"messages\"},\"enketoStatus\":{\"edited\":false,\"saving\":false,\"error\":null},\"facilities\":[],\"filters\":{\"search\":\"\"},\"forms\":[{\"id\":\"form:death_report\",\"code\":\"death_report\",\"title\":\"Death report\",\"icon\":\"icon-death-general\"},{\"id\":\"form:delivery\",\"code\":\"delivery\",\"title\":\"Delivery\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pnc_danger_sign_follow_up_baby\",\"code\":\"pnc_danger_sign_follow_up_baby\",\"title\":\"Postnatal danger sign follow-up - baby\",\"icon\":\"icon-infant\"},{\"id\":\"form:pnc_danger_sign_follow_up_mother\",\"code\":\"pnc_danger_sign_follow_up_mother\",\"title\":\"Postnatal danger sign follow-up - mother\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pregnancy\",\"code\":\"pregnancy\",\"title\":\"Pregnancy registration\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_danger_sign\",\"code\":\"pregnancy_danger_sign\",\"title\":\"Pregnancy danger sign\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_danger_sign_follow_up\",\"code\":\"pregnancy_danger_sign_follow_up\",\"title\":\"Pregnancy danger sign follow-up\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_facility_visit_reminder\",\"code\":\"pregnancy_facility_visit_reminder\",\"title\":\"Health facility ANC reminder\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_home_visit\",\"code\":\"pregnancy_home_visit\",\"title\":\"Pregnancy home visit\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:undo_death_report\",\"code\":\"undo_death_report\",\"title\":\"Undo death report\",\"icon\":\"icon-person\"}],\"isAdmin\":false,\"lastChangedDoc\":false,\"loadingContent\":false,\"loadingSubActionBar\":false,\"minimalTabs\":true,\"replicationStatus\":{\"disabled\":false,\"lastTrigger\":1620688483198,\"lastSuccessTo\":1620688268729,\"current\":{\"icon\":\"fa-refresh\",\"key\":\"sync.status.in_progress\",\"disableSyncButton\":true},\"lastSuccessFrom\":1620688268729},\"selectMode\":false,\"privacyPolicyAccepted\":true,\"showActionBar\":false,\"showContent\":false,\"showPrivacyPolicy\":false,\"title\":\"\",\"unreadCount\":{\"report\":0,\"message\":0},\"version\":null,\"translationsLoaded\":true,\"userFacilityId\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"services\":{\"lastChangedDoc\":false},\"analytics\":{\"selected\":null,\"analyticsModules\":[]},\"reports\":{\"reports\":[],\"reportsById\":{},\"selected\":[],\"verifyingReport\":false,\"filters\":{}},\"messages\":{\"error\":false,\"conversations\":[],\"selected\":null},\"targetAggregates\":{\"selected\":null,\"targetAggregates\":[],\"targetAggregatesLoaded\":false,\"error\":false},\"contacts\":{\"contacts\":[],\"contactsById\":{},\"selected\":null,\"filters\":{},\"loadingSelectedChildren\":false,\"loadingSelectedReports\":false,\"loadingSummary\":false},\"tasks\":{\"tasksList\":[],\"selected\":null,\"loaded\":false}}]"
+    },
+    {
+      "level": "info",
+      "arguments": "[\"Replication failed after 0 seconds\"]"
+    },
+    {
+      "level": "error",
+      "arguments": "[\"Error replicating to remote server\",{\"fileName\":\"\",\"lineNumber\":0,\"columnNumber\":0,\"message\":\"NetworkError when attempting to fetch resource.\",\"result\":{\"ok\":false,\"start_time\":\"2021-05-10T23:14:43.205Z\",\"docs_read\":0,\"docs_written\":0,\"doc_write_failures\":0,\"errors\":[],\"status\":\"aborting\",\"end_time\":\"2021-05-10T23:14:43.252Z\",\"last_seq\":0}}]"
+    },
+    {
+      "level": "error",
+      "arguments": "[\"Error replicating to remote server\",{\"fileName\":\"\",\"lineNumber\":0,\"columnNumber\":0,\"message\":\"NetworkError when attempting to fetch resource.\",\"result\":{\"ok\":false,\"start_time\":\"2021-05-10T23:14:43.205Z\",\"docs_read\":0,\"docs_written\":0,\"doc_write_failures\":0,\"errors\":[],\"status\":\"aborting\",\"end_time\":\"2021-05-10T23:14:43.252Z\",\"last_seq\":0}}]"
+    }
+  ],
+  "type": "feedback"
+},
+{
+  "_id": "feedback-2021-05-11T13:34:09.001Z-1014485a-4f7a-4411-8c05-5fe26b607bb2",
+  "meta": {
+    "time": "2021-05-11T13:34:09.001Z",
+    "user": {
+      "name": "adama",
+      "roles": [
+        "chw_supervisor"
+      ]
+    },
+    "url": "http://cht.localhost:5988/#/messages",
+    "source": "automatic"
+  },
+  "info": {
+    "message": "Uncaught (in promise): {\"status\":401,\"name\":\"unauthorized\",\"message\":\"getCheckpoint rejected with \"}",
+    "stack": "resolvePromise@http://cht.localhost:5988/polyfills.js:1863:21\nresolvePromise@http://cht.localhost:5988/polyfills.js:1810:25\nscheduleResolveOrReject/<@http://cht.localhost:5988/polyfills.js:1937:25\n./node_modules/zone.js/dist/zone.js/</Zone$1</ZoneDelegate</ZoneDelegate.prototype.invokeTask@http://cht.localhost:5988/polyfills.js:823:173\nonInvokeTask@http://cht.localhost:5988/main.js:130872:25\n./node_modules/zone.js/dist/zone.js/</Zone$1</ZoneDelegate</ZoneDelegate.prototype.invokeTask@http://cht.localhost:5988/polyfills.js:823:56\n./node_modules/zone.js/dist/zone.js/</Zone$1</Zone</Zone.prototype.runTask@http://cht.localhost:5988/polyfills.js:573:39\ndrainMicroTaskQueue@http://cht.localhost:5988/polyfills.js:1039:25\n"
+  },
+  "log": [
+    {
+      "level": "error",
+      "arguments": "[{\"rejection\":{\"code\":401,\"error\":\"unauthorized\",\"status\":401,\"name\":\"unauthorized\",\"message\":\"getCheckpoint rejected with \",\"docId\":\"_local/3batqWyVIjpz58AMLvy7GA%3D%3D\",\"result\":{\"ok\":false,\"start_time\":\"2021-05-11T13:34:08.972Z\",\"docs_read\":0,\"docs_written\":0,\"doc_write_failures\":0,\"errors\":[],\"status\":\"aborting\",\"end_time\":\"2021-05-11T13:34:08.994Z\",\"last_seq\":0}},\"promise\":{\"__zone_symbol__state\":0},\"zone\":{\"_parent\":{\"_parent\":null,\"_name\":\"<root>\",\"_properties\":{},\"_zoneDelegate\":{\"_taskCounts\":{\"microTask\":0,\"macroTask\":0,\"eventTask\":0},\"_parentDelegate\":null,\"_forkZS\":null,\"_forkDlgt\":null,\"_forkCurrZone\":null,\"_interceptZS\":null,\"_interceptDlgt\":null,\"_interceptCurrZone\":null,\"_invokeZS\":null,\"_invokeDlgt\":null,\"_invokeCurrZone\":null,\"_handleErrorZS\":null,\"_handleErrorDlgt\":null,\"_handleErrorCurrZone\":null,\"_scheduleTaskZS\":null,\"_scheduleTaskDlgt\":null,\"_scheduleTaskCurrZone\":null,\"_invokeTaskZS\":null,\"_invokeTaskDlgt\":null,\"_invokeTaskCurrZone\":null,\"_cancelTaskZS\":null,\"_cancelTaskDlgt\":null,\"_cancelTaskCurrZone\":null,\"_hasTaskZS\":null,\"_hasTaskDlgt\":null,\"_hasTaskDlgtOwner\":null,\"_hasTaskCurrZone\":null}},\"_name\":\"angular\",\"_properties\":{\"isAngularZone\":true,\"maybeDelayChangeDetection\":false},\"_zoneDelegate\":{\"_taskCounts\":{\"microTask\":0,\"macroTask\":3,\"eventTask\":113},\"_forkZS\":null,\"_forkDlgt\":null,\"_forkCurrZone\":null,\"_interceptZS\":null,\"_interceptDlgt\":null,\"_interceptCurrZone\":null,\"_invokeZS\":{\"name\":\"angular\"},\"_scheduleTaskZS\":{\"name\":\"\"}}},\"task\":{\"type\":\"microTask\",\"state\":\"notScheduled\",\"source\":\"Promise.then\",\"zone\":\"angular\",\"runCount\":0}}]"
+    },
+    {
+      "level": "log",
+      "arguments": "[\"%c next state\",\"color: #4CAF50; font-weight: bold\",{\"global\":{\"actionBar\":{\"left\":{\"hasResults\":false},\"right\":{\"type\":\"xml\",\"verifyingReport\":false,\"sendTo\":{\"parent\":{\"_id\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"type\":\"person\",\"name\":\"Bob Bouchard\",\"short_name\":\"Bob B\",\"date_of_birth\":\"2000-05-10\",\"date_of_birth_method\":\"approx\",\"ephemeral_dob\":{\"age_label\":\"\",\"age_years\":\"21\",\"age_months\":\"\",\"dob_method\":\"approx\",\"ephemeral_months\":\"5\",\"ephemeral_years\":\"2000\",\"dob_approx\":\"2000-05-10\",\"dob_raw\":\"2000-05-10\",\"dob_iso\":\"2000-05-10\"},\"sex\":\"male\",\"phone\":\"\",\"phone_alternate\":\"\",\"role\":\"chw\",\"external_id\":\"\",\"notes\":\"\",\"meta\":{\"created_by\":\"admin\",\"created_by_person_uuid\":\"\",\"created_by_place_uuid\":\"\"},\"reported_date\":1620687052700,\"patient_id\":\"57691\",\"_id\":\"fe8b9f60-0261-4b7e-ad2e-d718ed133597\",\"_rev\":\"2-160935b16fcb930fbbc200e07da0a8fb\"}}},\"cancelCallback\":null,\"currentTab\":\"messages\",\"snapshotData\":{\"permissions\":[\"can_view_messages\"],\"tab\":\"messages\"},\"enketoStatus\":{\"edited\":false,\"saving\":false,\"error\":null},\"facilities\":[],\"filters\":{\"search\":\"\"},\"forms\":[{\"id\":\"form:death_report\",\"code\":\"death_report\",\"title\":\"Death report\",\"icon\":\"icon-death-general\"},{\"id\":\"form:delivery\",\"code\":\"delivery\",\"title\":\"Delivery\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pnc_danger_sign_follow_up_baby\",\"code\":\"pnc_danger_sign_follow_up_baby\",\"title\":\"Postnatal danger sign follow-up - baby\",\"icon\":\"icon-infant\"},{\"id\":\"form:pnc_danger_sign_follow_up_mother\",\"code\":\"pnc_danger_sign_follow_up_mother\",\"title\":\"Postnatal danger sign follow-up - mother\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pregnancy\",\"code\":\"pregnancy\",\"title\":\"Pregnancy registration\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_danger_sign\",\"code\":\"pregnancy_danger_sign\",\"title\":\"Pregnancy danger sign\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_danger_sign_follow_up\",\"code\":\"pregnancy_danger_sign_follow_up\",\"title\":\"Pregnancy danger sign follow-up\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_facility_visit_reminder\",\"code\":\"pregnancy_facility_visit_reminder\",\"title\":\"Health facility ANC reminder\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_home_visit\",\"code\":\"pregnancy_home_visit\",\"title\":\"Pregnancy home visit\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:undo_death_report\",\"code\":\"undo_death_report\",\"title\":\"Undo death report\",\"icon\":\"icon-person\"}],\"isAdmin\":false,\"lastChangedDoc\":false,\"loadingContent\":false,\"loadingSubActionBar\":false,\"minimalTabs\":true,\"replicationStatus\":{\"disabled\":false,\"lastTrigger\":1620740045808,\"lastSuccessTo\":1620688268729,\"current\":{\"icon\":\"fa-exclamation-triangle\",\"key\":\"sync.status.required\",\"className\":\"required\"},\"lastSuccessFrom\":1620688268729},\"selectMode\":false,\"privacyPolicyAccepted\":true,\"showActionBar\":false,\"showContent\":false,\"showPrivacyPolicy\":false,\"title\":\"\",\"unreadCount\":{\"report\":0,\"message\":0},\"version\":null,\"translationsLoaded\":true,\"userFacilityId\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"services\":{\"lastChangedDoc\":false},\"analytics\":{\"selected\":null,\"analyticsModules\":[]},\"reports\":{\"reports\":[],\"reportsById\":{},\"selected\":[],\"verifyingReport\":false,\"filters\":{}},\"messages\":{\"error\":false,\"conversations\":[],\"selected\":null},\"targetAggregates\":{\"selected\":null,\"targetAggregates\":[],\"targetAggregatesLoaded\":false,\"error\":false},\"contacts\":{\"contacts\":[],\"contactsById\":{},\"selected\":null,\"filters\":{},\"loadingSelectedChildren\":false,\"loadingSelectedReports\":false,\"loadingSummary\":false},\"tasks\":{\"tasksList\":[],\"selected\":null,\"loaded\":false}}]"
+    },
+    {
+      "level": "log",
+      "arguments": "[\"%c action\",\"color: #03A9F4; font-weight: bold\",{\"payload\":{\"replicationStatus\":{\"current\":{\"icon\":\"fa-exclamation-triangle\",\"key\":\"sync.status.required\",\"className\":\"required\"}}},\"type\":\"UPDATE_REPLICATION_STATUS\"}]"
+    },
+    {
+      "level": "log",
+      "arguments": "[\"%c prev state\",\"color: #9E9E9E; font-weight: bold\",{\"global\":{\"actionBar\":{\"left\":{\"hasResults\":false},\"right\":{\"type\":\"xml\",\"verifyingReport\":false,\"sendTo\":{\"parent\":{\"_id\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"type\":\"person\",\"name\":\"Bob Bouchard\",\"short_name\":\"Bob B\",\"date_of_birth\":\"2000-05-10\",\"date_of_birth_method\":\"approx\",\"ephemeral_dob\":{\"age_label\":\"\",\"age_years\":\"21\",\"age_months\":\"\",\"dob_method\":\"approx\",\"ephemeral_months\":\"5\",\"ephemeral_years\":\"2000\",\"dob_approx\":\"2000-05-10\",\"dob_raw\":\"2000-05-10\",\"dob_iso\":\"2000-05-10\"},\"sex\":\"male\",\"phone\":\"\",\"phone_alternate\":\"\",\"role\":\"chw\",\"external_id\":\"\",\"notes\":\"\",\"meta\":{\"created_by\":\"admin\",\"created_by_person_uuid\":\"\",\"created_by_place_uuid\":\"\"},\"reported_date\":1620687052700,\"patient_id\":\"57691\",\"_id\":\"fe8b9f60-0261-4b7e-ad2e-d718ed133597\",\"_rev\":\"2-160935b16fcb930fbbc200e07da0a8fb\"}}},\"cancelCallback\":null,\"currentTab\":\"messages\",\"snapshotData\":{\"permissions\":[\"can_view_messages\"],\"tab\":\"messages\"},\"enketoStatus\":{\"edited\":false,\"saving\":false,\"error\":null},\"facilities\":[],\"filters\":{\"search\":\"\"},\"forms\":[{\"id\":\"form:death_report\",\"code\":\"death_report\",\"title\":\"Death report\",\"icon\":\"icon-death-general\"},{\"id\":\"form:delivery\",\"code\":\"delivery\",\"title\":\"Delivery\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pnc_danger_sign_follow_up_baby\",\"code\":\"pnc_danger_sign_follow_up_baby\",\"title\":\"Postnatal danger sign follow-up - baby\",\"icon\":\"icon-infant\"},{\"id\":\"form:pnc_danger_sign_follow_up_mother\",\"code\":\"pnc_danger_sign_follow_up_mother\",\"title\":\"Postnatal danger sign follow-up - mother\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pregnancy\",\"code\":\"pregnancy\",\"title\":\"Pregnancy registration\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_danger_sign\",\"code\":\"pregnancy_danger_sign\",\"title\":\"Pregnancy danger sign\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_danger_sign_follow_up\",\"code\":\"pregnancy_danger_sign_follow_up\",\"title\":\"Pregnancy danger sign follow-up\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_facility_visit_reminder\",\"code\":\"pregnancy_facility_visit_reminder\",\"title\":\"Health facility ANC reminder\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_home_visit\",\"code\":\"pregnancy_home_visit\",\"title\":\"Pregnancy home visit\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:undo_death_report\",\"code\":\"undo_death_report\",\"title\":\"Undo death report\",\"icon\":\"icon-person\"}],\"isAdmin\":false,\"lastChangedDoc\":false,\"loadingContent\":false,\"loadingSubActionBar\":false,\"minimalTabs\":true,\"replicationStatus\":{\"disabled\":false,\"lastTrigger\":1620740045808,\"lastSuccessTo\":1620688268729,\"current\":{\"icon\":\"fa-refresh\",\"key\":\"sync.status.in_progress\",\"disableSyncButton\":true},\"lastSuccessFrom\":1620688268729},\"selectMode\":false,\"privacyPolicyAccepted\":true,\"showActionBar\":false,\"showContent\":false,\"showPrivacyPolicy\":false,\"title\":\"\",\"unreadCount\":{\"report\":0,\"message\":0},\"version\":null,\"translationsLoaded\":true,\"userFacilityId\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"services\":{\"lastChangedDoc\":false},\"analytics\":{\"selected\":null,\"analyticsModules\":[]},\"reports\":{\"reports\":[],\"reportsById\":{},\"selected\":[],\"verifyingReport\":false,\"filters\":{}},\"messages\":{\"error\":false,\"conversations\":[],\"selected\":null},\"targetAggregates\":{\"selected\":null,\"targetAggregates\":[],\"targetAggregatesLoaded\":false,\"error\":false},\"contacts\":{\"contacts\":[],\"contactsById\":{},\"selected\":null,\"filters\":{},\"loadingSelectedChildren\":false,\"loadingSelectedReports\":false,\"loadingSummary\":false},\"tasks\":{\"tasksList\":[],\"selected\":null,\"loaded\":false}}]"
+    },
+    {
+      "level": "info",
+      "arguments": "[\"Replication failed after 0 seconds\"]"
+    },
+    {
+      "level": "error",
+      "arguments": "[\"Error replicating to remote server\",{\"error\":\"unauthorized\",\"reason\":\"Authentication required.\",\"status\":401,\"name\":\"unauthorized\",\"message\":\"Authentication required.\",\"result\":{\"ok\":false,\"start_time\":\"2021-05-11T13:34:05.815Z\",\"docs_read\":0,\"docs_written\":0,\"doc_write_failures\":0,\"errors\":[],\"status\":\"aborting\",\"end_time\":\"2021-05-11T13:34:05.946Z\",\"last_seq\":0}}]"
+    },
+    {
+      "level": "error",
+      "arguments": "[\"Error replicating to remote server\",{\"error\":\"unauthorized\",\"reason\":\"Authentication required.\",\"status\":401,\"name\":\"unauthorized\",\"message\":\"Authentication required.\",\"result\":{\"ok\":false,\"start_time\":\"2021-05-11T13:34:05.815Z\",\"docs_read\":0,\"docs_written\":0,\"doc_write_failures\":0,\"errors\":[],\"status\":\"aborting\",\"end_time\":\"2021-05-11T13:34:05.946Z\",\"last_seq\":0}}]"
+    },
+    {
+      "level": "error",
+      "arguments": "[\"Unhandled Promise rejection:\",\"Unhandled error. (undefined)\",\"; Zone:\",\"<root>\",\"; Task:\",\"Promise.then\",\"; Value:\",{\"context\":{\"code\":401,\"error\":\"unauthorized\",\"status\":401,\"name\":\"unauthorized\",\"message\":\"changes rejected\"}},\"emit@http://cht.localhost:5988/main.js:1132:15\\n./src/ts/services/db.service.ts/DbService.prototype.outOfZoneEventEmitter/</</<@http://cht.localhost:5988/main.js:327189:41\\nemit@http://cht.localhost:5988/main.js:1141:17\\nChanges$1/opts.complete<@http://cht.localhost:5988/main.js:260944:14\\nonce/<@http://cht.localhost:5988/main.js:259437:11\\nargsArray/<@http://cht.localhost:5988/main.js:161748:18\\n./node_modules/zone.js/dist/zone.js/</Zone$1</ZoneDelegate</ZoneDelegate.prototype.invoke@http://cht.localhost:5988/polyfills.js:790:160\\n./node_modules/zone.js/dist/zone.js/</Zone$1</Zone</Zone.prototype.run@http://cht.localhost:5988/polyfills.js:516:37\\nscheduleResolveOrReject/<@http://cht.localhost:5988/polyfills.js:1936:28\\n./node_modules/zone.js/dist/zone.js/</Zone$1</ZoneDelegate</ZoneDelegate.prototype.invokeTask@http://cht.localhost:5988/polyfills.js:823:173\\n./node_modules/zone.js/dist/zone.js/</Zone$1</Zone</Zone.prototype.runTask@http://cht.localhost:5988/polyfills.js:573:39\\ndrainMicroTaskQueue@http://cht.localhost:5988/polyfills.js:1039:25\\n\"]"
+    },
+    {
+      "level": "error",
+      "arguments": "[\"Error replicating from remote server\",{\"code\":401,\"error\":\"unauthorized\",\"status\":401,\"name\":\"unauthorized\",\"message\":\"changes rejected\",\"result\":{\"ok\":false,\"start_time\":\"2021-05-11T13:34:05.813Z\",\"docs_read\":0,\"docs_written\":0,\"doc_write_failures\":0,\"errors\":[],\"status\":\"aborting\",\"end_time\":\"2021-05-11T13:34:05.929Z\",\"last_seq\":0}}]"
+    },
+    {
+      "level": "error",
+      "arguments": "[\"Error replicating from remote server\",{\"code\":401,\"error\":\"unauthorized\",\"status\":401,\"name\":\"unauthorized\",\"message\":\"changes rejected\",\"result\":{\"ok\":false,\"start_time\":\"2021-05-11T13:34:05.813Z\",\"docs_read\":0,\"docs_written\":0,\"doc_write_failures\":0,\"errors\":[],\"status\":\"aborting\",\"end_time\":\"2021-05-11T13:34:05.929Z\",\"last_seq\":0}}]"
+    },
+    {
+      "level": "info",
+      "arguments": "[\"Replication started after 60 seconds since previous attempt\"]"
+    },
+    {
+      "level": "log",
+      "arguments": "[\"%c next state\",\"color: #4CAF50; font-weight: bold\",{\"global\":{\"actionBar\":{\"left\":{\"hasResults\":false},\"right\":{\"type\":\"xml\",\"verifyingReport\":false,\"sendTo\":{\"parent\":{\"_id\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"type\":\"person\",\"name\":\"Bob Bouchard\",\"short_name\":\"Bob B\",\"date_of_birth\":\"2000-05-10\",\"date_of_birth_method\":\"approx\",\"ephemeral_dob\":{\"age_label\":\"\",\"age_years\":\"21\",\"age_months\":\"\",\"dob_method\":\"approx\",\"ephemeral_months\":\"5\",\"ephemeral_years\":\"2000\",\"dob_approx\":\"2000-05-10\",\"dob_raw\":\"2000-05-10\",\"dob_iso\":\"2000-05-10\"},\"sex\":\"male\",\"phone\":\"\",\"phone_alternate\":\"\",\"role\":\"chw\",\"external_id\":\"\",\"notes\":\"\",\"meta\":{\"created_by\":\"admin\",\"created_by_person_uuid\":\"\",\"created_by_place_uuid\":\"\"},\"reported_date\":1620687052700,\"patient_id\":\"57691\",\"_id\":\"fe8b9f60-0261-4b7e-ad2e-d718ed133597\",\"_rev\":\"2-160935b16fcb930fbbc200e07da0a8fb\"}}},\"cancelCallback\":null,\"currentTab\":\"messages\",\"snapshotData\":{\"permissions\":[\"can_view_messages\"],\"tab\":\"messages\"},\"enketoStatus\":{\"edited\":false,\"saving\":false,\"error\":null},\"facilities\":[],\"filters\":{\"search\":\"\"},\"forms\":[{\"id\":\"form:death_report\",\"code\":\"death_report\",\"title\":\"Death report\",\"icon\":\"icon-death-general\"},{\"id\":\"form:delivery\",\"code\":\"delivery\",\"title\":\"Delivery\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pnc_danger_sign_follow_up_baby\",\"code\":\"pnc_danger_sign_follow_up_baby\",\"title\":\"Postnatal danger sign follow-up - baby\",\"icon\":\"icon-infant\"},{\"id\":\"form:pnc_danger_sign_follow_up_mother\",\"code\":\"pnc_danger_sign_follow_up_mother\",\"title\":\"Postnatal danger sign follow-up - mother\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pregnancy\",\"code\":\"pregnancy\",\"title\":\"Pregnancy registration\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_danger_sign\",\"code\":\"pregnancy_danger_sign\",\"title\":\"Pregnancy danger sign\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_danger_sign_follow_up\",\"code\":\"pregnancy_danger_sign_follow_up\",\"title\":\"Pregnancy danger sign follow-up\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_facility_visit_reminder\",\"code\":\"pregnancy_facility_visit_reminder\",\"title\":\"Health facility ANC reminder\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_home_visit\",\"code\":\"pregnancy_home_visit\",\"title\":\"Pregnancy home visit\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:undo_death_report\",\"code\":\"undo_death_report\",\"title\":\"Undo death report\",\"icon\":\"icon-person\"}],\"isAdmin\":false,\"lastChangedDoc\":false,\"loadingContent\":false,\"loadingSubActionBar\":false,\"minimalTabs\":true,\"replicationStatus\":{\"disabled\":false,\"lastTrigger\":1620740045808,\"lastSuccessTo\":1620688268729,\"current\":{\"icon\":\"fa-refresh\",\"key\":\"sync.status.in_progress\",\"disableSyncButton\":true},\"lastSuccessFrom\":1620688268729},\"selectMode\":false,\"privacyPolicyAccepted\":true,\"showActionBar\":false,\"showContent\":false,\"showPrivacyPolicy\":false,\"title\":\"\",\"unreadCount\":{\"report\":0,\"message\":0},\"version\":null,\"translationsLoaded\":true,\"userFacilityId\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"services\":{\"lastChangedDoc\":false},\"analytics\":{\"selected\":null,\"analyticsModules\":[]},\"reports\":{\"reports\":[],\"reportsById\":{},\"selected\":[],\"verifyingReport\":false,\"filters\":{}},\"messages\":{\"error\":false,\"conversations\":[],\"selected\":null},\"targetAggregates\":{\"selected\":null,\"targetAggregates\":[],\"targetAggregatesLoaded\":false,\"error\":false},\"contacts\":{\"contacts\":[],\"contactsById\":{},\"selected\":null,\"filters\":{},\"loadingSelectedChildren\":false,\"loadingSelectedReports\":false,\"loadingSummary\":false},\"tasks\":{\"tasksList\":[],\"selected\":null,\"loaded\":false}}]"
+    },
+    {
+      "level": "log",
+      "arguments": "[\"%c action\",\"color: #03A9F4; font-weight: bold\",{\"payload\":{\"replicationStatus\":{\"current\":{\"icon\":\"fa-refresh\",\"key\":\"sync.status.in_progress\",\"disableSyncButton\":true},\"lastTrigger\":1620740045808}},\"type\":\"UPDATE_REPLICATION_STATUS\"}]"
+    },
+    {
+      "level": "log",
+      "arguments": "[\"%c prev state\",\"color: #9E9E9E; font-weight: bold\",{\"global\":{\"actionBar\":{\"left\":{\"hasResults\":false},\"right\":{\"type\":\"xml\",\"verifyingReport\":false,\"sendTo\":{\"parent\":{\"_id\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"type\":\"person\",\"name\":\"Bob Bouchard\",\"short_name\":\"Bob B\",\"date_of_birth\":\"2000-05-10\",\"date_of_birth_method\":\"approx\",\"ephemeral_dob\":{\"age_label\":\"\",\"age_years\":\"21\",\"age_months\":\"\",\"dob_method\":\"approx\",\"ephemeral_months\":\"5\",\"ephemeral_years\":\"2000\",\"dob_approx\":\"2000-05-10\",\"dob_raw\":\"2000-05-10\",\"dob_iso\":\"2000-05-10\"},\"sex\":\"male\",\"phone\":\"\",\"phone_alternate\":\"\",\"role\":\"chw\",\"external_id\":\"\",\"notes\":\"\",\"meta\":{\"created_by\":\"admin\",\"created_by_person_uuid\":\"\",\"created_by_place_uuid\":\"\"},\"reported_date\":1620687052700,\"patient_id\":\"57691\",\"_id\":\"fe8b9f60-0261-4b7e-ad2e-d718ed133597\",\"_rev\":\"2-160935b16fcb930fbbc200e07da0a8fb\"}}},\"cancelCallback\":null,\"currentTab\":\"messages\",\"snapshotData\":{\"permissions\":[\"can_view_messages\"],\"tab\":\"messages\"},\"enketoStatus\":{\"edited\":false,\"saving\":false,\"error\":null},\"facilities\":[],\"filters\":{\"search\":\"\"},\"forms\":[{\"id\":\"form:death_report\",\"code\":\"death_report\",\"title\":\"Death report\",\"icon\":\"icon-death-general\"},{\"id\":\"form:delivery\",\"code\":\"delivery\",\"title\":\"Delivery\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pnc_danger_sign_follow_up_baby\",\"code\":\"pnc_danger_sign_follow_up_baby\",\"title\":\"Postnatal danger sign follow-up - baby\",\"icon\":\"icon-infant\"},{\"id\":\"form:pnc_danger_sign_follow_up_mother\",\"code\":\"pnc_danger_sign_follow_up_mother\",\"title\":\"Postnatal danger sign follow-up - mother\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pregnancy\",\"code\":\"pregnancy\",\"title\":\"Pregnancy registration\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_danger_sign\",\"code\":\"pregnancy_danger_sign\",\"title\":\"Pregnancy danger sign\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_danger_sign_follow_up\",\"code\":\"pregnancy_danger_sign_follow_up\",\"title\":\"Pregnancy danger sign follow-up\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_facility_visit_reminder\",\"code\":\"pregnancy_facility_visit_reminder\",\"title\":\"Health facility ANC reminder\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_home_visit\",\"code\":\"pregnancy_home_visit\",\"title\":\"Pregnancy home visit\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:undo_death_report\",\"code\":\"undo_death_report\",\"title\":\"Undo death report\",\"icon\":\"icon-person\"}],\"isAdmin\":false,\"lastChangedDoc\":false,\"loadingContent\":false,\"loadingSubActionBar\":false,\"minimalTabs\":true,\"replicationStatus\":{\"disabled\":false,\"lastTrigger\":1620739985808,\"lastSuccessTo\":1620688268729,\"current\":{\"icon\":\"fa-exclamation-triangle\",\"key\":\"sync.status.required\",\"className\":\"required\"},\"lastSuccessFrom\":1620688268729},\"selectMode\":false,\"privacyPolicyAccepted\":true,\"showActionBar\":false,\"showContent\":false,\"showPrivacyPolicy\":false,\"title\":\"\",\"unreadCount\":{\"report\":0,\"message\":0},\"version\":null,\"translationsLoaded\":true,\"userFacilityId\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"services\":{\"lastChangedDoc\":false},\"analytics\":{\"selected\":null,\"analyticsModules\":[]},\"reports\":{\"reports\":[],\"reportsById\":{},\"selected\":[],\"verifyingReport\":false,\"filters\":{}},\"messages\":{\"error\":false,\"conversations\":[],\"selected\":null},\"targetAggregates\":{\"selected\":null,\"targetAggregates\":[],\"targetAggregatesLoaded\":false,\"error\":false},\"contacts\":{\"contacts\":[],\"contactsById\":{},\"selected\":null,\"filters\":{},\"loadingSelectedChildren\":false,\"loadingSelectedReports\":false,\"loadingSummary\":false},\"tasks\":{\"tasksList\":[],\"selected\":null,\"loaded\":false}}]"
+    },
+    {
+      "level": "log",
+      "arguments": "[\"%c next state\",\"color: #4CAF50; font-weight: bold\",{\"global\":{\"actionBar\":{\"left\":{\"hasResults\":false},\"right\":{\"type\":\"xml\",\"verifyingReport\":false,\"sendTo\":{\"parent\":{\"_id\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"type\":\"person\",\"name\":\"Bob Bouchard\",\"short_name\":\"Bob B\",\"date_of_birth\":\"2000-05-10\",\"date_of_birth_method\":\"approx\",\"ephemeral_dob\":{\"age_label\":\"\",\"age_years\":\"21\",\"age_months\":\"\",\"dob_method\":\"approx\",\"ephemeral_months\":\"5\",\"ephemeral_years\":\"2000\",\"dob_approx\":\"2000-05-10\",\"dob_raw\":\"2000-05-10\",\"dob_iso\":\"2000-05-10\"},\"sex\":\"male\",\"phone\":\"\",\"phone_alternate\":\"\",\"role\":\"chw\",\"external_id\":\"\",\"notes\":\"\",\"meta\":{\"created_by\":\"admin\",\"created_by_person_uuid\":\"\",\"created_by_place_uuid\":\"\"},\"reported_date\":1620687052700,\"patient_id\":\"57691\",\"_id\":\"fe8b9f60-0261-4b7e-ad2e-d718ed133597\",\"_rev\":\"2-160935b16fcb930fbbc200e07da0a8fb\"}}},\"cancelCallback\":null,\"currentTab\":\"messages\",\"snapshotData\":{\"permissions\":[\"can_view_messages\"],\"tab\":\"messages\"},\"enketoStatus\":{\"edited\":false,\"saving\":false,\"error\":null},\"facilities\":[],\"filters\":{\"search\":\"\"},\"forms\":[{\"id\":\"form:death_report\",\"code\":\"death_report\",\"title\":\"Death report\",\"icon\":\"icon-death-general\"},{\"id\":\"form:delivery\",\"code\":\"delivery\",\"title\":\"Delivery\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pnc_danger_sign_follow_up_baby\",\"code\":\"pnc_danger_sign_follow_up_baby\",\"title\":\"Postnatal danger sign follow-up - baby\",\"icon\":\"icon-infant\"},{\"id\":\"form:pnc_danger_sign_follow_up_mother\",\"code\":\"pnc_danger_sign_follow_up_mother\",\"title\":\"Postnatal danger sign follow-up - mother\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pregnancy\",\"code\":\"pregnancy\",\"title\":\"Pregnancy registration\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_danger_sign\",\"code\":\"pregnancy_danger_sign\",\"title\":\"Pregnancy danger sign\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_danger_sign_follow_up\",\"code\":\"pregnancy_danger_sign_follow_up\",\"title\":\"Pregnancy danger sign follow-up\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_facility_visit_reminder\",\"code\":\"pregnancy_facility_visit_reminder\",\"title\":\"Health facility ANC reminder\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_home_visit\",\"code\":\"pregnancy_home_visit\",\"title\":\"Pregnancy home visit\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:undo_death_report\",\"code\":\"undo_death_report\",\"title\":\"Undo death report\",\"icon\":\"icon-person\"}],\"isAdmin\":false,\"lastChangedDoc\":false,\"loadingContent\":false,\"loadingSubActionBar\":false,\"minimalTabs\":true,\"replicationStatus\":{\"disabled\":false,\"lastTrigger\":1620739985808,\"lastSuccessTo\":1620688268729,\"current\":{\"icon\":\"fa-exclamation-triangle\",\"key\":\"sync.status.required\",\"className\":\"required\"},\"lastSuccessFrom\":1620688268729},\"selectMode\":false,\"privacyPolicyAccepted\":true,\"showActionBar\":false,\"showContent\":false,\"showPrivacyPolicy\":false,\"title\":\"\",\"unreadCount\":{\"report\":0,\"message\":0},\"version\":null,\"translationsLoaded\":true,\"userFacilityId\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"services\":{\"lastChangedDoc\":false},\"analytics\":{\"selected\":null,\"analyticsModules\":[]},\"reports\":{\"reports\":[],\"reportsById\":{},\"selected\":[],\"verifyingReport\":false,\"filters\":{}},\"messages\":{\"error\":false,\"conversations\":[],\"selected\":null},\"targetAggregates\":{\"selected\":null,\"targetAggregates\":[],\"targetAggregatesLoaded\":false,\"error\":false},\"contacts\":{\"contacts\":[],\"contactsById\":{},\"selected\":null,\"filters\":{},\"loadingSelectedChildren\":false,\"loadingSelectedReports\":false,\"loadingSummary\":false},\"tasks\":{\"tasksList\":[],\"selected\":null,\"loaded\":false}}]"
+    },
+    {
+      "level": "log",
+      "arguments": "[\"%c action\",\"color: #03A9F4; font-weight: bold\",{\"payload\":{\"replicationStatus\":{\"current\":{\"icon\":\"fa-exclamation-triangle\",\"key\":\"sync.status.required\",\"className\":\"required\"}}},\"type\":\"UPDATE_REPLICATION_STATUS\"}]"
+    },
+    {
+      "level": "log",
+      "arguments": "[\"%c prev state\",\"color: #9E9E9E; font-weight: bold\",{\"global\":{\"actionBar\":{\"left\":{\"hasResults\":false},\"right\":{\"type\":\"xml\",\"verifyingReport\":false,\"sendTo\":{\"parent\":{\"_id\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"type\":\"person\",\"name\":\"Bob Bouchard\",\"short_name\":\"Bob B\",\"date_of_birth\":\"2000-05-10\",\"date_of_birth_method\":\"approx\",\"ephemeral_dob\":{\"age_label\":\"\",\"age_years\":\"21\",\"age_months\":\"\",\"dob_method\":\"approx\",\"ephemeral_months\":\"5\",\"ephemeral_years\":\"2000\",\"dob_approx\":\"2000-05-10\",\"dob_raw\":\"2000-05-10\",\"dob_iso\":\"2000-05-10\"},\"sex\":\"male\",\"phone\":\"\",\"phone_alternate\":\"\",\"role\":\"chw\",\"external_id\":\"\",\"notes\":\"\",\"meta\":{\"created_by\":\"admin\",\"created_by_person_uuid\":\"\",\"created_by_place_uuid\":\"\"},\"reported_date\":1620687052700,\"patient_id\":\"57691\",\"_id\":\"fe8b9f60-0261-4b7e-ad2e-d718ed133597\",\"_rev\":\"2-160935b16fcb930fbbc200e07da0a8fb\"}}},\"cancelCallback\":null,\"currentTab\":\"messages\",\"snapshotData\":{\"permissions\":[\"can_view_messages\"],\"tab\":\"messages\"},\"enketoStatus\":{\"edited\":false,\"saving\":false,\"error\":null},\"facilities\":[],\"filters\":{\"search\":\"\"},\"forms\":[{\"id\":\"form:death_report\",\"code\":\"death_report\",\"title\":\"Death report\",\"icon\":\"icon-death-general\"},{\"id\":\"form:delivery\",\"code\":\"delivery\",\"title\":\"Delivery\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pnc_danger_sign_follow_up_baby\",\"code\":\"pnc_danger_sign_follow_up_baby\",\"title\":\"Postnatal danger sign follow-up - baby\",\"icon\":\"icon-infant\"},{\"id\":\"form:pnc_danger_sign_follow_up_mother\",\"code\":\"pnc_danger_sign_follow_up_mother\",\"title\":\"Postnatal danger sign follow-up - mother\",\"icon\":\"icon-mother-child\"},{\"id\":\"form:pregnancy\",\"code\":\"pregnancy\",\"title\":\"Pregnancy registration\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_danger_sign\",\"code\":\"pregnancy_danger_sign\",\"title\":\"Pregnancy danger sign\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_danger_sign_follow_up\",\"code\":\"pregnancy_danger_sign_follow_up\",\"title\":\"Pregnancy danger sign follow-up\",\"icon\":\"icon-pregnancy-danger\"},{\"id\":\"form:pregnancy_facility_visit_reminder\",\"code\":\"pregnancy_facility_visit_reminder\",\"title\":\"Health facility ANC reminder\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:pregnancy_home_visit\",\"code\":\"pregnancy_home_visit\",\"title\":\"Pregnancy home visit\",\"icon\":\"icon-pregnancy\"},{\"id\":\"form:undo_death_report\",\"code\":\"undo_death_report\",\"title\":\"Undo death report\",\"icon\":\"icon-person\"}],\"isAdmin\":false,\"lastChangedDoc\":false,\"loadingContent\":false,\"loadingSubActionBar\":false,\"minimalTabs\":true,\"replicationStatus\":{\"disabled\":false,\"lastTrigger\":1620739985808,\"lastSuccessTo\":1620688268729,\"current\":{\"icon\":\"fa-refresh\",\"key\":\"sync.status.in_progress\",\"disableSyncButton\":true},\"lastSuccessFrom\":1620688268729},\"selectMode\":false,\"privacyPolicyAccepted\":true,\"showActionBar\":false,\"showContent\":false,\"showPrivacyPolicy\":false,\"title\":\"\",\"unreadCount\":{\"report\":0,\"message\":0},\"version\":null,\"translationsLoaded\":true,\"userFacilityId\":\"56eae207-4f3f-44c5-9858-8d1e6d3ba6df\"},\"services\":{\"lastChangedDoc\":false},\"analytics\":{\"selected\":null,\"analyticsModules\":[]},\"reports\":{\"reports\":[],\"reportsById\":{},\"selected\":[],\"verifyingReport\":false,\"filters\":{}},\"messages\":{\"error\":false,\"conversations\":[],\"selected\":null},\"targetAggregates\":{\"selected\":null,\"targetAggregates\":[],\"targetAggregatesLoaded\":false,\"error\":false},\"contacts\":{\"contacts\":[],\"contactsById\":{},\"selected\":null,\"filters\":{},\"loadingSelectedChildren\":false,\"loadingSelectedReports\":false,\"loadingSummary\":false},\"tasks\":{\"tasksList\":[],\"selected\":null,\"loaded\":false}}]"
+    },
+    {
+      "level": "info",
+      "arguments": "[\"Replication failed after 0 seconds\"]"
+    },
+    {
+      "level": "error",
+      "arguments": "[\"Error replicating to remote server\",{\"fileName\":\"\",\"lineNumber\":0,\"columnNumber\":0,\"message\":\"NetworkError when attempting to fetch resource.\",\"result\":{\"ok\":false,\"start_time\":\"2021-05-11T13:33:05.815Z\",\"docs_read\":0,\"docs_written\":0,\"doc_write_failures\":0,\"errors\":[],\"status\":\"aborting\",\"end_time\":\"2021-05-11T13:33:05.861Z\",\"last_seq\":0}}]"
+    },
+    {
+      "level": "error",
+      "arguments": "[\"Error replicating to remote server\",{\"fileName\":\"\",\"lineNumber\":0,\"columnNumber\":0,\"message\":\"NetworkError when attempting to fetch resource.\",\"result\":{\"ok\":false,\"start_time\":\"2021-05-11T13:33:05.815Z\",\"docs_read\":0,\"docs_written\":0,\"doc_write_failures\":0,\"errors\":[],\"status\":\"aborting\",\"end_time\":\"2021-05-11T13:33:05.861Z\",\"last_seq\":0}}]"
+    }
+  ],
+  "type": "feedback"
+}
+]
