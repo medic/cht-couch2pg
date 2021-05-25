@@ -1,12 +1,12 @@
 {
-  "name": "medic-couch2pg",
+  "name": "cht-couch2pg",
   "version": "3.3.0",
-  "description": "replicate medic data to postgres database",
+  "description": "replicate cht data to postgres database",
   "main": "index.js",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/medic/medic-couch2pg.git"
+    "url": "git://github.com/medic/cht-couch2pg.git"
   },
   "bin": {
     "replicate-medic": "./index.js"

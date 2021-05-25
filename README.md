@@ -1,4 +1,4 @@
-# medic-couch2pg
+# CHT-couch2pg
 
 Software for creating read-only replicas of CouchDB data inside PostgreSQL v9.4.
 
@@ -21,8 +21,8 @@ The supported environment variables are:
 | POSTGRESQL_URL       | PostgreSQL instance URL, format: `postgres://[user]:[password]@localhost:[port]/[database name]`           |
 | COUCHDB_URL          | CouchDB instance URL, format: `https://[user]:[password]@localhost:[port]/medic`                           |
 | COUCH2PG_SLEEP_MINS  | Number of minutes between synchronization                                                                  |
-| COUCH2PG_DOC_LIMIT   | Number of documents medic-couch2pg fetches from CouchDB everytime                                          |
-| COUCH2PG_RETRY_COUNT | Number of times medic-couch2pg will retry synchronizing documents from CouchDB after experiencing an error |
+| COUCH2PG_DOC_LIMIT   | Number of documents cht-couch2pg fetches from CouchDB everytime                                          |
+| COUCH2PG_RETRY_COUNT | Number of times cht-couch2pg will retry synchronizing documents from CouchDB after experiencing an error |
 
 Example:
 ```
@@ -77,7 +77,7 @@ We support PostgreSQL 9.4 and greater. The user passed in the postgres url needs
 
 ## Example usage
 
-You should probably install medic-couch2pg as a service and leave it to do its thing, as it should be able to run independently without any user input.
+You should probably install cht-couch2pg as a service and leave it to do its thing, as it should be able to run independently without any user input.
 
 ### Installing as a service using Upstart (Ubuntu 14.4)
 
@@ -117,12 +117,12 @@ Environment='COUCH2PG_DOC_LIMIT=1000'
 Environment='COUCH2PG_RETRY_COUNT=5'
 Environment='COUCH2PG_CHANGES_LIMIT=1000'
 
-ExecStart=/usr/bin/npm run medic-couch2pg --prefix /path/to/medic-couch2pg/index.js
+ExecStart=/usr/bin/npm run cht-couch2pg --prefix /path/to/cht-couch2pg/index.js
 
 ExecStartPost= add monitoring script command to run after service starts.
 ExecStopPost= add monitoring script to run if service stops 
 # Required on some systems
-WorkingDirectory=/path/to/medic-couch2pg/source
+WorkingDirectory=/path/to/cht-couch2pg/source
 Restart=always
 # Restart service after 10 seconds if couch2pg service crashes
 RestartSec=10
@@ -145,7 +145,7 @@ WantedBy=multi-user.target
 
 ### Error "Checksum failed for migration ..." when upgrading from 3.2.0 to latest
 
-An SQL migration file was changed in version 3.2.0. This made upgrades from 3.1.x impossible, with the process crashing upon startup after the upgrade. See more [details about the error](https://github.com/medic/medic-couch2pg/issues/78).
+An SQL migration file was changed in version 3.2.0. This made upgrades from 3.1.x impossible, with the process crashing upon startup after the upgrade. See more [details about the error](https://github.com/medic/cht-couch2pg/issues/78).
 
 This was fixed in version 3.2.1, by reverting the changes made to the migration file. 
 Fresh installations of 3.2.0 should execute this SQL before upgrading: 
@@ -157,7 +157,7 @@ UPDATE xmlforms_migrations
         md5 = '40187aa5ee95eda0e154ecefd7512cda';
 ```
 
-See more details about the error in [#78](https://github.com/medic/medic-couch2pg/issues/78).
+See more details about the error in [#78](https://github.com/medic/cht-couch2pg/issues/78).
 
 ### Error installing deps `ERR! ... node-pre-gyp install --fallback-to-build`
 

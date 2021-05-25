@@ -18,11 +18,11 @@ const run = async (args) => {
   } else {
     console.log(
       chalk.yellow(
-        figlet.textSync('Medic-Couch2Pg', { horizontalLayout: 'full' })
+        figlet.textSync('CHT-Couch2Pg', { horizontalLayout: 'full' })
       )
     );
     const {couchUrl, pgUrl, ...opts} = await inquirer.askAboutConfiguration(args.slice(1));
-    const spinner = new Spinner('medic-couch2pg:');
+    const spinner = new Spinner('cht-couch2pg:');
     spinner.start();
     try {
       await replicate(couchUrl, pgUrl, opts);
