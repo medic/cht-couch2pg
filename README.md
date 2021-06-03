@@ -1,4 +1,4 @@
-# CHT-couch2pg
+# CHTcouch2pg
 
 Software for creating read-only replicas of CouchDB data inside PostgreSQL v9.4.
 
