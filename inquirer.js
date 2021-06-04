@@ -21,7 +21,7 @@ module.exports = {
         message: 'Enter cht-couch2pg postgres url:',
         default: args.length >= 2 ? args[1] : 'postgres://localhost:5432/medic-analytics',
         validate: function(value) {
-          return value.length ? true : 'Please enter cht-couch2pg url';
+          return value.length ? true : 'Please enter cht-couch2pg postgres url';
         }
       },
       {
