@@ -1,7 +1,7 @@
 {
   "name": "cht-couch2pg",
   "version": "3.4.0",
-  "description": "replicate cht data to postgres database",
+  "description": "Replicate CHT data from CouchDB to postgres database",
   "main": "index.js",
   "license": "Apache-2.0",
   "repository": {
