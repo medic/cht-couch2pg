@@ -1,10 +1,10 @@
-name: Build medic-couch2pg and run unit test cases
+name: Build cht-couch2pg and run unit test cases
 
 on: [ push, pull_request ]
 
 jobs:
   build-and-test:
-    name: Build medic-couch2pg
+    name: Build cht-couch2pg
     runs-on: ubuntu-18.04
 
     strategy:

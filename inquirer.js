@@ -9,19 +9,19 @@ module.exports = {
       {
         name: 'couchUrl',
         type: 'input',
-        message: 'Enter medic\'s couch url:',
+        message: 'Enter CHT\'s couch url:',
         default: args.length >= 1 ? args[0] : 'http://admin:pass@localhost:5984/medic',
         validate: function( value ) {
-          return value.length ? true : 'Please enter medic\'s couch url.';
+          return value.length ? true : 'Please enter CHT\'s couch url.';
         }
       },
       {
         name: 'pgUrl',
         type: 'input',
-        message: 'Enter medic analytics postgres url:',
+        message: 'Enter cht-couch2pg postgres url:',
         default: args.length >= 2 ? args[1] : 'postgres://localhost:5432/medic-analytics',
         validate: function(value) {
-          return value.length ? true : 'Please enter medic analytics url';
+          return value.length ? true : 'Please enter cht-couch2pg postgres url';
         }
       },
       {
@@ -55,7 +55,7 @@ module.exports = {
       {
         name: 'retryCount',
         type: 'list',
-        message: 'Select how many times to internally retry continued unsuccessful runs before exiting. If unset medic-couch2pg will retry indefinitely. If set it will retry N times, and then exit with status code 1',
+        message: 'Select how many times to internally retry continued unsuccessful runs before exiting. If unset cht-couch2pg will retry indefinitely. If set it will retry N times, and then exit with status code 1',
         choices: ['1', '3', '5', '10', INDEFINITELY],
         default: INDEFINITELY
       },
