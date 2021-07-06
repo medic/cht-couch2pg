@@ -23,6 +23,7 @@ The supported environment variables are:
 | COUCH2PG_SLEEP_MINS  | Number of minutes between synchronization                                                                  |
 | COUCH2PG_DOC_LIMIT   | Number of documents cht-couch2pg fetches from CouchDB everytime                                          |
 | COUCH2PG_RETRY_COUNT | Number of times cht-couch2pg will retry synchronizing documents from CouchDB after experiencing an error |
+| COUCH2PG_USERS_META_DOC_LIMIT | Number of documents from users-meta database that cht-couch2pg fetches from CouchDB everytime |
 
 Example:
 ```
