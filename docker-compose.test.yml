@@ -18,6 +18,7 @@ services:
   sut:
     build:
       context: .
+      dockerfile: Dockerfile.test
       args:
         - node_version=10
     volumes:
@@ -26,7 +27,7 @@ services:
     environment:
       TEST_PG_URL: postgres://cht:cht_password@postgres:5432
       TEST_COUCH_URL: http://${COUCHDB_USER:-cht}:${COUCHDB_PASSWORD:-cht-password}@couch:5984
-    command: ["grunt", "test"]
+    command: ["/bin/bash", "run_tests.sh"]
 
     networks:
       - cht-net
