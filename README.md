@@ -83,6 +83,53 @@ You can test both the code in the repository and the docker image entrypoint by 
 
 You should probably install cht-couch2pg as a service and leave it to do its thing, as it should be able to run independently without any user input.
 
+### Running  the docker image
+
+You can run the [docker image](https://hub.docker.com/r/medicmobile/cht-couch2pg) avaialable on docker hub.  You will need to provide the required environment variables.  A sample docker-compose snipet is shown below. This image can work with the [cht-postgres](https://hub.docker.com/r/medicmobile/cht-postgres) docker image also available on dockerhub.
+
+```yaml
+
+  couch2pg:
+        container_name: cht_couch2pg
+        image: medicmobile/cht-couch2pg:test-rc.1
+        environment:
+           COUCHDB_URL: "http://${COUCHDB_USER:-cht}:${COUCHDB_PASSWORD:-cht_password}@medic-api:5988/medic"
+           COUCH2PG_SLEEP_MINS: '720'
+           COUCH2PG_DOC_LIMIT: '1000'
+           COUCH2PG_RETRY_COUNT: '5'
+           POSTGRES_DB: cht-postgres
+           COUCH2PG_CHANGES_LIMIT: 100
+           POSTGRES_USER_NAME: cht_couch2pg
+           POSTGRES_DB_NAME: cht
+           POSTGRES_PASSWORD: couch2pg_password
+           API_URL: http://medic-api:5988
+        depends_on:
+          - cht-postgres
+  cht-postgres:
+        container_name: cht-postgres
+        image: medicmobile/cht-postgres:release-postgres13-rc.1
+        environment:
+            POSTGRES_DB: cht
+            POSTGRES_USER: cht
+            POSTGRES_PASSWORD: cht_password
+            COUCH2PG_USER: cht_couch2pg
+            COUCH2PG_USER_PASSWORD: couch2pg_password
+            DB_OWNER_GROUP: cht_analytics
+        volumes:
+            - cht-postgres-data:/var/lib/postgresql/data
+        networks:
+          - cht-net
+
+volumes:
+  cht-postgres-data:
+    name: cht-postgres-data
+
+networks:
+  cht-net:
+   name: cht-net
+
+```
+
 ### Installing as a service using Upstart (Ubuntu 14.4)
 
 To setup a really simple service with upstart, all you need is sudo rights on the server. You want to do something like this:
