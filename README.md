@@ -74,6 +74,10 @@ NB: The integration tests destroy and re-create the given databases each time th
 
 We support PostgreSQL 9.4 and greater. The user passed in the postgres url needs to have full creation rights on the given database.
 
+## Tesing the entrypoint script together with the npm tests
+
+You can test both the code in the repository and the docker image entrypoint by runing the `docker-compose.test.yml` file. You first need to install the test submodules that are found in in the bash tests folder by running `git submodule update --init`.  Once done you can run the tests by running `docker-compose -f docker-compose.test.yml up -d` and checking the tests results through `docker logs cht-couch2pg_sut_1`
+
 
 ## Example usage
 
@@ -97,12 +101,12 @@ script
 end script
 ```
  - The service is then a standard service, e.g. `service couch2pg-example-client start`
- 
+
 ### Installing as a service using Systemd (18.04.3 LTS [Bionic Beaver])
 
 To setup couch2pg using systemd is also pretty simple. You will need to have sudo rights to the server and then follow the steps listed below:
- 
- - Install git and clone this repo onto your server, check out the relevant tag `git checkout tag_id`, and run `npm ci`. 
+
+ - Install git and clone this repo onto your server, check out the relevant tag `git checkout tag_id`, and run `npm ci`.
  - Create a systemd unit file for your project `sudo` create `/etc/systemd/system/couch2pg-sample-client.service`
  - As we are going to put passwords in this file, you want to `sudo chmod o-r /etc/systemd/system/couch2pg-sample-client.service` so that only root can read it.
  - Edit this file and configure the couch2pg system unit. It could be something simillar to this;
@@ -120,7 +124,7 @@ Environment='COUCH2PG_CHANGES_LIMIT=1000'
 ExecStart=/usr/bin/npm run cht-couch2pg --prefix /path/to/cht-couch2pg/index.js
 
 ExecStartPost= add monitoring script command to run after service starts.
-ExecStopPost= add monitoring script to run if service stops 
+ExecStopPost= add monitoring script to run if service stops
 # Required on some systems
 WorkingDirectory=/path/to/cht-couch2pg/source
 Restart=always
@@ -147,8 +151,8 @@ WantedBy=multi-user.target
 
 An SQL migration file was changed in version 3.2.0. This made upgrades from 3.1.x impossible, with the process crashing upon startup after the upgrade. See more [details about the error](https://github.com/medic/cht-couch2pg/issues/78).
 
-This was fixed in version 3.2.1, by reverting the changes made to the migration file. 
-Fresh installations of 3.2.0 should execute this SQL before upgrading: 
+This was fixed in version 3.2.1, by reverting the changes made to the migration file.
+Fresh installations of 3.2.0 should execute this SQL before upgrading:
 
 ```sql
 UPDATE xmlforms_migrations
