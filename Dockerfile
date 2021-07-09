@@ -14,4 +14,4 @@ RUN npm i -g grunt-cli
 
 COPY . .
 
-CMD ["/bin/sh", "/usr/app/couch2pg-entrypoint.sh main"]
+CMD ["/bin/sh", "/usr/app/couch2pg-entrypoint.sh", "main"]
