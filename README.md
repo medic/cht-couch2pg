@@ -45,16 +45,16 @@ Run it locally in interactive mode: `npm ci && node . -i`
 Run tests with:
 
 ```bash
-docker-compose -f docker-compose.test.yml build sut
-docker-compose -f docker-compose.test.yml run sut grunt test
+docker-compose build sut
+docker-compose run sut grunt test
 ```
 
-Run tests in interactive watch mode with: `docker-compose -f docker-compose.test.yml run test npm run watch`
+Run tests in interactive watch mode with: `docker-compose run test npm run watch`
 
 Run entrypoint script tests with
 
 ```bash
-docker-compose -f docker-compose.test.yml run sut ./tests/bash/bats/bin/bats  /app/tests/bash/test.bats
+docker-compose run sut ./tests/bash/bats/bin/bats  /app/tests/bash/test.bats
 ```
 
 ### Running  the docker image
