@@ -1,26 +1,90 @@
-version: '2.2'
+version: '3.7'
 services:
-  couch:
-    image: couchdb:2.1.1
-    ports:
-      - ${COUCH_PORT}:5984
-    environment:
-      COUCHDB_USER: ${COUCH_ADMIN}
-      COUCHDB_PASSWORD: ${COUCH_PASS}
-  postgres:
-    image: postgres:9.4
-    ports:
-      - ${PG_PORT}:5432
-    environment:
-      POSTGRES_PASSWORD: postgres
-  test:
-    build: .
-    volumes:
-      - ./libs:/usr/app/libs
-      - ./tests:/usr/app/tests
-    depends_on:
-      - couch
-      - postgres
-    environment:
-      TEST_COUCH_URL: http://${COUCH_ADMIN}:${COUCH_PASS}@couch:5984
-      TEST_PG_URL: postgres://postgres:${PG_PASS}@postgres:5432
+
+    couchdb:
+      container_name: medic-couchdb
+      image: medicmobile/couchdb:2.3.1-test14
+      environment:
+        COUCHDB_USER: "${COUCHDB_USER:-cht}"
+        COUCHDB_PASSWORD: "${COUCHDB_PASSWORD:-cht_password}"
+      volumes:
+        - cht-data:/opt/couchdb/data/
+        - cht-couchconfig:/opt/couchdb/etc/local.d/
+      networks:
+        - cht-net
+
+    medic-api:
+      container_name: medic-api
+      image: medicmobile/medic-api:3.10.0-010520-test3
+      environment:
+        COUCHDB_SERVICE_NAME: couchdb
+        COUCH_NODE_NAME: "couchdb@127.0.0.1"
+        COUCHDB_USER: "${COUCHDB_USER:-cht}"
+        COUCHDB_PASSWORD: "${COUCHDB_PASSWORD:-cht_password}"
+        HORTI_BOOTSTRAP_VERSION: 3.10.0
+        NODE_ENV: production
+        HAPROXY_SVC: haproxy
+      networks:
+        - cht-net
+      depends_on:
+        - haproxy
+
+    haproxy:
+      container_name: haproxy
+      image: medicmobile/haproxy:rc-1.17
+      environment:
+        COUCHDB_USER: "${COUCHDB_USER:-cht}"
+        COUCHDB_PASSWoRD: "${COUCHDB_PASSWORD:-cht_password}"
+        COUCHDB_HOST: couchdb
+      networks:
+        - cht-net
+      depends_on:
+        - couchdb
+      restart: unless-stopped
+    couch2pg:
+        container_name: cht_couch2pg
+        image: medicmobile/cht-couch2pg:test-rc.1
+        environment:
+           COUCHDB_URL: "http://${COUCHDB_USER:-cht}:${COUCHDB_PASSWORD:-cht_password}@medic-api:5988/medic"
+           COUCH2PG_SLEEP_MINS: '720'
+           COUCH2PG_DOC_LIMIT: '1000'
+           COUCH2PG_RETRY_COUNT: '5'
+           POSTGRES_DB: cht-postgres
+           COUCH2PG_CHANGES_LIMIT: 100
+           POSTGRES_USER_NAME: cht_couch2pg
+           POSTGRES_DB_NAME: cht
+           POSTGRES_PASSWORD: couch2pg_password
+           API_URL: http://medic-api:5988
+        networks:
+            - cht-net
+        depends_on:
+            - medic-api
+            - cht-postgres
+    cht-postgres:
+        container_name: cht-postgres
+        image: medicmobile/cht-postgres:release-postgres13-rc.1
+        environment:
+            POSTGRES_DB: cht
+            POSTGRES_USER: cht
+            POSTGRES_PASSWORD: cht_password
+            COUCH2PG_USER: cht_couch2pg
+            COUCH2PG_USER_PASSWORD: couch2pg_password
+            DB_OWNER_GROUP: cht_analytics
+        volumes:
+            - cht-postgres-data:/var/lib/postgresql/data
+        networks:
+          - cht-net
+
+volumes:
+  cht-data:
+    name: cht-data
+  cht-couchconfig:
+    name: cht-couchconfig
+  cht-ssl:
+    name: cht-ssl
+  cht-postgres-data:
+    name: cht-postgres-data
+
+networks:
+  cht-net:
+   name: cht-net

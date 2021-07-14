@@ -18,16 +18,15 @@ services:
   sut:
     build:
       context: .
-      dockerfile: Dockerfile.test
+      target: test-couch2pg
       args:
-        - node_version=10
+        node_version: '10'
     volumes:
       - ./libs:/usr/app/libs
       - ./tests:/usr/app/tests
     environment:
       TEST_PG_URL: postgres://cht:cht_password@postgres:5432
       TEST_COUCH_URL: http://${COUCHDB_USER:-cht}:${COUCHDB_PASSWORD:-cht-password}@couch:5984
-    command: ["/bin/bash", "run_tests.sh"]
 
     networks:
       - cht-net
