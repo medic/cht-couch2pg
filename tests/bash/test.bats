@@ -57,7 +57,7 @@ teardown()
 
 
 @test "when api is ready we return a ready message " {
-    export API_URL=http://cht:cht-password@couch:5984
+    export API_URL=http://${COUCHDB_USER}:${COUCHDB_PASSWORD}@${COUCHDB_HOST}:5984
     run couch2pg-entrypoint.sh check_if_api_is_ready
     assert_output --partial "api  is ready"
 }

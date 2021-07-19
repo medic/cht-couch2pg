@@ -11,6 +11,28 @@ jobs:
       matrix:
         node-version: [ 8, 10, 12 ]
 
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: cht_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      couchdb:
+        image: apache/couchdb:2.3.1
+        env:
+          COUCHDB_USER: cht
+          COUCHDB_PASSWORD: cht-password
+        ports:
+          - 5984:5984
+          - 5985:5985
+
     steps:
       - name: Get Docker Hub username
         id: get-docker-hub-username
@@ -24,11 +46,30 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@v2
 
-      - name: Build
-        run: docker-compose build --build-arg node_version=${{ matrix.node-version }} sut
+      # - name: Build test image and run tests
+      #   run: docker build --build-arg node_version=${{ matrix.node-version }}  --build-arg PG_PASS=cht_password --build-arg COUCH_PASS=cht-password --build-arg COUCH_ADMIN=cht --build-arg PG_SVC=127.0.0.1 --build-arg COUCHDB_SVC=127.0.0.1 --target test-couch2pg .
 
-      - name: Run npm tests
-        run: docker-compose run sut grunt test
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-      - name: Run entrypoint script tests
-        run: docker-compose run sut ./tests/bash/bats/bin/bats  /app/tests/bash/test.bats
+      - name:  Get tags to apply to image
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: |
+            medicmobile/cht-couch2pg
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: ${{github.ref == 'refs/heads/arch-v3' || github.event.ref_type == 'tag' }}
+          tags: ${{ steps.meta.outputs.tags }}
