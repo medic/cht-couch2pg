@@ -46,8 +46,8 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@v2
 
-      # - name: Build test image and run tests
-      #   run: docker build --build-arg node_version=${{ matrix.node-version }}  --build-arg PG_PASS=cht_password --build-arg COUCH_PASS=cht-password --build-arg COUCH_ADMIN=cht --build-arg PG_SVC=127.0.0.1 --build-arg COUCHDB_SVC=127.0.0.1 --target test-couch2pg .
+      - name: Build test image and run tests
+        run: docker build --build-arg node_version=${{ matrix.node-version }}  --build-arg PG_PASS=cht_password --build-arg COUCH_PASS=cht-password --build-arg COUCH_ADMIN=cht --build-arg PG_SVC=127.0.0.1 --build-arg COUCHDB_SVC=127.0.0.1 --target test-couch2pg .
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
