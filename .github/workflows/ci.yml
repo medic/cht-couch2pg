@@ -6,10 +6,12 @@ jobs:
   build-and-test:
     name: Build cht-couch2pg
     runs-on: ubuntu-18.04
+    container: ubuntu:20.04
 
     strategy:
       matrix:
         node-version: [ 8, 10, 12 ]
+        # node-version: [10]
 
     services:
       postgres:
@@ -46,11 +48,11 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@v2
 
-      - name: Build test image and run tests
-        run: docker build --build-arg node_version=${{ matrix.node-version }}  --build-arg PG_PASS=cht_password --build-arg COUCH_PASS=cht-password --build-arg COUCH_ADMIN=cht --build-arg PG_SVC=127.0.0.1 --build-arg COUCHDB_SVC=127.0.0.1 --target test-couch2pg .
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+
+      - name: Build test image and run tests
+        run: docker build --build-arg node_version=${{ matrix.node-version }}  --build-arg PG_PASS=cht_password --build-arg COUCH_PASS=cht-password --build-arg COUCH_ADMIN=cht --build-arg PG_SVC=postgres --build-arg COUCHDB_SVC=couchdb --target test-couch2pg .
 
       - name:  Get tags to apply to image
         id: meta
