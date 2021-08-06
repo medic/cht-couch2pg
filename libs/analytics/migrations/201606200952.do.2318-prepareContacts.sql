@@ -79,7 +79,6 @@ WHERE
 CREATE OR REPLACE FUNCTION refresh_matviews() RETURNS INTEGER AS $$
 DECLARE
   matview RECORD;
-  start_time TIMESTAMPTZ;
 BEGIN
   RAISE NOTICE 'Refreshing base metaviews';
   -- other matviews rely on contactview_metadata, which is a matview
@@ -91,9 +90,7 @@ BEGIN
       CONTINUE;
     END IF;
     RAISE NOTICE 'Refreshing %', matview.matviewname;
-    start_time := clock_timestamp();
     EXECUTE format('REFRESH MATERIALIZED VIEW CONCURRENTLY %I', matview.matviewname);
-    RAISE INFO 'Finished refreshing % took %', matview.matviewname, clock_timestamp() - start_time;
   END LOOP;
   RAISE NOTICE 'Materialized views refreshed.';
   RETURN 1;
