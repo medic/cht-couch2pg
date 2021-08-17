@@ -82,11 +82,11 @@ This sets the number of times cht-couch2pg will retry synchronizing documents fr
 
 #### 5. COUCH2PG_CHANGES_LIMIT
 
-TODO
+The number of document ids to fetch per change limit request
 
 #### 6. COUCH2PG_USERS_META_DOC_LIMIT
 
-TODO
+The number of documents to fetch concurrently from the users-meta database
 
 #### 7. POSTGRES_DB
 
