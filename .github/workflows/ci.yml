@@ -11,28 +11,6 @@ jobs:
       matrix:
         node-version: [ 8, 10, 12 ]
 
-
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_PASSWORD: cht_password
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
-      couchdb:
-        image: apache/couchdb:2.3.1
-        env:
-          COUCHDB_USER: cht
-          COUCHDB_PASSWORD: cht-password
-        ports:
-          - 5984:5984
-
     steps:
       - name: Get Docker Hub username
         id: get-docker-hub-username
@@ -46,30 +24,35 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@v2
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
 
-      - name: Build test image and run tests
-        run: docker build --build-arg node_version=${{ matrix.node-version }}  --build-arg PG_PASS=cht_password --build-arg COUCH_PASS=cht-password --build-arg COUCH_ADMIN=cht --build-arg PG_SVC=localhost --build-arg COUCHDB_SVC=localhost --target test-couch2pg .
+      - name: Build test image
+        run: docker-compose build --build-arg node_version=${{ matrix.node-version }} cht-couch2pg
+
+      - name: Run grunt Tests
+        run: docker-compose run cht-couch2pg grunt test
+
+      - name: Run entry point script Tests
+        run: docker-compose run cht-couch2pg ./tests/bash/bats/bin/bats  /app/tests/bash/test.bats
 
       - name:  Get tags to apply to image
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: |
-            medicmobile/cht-couch2pg
-          tags: |
-            type=schedule
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
-            type=sha
+          images: medicmobile/cht-couch2pg
+          labels: |
+            org.opencontainers.image.title=cht-couch2pg
+            org.opencontainers.image.description= Software for creating read-only replicas of CouchDB data inside PostgreSQL
+            org.opencontainers.image.vendor=Medic
+          flavor: |
+            latest=auto
+            suffix=-node-${{matrix.node-version}}
 
-      - name: Build and push Docker image
+
+      - name: Build and Publish to Docker Hub
         uses: docker/build-push-action@v2
         with:
           context: .
           push: ${{github.ref == 'refs/heads/arch-v3' || github.event.ref_type == 'tag' }}
           tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          target: cht-couch2pg

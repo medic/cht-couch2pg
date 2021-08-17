@@ -33,7 +33,7 @@ echo "Postgres is ready moving on ...">&2
 check_if_api_is_ready(){
   # check if api is up
   wait_count=0
-  until curl -s --head  --request GET $API_URL $| grep "200 OK" > /dev/null
+  until curl -s --head  --request GET $COUCHDB_URL $| grep "200 OK" > /dev/null
   do
     echo "Waiting for cht api" >&2
     wait_count=$((wait_count +1))

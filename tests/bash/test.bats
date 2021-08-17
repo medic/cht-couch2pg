@@ -8,10 +8,6 @@ setup() {
     DIR="$( cd "$( dirname "$BATS_TEST_FILENAME" )" >/dev/null 2>&1 && pwd )"
     # make executables in  the base directory visible to PATH
     PATH="$DIR/../../:$PATH"
-    export POSTGRES_USER_NAME=cht
-    export POSTGRES_PASSWORD=cht_password
-    export POSTGRES_DB=cht-postgres
-    export POSTGRES_DB_NAME=cht
     export WAIT_THRESHOLD=1
     export SLEEP_SECONDS=1
 
@@ -57,7 +53,7 @@ teardown()
 
 
 @test "when api is ready we return a ready message " {
-    export API_URL=http://${COUCHDB_USER}:${COUCHDB_PASSWORD}@${COUCHDB_HOST}:5984
+    export COUCHDB_URL=${TEST_COUCH_URL}
     run couch2pg-entrypoint.sh check_if_api_is_ready
     assert_output --partial "api  is ready"
 }
