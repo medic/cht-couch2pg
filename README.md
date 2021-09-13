@@ -50,12 +50,12 @@ docker-compose build cht-couch2pg
 docker-compose run cht-couch2pg grunt test
 ```
 
-Run tests in interactive watch mode with: `docker-compose run test npm run watch`
+Run tests in interactive watch mode with: `docker-compose -f docker-compose.test.yml run cht-couch2pg npm run watch`
 
 Run entrypoint script tests with
 
 ```bash
-docker-compose run cht-couch2pg ./tests/bash/bats/bin/bats  /app/tests/bash/test.bats
+docker-compose -f docker-compose.test.yml run cht-couch2pg ./tests/bash/bats/bin/bats  /app/tests/bash/test.bats
 ```
 
 ## Running  the docker image
@@ -107,7 +107,8 @@ The password the cht-couch2pg uses to authenticate to PostgreSQL.
 A sample docker-compose snippet is shown below. This image can work with the [cht-postgres](https://hub.docker.com/r/medicmobile/cht-postgres) docker image also available on docker hub.
 
 ```yaml
-
+version: '3.7'
+services:
   couch:
         image: couchdb:2.3.1
         environment:
@@ -117,7 +118,7 @@ A sample docker-compose snippet is shown below. This image can work with the [ch
         - cht-net
   cht-couch2pg:
         container_name: cht-couch2pg
-        image: medicmobile/cht-couch2pg:test-rc.1
+        image: medicmobile/cht-couch2pg:v3.2.0-node-10
         environment:
            COUCHDB_URL: "http://cht:cht_password@couch:5984"
            COUCH2PG_SLEEP_MINS: '720'

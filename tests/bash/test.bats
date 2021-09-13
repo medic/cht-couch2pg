@@ -45,17 +45,17 @@ teardown()
     assert_output "Set postgres URL to postgres://cht:cht_password@cht-postgres:5432/cht"
 }
 
-@test "when api is not ready we return a wait message" {
-    run couch2pg-entrypoint.sh check_if_api_is_ready
-    assert_output --partial "Waiting for cht api"
-    assert_output --partial "No api end point Found"
+@test "when couchdb is not ready we return a wait message" {
+    run couch2pg-entrypoint.sh check_if_couchdb_is_ready
+    assert_output --partial "Waiting for cht couchdb"
+    assert_output --partial "No couchdb end point Found"
 }
 
 
-@test "when api is ready we return a ready message " {
+@test "when couchdb is ready we return a ready message " {
     export COUCHDB_URL=${TEST_COUCH_URL}
-    run couch2pg-entrypoint.sh check_if_api_is_ready
-    assert_output --partial "api  is ready"
+    run couch2pg-entrypoint.sh check_if_couchdb_is_ready
+    assert_output --partial "couchdb  is ready"
 }
 
 @test "when postgres is not ready we return a wait message" {

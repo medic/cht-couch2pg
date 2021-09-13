@@ -30,20 +30,20 @@ echo "Postgres is ready moving on ...">&2
 }
 
 
-check_if_api_is_ready(){
-  # check if api is up
+check_if_couchdb_is_ready(){
+  # check if couchdb is up
   wait_count=0
   until curl -s --head  --request GET $COUCHDB_URL $| grep "200 OK" > /dev/null
   do
-    echo "Waiting for cht api" >&2
+    echo "Waiting for cht couchdb" >&2
     wait_count=$((wait_count +1))
     if [[ "$wait_count" -gt $WAIT_THRESHOLD ]]; then
-      echo "No api end point Found" >&2
+      echo "No couchdb end point Found" >&2
       exit 1
     fi
     sleep $SLEEP_SECONDS
   done
-  echo "api  is ready">&2
+  echo "couchdb  is ready">&2
 
 }
 
@@ -56,7 +56,7 @@ main (){
 
 welcome_message
 set_postgres_url
-check_if_api_is_ready
+check_if_couchdb_is_ready
 check_if_postgres_is_ready
 echo "Launching couchdb">&2
 launch_couchdb

@@ -7,14 +7,23 @@ services:
       COUCHDB_PASSWORD: cht-password
     networks:
       - cht-net
+
   postgres:
-    image: postgres:13
+    image: medicmobile/cht-postgres:release-postgres13-rc.1
     environment:
-        POSTGRES_DB: cht
-        POSTGRES_USER: cht
-        POSTGRES_PASSWORD: cht_password
+      POSTGRES_DB: cht
+      POSTGRES_USER: cht
+      POSTGRES_PASSWORD: cht_password
+      COUCH2PG_USER: cht_couch2pg
+      COUCH2PG_USER_PASSWORD: couch2pg_password
+      DB_OWNER_GROUP: cht_analytics
+    volumes:
+    - cht-postgres-data:/var/lib/postgresql/data
     networks:
-      - cht-net
+    - cht-net
+    ports:
+    - ${PG_PORT:-5432}:5432
+
   cht-couch2pg:
     build:
       context: .
@@ -39,3 +48,7 @@ services:
 networks:
   cht-net:
     name: cht-net
+
+volumes:
+  cht-postgres-data:
+    name: cht-postgres-data

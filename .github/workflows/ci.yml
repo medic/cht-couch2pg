@@ -18,9 +18,7 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
-          # username: ${{ secrets.CI_DOCKER_USERNAME }}
-          # password: ${{ secrets.CI_DOCKER_PASSWORD }}
-          username: nomulex
+          username: dockermedic
           password: ${{ secrets.DOCKER_WRITE_PASSWORD }}
         if: steps.get-docker-hub-username.outputs.dockerhub_username
       - name: Checkout branch
@@ -28,13 +26,13 @@ jobs:
 
 
       - name: Build test image
-        run: docker-compose build --build-arg node_version=${{ matrix.node-version }} cht-couch2pg
+        run: docker-compose -f docker-compose.test.yml build --build-arg node_version=${{ matrix.node-version }} cht-couch2pg
 
       - name: Run grunt Tests
-        run: docker-compose run cht-couch2pg grunt test
+        run: docker-compose -f docker-compose.test.yml run cht-couch2pg grunt test
 
       - name: Run entry point script Tests
-        run: docker-compose run cht-couch2pg ./tests/bash/bats/bin/bats  /app/tests/bash/test.bats
+        run: docker-compose -f docker-compose.test.yml run cht-couch2pg ./tests/bash/bats/bin/bats  /app/tests/bash/test.bats
 
       - name:  Get tags to apply to image
         id: meta
@@ -54,7 +52,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          push: ${{github.ref == 'refs/heads/arch-v3' || github.event.ref_type == 'tag' }}
+          push: ${{github.ref == 'refs/heads/master' || github.ref == 'refs/heads/arch-v3' || github.event.ref_type == 'tag' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           target: cht-couch2pg
