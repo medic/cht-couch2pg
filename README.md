@@ -20,9 +20,10 @@ The supported environment variables are:
 | -------------------- | ---------------------------------------------------------------------------------------------------------- |
 | POSTGRESQL_URL       | PostgreSQL instance URL, format: `postgres://[user]:[password]@localhost:[port]/[database name]`           |
 | COUCHDB_URL          | CouchDB instance URL, format: `https://[user]:[password]@localhost:[port]/medic`                           |
-| COUCH2PG_SLEEP_MINS  | Number of minutes between synchronization                                                                  |
+| COUCH2PG_SLEEP_MINS  | Number of minutes between synchronization. It defaults to 50 if this variable is not explicitly set.       |
 | COUCH2PG_DOC_LIMIT   | Number of documents cht-couch2pg fetches from CouchDB everytime                                          |
 | COUCH2PG_RETRY_COUNT | Number of times cht-couch2pg will retry synchronizing documents from CouchDB after experiencing an error |
+| COUCH2PG_USERS_META_DOC_LIMIT | Number of documents to grab concurrently from the users-meta database. These documents are larger so set a limit lower than the docLimit. It defaults to 50 if this variable is not explicitly set. |
 
 Example:
 ```
