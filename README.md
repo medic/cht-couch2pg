@@ -46,8 +46,8 @@ Run it locally in interactive mode: `npm ci && node . -i`
 Run tests with:
 
 ```bash
-docker-compose build cht-couch2pg
-docker-compose run cht-couch2pg grunt test
+docker-compose  -f docker-compose.test.yml build cht-couch2pg
+docker-compose  -f docker-compose.test.yml run cht-couch2pg grunt test
 ```
 
 Run tests in interactive watch mode with: `docker-compose -f docker-compose.test.yml run cht-couch2pg npm run watch`

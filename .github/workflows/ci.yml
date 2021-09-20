@@ -1,11 +1,12 @@
 name: Build cht-couch2pg and run unit test cases
 
-on: [ push, pull_request ]
+on: [ push]
 
 jobs:
   build-and-test:
     name: Build cht-couch2pg
     runs-on: ubuntu-18.04
+    timeout-minutes: 15
 
     strategy:
       matrix:
