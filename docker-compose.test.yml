@@ -1,0 +1,54 @@
+version: '3.7'
+services:
+  couch:
+    image: couchdb:2.3.1
+    environment:
+      COUCHDB_USER: cht
+      COUCHDB_PASSWORD: cht-password
+    networks:
+      - cht-net
+
+  postgres:
+    image: medicmobile/cht-postgres:release-postgres13-rc.1
+    environment:
+      POSTGRES_DB: cht
+      POSTGRES_USER: cht
+      POSTGRES_PASSWORD: cht_password
+      COUCH2PG_USER: cht_couch2pg
+      COUCH2PG_USER_PASSWORD: couch2pg_password
+      DB_OWNER_GROUP: cht_analytics
+    volumes:
+    - cht-postgres-data:/var/lib/postgresql/data
+    networks:
+    - cht-net
+    ports:
+    - ${PG_PORT:-5432}:5432
+
+  cht-couch2pg:
+    build:
+      context: .
+      target: test-couch2pg
+    volumes:
+      - ./libs:/usr/app/libs
+      - ./tests:/usr/app/tests
+    environment:
+      TEST_PG_URL: postgres://cht:cht_password@postgres:5432
+      TEST_COUCH_URL: http://cht:cht-password@couch:5984
+      POSTGRES_USER_NAME: cht
+      POSTGRES_PASSWORD: cht_password
+      POSTGRES_DB: cht-postgres
+      POSTGRES_DB_NAME: cht
+
+    networks:
+      - cht-net
+    depends_on:
+      - couch
+      - postgres
+
+networks:
+  cht-net:
+    name: cht-net
+
+volumes:
+  cht-postgres-data:
+    name: cht-postgres-data
