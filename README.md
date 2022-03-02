@@ -89,9 +89,9 @@ The number of document ids to fetch per change limit request
 
 The number of documents to fetch concurrently from the users-meta database
 
-#### 7. POSTGRES_DB
+#### 7. $POSTGRES_CONTAINER
 
-The name of the PostgreSQL instance running PostgreSQL.
+The name of the PostgreSQL container running PostgreSQL.
 
 #### 8. POSTGRES_USER_NAME
 
@@ -126,7 +126,7 @@ services:
            COUCH2PG_DOC_LIMIT: '1000'
            COUCH2PG_RETRY_COUNT: '5'
            COUCH2PG_CHANGES_LIMIT: '100'
-           POSTGRES_DB: cht-postgres
+           POSTGRES_CONTAINER: cht-postgres
            POSTGRES_USER_NAME: cht_couch2pg
            POSTGRES_DB_NAME: cht
            POSTGRES_PASSWORD: couch2pg_password
