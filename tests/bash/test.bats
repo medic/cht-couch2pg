@@ -42,7 +42,7 @@ teardown()
 
 @test "test postgres url exported properly" {
     run couch2pg-entrypoint.sh set_postgres_url
-    assert_output "Set postgres URL to postgres://cht:cht_password@cht-postgres:5432/cht"
+    assert_output "Set postgres URL to postgres://cht:cht_password@postgres:5432/cht"
 }
 
 @test "when couchdb is not ready we return a wait message" {
