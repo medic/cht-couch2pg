@@ -107,56 +107,6 @@ The password the cht-couch2pg uses to authenticate to PostgreSQL.
 
 A sample docker-compose snippet is shown below. This image can work with the [cht-postgres](https://hub.docker.com/r/medicmobile/cht-postgres) docker image also available on docker hub.
 
-```yaml
-version: '3.7'
-services:
-  couch:
-        image: couchdb:2.3.1
-        environment:
-          COUCHDB_USER: cht
-          COUCHDB_PASSWORD: cht-password
-        networks:
-        - cht-net
-  cht-couch2pg:
-        container_name: cht-couch2pg
-        image: medicmobile/cht-couch2pg:v3.2.0-node-10
-        environment:
-           COUCHDB_URL: "http://cht:cht_password@couch:5984"
-           COUCH2PG_SLEEP_MINS: '720'
-           COUCH2PG_DOC_LIMIT: '1000'
-           COUCH2PG_RETRY_COUNT: '5'
-           COUCH2PG_CHANGES_LIMIT: '100'
-           POSTGRES_CONTAINER: cht-postgres
-           POSTGRES_USER_NAME: cht_couch2pg
-           POSTGRES_DB_NAME: cht
-           POSTGRES_PASSWORD: couch2pg_password
-        depends_on:
-          - cht-postgres
-
-  cht-postgres:
-        container_name: cht-postgres
-        image: medicmobile/cht-postgres:release-postgres13-rc.1
-        environment:
-            POSTGRES_DB: cht
-            POSTGRES_USER: cht
-            POSTGRES_PASSWORD: cht_password
-            COUCH2PG_USER: cht_couch2pg
-            COUCH2PG_USER_PASSWORD: couch2pg_password
-            DB_OWNER_GROUP: cht_analytics
-        volumes:
-            - cht-postgres-data:/var/lib/postgresql/data
-        networks:
-          - cht-net
-
-volumes:
-  cht-postgres-data:
-    name: cht-postgres-data
-
-networks:
-  cht-net:
-   name: cht-net
-
-```
 
 ## Known issues
 

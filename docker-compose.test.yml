@@ -37,7 +37,7 @@ services:
       TEST_COUCH_URL: http://cht:cht-password@couch:5984
       POSTGRES_USER_NAME: cht
       POSTGRES_PASSWORD: cht_password
-      POSTGRES_CONTAINER: postgres
+      POSTGRES_SERVER: postgres
       POSTGRES_DB_NAME: cht
 
     networks:
