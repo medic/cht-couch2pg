@@ -1,5 +1,12 @@
 version: '3.7'
 services:
+  couch:
+    image: couchdb:2.3.1
+    environment:
+      COUCHDB_USER: cht
+      COUCHDB_PASSWORD: cht-password
+    networks:
+      - cht-net
 
   postgres:
     image: medicmobile/cht-postgres:release-postgres13-rc.1
@@ -20,19 +27,24 @@ services:
   cht-couch2pg:
     build:
       context: .
+      target: test-couch2pg
     volumes:
       - ./libs:/usr/app/libs
+      - ./tests:/usr/app/tests
     environment:
       COUCHDB_URL: ${COUCHDB_URL:-"http://cht:cht-password@couch:5984"}
+      TEST_PG_URL: postgres://cht:cht_password@postgres:5432
+      TEST_COUCH_URL: http://cht:cht-password@couch:5984
       POSTGRES_USER_NAME: cht
       POSTGRES_PASSWORD: cht_password
-      POSTGRES_DB: postgres
+      POSTGRES_CONTAINER: postgres
       POSTGRES_DB_NAME: cht
 
     networks:
       - cht-net
     depends_on:
       - postgres
+      - couch
 
 networks:
   cht-net:
