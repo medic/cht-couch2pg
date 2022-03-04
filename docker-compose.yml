@@ -5,29 +5,26 @@ services:
     image: medicmobile/cht-postgres:release-postgres13-rc.1
     environment:
 
-      # todo - these should be the fancy root user for pg, not used by anything else
       POSTGRES_DB: ${POSTGRES_DB_NAME:-cht}
-      POSTGRES_USER: ${POSTGRES_USER_NAME:-cht}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-cht_password}
+      POSTGRES_USER: ${POSTGRES_USER_NAME:-postgres_root}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres_root_password}
 
-      # todo - these A) shouldn't be hard coded and B) should be used by couch2pg below
-      COUCH2PG_USER: cht_couch2pg
-      COUCH2PG_USER_PASSWORD: couch2pg_password
-      DB_OWNER_GROUP: cht_analytics
+      COUCH2PG_USER: ${COUCH2PG_USER:-cht_couch2pg}
+      COUCH2PG_USER_PASSWORD: ${COUCH2PG_USER_PASSWORD:-cht_couch2pg_password}
+      DB_OWNER_GROUP: ${DB_OWNER_GROUP:-cht_analytics}
     volumes:
-    - cht-postgres-data:/var/lib/postgresql/data
+      - cht-postgres-data:/var/lib/postgresql/data
     ports:
-    - ${POSTGRES_PORT:-5432}:5432
+      - ${POSTGRES_PORT:-5432}:5432
 
   cht-couch2pg:
     image: medicmobile/cht-couch2pg:master-node-10
     environment:
-      COUCHDB_URL: ${COUCHDB_URL}
+      COUCHDB_URL: ${COUCHDB_URL:-https://medic:password@localhost:5988/medic}
 
-      POSTGRES_USER_NAME: ${POSTGRES_USER_NAME:-cht}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-cht_password}
+      POSTGRES_USER_NAME: ${COUCH2PG_USER:-cht_couch2pg}
+      POSTGRES_PASSWORD: ${COUCH2PG_USER_PASSWORD:-cht_couch2pg_password}
       POSTGRES_SERVER_NAME: ${POSTGRES_SERVER_NAME:-postgres}
-      POSTGRES_SERVER: ${POSTGRES_SERVER_NAME:-postgres}
       POSTGRES_DB_NAME: ${POSTGRES_DB_NAME:-cht}
 
       COUCH2PG_CHANGES_LIMIT: ${COUCH2PG_CHANGES_LIMIT:-100}

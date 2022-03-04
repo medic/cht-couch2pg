@@ -38,7 +38,6 @@ services:
       POSTGRES_USER_NAME: cht
       POSTGRES_PASSWORD: cht_password
       POSTGRES_SERVER_NAME: ${POSTGRES_SERVER_NAME:-postgres}
-      POSTGRES_SERVER: ${POSTGRES_SERVER_NAME:-postgres}
       POSTGRES_DB_NAME: cht
 
     networks:
