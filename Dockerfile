@@ -1,9 +1,9 @@
 #base Build
 ARG node_version=10
 FROM node:$node_version as base_couch2pg_build
-RUN apt-get update
-RUN apt-get dist-upgrade -y
-RUN apt-get -y install postgresql-client curl
+RUN apt update
+RUN apt dist-upgrade -y
+RUN apt -y install postgresql-client curl
 WORKDIR /app
 COPY . .
 RUN npm ci
