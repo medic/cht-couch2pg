@@ -9,15 +9,15 @@ welcome_message(){
 }
 
 set_postgres_url(){
-  export POSTGRESQL_URL=postgres://$POSTGRES_USER_NAME:$POSTGRES_PASSWORD@$POSTGRES_SERVER:5432/$POSTGRES_DB_NAME
+  export POSTGRESQL_URL=postgres://$POSTGRES_USER_NAME:$POSTGRES_PASSWORD@$POSTGRES_SERVER_NAME:5432/$POSTGRES_DB_NAME
   echo "Set postgres URL to $POSTGRESQL_URL" >&2
 }
 
 check_if_postgres_is_ready(){
   #waiting for postgres
   wait_count=0
-  echo "check_if_postgres_is_ready with \"pg_isready -q  -h $POSTGRES_SERVER -U $POSTGRES_USER_NAME --d $POSTGRES_DB_NAME\""
-  until  pg_isready -q  -h $POSTGRES_SERVER -U $POSTGRES_USER_NAME --d $POSTGRES_DB_NAME
+  echo "check_if_postgres_is_ready with \"pg_isready -q  -h $POSTGRES_SERVER_NAME -U $POSTGRES_USER_NAME --d $POSTGRES_DB_NAME\""
+  until  pg_isready -q  -h $POSTGRES_SERVER_NAME -U $POSTGRES_USER_NAME --d $POSTGRES_DB_NAME
   do
     echo "Waiting for PostgreSQL..." >&2
     wait_count=$((wait_count +1))
