@@ -31,7 +31,7 @@ echo "Postgres is ready moving on ...">&2
 }
 
 get_couch_http_code(){
-  curl -k --silent --show-error --head "$COUCHDB_URL" --write-out '%{http_code}' | tail -n1
+  curl -k --silent --show-error --head "$COUCHDB_URL/" --write-out '%{http_code}' | tail -n1
 }
 
 
