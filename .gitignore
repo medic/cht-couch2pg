@@ -1,2 +1,4 @@
 node_modules
 .idea
+docker.env
+couch2pg.env
