@@ -12,7 +12,7 @@
     "replicate-medic": "./index.js"
   },
   "scripts": {
-    "watch": "npm run jest --projects jest-*.config.js --watchAll"
+    "watch": "jest --projects jest-*.config.js --watchAll"
   },
   "dependencies": {
     "chalk": "2.4.1",
