@@ -21,7 +21,7 @@ couch2pg supports PostgreSQL 9.4 and greater. The user passed in the postgres ur
 
 ## Installation
 
-After you have ensured you have `node` and `npm` installed: 
+After installing `node`, `npm`, and `git`:
 
 1. Clone repository: `git clone https://github.com/medic/cht-couch2pg.git`
 2. Change directories into it: `cd cht-couch2pg`
