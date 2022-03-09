@@ -58,7 +58,7 @@ The simplest way to run with `docker-compose` is to specify the CouchDB instance
    export COUCHDB_URL=https://medic:password@192-168-68-26.my.local-ip.co:8442/medic 
    docker-compose up
    ```
-2. Connect to the PostgresSQL instance with login `cht_couch2pg` and password `cht_couch2pg_password`. As these are insecure, do not use with production data. See below for how to harden these.
+2. Connect to the PostgresSQL instance with login `cht_couch2pg`, password `cht_couch2pg_password` and database `cht`. As these are insecure, do not use with production data. See below for how to harden these.
 
 If you want to set all possible variables, or be able to store the variables in configuration file:
 
