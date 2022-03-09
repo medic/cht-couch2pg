@@ -53,7 +53,7 @@ If you want to set and save all possible variables:
 
 The simplest way to run with `docker-compose` is to specify the CouchDB instance that your CHT is using.  The compose file will then create a dockerized PostgresSQL instance, connect to the CouchDB server and proceed to download all the data to the PostgresSQL instance:
 
-1. Start the docker compose services by running:
+1. Start the docker compose services by running. The URL specified in `COUCHDB_URL` needs to be reachable the docker conatiner (ie not `localhost`):
    ```shell
    export COUCHDB_URL=https://medic:password@192-168-68-26.my.local-ip.co:8442/medic 
    docker-compose up
