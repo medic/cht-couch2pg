@@ -37,7 +37,7 @@
     "jest": "23.0.0",
     "jest-runner-eslint": "0.5.0",
     "jest-runner-mocha": "0.6.0",
-    "knex": "0.14.6",
+    "knex": "0.19.5",
     "mocha": "5.1.1",
     "sinon": "4.5.0"
   }
