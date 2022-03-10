@@ -8,40 +8,45 @@ This version is built for medic/cht-core#3.0.0 and above. For replicating data f
 
 ## Prerequisites 
 
+### Clone
+
+All steps below require you to have a local clone of the repo.
+
+```
+git clone https://github.com/medic/cht-couch2pg.git`
+```
+
 ### Node and npm
 
-You will need to install the following:
+You will need to install the following to run locally, but not for docker:
 
 - [Node.js](https://nodejs.org) 8.11.x up to  12.x.x. Must be an LTS release. LTS is designated with an even major version number.
 - [npm](https://npmjs.com/) 6.x.x above
 
+*NOTE:* Currently, cht-couch2pg only runs in node versions 8, 10 and 12. Later versions of node have been known to fail.
+
+
 ### Database setup
 
-couch2pg supports PostgreSQL 9.4 and greater. The user passed in the postgres url needs to have full creation rights on the given database.
-
-## Installation
-
-After installing `node`, `npm`, and `git`:
-
-1. Clone repository: `git clone https://github.com/medic/cht-couch2pg.git`
-2. Change directories into it: `cd cht-couch2pg`
-3. Install dependencies: `npm ci`
-
-*NOTE:* Currently, cht-couch2pg only runs in node versions 8, 10 and 12. Later versions of node have been known to fail.
+`cht-couch2pg` supports PostgreSQL 9.4 and greater. The user passed in `POSTGRESQL_URL` needs to have full creation rights on the database in  `POSTGRES_DB_NAME`.
 
 ## Running 
 
 ### Locally with environment variables
 
 1. `cd` into it this repo's directory where you cloned it.
-2. Export these four variables with the values you need.:
+2. Install dependencies: 
+   ```
+   npm ci
+   ```
+6. Export these four variables with the values you need.:
    ```
    export POSTGRESQL_URL=postgres://postgres:postgres@localhost:15432/postgres
    export COUCHDB_URL=https://admin:pass@localhost:5984/medic
    export COUCH2PG_DOC_LIMIT=1000
    export COUCH2PG_RETRY_COUNT=5
    ```
-3. Run: `node .`
+7. Run: `node .`
 
 If you want to set and save all possible variables:
 
