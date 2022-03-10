@@ -1,0 +1,39 @@
+version: '3.7'
+services:
+
+  postgres:
+    image: medicmobile/cht-postgres:release-postgres13-rc.1
+    environment:
+
+      POSTGRES_DB: ${POSTGRES_DB_NAME:-cht}
+      POSTGRES_USER: ${POSTGRES_USER_NAME:-postgres_root}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres_root_password}
+
+      COUCH2PG_USER: ${COUCH2PG_USER:-cht_couch2pg}
+      COUCH2PG_USER_PASSWORD: ${COUCH2PG_USER_PASSWORD:-cht_couch2pg_password}
+      DB_OWNER_GROUP: ${DB_OWNER_GROUP:-cht_analytics}
+    volumes:
+      - cht-postgres-data:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT:-5432}:5432
+
+  cht-couch2pg:
+    image: medicmobile/cht-couch2pg:master-node-10
+    environment:
+      COUCHDB_URL: ${COUCHDB_URL:-https://medic:password@localhost:5988/medic}
+
+      POSTGRES_USER_NAME: ${COUCH2PG_USER:-cht_couch2pg}
+      POSTGRES_PASSWORD: ${COUCH2PG_USER_PASSWORD:-cht_couch2pg_password}
+      POSTGRES_SERVER_NAME: ${POSTGRES_SERVER_NAME:-postgres}
+      POSTGRES_DB_NAME: ${POSTGRES_DB_NAME:-cht}
+
+      COUCH2PG_CHANGES_LIMIT: ${COUCH2PG_CHANGES_LIMIT:-100}
+      COUCH2PG_SLEEP_MINS: ${COUCH2PG_SLEEP_MINS:-60}
+      COUCH2PG_DOC_LIMIT: ${COUCH2PG_DOC_LIMIT:-1000}
+      COUCH2PG_RETRY_COUNT: ${COUCH2PG_RETRY_COUNT:-5}
+    depends_on:
+      - postgres
+
+volumes:
+  cht-postgres-data:
+    name: cht-postgres-data

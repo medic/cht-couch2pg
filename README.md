@@ -1,13 +1,12 @@
 # CHT couch2pg
 
-Software for creating read-only replicas of CouchDB data inside PostgreSQL.
+Create read-only replicas of CouchDB data inside PostgresSQL.
 
-The focus is specifically on CHT application data currently stored in CouchDB. If you are looking to have a read-only replica of CouchDB data for your application, consider [couch2pg](https://www.npmjs.com/package/couch2pg).
+The focus is specifically on [CHT](https://github.com/medic/cht-core) application data currently stored in CouchDB. If you are looking to have a read-only replica of CouchDB data for your application that isn't the CHT, consider [couch2pg](https://www.npmjs.com/package/couch2pg).
 
 This version is built for medic/cht-core#3.0.0 and above. For replicating data from earlier versions, see the 2.0.x branch and associated tags.
 
-
-## Requirements
+## Prerequisites 
 
 ### Node and npm
 
@@ -16,162 +15,104 @@ You will need to install the following:
 - [Node.js](https://nodejs.org) 8.11.x up to  12.x.x. Must be an LTS release. LTS is designated with an even major version number.
 - [npm](https://npmjs.com/) 6.x.x above
 
-
 ### Database setup
 
 couch2pg supports PostgreSQL 9.4 and greater. The user passed in the postgres url needs to have full creation rights on the given database.
 
+## Installation
 
-## Installation Steps (if applicable)
+After installing `node`, `npm`, and `git`:
 
-1. Clone repository
-2. Run `npm ci`
+1. Clone repository: `git clone https://github.com/medic/cht-couch2pg.git`
+2. Change directories into it: `cd cht-couch2pg`
+3. Install dependencies: `npm ci`
 
-### Running locally with environment variables
+*NOTE:* Currently, cht-couch2pg only runs in node versions 8, 10 and 12. Later versions of node have been known to fail.
 
-The supported environment variables are:
+## Running 
 
-| Variable             | Description                                                                                                |
-| -------------------- | ---------------------------------------------------------------------------------------------------------- |
-| POSTGRESQL_URL       | PostgreSQL instance URL, format: `postgres://[user]:[password]@localhost:[port]/[database name]`           |
-| COUCHDB_URL          | CouchDB instance URL, format: `https://[user]:[password]@localhost:[port]/medic`                           |
-| COUCH2PG_SLEEP_MINS  | Number of minutes between synchronization. It defaults to 50 if this variable is not explicitly set.       |
-| COUCH2PG_DOC_LIMIT   | Number of documents cht-couch2pg fetches from CouchDB everytime                                          |
-| COUCH2PG_RETRY_COUNT | Number of times cht-couch2pg will retry synchronizing documents from CouchDB after experiencing an error |
-| COUCH2PG_USERS_META_DOC_LIMIT | Number of documents to grab concurrently from the users-meta database. These documents are larger so set a limit lower than the docLimit. It defaults to 50 if this variable is not explicitly set. |
+### Locally with environment variables
 
-Example:
+Export these four variables with the values you need.:
 ```
 export POSTGRESQL_URL=postgres://postgres:postgres@localhost:15432/postgres
 export COUCHDB_URL=https://admin:pass@localhost:5984/medic
-export COUCH2PG_SLEEP_MINS=120
 export COUCH2PG_DOC_LIMIT=1000
 export COUCH2PG_RETRY_COUNT=5
 ```
 
-*NOTE:* Currently, cht-couch2pg only runs in node versions 8 , 10 and 12. Later versions of node have been known to fail.+
+Then run: `node .`
 
-To run the contents of this repository locally, first, export the above environment variables and then run:  `npm ci && node .`
+If you want to set and save all possible variables:
 
-### Running locally in interactive mode without environment variables
+1. Copy `sample.env` to `couch2pg.env`
+2. Edit `couch2pg.env` to have all the variables you need.  Note that `POSTGRESQL_URL` shouldn't be edited as it's defined by the variables above it. Be sure to change `POSTGRES_SERVER_NAME` to where ever your postgress server is running.  If it's local, then use `localost`. The default value of `postgres` won't work.
+3. Run: `. ./couch2pg.env&&node .`
 
-Run it locally in interactive mode: `npm ci && node . -i`
+### In docker-compose
 
-## Running tests through docker-compose
+The simplest way to run with `docker-compose` is to specify the CouchDB instance that your CHT is using.  The compose file will then create a dockerized PostgresSQL instance, connect to the CouchDB server and proceed to download all the data to the PostgresSQL instance:
 
-Run tests with:
+1. Start the docker compose services by running. The URL specified in `COUCHDB_URL` needs to be reachable the docker conatiner (ie not `localhost`):
+   ```shell
+   export COUCHDB_URL=https://medic:password@192-168-68-26.my.local-ip.co:8442/medic 
+   docker-compose up
+   ```
+2. Connect to the PostgresSQL instance with login `cht_couch2pg`, password `cht_couch2pg_password` and database `cht`. As these are insecure, do not use with production data. See below for how to harden these.
 
-```bash
-docker-compose  -f docker-compose.test.yml build cht-couch2pg
-docker-compose  -f docker-compose.test.yml run cht-couch2pg grunt test
+If you want to set all possible variables, or be able to store the variables in configuration file:
+
+1. Copy `sample.env` to `couch2pg.env`
+2. Edit `couch2pg.env` to have all the variables you need.  Note that `POSTGRESQL_URL` shouldn't be edited as it's defined by the variables above it. If you're using the built-in PostgresSQL server, be sure to keep the `POSTGRES_SERVER_NAME` set to `postgres` as this is the correct internal service name in docker.  Be sure to also set secure passwords for all PostgresSQL accounts.
+3. Run docker and specify the environment file you just edited:
+   ```shell
+   docker-compose --env-file couch2pg.env up
+   ```
+3. To connect to the PostgresSQL instance, use the server defined in `POSTGRES_SERVER_NAME`, use login defined in `COUCH2PG_USER` and password  defined in `COUCH2PG_USER_PASSWORD`. 
+
+### Interactive
+
+Run it locally in interactive mode with `node . -i` and you will see the ASCII art:
+
+```shell
+   ____   _   _   _____            ____                          _       ____    ____          
+  / ___| | | | | |_   _|          / ___|   ___    _   _    ___  | |__   |___ \  |  _ \    __ _ 
+ | |     | |_| |   | |    _____  | |      / _ \  | | | |  / __| | '_ \    __) | | |_) |  / _` |
+ | |___  |  _  |   | |   |_____| | |___  | (_) | | |_| | | (__  | | | |  / __/  |  __/  | (_| |
+  \____| |_| |_|   |_|            \____|  \___/   \__,_|  \___| |_| |_| |_____| |_|      \__, |
+                                                                                         |___/ 
 ```
 
-Run tests in interactive watch mode with: `docker-compose -f docker-compose.test.yml run cht-couch2pg npm run watch`
+Instead of environment variables, you will be prompted to answer the following questions. For each question, you will be given suggestions for an answer:
 
-Run entrypoint script tests with
+* Enter CHT's couch url
+* Enter cht-couch2pg postgres url 
+* Select the number of minutes interval between checking for updates 
+* Select the number of documents to grab concurrently. Increasing this number will cut down on HTTP GETs and may improve performance, decreasing this number will cut down on node memory usage, and may increase stability.
+* Select the number of document ids to grab per change limit request. Increasing this number will cut down on HTTP GETs and may improve performance, decreasing this number will cut down on node memory usage slightly, and may increase stability. 
+* Select whether or not to have verbose logging. 
+* Select how many times to internally retry continued unsuccessful runs before exiting. If unset cht-couch2pg will retry indefinitely. If set it will retry N times, and then exit with status code 1 indefinitely
+* Select the number of documents to grab concurrently from the users-meta database. Increasing this number will cut down on HTTP GETs and may improve performance, decreasing this number will cut down on node memory usage, and may increase stability. These documents are larger so set a limit lower than the docLimit
 
-```bash
-docker-compose -f docker-compose.test.yml run cht-couch2pg ./tests/bash/bats/bin/bats  /app/tests/bash/test.bats
-```
 
-## Running  the docker image
+### Supported environment variables
 
-You can run the [docker image](https://hub.docker.com/r/medicmobile/cht-couch2pg) available on docker hub.  You will need to provide the required environment variables.
+All three methods of running cht-couch2pg listed above use these variables:
 
-### Required Environment Variables
-
-#### 1. COUCHDB_URL
-
-This sets the CouchDB instance URL, format: `https://[user]:[password]@[instance-name]:[port]/
-
-#### 2.COUCH2PG_SLEEP_MINS
-
-This sets the number of minutes between synchronization runs.
-
-#### 3. COUCH2PG_DOC_LIMIT
-
-This sets the document batch size cht-couch2pg fetches from CouchDB every time it querries CouchDB.
-
-#### 4. COUCH2PG_RETRY_COUNT
-
-This sets the number of times cht-couch2pg will retry synchronizing documents from CouchDB after experiencing an error
-
-#### 5. COUCH2PG_CHANGES_LIMIT
-
-The number of document ids to fetch per change limit request
-
-#### 6. COUCH2PG_USERS_META_DOC_LIMIT
-
-The number of documents to fetch concurrently from the users-meta database
-
-#### 7. POSTGRES_DB
-
-The name of the PostgreSQL instance running PostgreSQL.
-
-#### 8. POSTGRES_USER_NAME
-
-The user name cht-couch2pg will use to access PostgreSQL.
-
-#### 9. POSTGRES_DB_NAME
-
-The name of the PostgreSQL database to sync to.
-
-#### 10. POSTGRES_PASSWORD
-
-The password the cht-couch2pg uses to authenticate to PostgreSQL.
-
-A sample docker-compose snippet is shown below. This image can work with the [cht-postgres](https://hub.docker.com/r/medicmobile/cht-postgres) docker image also available on docker hub.
-
-```yaml
-version: '3.7'
-services:
-  couch:
-        image: couchdb:2.3.1
-        environment:
-          COUCHDB_USER: cht
-          COUCHDB_PASSWORD: cht-password
-        networks:
-        - cht-net
-  cht-couch2pg:
-        container_name: cht-couch2pg
-        image: medicmobile/cht-couch2pg:v3.2.0-node-10
-        environment:
-           COUCHDB_URL: "http://cht:cht_password@couch:5984"
-           COUCH2PG_SLEEP_MINS: '720'
-           COUCH2PG_DOC_LIMIT: '1000'
-           COUCH2PG_RETRY_COUNT: '5'
-           COUCH2PG_CHANGES_LIMIT: '100'
-           POSTGRES_DB: cht-postgres
-           POSTGRES_USER_NAME: cht_couch2pg
-           POSTGRES_DB_NAME: cht
-           POSTGRES_PASSWORD: couch2pg_password
-        depends_on:
-          - cht-postgres
-
-  cht-postgres:
-        container_name: cht-postgres
-        image: medicmobile/cht-postgres:release-postgres13-rc.1
-        environment:
-            POSTGRES_DB: cht
-            POSTGRES_USER: cht
-            POSTGRES_PASSWORD: cht_password
-            COUCH2PG_USER: cht_couch2pg
-            COUCH2PG_USER_PASSWORD: couch2pg_password
-            DB_OWNER_GROUP: cht_analytics
-        volumes:
-            - cht-postgres-data:/var/lib/postgresql/data
-        networks:
-          - cht-net
-
-volumes:
-  cht-postgres-data:
-    name: cht-postgres-data
-
-networks:
-  cht-net:
-   name: cht-net
-
-```
+* `COUCHDB_URL` - CouchDB instance URL with no trailing slash after `/medic`, format: `https://[user]:[password]@localhost:[port]/medic`
+* `COUCH2PG_SLEEP_MINS` - Number of minutes between synchronization. It defaults to `60`.
+* `COUCH2PG_DOC_LIMIT` - Number of documents cht-couch2pg fetches from CouchDB everytime. Suggested: `1000`
+* `COUCH2PG_RETRY_COUNT` - Number of times cht-couch2pg will retry synchronizing documents from CouchDB after experiencing an error
+* `COUCH2PG_USERS_META_DOC_LIMIT` - Number of documents to grab concurrently from the users-meta database. These documents are larger so set a limit lower than the docLimit. It defaults to `50`.
+* `COUCH2PG_CHANGES_LIMIT` - The number of document ids to fetch per change limit request. Suggested: `100`
+* `COUCH2PG_USER` - The user that couch2pg will use to login in to the CouchDB server. Suggested `cht_couch2pg`
+* `COUCH2PG_USER_PASSWORD` - The password that couch2pg will use to login in to the CouchDB server. 
+* `POSTGRES_SERVER_NAME` - The server or IP where the postgres server is. This should be set to `postgres` when using docker.
+* `POSTGRES_USER_NAME` - The admin user for postgres in docker. Suggested: `postgres_root`
+* `POSTGRES_PASSWORD` - The admin password for postgres in docker. 
+* `POSTGRES_DB_NAME` - The name of the PostgreSQL database to sync to.. Suggested: `cht`
+* `POSTGRES_PORT` - Port where PostgresSQL can be found. Suggested: `5432`
+* `POSTGRESQL_URL` - PostgresSQL instance URL, format: `postgres://[user]:[password]@localhost:[port]/[database name]`
 
 ## Known issues
 
@@ -203,3 +144,20 @@ npm ERR! node-libcurl@1.3.3 install: `node-pre-gyp install --fallback-to-build`
 ```
 
 It is probably related to a gcc library that is failing with some versions of Node and npm, try with Node 10 without updating the `npm` version that comes with it.
+
+## Tests
+
+Run tests with docker-compose:
+
+```bash
+docker-compose  -f docker-compose.test.yml build cht-couch2pg
+docker-compose  -f docker-compose.test.yml run cht-couch2pg grunt test
+```
+
+Run tests in interactive watch mode with: `docker-compose -f docker-compose.test.yml run cht-couch2pg npm run watch`
+
+Run entrypoint script tests with
+
+```bash
+docker-compose -f docker-compose.test.yml run cht-couch2pg ./tests/bash/bats/bin/bats  /app/tests/bash/test.bats
+```
