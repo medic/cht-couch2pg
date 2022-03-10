@@ -33,42 +33,45 @@ After installing `node`, `npm`, and `git`:
 
 ### Locally with environment variables
 
-Export these four variables with the values you need.:
-```
-export POSTGRESQL_URL=postgres://postgres:postgres@localhost:15432/postgres
-export COUCHDB_URL=https://admin:pass@localhost:5984/medic
-export COUCH2PG_DOC_LIMIT=1000
-export COUCH2PG_RETRY_COUNT=5
-```
-
-Then run: `node .`
+1. `cd` into it this repo's directory where you cloned it.
+2. Export these four variables with the values you need.:
+   ```
+   export POSTGRESQL_URL=postgres://postgres:postgres@localhost:15432/postgres
+   export COUCHDB_URL=https://admin:pass@localhost:5984/medic
+   export COUCH2PG_DOC_LIMIT=1000
+   export COUCH2PG_RETRY_COUNT=5
+   ```
+3. Run: `node .`
 
 If you want to set and save all possible variables:
 
-1. Copy `sample.env` to `couch2pg.env`
-2. Edit `couch2pg.env` to have all the variables you need.  Note that `POSTGRESQL_URL` shouldn't be edited as it's defined by the variables above it. Be sure to change `POSTGRES_SERVER_NAME` to where ever your postgress server is running.  If it's local, then use `localost`. The default value of `postgres` won't work.
-3. Run: `. ./couch2pg.env&&node .`
+1. `cd` into it this repo's directory where you cloned it.
+2. Copy `sample.env` to `couch2pg.env`
+3. Edit `couch2pg.env` to have all the variables you need.  Note that `POSTGRESQL_URL` shouldn't be edited as it's defined by the variables above it. Be sure to change `POSTGRES_SERVER_NAME` to where ever your postgress server is running.  If it's local, then use `localost`. The default value of `postgres` won't work.
+4. Run: `. ./couch2pg.env&&node .`
 
 ### In docker-compose
 
 The simplest way to run with `docker-compose` is to specify the CouchDB instance that your CHT is using.  The compose file will then create a dockerized PostgresSQL instance, connect to the CouchDB server and proceed to download all the data to the PostgresSQL instance:
 
-1. Start the docker compose services by running. The URL specified in `COUCHDB_URL` needs to be reachable the docker conatiner (ie not `localhost`):
+1. `cd` into it this repo's directory where you cloned it.
+3. When starting the docker compose services, you need to set the URL for CouchDB in the `COUCHDB_URL` env variable. This URL needs to be reachable the docker container (ie not `localhost`). Ensuring you're in the same directory where you ran the `curl` call in the prior step, run:
    ```shell
    export COUCHDB_URL=https://medic:password@192-168-68-26.my.local-ip.co:8442/medic 
    docker-compose up
    ```
-2. Connect to the PostgresSQL instance with login `cht_couch2pg`, password `cht_couch2pg_password` and database `cht`. As these are insecure, do not use with production data. See below for how to harden these.
+4. Connect to the PostgresSQL instance with login `cht_couch2pg`, password `cht_couch2pg_password` and database `cht`. As these are insecure, do not use with production data. See below for how to harden these.
 
 If you want to set all possible variables, or be able to store the variables in configuration file:
 
+1. `cd` into it this repo's directory where you cloned it.
 1. Copy `sample.env` to `couch2pg.env`
 2. Edit `couch2pg.env` to have all the variables you need.  Note that `POSTGRESQL_URL` shouldn't be edited as it's defined by the variables above it. If you're using the built-in PostgresSQL server, be sure to keep the `POSTGRES_SERVER_NAME` set to `postgres` as this is the correct internal service name in docker.  Be sure to also set secure passwords for all PostgresSQL accounts.
 3. Run docker and specify the environment file you just edited:
    ```shell
    docker-compose --env-file couch2pg.env up
    ```
-3. To connect to the PostgresSQL instance, use the server defined in `POSTGRES_SERVER_NAME`, use login defined in `COUCH2PG_USER` and password  defined in `COUCH2PG_USER_PASSWORD`. 
+3. To connect to the PostgresSQL instance, use the server from `POSTGRES_SERVER_NAME`, use login from `COUCH2PG_USER`, password from `COUCH2PG_USER_PASSWORD` and the database from `POSTGRES_DB_NAME`. 
 
 ### Interactive
 
