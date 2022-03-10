@@ -1,6 +1,6 @@
 {
   "name": "cht-couch2pg",
-  "version": "3.4.0",
+  "version": "3.5.0",
   "description": "Replicate CHT data from CouchDB to postgres database",
   "main": "index.js",
   "license": "Apache-2.0",
@@ -17,13 +17,13 @@
   "dependencies": {
     "chalk": "2.4.1",
     "clui": "0.3.6",
-    "couch2pg": "^0.5.0",
+    "couch2pg": "^0.7.0",
     "figlet": "1.2.0",
     "inquirer": "^3.0.6",
     "loglevel": "^1.4.1",
-    "pg": "7.4.1",
+    "pg": "^8.0.0",
     "pg-format": "1.0.4",
-    "pg-promise": "8.4.0",
+    "pg-promise": "^10.0.0",
     "postgrator": "3.5.0",
     "pouchdb-adapter-http": "^7.0.0",
     "pouchdb-core": "^7.0.0"
