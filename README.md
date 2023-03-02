@@ -13,7 +13,7 @@ This version is built for medic/cht-core#3.0.0 and above. For replicating data f
 All steps below require you to have a local clone of the repo.
 
 ```
-git clone https://github.com/medic/cht-couch2pg.git`
+git clone https://github.com/medic/cht-couch2pg.git
 ```
 
 ### Node and npm
