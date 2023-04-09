@@ -17,8 +17,10 @@ const replicateAll = async (couchUrl, pgconn, opts) => {
     opts.docLimit = opts.couchdbUsersMetaDocLimit;
 
     allResults = [
-      await couch2pg.replicate(couchUrl, pgconn, opts, 'couchdb'),
-      await couch2pg.replicate(sentinelUrl, pgconn, opts, 'couchdb'),
+      // await couch2pg.replicate(couchUrl, pgconn, opts, 'couchdb'),
+      { deleted: [], edited: [] },
+      // await couch2pg.replicate(sentinelUrl, pgconn, opts, 'couchdb'),
+      { deleted: [], edited: [] },
       await couch2pg.replicate(usersMetaUrl, pgconn, opts, 'couchdb_users_meta')
     ];
   } catch(err) {
