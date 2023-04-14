@@ -26,11 +26,12 @@ WITH telemetry_docs_with_metric_blob AS (
 )
 
 SELECT
-  telemetry_docs_with_metric_blob.device_id,
   telemetry_docs_with_metric_blob.telemetry_doc_id,
+  telemetry_docs_with_metric_blob.metric,
+  
   telemetry_docs_with_metric_blob.period_start,
   telemetry_docs_with_metric_blob.user_name,
-  telemetry_docs_with_metric_blob.metric,
+  telemetry_docs_with_metric_blob.device_id,
   jsonb_to_record.min,
   jsonb_to_record.max,
   jsonb_to_record.sum,
