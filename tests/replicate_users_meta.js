@@ -48,6 +48,6 @@ describe('medic users meta db replication', () => {
     const views = await db.matViews();
 
     const viewsNames = views.map(view => view.view_name);
-    expect(viewsNames).to.have.members(['form_metadata', 'contactview_metadata', 'useview_feedback', 'useview_telemetry']);
+    expect(viewsNames).to.have.members(['form_metadata', 'contactview_metadata', 'useview_feedback', 'useview_telemetry', 'useview_telemetry_metrics', 'useview_telemetry_devices']);
   });
 });
