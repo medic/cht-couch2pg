@@ -5,6 +5,8 @@ TABLESPACE pg_default AS
 
 SELECT
   DISTINCT ON (doc #>> '{metadata,deviceId}', doc #>> '{metadata,user}')
+  
+  doc #>> '{_id}' AS telemetry_doc_id,
   doc #>> '{metadata,deviceId}' AS device_id,
   doc #>> '{metadata,user}' AS user_name,
   
@@ -29,7 +31,6 @@ SELECT
   )::date AS period_start,
     
 
-  doc #>> '{_id}' AS telemetry_doc_id,
   doc #>> '{device,deviceInfo,hardware,manufacturer}' AS device_manufacturer,
   doc #>> '{device,deviceInfo,hardware,model}' AS device_model,
   
