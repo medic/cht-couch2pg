@@ -5,7 +5,7 @@ on: [ push]
 jobs:
   build-and-test:
     name: Build cht-couch2pg
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     timeout-minutes: 15
 
     strategy:
