@@ -11,7 +11,7 @@ RUN npm ci
 #Test build
 FROM base_couch2pg_build AS test-couch2pg
 WORKDIR /app
-RUN apt install git
+RUN apt-get install git --assume-yes
 RUN git submodule update --init
 RUN npm i -g grunt-cli
 
