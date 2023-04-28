@@ -47,7 +47,7 @@ SELECT
   doc #>> '{device,deviceInfo,network,downSpeed}' AS network_down_speed
 FROM couchdb_users_meta
 WHERE doc ->> 'type' = 'telemetry'
-ORDER BY 1, 2, 3 ASC
+ORDER BY 2, 3, 4 ASC
 
 WITH DATA;
 
