@@ -1,6 +1,6 @@
 #base Build
 ARG node_version=10
-FROM node:$node_version as base_couch2pg_build
+FROM node:$node_version-buster-slim as base_couch2pg_build
 RUN apt update
 RUN apt dist-upgrade -y
 RUN apt -y install postgresql-client curl
@@ -11,6 +11,7 @@ RUN npm ci
 #Test build
 FROM base_couch2pg_build AS test-couch2pg
 WORKDIR /app
+RUN apt-get install git --assume-yes
 RUN git submodule update --init
 RUN npm i -g grunt-cli
 
