@@ -1,6 +1,6 @@
 #base Build
 ARG node_version=10
-FROM node:$node_version-buster as base_couch2pg_build
+FROM node:$node_version-buster-slim as base_couch2pg_build
 RUN apt update
 RUN apt dist-upgrade -y
 RUN apt -y install postgresql-client curl
