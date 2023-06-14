@@ -33,6 +33,13 @@ describe('medic users meta db replication', () => {
     await pg.destroy();
   });
 
+  it('can skip replication', async() => {
+    await replicate(couchUrl, pgUrl, { timesToRun: 1 });
+    const rows = await pg.rows('couchdb_users_meta');
+    console.log('ROWS', JSON.stringify(rows));
+    expect(rows.length).to.equal(0);
+  });
+  
   it('replicates single couch record to the right table on postgres', async() => {
     await replicate(couchUrl, pgUrl, opts);
     let rows = await pg.rows('couchdb_users_meta');
@@ -41,13 +48,6 @@ describe('medic users meta db replication', () => {
     expect(pgRecord.sex).to.equal(couchRecord.sex);
     expect(pgRecord.role).to.equal(couchRecord.role);
     expect(pgRecord.type).to.equal(couchRecord.type);
-  });
-
-  it('can skip replication', async() => {
-    await replicate(couchUrl, pgUrl, { timesToRun: 1 });
-    const rows = await pg.rows('couchdb_users_meta');
-    console.log('ROWS', JSON.stringify(rows));
-    expect(rows.length).to.equal(0);
   });
 
   it('checks migrations', async() => {

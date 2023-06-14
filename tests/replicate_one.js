@@ -33,6 +33,12 @@ describe('medic without sentinel db replication', () => {
     await pg.destroy();
   });
 
+  it('medic replication can be skipped', async() => {
+    await replicate(couchUrl, pgUrl, { timesToRun: 1 });
+    let rows = await pg.rows('couchdb');
+    expect(rows.length).to.equal(1);
+  });
+
   it('replicates single couch record to postgres', async() => {
     await replicate(couchUrl, pgUrl, opts);
     let rows = await pg.rows('couchdb');
@@ -53,11 +59,5 @@ describe('medic without sentinel db replication', () => {
     rows = await pg.rows('couchdb');
     expect(rows.length).to.equal(1); // Still one pg record
     expect(rows[0].doc.name).to.equal(doc.name); // pg record has been updated
-  });
-
-  it('medic replication can be skipped', async() => {
-    await replicate(couchUrl, pgUrl, { timesToRun: 1 });
-    let rows = await pg.rows('couchdb');
-    expect(rows.length).to.equal(1);
   });
 });
