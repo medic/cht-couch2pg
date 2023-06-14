@@ -36,7 +36,7 @@ describe('medic without sentinel db replication', () => {
   it('medic replication can be skipped', async() => {
     await replicate(couchUrl, pgUrl, { timesToRun: 1 });
     let rows = await pg.rows('couchdb');
-    expect(rows.length).to.equal(1);
+    expect(rows.length).to.equal(0);
   });
 
   it('replicates single couch record to postgres', async() => {
