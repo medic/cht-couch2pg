@@ -67,7 +67,14 @@ module.exports = {
         default: '50'
       }
     ];
-    const values = await inquirer.prompt(questions);
+
+    const values = {
+      syncMedicDb: true,
+      syncSentinelDb: true,
+      syncUserMetaDb: true,
+      ...await inquirer.prompt(questions),
+    };
+
     ['sleepMins', 'docLimit', 'changesLimit'].forEach(key => {
       values[key] = parseInt(values[key].replace(/,/g, ''));
     });
