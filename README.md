@@ -121,6 +121,9 @@ All three methods of running cht-couch2pg listed above use these variables:
 * `POSTGRES_DB_NAME` - The name of the PostgreSQL database to sync to.. Suggested: `cht`
 * `POSTGRES_PORT` - Port where PostgresSQL can be found. Suggested: `5432`
 * `POSTGRESQL_URL` - PostgresSQL instance URL, format: `postgres://[user]:[password]@localhost:[port]/[database name]`
+* `SYNC_DB_MEDIC` - Whether to sync the content of the `medic` database. Suggested: `true`
+* `SYNC_DB_SENTINEL` - Whether to sync the content of the `medic-sentinel` database. Suggested: `true`
+* `SYNC_DB_USER_META` - Whether to sync the content of the `medic-users-meta` database. Suggested: `true`
 
 ## Known issues
 

@@ -10,6 +10,11 @@ const pgUrl = `${process.env.TEST_PG_URL}/${pgDbName}`;
 
 const pouch = () => new PouchDB(couchUrl);
 
+const opts = {
+  timesToRun: 1,
+  syncMedicDb: true,
+};
+
 const cleanUp = async () => {
   await pouch().destroy();
   await pgutils.ensureDbIsClean(pgUrl);
@@ -28,8 +33,14 @@ describe('medic without sentinel db replication', () => {
     await pg.destroy();
   });
 
+  it('medic replication can be skipped', async() => {
+    await replicate(couchUrl, pgUrl, { timesToRun: 1 });
+    let rows = await pg.rows('couchdb');
+    expect(rows.length).to.equal(0);
+  });
+
   it('replicates single couch record to postgres', async() => {
-    await replicate(couchUrl, pgUrl, {timesToRun: 1});
+    await replicate(couchUrl, pgUrl, opts);
     let rows = await pg.rows('couchdb');
     expect(rows.length).to.equal(1);
     const [couchRecord, pgRecord] = [singleMedicDoc, rows[0].doc];
@@ -44,7 +55,7 @@ describe('medic without sentinel db replication', () => {
     await couch.put(doc);
 
     // Replicate again
-    await replicate(couchUrl, pgUrl, {timesToRun: 1});
+    await replicate(couchUrl, pgUrl, opts);
     rows = await pg.rows('couchdb');
     expect(rows.length).to.equal(1); // Still one pg record
     expect(rows[0].doc.name).to.equal(doc.name); // pg record has been updated

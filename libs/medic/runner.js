@@ -9,18 +9,28 @@ let errorCount = 0;
 let runTimes = 0;
 
 const replicateAll = async (couchUrl, pgconn, opts) => {
-  let allResults = [],
-      runErrored = false;
-  try {
-    const sentinelUrl = `${couchUrl}-sentinel`;
-    const usersMetaUrl = `${couchUrl}-users-meta`;
-    opts.docLimit = opts.couchdbUsersMetaDocLimit;
+  const results = [];
+  let runErrored = false;
 
-    allResults = [
-      await couch2pg.replicate(couchUrl, pgconn, opts, 'couchdb'),
-      await couch2pg.replicate(sentinelUrl, pgconn, opts, 'couchdb'),
-      await couch2pg.replicate(usersMetaUrl, pgconn, opts, 'couchdb_users_meta')
-    ];
+  const replicateDatabase = async (url, table) => {
+    const result = await couch2pg.replicate(url, pgconn, opts, table);
+    results.push(result);
+  };
+
+  try {
+    opts.docLimit = opts.couchdbUsersMetaDocLimit;
+    
+    if (opts.syncMedicDb) {
+      await replicateDatabase(couchUrl, 'couchdb');
+    }
+
+    if (opts.syncSentinelDb) {
+      await replicateDatabase(`${couchUrl}-sentinel`, 'couchdb');
+    }
+
+    if (opts.syncUserMetaDb) {
+      await replicateDatabase(`${couchUrl}-users-meta`, 'couchdb_users_meta');
+    }
   } catch(err) {
     log.error('Couch2PG import failed');
     log.error(err);
@@ -29,22 +39,25 @@ const replicateAll = async (couchUrl, pgconn, opts) => {
     }
     runErrored = true;
   }
-  return [allResults, runErrored];
+  return [results, runErrored];
 };
 
 const run = async (couchUrl, pgconn, opts) => {
   log.info('Beginning couch2pg and xmlforms run at ' + new Date());
-  const [allResults, runErrored] = await replicateAll(couchUrl, pgconn, opts);
-  if(allResults) {
-    const [medicResults, sentinelResults, usersMetaResults] = allResults;
+  const [results, runErrored] = await replicateAll(couchUrl, pgconn, opts);
+  if(results) {
     // Run secondary tasks if we reasonably think there might be new data
     // runErrored || errorCount <- something went wrong, but maybe there is still new data
     // firstRun <- this is first run, we don't know what the DB state is in
     // results.deleted.length || results.edited.length <- data has changed
-    if (runErrored || errorCount || firstRun ||
-        medicResults.deleted.length || medicResults.edited.length ||
-        sentinelResults.deleted.length || sentinelResults.edited.length ||
-        usersMetaResults && usersMetaResults.deleted.length || usersMetaResults && usersMetaResults.edited.length) {
+
+    const resultHasDataChanged = result => result && (result.deleted.length || result.edited.length);
+    if (
+      runErrored ||
+      errorCount ||
+      firstRun ||
+      results.some(resultHasDataChanged)
+    ) {
       try {
         await analytics.update(pgconn);
         // We have completed a successful run
