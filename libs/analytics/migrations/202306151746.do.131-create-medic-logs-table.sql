@@ -1,1 +1,1 @@
-CREATE TABLE IF NOT EXISTS medic_logs (doc jsonb);
+CREATE TABLE IF NOT EXISTS couchdb_medic_logs (doc jsonb);
