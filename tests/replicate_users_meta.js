@@ -36,7 +36,6 @@ describe('medic users meta db replication', () => {
   it('can skip replication', async() => {
     await replicate(couchUrl, pgUrl, { timesToRun: 1 });
     const rows = await pg.rows('couchdb_users_meta');
-    console.log('ROWS', JSON.stringify(rows));
     expect(rows.length).to.equal(0);
   });
   
