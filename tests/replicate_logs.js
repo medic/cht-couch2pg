@@ -36,7 +36,6 @@ describe('medic-logs db replication', () => {
   it('can skip replication', async() => {
     await replicate(couchUrl, pgUrl, { timesToRun: 1 });
     const rows = await pg.rows('couchdb_medic_logs');
-    console.log('ROWS', JSON.stringify(rows));
     expect(rows.length).to.equal(0);
   });
   
