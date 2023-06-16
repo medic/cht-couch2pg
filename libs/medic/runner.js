@@ -27,6 +27,9 @@ const replicateAll = async (couchUrl, pgconn, opts) => {
 
     const usersMetaUrl = `${couchUrl}-users-meta`;
     await replicateDatabase(opts.syncUserMetaDb, usersMetaUrl, 'couchdb_users_meta');
+
+    const medicLogsUrl = `${couchUrl}-logs`;
+    await replicateDatabase(opts.syncLogsDb, medicLogsUrl, 'medic_logs');
   } catch(err) {
     log.error('Couch2PG import failed');
     log.error(err);
@@ -42,7 +45,6 @@ const run = async (couchUrl, pgconn, opts) => {
   log.info('Beginning couch2pg and xmlforms run at ' + new Date());
   const [results, runErrored] = await replicateAll(couchUrl, pgconn, opts);
   if(results) {
-    const [medicResult, sentinelResult, usersMetaResult] = results;
     // Run secondary tasks if we reasonably think there might be new data
     // runErrored || errorCount <- something went wrong, but maybe there is still new data
     // firstRun <- this is first run, we don't know what the DB state is in
@@ -53,9 +55,7 @@ const run = async (couchUrl, pgconn, opts) => {
       runErrored ||
       errorCount ||
       firstRun ||
-      resultHasDataChanged(medicResult) ||
-      resultHasDataChanged(sentinelResult) ||
-      resultHasDataChanged(usersMetaResult)
+      results.some(resultHasDataChanged)
     ) {
       try {
         await analytics.update(pgconn);
