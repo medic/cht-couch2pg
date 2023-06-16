@@ -12,21 +12,25 @@ const replicateAll = async (couchUrl, pgconn, opts) => {
   const results = [];
   let runErrored = false;
 
-  const replicateDatabase = async (condition, url, table) => {
-    const result = !!condition && await couch2pg.replicate(url, pgconn, opts, table);
+  const replicateDatabase = async (url, table) => {
+    const result = await couch2pg.replicate(url, pgconn, opts, table);
     results.push(result);
   };
 
   try {
     opts.docLimit = opts.couchdbUsersMetaDocLimit;
     
-    await replicateDatabase(opts.syncMedicDb, couchUrl, 'couchdb');
+    if (opts.syncMedicDb) {
+      await replicateDatabase(couchUrl, 'couchdb');
+    }
 
-    const sentinelUrl = `${couchUrl}-sentinel`;
-    await replicateDatabase(opts.syncSentinelDb, sentinelUrl, 'couchdb');
+    if (opts.syncSentinelDb) {
+      await replicateDatabase(`${couchUrl}-sentinel`, 'couchdb');
+    }
 
-    const usersMetaUrl = `${couchUrl}-users-meta`;
-    await replicateDatabase(opts.syncUserMetaDb, usersMetaUrl, 'couchdb_users_meta');
+    if (opts.syncUserMetaDb) {
+      await replicateDatabase(`${couchUrl}-users-meta`, 'couchdb_users_meta');
+    }
   } catch(err) {
     log.error('Couch2PG import failed');
     log.error(err);
@@ -42,7 +46,6 @@ const run = async (couchUrl, pgconn, opts) => {
   log.info('Beginning couch2pg and xmlforms run at ' + new Date());
   const [results, runErrored] = await replicateAll(couchUrl, pgconn, opts);
   if(results) {
-    const [medicResult, sentinelResult, usersMetaResult] = results;
     // Run secondary tasks if we reasonably think there might be new data
     // runErrored || errorCount <- something went wrong, but maybe there is still new data
     // firstRun <- this is first run, we don't know what the DB state is in
@@ -53,9 +56,7 @@ const run = async (couchUrl, pgconn, opts) => {
       runErrored ||
       errorCount ||
       firstRun ||
-      resultHasDataChanged(medicResult) ||
-      resultHasDataChanged(sentinelResult) ||
-      resultHasDataChanged(usersMetaResult)
+      results.some(resultHasDataChanged)
     ) {
       try {
         await analytics.update(pgconn);
