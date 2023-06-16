@@ -22,5 +22,6 @@ module.exports = function() {
     syncMedicDb: notFalse(process.env.SYNC_DB_MEDIC),
     syncSentinelDb: notFalse(process.env.SYNC_DB_SENTINEL),
     syncUserMetaDb: notFalse(process.env.SYNC_DB_USER_META),
+    syncLogsDb: notFalse(process.env.SYNC_DB_LOGS),
   };
 };

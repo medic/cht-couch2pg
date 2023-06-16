@@ -45,6 +45,7 @@ describe('replication', () => {
     syncMedicDb: true,
     syncSentinelDb: true,
     syncUserMetaDb: true,
+    syncLogsDb: true,
   };
 
   it('replicates different type of couch records to pg', async () => {

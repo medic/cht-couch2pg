@@ -31,6 +31,10 @@ const replicateAll = async (couchUrl, pgconn, opts) => {
     if (opts.syncUserMetaDb) {
       await replicateDatabase(`${couchUrl}-users-meta`, 'couchdb_users_meta');
     }
+
+    if (opts.syncLogsDb) {
+      await replicateDatabase(`${couchUrl}-logs`, 'couchdb_medic_logs');
+    }
   } catch(err) {
     log.error('Couch2PG import failed');
     log.error(err);

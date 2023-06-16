@@ -124,6 +124,7 @@ All three methods of running cht-couch2pg listed above use these variables:
 * `SYNC_DB_MEDIC` - Whether to sync the content of the `medic` database. Suggested: `true`
 * `SYNC_DB_SENTINEL` - Whether to sync the content of the `medic-sentinel` database. Suggested: `true`
 * `SYNC_DB_USER_META` - Whether to sync the content of the `medic-users-meta` database. Suggested: `true`
+* `SYNC_DB_LOGS` - Whether to sync the content of `medic-logs` database. Suggested: `true`
 
 ## Known issues
 
