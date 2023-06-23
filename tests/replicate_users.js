@@ -41,7 +41,7 @@ describe('medic _users db replication', () => {
   
   it('replicates _user record without security information', async() => {
     await replicate(couchUrl, pgUrl, opts);
-    let rows = await pg.rows('couchdb_medic_users');
+    const rows = await pg.rows('couchdb_medic_users');
     expect(rows.length).to.equal(1);
 
     const pgRecord = rows[0].doc;

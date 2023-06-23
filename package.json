@@ -21,6 +21,7 @@
     "figlet": "1.2.0",
     "inquirer": "^3.0.6",
     "loglevel": "^1.4.1",
+    "loglevel-message-prefix": "^3.0.0",
     "pg": "^8.0.0",
     "pg-format": "1.0.4",
     "pg-promise": "^10.0.0",
