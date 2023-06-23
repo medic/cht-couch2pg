@@ -73,6 +73,7 @@ module.exports = {
       syncSentinelDb: true,
       syncUserMetaDb: true,
       syncLogsDb: true,
+      syncUsersDb: false,
       ...await inquirer.prompt(questions),
     };
 
