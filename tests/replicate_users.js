@@ -8,7 +8,7 @@ const couchUrl = `${process.env.TEST_COUCH_URL}/mycouch`;
 const pgDbName = 'pgusertest';
 const pgUrl = `${process.env.TEST_PG_URL}/${pgDbName}`;
 
-const pouch = () => new PouchDB(`${process.env.TEST_COUCH_URL}/mycouch`);
+const pouch = () => new PouchDB(`${process.env.TEST_COUCH_URL}/_users`);
 
 const cleanUp = async () => {
   await pouch().destroy();
@@ -39,13 +39,14 @@ describe('medic _users db replication', () => {
     expect(rows.length).to.equal(0);
   });
   
-  it('replicates user without security information', async() => {
+  it('replicates _user record without security information', async() => {
     await replicate(couchUrl, pgUrl, opts);
     let rows = await pg.rows('couchdb_medic_users');
     expect(rows.length).to.equal(1);
-    const [couchRecord, pgRecord] = [fakeUserDoc, rows[0].doc];
+
+    const pgRecord = rows[0].doc;
     expect(pgRecord.name).to.equal(fakeUserDoc.name);
-    expect(pgRecord.role).to.equal(couchRecord.role);
+    expect(pgRecord.role).to.deep.equal(fakeUserDoc.role);
     expect(pgRecord.derived_key).to.be.undefined;
   });
 });

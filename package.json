@@ -17,7 +17,7 @@
   "dependencies": {
     "chalk": "2.4.1",
     "clui": "0.3.6",
-    "couch2pg": "^0.7.0",
+    "couch2pg": "^0.7.1",
     "figlet": "1.2.0",
     "inquirer": "^3.0.6",
     "loglevel": "^1.4.1",
