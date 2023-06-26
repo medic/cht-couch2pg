@@ -48,6 +48,6 @@ describe('medic _users db replication', () => {
 
     // package couch2pg 0.7.1 removes security information from users docs
     expect(pgRecord).to.have.keys('_id', 'name', 'type', 'roles', 'facility_id', 'iterations');
-    expect(pgRecord).to.not.have.any.keys('derived_key', 'salt', `password_scheme`);
+    expect(pgRecord).to.not.have.any.keys('derived_key', 'salt', 'password_scheme');
   });
 });
