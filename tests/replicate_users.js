@@ -15,11 +15,6 @@ const cleanUp = async () => {
   await pgutils.ensureDbIsClean(pgUrl);
 };
 
-const opts = {
-  timesToRun: 1,
-  syncUsersDb: true,
-};
-
 describe('medic _users db replication', () => {
   let pg;
 
@@ -40,13 +35,19 @@ describe('medic _users db replication', () => {
   });
   
   it('replicates _user record without security information', async() => {
-    await replicate(couchUrl, pgUrl, opts);
+    await replicate(couchUrl, pgUrl, {
+      timesToRun: 1,
+      syncUsersDb: true,
+    });
     const rows = await pg.rows('couchdb_medic_users');
     expect(rows.length).to.equal(1);
 
     const pgRecord = rows[0].doc;
     expect(pgRecord.name).to.equal(fakeUserDoc.name);
     expect(pgRecord.role).to.deep.equal(fakeUserDoc.role);
-    expect(pgRecord.derived_key).to.be.undefined;
+
+    // package couch2pg 0.7.1 removes security information from users docs
+    expect(pgRecord).to.have.keys('_id', 'name', 'type', 'roles', 'facility_id', 'iterations');
+    expect(pgRecord).to.not.have.any.keys('derived_key', 'salt', `password_scheme`);
   });
 });
