@@ -12,7 +12,8 @@
     "replicate-medic": "./index.js"
   },
   "scripts": {
-    "watch": "jest --projects jest-*.config.js --watchAll"
+    "watch": "jest --projects jest-*.config.js --watchAll",
+    "semantic-release": "semantic-release"
   },
   "dependencies": {
     "chalk": "2.4.1",
@@ -30,16 +31,21 @@
     "pouchdb-core": "^7.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.6.6",
+    "@commitlint/config-conventional": "^17.6.6",
+    "@semantic-release/git": "^10.0.1",
     "chai": "^3.0.0",
     "grunt": "^1.0.3",
     "grunt-cli": "1.2.0",
     "grunt-mocha-test": "0.13.3",
     "gruntify-eslint": "4.0.0",
+    "husky": "^8.0.3",
     "jest": "23.0.0",
     "jest-runner-eslint": "0.5.0",
     "jest-runner-mocha": "0.6.0",
     "knex": "0.14.6",
     "mocha": "5.1.1",
+    "semantic-release": "^18.0.0",
     "sinon": "4.5.0"
   }
 }

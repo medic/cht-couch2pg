@@ -174,3 +174,20 @@ Run entrypoint script tests with
 ```bash
 docker-compose -f docker-compose.test.yml run cht-couch2pg ./tests/bash/bats/bin/bats  /app/tests/bash/test.bats
 ```
+
+## Releasing
+1. Create a pull request with prep for the new release. 
+1. Get the pull request reviewed and approved.
+1. When doing the squash and merge, make sure that your commit message is clear and readable and follows the strict format described in the commit format section below. If the commit message does not comply, automatic release will fail.
+1. In case you are planning to merge the pull request with a merge commit, make sure that every commit in your branch respects the format. 
+
+### Commit format
+The commit format should follow this [conventional-changelog angular preset](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular). Examples are provided below.
+
+Type | Example commit message | Release type
+-- | -- | --
+Bug fixes | fix(#123): infinite loop when materialized views doesn't exist | patch
+Performance | perf(#789): Refresh materialized views faster | patch
+Features | feat(#456): Support real-time sync | minor
+Non-code | chore(#123): update README | none
+Breaking| perf(#2): remove support for pg 7 <br/> BREAKING CHANGE: postgres 7 no longer supported | major
