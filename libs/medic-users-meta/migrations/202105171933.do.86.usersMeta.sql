@@ -24,26 +24,29 @@ CREATE INDEX idx_useview_feedback_period_start_user ON useview_feedback(period_s
 CREATE MATERIALIZED VIEW useview_telemetry AS
 SELECT
   doc->>'_id' AS uuid,
-  CONCAT_WS(                                --> Date concatenation from JSON fields, eg. 2021-5-17
-    '-',
-    doc#>>'{metadata,year}',                --> year
-    CASE                                    --> month of the year
-      WHEN
-        string_to_array(substring(doc#>>'{metadata,versions,app}' FROM '(\d+.\d+.\d+)'),'.')::int[] < '{3,8,0}'::int[]
-      THEN
-        (doc#>>'{metadata,month}')::int+1   --> Legacy, months zero-indexed (0 - 11)
-      ELSE
-        (doc#>>'{metadata,month}')::int     --> Month is between 1 - 12
-    END,
-    CASE                                    --> day of the month, else 1
-      WHEN
-        (doc#>>'{metadata,day}') IS NOT NULL
-      THEN
-        doc#>>'{metadata,day}'
-      ELSE
-        '1'
-    END
-  )::date AS period_start,
+  (CASE 
+    WHEN doc#>>'{metadata,year}' IS NULL THEN '1970-1-1'
+  ELSE
+    CONCAT_WS(                                --> Date concatenation from JSON fields, eg. 2021-5-17
+      '-',
+      doc#>>'{metadata,year}',                --> year
+      CASE                                    --> month of the year
+        WHEN
+          string_to_array(substring(doc#>>'{metadata,versions,app}' FROM '(\d+.\d+.\d+)'),'.')::int[] < '{3,8,0}'::int[]
+        THEN
+          (doc#>>'{metadata,month}')::int+1   --> Legacy, months zero-indexed (0 - 11)
+        ELSE
+          (doc#>>'{metadata,month}')::int     --> Month is between 1 - 12
+      END,
+      CASE                                    --> day of the month, else 1
+        WHEN
+          (doc#>>'{metadata,day}') IS NOT NULL
+        THEN
+          doc#>>'{metadata,day}'
+        ELSE
+          '1'
+      END)
+    END)::date AS period_start,
   doc#>>'{metadata,user}' AS user_name,
   doc#>>'{metadata,versions,app}' AS app_version,
   doc#>>'{metrics,boot_time,min}' AS boot_time_min,

@@ -9,26 +9,28 @@ SELECT
   doc #>> '{_id}' AS telemetry_doc_id,
   doc #>> '{metadata,deviceId}' AS device_id,
   doc #>> '{metadata,user}' AS user_name,
-  
-  concat_ws(
-    '-',
-    doc #>> '{metadata,year}',
-    CASE
-      WHEN 
-        doc #>> '{metadata,day}' IS NULL 
-        AND (
-          doc #>> '{metadata,versions,app}' IS NULL 
-          OR string_to_array("substring"(doc #>> '{metadata,versions,app}', '(\d+.\d+.\d+)'), '.')::integer[] < '{3,8,0}'::integer[]
-        ) 
-      THEN (doc #>> '{metadata,month}')::integer + 1
-      ELSE (doc #>> '{metadata,month}')::integer
-    END,
-    CASE
-      WHEN doc #>> '{metadata,day}' IS NOT NULL 
-      THEN doc #>> '{metadata,day}'
-      ELSE '1'
-    END
-  )::date AS period_start,
+  (CASE 
+      WHEN doc#>>'{metadata,year}' IS NULL THEN '1970-1-1'
+  ELSE
+    concat_ws(
+      '-',
+      doc #>> '{metadata,year}',
+      CASE
+        WHEN 
+          doc #>> '{metadata,day}' IS NULL 
+          AND (
+            doc #>> '{metadata,versions,app}' IS NULL 
+            OR string_to_array("substring"(doc #>> '{metadata,versions,app}', '(\d+.\d+.\d+)'), '.')::integer[] < '{3,8,0}'::integer[]
+          ) 
+        THEN (doc #>> '{metadata,month}')::integer + 1
+        ELSE (doc #>> '{metadata,month}')::integer
+      END,
+      CASE
+        WHEN doc #>> '{metadata,day}' IS NOT NULL 
+        THEN doc #>> '{metadata,day}'
+        ELSE '1'
+      END)
+    END)::date AS period_start,
     
 
   doc #>> '{device,deviceInfo,hardware,manufacturer}' AS device_manufacturer,
