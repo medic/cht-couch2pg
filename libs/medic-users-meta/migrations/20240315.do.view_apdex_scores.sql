@@ -1,4 +1,4 @@
-CREATE VIEW view_apdex_scores AS
+CREATE VIEW useview_apdex_scores AS
 WITH apdex_telemetry_data AS (
   SELECT
     substring(metric from '^(.*):apdex:') AS event_category,
@@ -9,7 +9,7 @@ WITH apdex_telemetry_data AS (
     END AS event_type,
     SUM(count) AS event_count
   FROM
-    useview_telemetry_metrics
+    couchdb_users_meta
   WHERE metric LIKE '%:apdex:%'
   GROUP BY event_category, event_type
 ), 
