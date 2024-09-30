@@ -1,5 +1,7 @@
 # CHT couch2pg
 
+> **_NOTE:_** CHT couch2pg is deprecated. For data synchronization, refer to [CHT Sync](https://docs.communityhealthtoolkit.org/core/overview/cht-sync/).
+
 Create read-only replicas of CouchDB data inside PostgresSQL.
 
 The focus is specifically on [CHT](https://github.com/medic/cht-core) application data currently stored in CouchDB. If you are looking to have a read-only replica of CouchDB data for your application that isn't the CHT, consider [couch2pg](https://www.npmjs.com/package/couch2pg).
