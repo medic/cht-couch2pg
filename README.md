@@ -65,7 +65,7 @@ The simplest way to run with `docker-compose` is to specify the CouchDB instance
 3. When starting the docker compose services, you need to set the URL for CouchDB in the `COUCHDB_URL` env variable. This URL needs to be reachable the docker container (ie not `localhost`). Ensuring you're in the same directory where you ran the `curl` call in the prior step, run:
    ```shell
    export COUCHDB_URL=https://medic:password@192-168-68-26.my.local-ip.co:8442/medic 
-   docker-compose up
+   docker compose up
    ```
 4. Connect to the PostgresSQL instance with login `cht_couch2pg`, password `cht_couch2pg_password` and database `cht`. As these are insecure, do not use with production data. See below for how to harden these.
 
@@ -76,7 +76,7 @@ If you want to set all possible variables, or be able to store the variables in 
 2. Edit `couch2pg.env` to have all the variables you need.  Note that `POSTGRESQL_URL` shouldn't be edited as it's defined by the variables above it. If you're using the built-in PostgresSQL server, be sure to keep the `POSTGRES_SERVER_NAME` set to `postgres` as this is the correct internal service name in docker.  Be sure to also set secure passwords for all PostgresSQL accounts.
 3. Run docker and specify the environment file you just edited:
    ```shell
-   docker-compose --env-file couch2pg.env up
+   docker compose --env-file couch2pg.env up
    ```
 3. To connect to the PostgresSQL instance, use the server from `POSTGRES_SERVER_NAME`, use login from `COUCH2PG_USER`, password from `COUCH2PG_USER_PASSWORD` and the database from `POSTGRES_DB_NAME`. 
 
@@ -165,16 +165,16 @@ It is probably related to a gcc library that is failing with some versions of No
 Run tests with docker-compose:
 
 ```bash
-docker-compose  -f docker-compose.test.yml build cht-couch2pg
-docker-compose  -f docker-compose.test.yml run cht-couch2pg grunt test
+docker compose  -f docker-compose.test.yml build cht-couch2pg
+docker compose  -f docker-compose.test.yml run cht-couch2pg grunt test
 ```
 
-Run tests in interactive watch mode with: `docker-compose -f docker-compose.test.yml run cht-couch2pg npm run watch`
+Run tests in interactive watch mode with: `docker compose -f docker-compose.test.yml run cht-couch2pg npm run watch`
 
 Run entrypoint script tests with
 
 ```bash
-docker-compose -f docker-compose.test.yml run cht-couch2pg ./tests/bash/bats/bin/bats  /app/tests/bash/test.bats
+docker compose -f docker-compose.test.yml run cht-couch2pg ./tests/bash/bats/bin/bats  /app/tests/bash/test.bats
 ```
 
 ## Releasing
