@@ -12,16 +12,10 @@ services:
       - 5984:5984
 
   postgres:
-    image: medicmobile/cht-postgres:release-postgres13-rc.1
+    image: postgres:15
     environment:
-      - "POSTGRES_DB=cht"
       - "POSTGRES_USER=cht"
       - "POSTGRES_PASSWORD=cht_password"
-      - "COUCH2PG_USER=cht_couch2pg"
-      - "COUCH2PG_USER_PASSWORD=couch2pg_password"
-      - "DB_OWNER_GROUP=cht_analytics"
-    volumes:
-    - cht-postgres-data:/var/lib/postgresql/data
     ports:
     - ${PG_PORT:-5432}:5432
 
@@ -43,7 +37,3 @@ services:
     depends_on:
       - postgres
       - couch
-
-volumes:
-  cht-postgres-data:
-    name: cht-postgres-data
