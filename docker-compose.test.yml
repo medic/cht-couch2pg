@@ -1,26 +1,27 @@
-version: '3.7'
 services:
   couch:
-    image: couchdb:2.3.1
+    image: public.ecr.aws/medic/cht-couchdb:4.17.0
     environment:
-      COUCHDB_USER: cht
-      COUCHDB_PASSWORD: cht-password
-    networks:
-      - cht-net
+      - "COUCHDB_USER=cht"
+      - "COUCHDB_PASSWORD=cht-password"
+      - "COUCHDB_SECRET=424a71c9-bb2b-44ba-9ea2-2ae97e78f41d"
+      - "COUCHDB_UUID=424a71c9-bb2b-44ba-9ea2-2ae97e78f41d"
+      - "SVC_NAME=couch"
+      - "COUCHDB_LOG_LEVEL=debug"
+    ports:
+      - 5984:5984
 
   postgres:
     image: medicmobile/cht-postgres:release-postgres13-rc.1
     environment:
-      POSTGRES_DB: cht
-      POSTGRES_USER: cht
-      POSTGRES_PASSWORD: cht_password
-      COUCH2PG_USER: cht_couch2pg
-      COUCH2PG_USER_PASSWORD: couch2pg_password
-      DB_OWNER_GROUP: cht_analytics
+      - "POSTGRES_DB=cht"
+      - "POSTGRES_USER=cht"
+      - "POSTGRES_PASSWORD=cht_password"
+      - "COUCH2PG_USER=cht_couch2pg"
+      - "COUCH2PG_USER_PASSWORD=couch2pg_password"
+      - "DB_OWNER_GROUP=cht_analytics"
     volumes:
     - cht-postgres-data:/var/lib/postgresql/data
-    networks:
-    - cht-net
     ports:
     - ${PG_PORT:-5432}:5432
 
@@ -39,16 +40,9 @@ services:
       POSTGRES_PASSWORD: cht_password
       POSTGRES_SERVER_NAME: ${POSTGRES_SERVER_NAME:-postgres}
       POSTGRES_DB_NAME: cht
-
-    networks:
-      - cht-net
     depends_on:
       - postgres
       - couch
-
-networks:
-  cht-net:
-    name: cht-net
 
 volumes:
   cht-postgres-data:

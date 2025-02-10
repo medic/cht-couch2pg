@@ -57,7 +57,7 @@ const waitForPg = async (dbUrl) => {
       return true;
     } catch(err) {
       if(err.code !== 'ECONNREFUSED') {
-        console.log(err);
+        console.log('Failed to connect to postgres server', dbUrl, err);
         process.exit(1);
       }
     }
@@ -87,7 +87,7 @@ before(async () => {
   if (!process.env.TEST_PG_URL) {
     throw new Error('TEST_PG_URL is undefined.');
   }
-
+  console.log('Node Version',process.version);
   await waitForCouch(process.env.TEST_COUCH_URL);
   await waitForPg(process.env.TEST_PG_URL);
 });
