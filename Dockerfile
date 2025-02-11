@@ -1,5 +1,5 @@
 #base Build
-ARG node_version=10
+ARG node_version=14
 FROM node:$node_version-buster-slim as base_couch2pg_build
 RUN apt update
 RUN apt dist-upgrade -y

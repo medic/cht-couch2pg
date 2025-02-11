@@ -3,7 +3,7 @@ services:
     image: public.ecr.aws/medic/cht-couchdb:4.17.0
     environment:
       - "COUCHDB_USER=cht"
-      - "COUCHDB_PASSWORD=cht-password"
+      - "COUCHDB_PASSWORD=cht_password"
       - "COUCHDB_SECRET=424a71c9-bb2b-44ba-9ea2-2ae97e78f41d"
       - "COUCHDB_UUID=424a71c9-bb2b-44ba-9ea2-2ae97e78f41d"
       - "SVC_NAME=couch"
@@ -12,7 +12,7 @@ services:
       - 5984:5984
 
   postgres:
-    image: postgres:15
+    image: postgres:13
     environment:
       - "POSTGRES_USER=cht"
       - "POSTGRES_PASSWORD=cht_password"
@@ -27,9 +27,9 @@ services:
       - ./libs:/usr/app/libs
       - ./tests:/usr/app/tests
     environment:
-      COUCHDB_URL: ${COUCHDB_URL:-"http://cht:cht-password@couch:5984"}
+      COUCHDB_URL: ${COUCHDB_URL:-"http://cht:cht_password@couch:5984"}
       TEST_PG_URL: postgres://cht:cht_password@postgres:5432
-      TEST_COUCH_URL: http://cht:cht-password@couch:5984
+      TEST_COUCH_URL: http://cht:cht_password@couch:5984
       POSTGRES_USER_NAME: cht
       POSTGRES_PASSWORD: cht_password
       POSTGRES_SERVER_NAME: ${POSTGRES_SERVER_NAME:-postgres}
