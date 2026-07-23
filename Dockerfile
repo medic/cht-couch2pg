@@ -1,6 +1,11 @@
 #base Build
 ARG node_version=10
 FROM node:$node_version-buster-slim as base_couch2pg_build
+# Debian buster is EOL — its repos moved to archive.debian.org (deb.debian.org / security.debian.org now 404).
+RUN sed -i -e 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' \
+           -e 's|http://security.debian.org/debian-security|http://archive.debian.org/debian-security|g' \
+           -e '/buster-updates/d' /etc/apt/sources.list \
+ && echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until
 RUN apt update
 RUN apt dist-upgrade -y
 RUN apt -y install postgresql-client curl
