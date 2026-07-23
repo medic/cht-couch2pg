@@ -1,0 +1,32 @@
+DROP MATERIALIZED VIEW IF EXISTS useview_telemetry_devices;
+
+CREATE MATERIALIZED VIEW public.useview_telemetry_devices
+TABLESPACE pg_default AS
+
+SELECT
+  DISTINCT ON (doc #>> '{metadata,deviceId}', doc #>> '{metadata,user}')
+  doc #>> '{_id}' AS telemetry_doc_id,
+  doc #>> '{metadata,deviceId}' AS device_id,
+  doc #>> '{metadata,user}' AS user_name,
+  get_telemetry_date(
+    doc #>> '{metadata,versions,app}',
+    doc #>> '{metadata,year}',
+    doc #>> '{metadata,month}',
+    doc #>> '{metadata,day}'
+  )::date AS period_start,
+  doc #>> '{device,deviceInfo,hardware,manufacturer}' AS device_manufacturer,
+  doc #>> '{device,deviceInfo,hardware,model}' AS device_model,
+  doc #>> '{dbInfo,doc_count}' AS doc_count,
+  doc #>> '{device,userAgent}' AS user_agent,
+  doc #>> '{device,deviceInfo,app,version}' AS cht_android_version,
+  doc #>> '{device,deviceInfo,software,androidVersion}' AS android_version,
+  doc #>> '{device,deviceInfo,storage,free}' AS storage_free,
+  doc #>> '{device,deviceInfo,storage,total}' AS storage_total,
+  doc #>> '{device,deviceInfo,network,upSpeed}' AS network_up_speed,
+  doc #>> '{device,deviceInfo,network,downSpeed}' AS network_down_speed
+FROM couchdb_users_meta
+WHERE doc ->> 'type' = 'telemetry'
+ORDER BY 2, 3, 4 ASC
+WITH DATA;
+
+CREATE UNIQUE INDEX useview_telemetry_devices_device_user ON public.useview_telemetry_devices USING btree (device_id, user_name);

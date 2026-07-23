@@ -17,7 +17,7 @@ AS $$
              THEN (month::int + 1)::text
              ELSE month
            END,
-           COALESCE(day, '1')
+           COALESCE(NULLIF(day, ''), '1')
          )::date
   END
 $$;
