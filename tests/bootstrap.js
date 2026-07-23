@@ -12,7 +12,7 @@ const PUBLIC_ANNOUNCEMENT =
     TEST_COUCH_URL (ie: http://admin:pass@localhost:5984) &\n \
     TEST_PG_URL    (ie: postgres://locahost:5432)\n\n\n\
   * Everything can also be tested with:\n\n\
-    docker-compose run test grunt test\n\n\
+    docker compose run test grunt test\n\n\
 -----------------------------------------------------------------';
 
 const waitForDb = async ({ dbUrl, fn, retries=0 }) => {

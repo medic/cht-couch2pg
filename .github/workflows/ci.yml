@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 8, 10, 12 ]
+        node-version: [10, 12 ]
 
     steps:
       - name: Get Docker Hub username
@@ -27,13 +27,13 @@ jobs:
 
 
       - name: Build test image
-        run: docker-compose -f docker-compose.test.yml build --build-arg node_version=${{ matrix.node-version }} cht-couch2pg
+        run: docker compose -f docker-compose.test.yml build --build-arg node_version=${{ matrix.node-version }} cht-couch2pg
 
       - name: Run grunt Tests
-        run: docker-compose -f docker-compose.test.yml run cht-couch2pg grunt test
+        run: docker compose -f docker-compose.test.yml run cht-couch2pg grunt test
 
       - name: Run entry point script Tests
-        run: docker-compose -f docker-compose.test.yml run cht-couch2pg ./tests/bash/bats/bin/bats  /app/tests/bash/test.bats
+        run: docker compose -f docker-compose.test.yml run cht-couch2pg ./tests/bash/bats/bin/bats  /app/tests/bash/test.bats
 
       - name:  Get tags to apply to image
         id: meta
