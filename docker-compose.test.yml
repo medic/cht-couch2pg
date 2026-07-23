@@ -1,4 +1,3 @@
-version: '3.7'
 services:
   couch:
     image: couchdb:2.3.1
