@@ -33,8 +33,8 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.6",
     "@commitlint/config-conventional": "^17.6.6",
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/changelog": "^7.0.0",
+    "@semantic-release/git": "^11.0.1",
     "chai": "^3.0.0",
     "grunt": "^1.0.3",
     "grunt-cli": "1.2.0",
@@ -46,7 +46,7 @@
     "jest-runner-mocha": "0.6.0",
     "knex": "0.14.6",
     "mocha": "5.1.1",
-    "semantic-release": "^18.0.0",
+    "semantic-release": "^25.0.8",
     "sinon": "4.5.0"
   }
 }
